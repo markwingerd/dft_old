@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<data>
+	<skill>
+		<name>Endurance</name>
+		<effect>0.05</effect>
+	</skill>
+	<skill>
+		<name>Vigor</name>
+		<effect>0.05</effect>
+	</skill>
+	<skill>
+		<name>Circuitry</name>
+		<effect>0.05</effect>
+	</skill>
+	<skill>
+		<name>Combat Engineering</name>
+		<effect>0.05</effect>
+	</skill>
+	<skill>
+		<name>Shield Boost Systems</name>
+		<effect>0.03</effect>
+	</skill>
+	<skill>
+		<name>Shield Control</name>
+		<effect>-0.05</effect>
+	</skill>
+	<skill>
+		<name>Shield Enhancements</name>
+		<effect>-0.03</effect>
+	</skill>
+	<skill>
+		<name>Light Weapon Upgrades</name>
+		<effect>-0.05</effect>
+	</skill>
+	<skill>
+		<name>Assault Rifle Proficiency</name>
+		<effect>0.03</effect>
+	</skill>
+	<skill>
+		<name>Armor Repair Systems</name>
+		<effect>0.03</effect>
+	</skill>
+	<skill>
+		<name>Armor Upgrades</name>
+		<effect>-0.03</effect>
+	</skill>
+	<skill>
+		<name>Field Mechanics</name>
+		<effect>0.05</effect>
+	</skill>
+</data>

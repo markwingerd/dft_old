@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<data>
+	<module mod_name="Duvolle Assault Rifle">
+		<slot_type>light_weapon</slot_type>
+		<cpu effected_by="Light Weapon Upgrades">90</cpu>
+		<pg>15</pg>
+		<damage effected_by="Assault Rifle Proficiency">36</damage>
+		<clip_size>60</clip_size>
+		<max_ammo>400</max_ammo>
+		<accuracy_rating>50</accuracy_rating>
+		<max_range>87</max_range>
+		<optimal_range_high>39</optimal_range_high>
+		<optimal_range_low>1</optimal_range_low>
+	</module>
+	<module mod_name="Basic Shield Extender">
+		<slot_type>hi_slot</slot_type>
+		<cpu effected_by="Shield Enhancements">18</cpu>
+		<pg>3</pg>
+		<shield_hp>22</shield_hp>
+	</module>
+	<module mod_name="Enhanced Shield Extender">
+		<slot_type>hi_slot</slot_type>
+		<cpu effected_by="Shield Enhancements">36</cpu>
+		<pg>6</pg>
+		<shield_hp>33</shield_hp>
+	</module>
+	<module mod_name="Complex Shield Extender">
+		<slot_type>hi_slot</slot_type>
+		<cpu effected_by="Shield Enhancements">54</cpu>
+		<pg>11</pg>
+		<shield_hp>66</shield_hp>
+	</module>
+	<module mod_name="Complex Shield Recharger">
+		<slot_type>hi_slot</slot_type>
+		<cpu effected_by="Shield Enhancements">90</cpu>
+		<pg>0</pg>
+		<shield_recharge>0.42</shield_recharge>
+	</module>
+	<module mod_name="Complex Shield Regulator">
+		<slot_type>low_slot</slot_type>
+		<cpu effected_by="Shield Enhancements">35</cpu>
+		<pg>3</pg>
+		<shield_recharge_delay>-0.25</shield_recharge_delay>
+		<shield_depleted_recharge_delay>-0.25</shield_depleted_recharge_delay>
+	</module>
+	<module mod_name="Complex Armor Plates">
+		<slot_type>low_slot</slot_type>
+		<cpu>30</cpu>
+		<pg effected_by="Armor Upgrades">12</pg>
+		<armor_hp>115</armor_hp>
+		<movement_speed>-0.10</movement_speed>
+		<sprint_speed>-0.10</sprint_speed>
+	</module>
+	<module mod_name="Complex Armor Repairer">
+		<slot_type>low_slot</slot_type>
+		<cpu>45</cpu>
+		<pg effected_by="Armor Upgrades">11</pg>
+		<armor_repair_rate effected_by="Armor Repair Systems">5</armor_repair_rate>
+	</module>
+	<module mod_name="Complex Light Damage Modifier">
+		<slot_type>hi_slot</slot_type>
+		<cpu>90</cpu>
+		<pg>11</pg>
+	</module>
+</data>
