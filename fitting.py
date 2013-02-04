@@ -18,7 +18,7 @@
 import xml.etree.ElementTree as ET
 
 from char import Character
-from module import Module
+from module import Module, Weapon
 
 class Fitting:
 	def __init__(self, character, ds_type, ds_name):
@@ -50,7 +50,7 @@ class Fitting:
 		def get_mod_names(slot):
 			name_list = []
 			for module in slot:
-				name_list.append(module.mod_name)
+				name_list.append(module.name)
 			return name_list
 
 		print 'CPU:                            %s/%s' % (self.current_cpu, self.dropsuit.stats['cpu'])
@@ -76,14 +76,14 @@ class Fitting:
 		p = Character()
 		for mod in self.light_weapon:
 			print '\nPlain'
-			plain = Module(p.skill_effect,mod.mod_name)
+			plain = Weapon(p.skill_effect,mod.name)
 			plain.show_stats()
 			print '\nWith Character Stats'
 			mod.show_stats()
 			print '======================================================'
 		for mod in self.hi_slot:
 			print '\nPlain'
-			plain = Module(p.skill_effect,mod.mod_name)
+			plain = Module(p.skill_effect,mod.name)
 			plain.show_stats()
 			print '\nWith Character Stats'
 			mod.show_stats()
@@ -100,14 +100,26 @@ class Fitting:
 	def add_module(self, mod_name):
 		""" Adds a module if there is enough CPU, PG, and slots available. """
 		module = Module(self.char.skill_effect, mod_name)
-		used_slots = len(getattr(self, module.slot_type))
 		slot_type = module.slot_type
+		used_slots = len(getattr(self, slot_type))
 		max_slots = self.dropsuit.stats[slot_type]
 		if used_slots < max_slots:
 			if True: #self.current_cpu >= module.cpu and self.current_pg >= module.pg:
 				self.current_cpu = self.current_cpu - module.cpu
 				self.current_pg = self.current_pg - module.pg
 				getattr(self, module.slot_type).append(module)
+
+	def add_weapon(self, weapon_name):
+		""" Adds a weapon. THIS MUST bE CALLED AFTER MODULES HAVE BEEN ADDED. """
+		weapon = Weapon(self.char.skill_effect, weapon_name, self.hi_slot)
+		slot_type = weapon.slot_type
+		used_slots = len(getattr(self, slot_type))
+		max_slots = self.dropsuit.stats[slot_type]
+		if used_slots < max_slots:
+			if True: #cpu/pg reqs go here.
+				self.current_cpu = self.current_cpu - weapon.cpu
+				self.current_pg = self.current_pg - weapon.cpu
+				getattr(self, weapon.slot_type).append(weapon)
 
 	def _get_additive_stat(self, stat):
 		output = self.dropsuit.stats[stat]
@@ -218,29 +230,13 @@ if __name__ == '__main__':
 	richard = Character()
 	plain = Character()
 	plain_fit = Fitting(plain,'God','Type-I')
-	richard.set_skill('Light Weapon Upgrades',2)
-	richard.set_skill('Assault Rifle Proficiency',2)
-	#richard.set_skill('Endurance',2)
-	#richard.set_skill('Vigor',4)
-	#richard.set_skill('Circuitry',5)
-	#richard.set_skill('Combat Engineering',5)
-	#richard.set_skill('Shield Enhancements',5)
-	#richard.set_skill('Shield Boost Systems',5)
-	#richard.set_skill('Armor Repair Systems',5)
-	#richard.set_skill('Armor Upgrades',5)
-	#richard.set_skill('Field Mechanics',2)
+	#richard.set_skill('Light Weapon Upgrades',2)
+	richard.set_skill('Assault Rifle Proficiency',0)
 
 	fitting = Fitting(richard,'God','Type-I')
-	fitting.add_module('Duvolle Assault Rifle')
-	#fitting.add_module('Complex Armor Repairer')
-	#fitting.add_module('Complex Shield Extender')
-	#fitting.add_module('Complex Shield Extender')
-	#fitting.add_module('Complex Armor Plates')
-	#fitting.add_module('Complex Armor Plates')
-	#fitting.add_module('Complex Shield Recharger')
-	#fitting.add_module('Complex Shield Regulator')
 	fitting.add_module('Complex Light Damage Modifier')
 	fitting.add_module('Complex Light Damage Modifier')
+	fitting.add_weapon('Duvolle Assault Rifle')
 
 	fitting.show_module_stats()
 

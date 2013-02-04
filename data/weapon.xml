@@ -1,0 +1,14 @@
+<data>
+	<weapon weapon_name="Duvolle Assault Rifle">
+		<slot_type>light_weapon</slot_type>
+		<cpu effected_by="Light Weapon Upgrades">90</cpu>
+		<pg>15</pg>
+		<damage effected_by="Assault Rifle Proficiency">36</damage>
+		<clip_size>60</clip_size>
+		<max_ammo>400</max_ammo>
+		<accuracy_rating>50</accuracy_rating>
+		<max_range>87</max_range>
+		<optimal_range_high>39</optimal_range_high>
+		<optimal_range_low>1</optimal_range_low>
+	</weapon>
+</data> 
