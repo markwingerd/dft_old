@@ -61,5 +61,6 @@
 		<slot_type>hi_slot</slot_type>
 		<cpu>90</cpu>
 		<pg>11</pg>
+		<enhances>light_weapon</enhances>
 	</module>
 </data>

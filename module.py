@@ -20,7 +20,7 @@ import xml.etree.ElementTree as ET
 from char import Character
 
 class Module:
-	def __init__(self, skills, mod_name, effecting_modules=None):
+	def __init__(self, skills, mod_name):
 		self.attributes = []
 		self.mod_name = None
 

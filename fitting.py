@@ -109,11 +109,6 @@ class Fitting:
 				self.current_pg = self.current_pg - module.pg
 				getattr(self, module.slot_type).append(module)
 
-	def add_weapon(self, weapon_name):
-		""" Adds a weapon if there are enough slots available.  Takes current
-		modules into account (damage mods). """
-		weapon = Module(self.char.skill_effect, mod_name, effecting_modules=None)
-
 	def _get_additive_stat(self, stat):
 		output = self.dropsuit.stats[stat]
 		for m in self.hi_slot:
