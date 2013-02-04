@@ -1,5 +1,5 @@
 <data>
-	<weapon weapon_name="Duvolle Assault Rifle">
+	<weapon name="Duvolle Assault Rifle">
 		<slot_type>light_weapon</slot_type>
 		<cpu effected_by="Light Weapon Upgrades">90</cpu>
 		<pg>15</pg>

@@ -19,17 +19,20 @@ import xml.etree.ElementTree as ET
 
 from char import Character
 
+
 class Module:
 	def __init__(self, skills, mod_name):
-		self.attributes = []
-		self.name = None
+		self.stats = {}
+		self.name = mod_name
+		self.skills = skills
 
-		self._get_xml(skills, mod_name)
+		properties, effecting_skills = self._get_xml('data/module.xml')
+		self._add_stats(properties,effecting_skills)
 
 	def show_stats(self):
 		print self.name
-		for attr in self.attributes:
-			print '{:<20} {:<15}'.format(attr, getattr(self,attr))
+		for key in self.stats:
+			print '{:<20} {:<15}'.format(key, self.stats[key])
 
 	def get(self, stat):
 		if hasattr(self, stat):
@@ -37,92 +40,91 @@ class Module:
 		else:
 			return None
 
-	def _get_xml(self, skills, mod_name):
-		""" Extracts basic module values from an xml file using mod_name as 
-		search parameters. """
-		def _apply_stats(skills, item):
-			skill_name = item.get('effected_by')
-			try:
-				mod = skills[skill_name]
-			except KeyError: # Skill_name isn't in skills dictionary.
-				mod = 0
-			return float(item.text) * (1+mod)
+	def _add_stats(self, properties, effecting_skills):
+		""" Uses the properties list and effecting_skills list to populate
+		the stats dictionary with all appropriate values. 
+		THIS ALSO HANDLES SKILL BONUSES! """
 
-		xml_tree = ET.parse('data/module.xml')
-		xml_root = xml_tree.getroot()
-		for mod in xml_root:
-			if mod.attrib['mod_name'] == mod_name:
+		def _get_skill_modifier(skill_list):
+			output = 0
+			for name in skill_list:
+				try:
+					output = output + self.skills[name]
+				except KeyError:
+					# Skill is not in self.skills
+					pass
+			return output
+
+		for key in properties:
+			if key in effecting_skills.keys():
+				# Skills effect this property. Get and apply the skill modifier.
+				skill_list = effecting_skills[key]
+				mod = _get_skill_modifier(skill_list)
+				self.stats[key] = properties[key] * (1 + mod)
+			else:
+				self.stats[key] = properties[key]
+
+
+	def _get_xml(self,src):
+		def is_number(s):
+			""" Checks if a string is a number. """
+			try:
+				float(s)
+				return True
+			except ValueError:
+				return False
+
+		xml_tree = ET.parse(src)
+		# Finds the desired target in xml file
+		for child in xml_tree.getroot():
+			if child.attrib['name'] == self.name:
+				target = child
 				break
+		# Create a dictionary of the targets properties and effecting skills.
+		properties = {}
+		effecting_skills = {}
+		for prop in target:
+			# Get any xml attributes and save them to a dict for later use.
+			if 'effected_by' in prop.attrib.keys():
+				effecting_skills[prop.tag] = prop.attrib.values()
+			# Get the properties and convert them to a float if needed.
+			if is_number(prop.text):
+				properties[prop.tag] = float(prop.text)
+			else:
+				properties[prop.tag] = prop.text
 
-		self.name = mod.attrib['mod_name']
-
-		for item in mod:
-			try:
-				if item.attrib:
-					value = _apply_stats(skills, item)
-				else:
-					value = float(item.text)
-			except ValueError: #Catches int(text) errors.
-				value = item.text
-			setattr(self, item.tag, value)
-			self.attributes.append(item.tag)
+		# Returns the properties list and effecting_skills list as a tuple
+		return (properties, effecting_skills)
 
 
 class Weapon(Module):
 	""" Req dropsuit and fitting to test properly. """
 	def __init__(self, skills, weapon_name, module_list=[]):
-		self.attributes = []
-		self.name = None
+		self.stats = {}
+		self.name = weapon_name
+		self.skills = skills
+		self.module_list = module_list
 
-		self._get_xml(skills, weapon_name, module_list)
+		properties, effecting_skills = self._get_xml('data/weapon.xml')
+		self._add_stats(properties,effecting_skills)
+		self._add_module_bonus()
 
-	def _get_xml(self, skills, weapon_name, module_list):
-		""" Extracts basic weapon values from an xml file using mod_name as 
-		search parameters. Applies skill effects and module effects. """
-		def _apply_stats(skills, item):
-			skill_name = item.get('effected_by')
+	def _add_module_bonus(self):
+		""" Searching self.module_list for any modules which effect this 
+		weapons slot type (found in the modules 'enhances' cell. If so, it will 
+		add the bonuses for that module. 
+		CURRENTLY ONLY WORKS FOR DAMAGE!!! """
+		print 'hello'
+		slot_type = self.stats['slot_type']
+		print slot_type
+		for m in self.module_list:
 			try:
-				mod = skills[skill_name]
-			except KeyError: # Skill_name isn't in skills dictionary.
-				mod = 0
-			return float(item.text) * (1+mod)
-		def _apply_module_enhancements(modifier_list, stat):
-			for modifier in modifier_list:
-				stat = float(stat) * (1+modifier)
-			return stat
-
-		xml_tree = ET.parse('data/weapon.xml')
-		xml_root = xml_tree.getroot()
-		for weapon in xml_root:
-			if weapon.attrib['weapon_name'] == weapon_name:
-				break
-
-		self.name = weapon.attrib['weapon_name']
-
-		weapon_type = weapon.find('slot_type').text
-		modifier_list = []
-		for m in module_list:
-			if hasattr(m, 'enhances'):
-				if getattr(m, 'enhances') == weapon_type:
-					modifier_list.append(getattr(m,'damage'))
-
-		for item in weapon:
-			try:
-				if item.tag == 'damage':
-					if item.attrib:
-						value = _apply_stats(skills, item)
-						value = _apply_module_enhancements(modifier_list, value)
-					else:
-						value = float(item.text)
-				else:
-					if item.attrib:
-						value = _apply_stats(skills, item)
-					else:
-						value = float(item.text)
-			except ValueError: #Catches int(text) errors.
-				value = item.text
-			setattr(self, item.tag, value)
-			self.attributes.append(item.tag)
+				print m.stats['enhances']
+				if slot_type == m.stats['enhances']:
+					self.stats['damage'] = self.stats['damage'] * (1 + m.stats['damage'])
+			except KeyError:
+				# Module does not have a key 'enhances' in its stats dictionary.
+				pass
 
 
 if __name__ == '__main__':

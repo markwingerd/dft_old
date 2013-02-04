@@ -100,26 +100,26 @@ class Fitting:
 	def add_module(self, mod_name):
 		""" Adds a module if there is enough CPU, PG, and slots available. """
 		module = Module(self.char.skill_effect, mod_name)
-		slot_type = module.slot_type
+		slot_type = module.stats['slot_type']
 		used_slots = len(getattr(self, slot_type))
 		max_slots = self.dropsuit.stats[slot_type]
 		if used_slots < max_slots:
 			if True: #self.current_cpu >= module.cpu and self.current_pg >= module.pg:
-				self.current_cpu = self.current_cpu - module.cpu
-				self.current_pg = self.current_pg - module.pg
-				getattr(self, module.slot_type).append(module)
+				self.current_cpu = self.current_cpu - module.stats['cpu']
+				self.current_pg = self.current_pg - module.stats['pg']
+				getattr(self, module.stats['slot_type']).append(module)
 
 	def add_weapon(self, weapon_name):
 		""" Adds a weapon. THIS MUST bE CALLED AFTER MODULES HAVE BEEN ADDED. """
 		weapon = Weapon(self.char.skill_effect, weapon_name, self.hi_slot)
-		slot_type = weapon.slot_type
+		slot_type = weapon.stats['slot_type']
 		used_slots = len(getattr(self, slot_type))
 		max_slots = self.dropsuit.stats[slot_type]
 		if used_slots < max_slots:
 			if True: #cpu/pg reqs go here.
-				self.current_cpu = self.current_cpu - weapon.cpu
-				self.current_pg = self.current_pg - weapon.cpu
-				getattr(self, weapon.slot_type).append(weapon)
+				self.current_cpu = self.current_cpu - weapon.stats['cpu']
+				self.current_pg = self.current_pg - weapon.stats['pg']
+				getattr(self, weapon.stats['slot_type']).append(weapon)
 
 	def _get_additive_stat(self, stat):
 		output = self.dropsuit.stats[stat]
@@ -231,7 +231,8 @@ if __name__ == '__main__':
 	plain = Character()
 	plain_fit = Fitting(plain,'God','Type-I')
 	#richard.set_skill('Light Weapon Upgrades',2)
-	richard.set_skill('Assault Rifle Proficiency',0)
+	#richard.set_skill('Assault Rifle Proficiency',0)
+	#richard.set_skill('Light Weapon Upgrades',1)
 
 	fitting = Fitting(richard,'God','Type-I')
 	fitting.add_module('Complex Light Damage Modifier')

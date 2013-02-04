@@ -1,37 +1,37 @@
 <?xml version="1.0"?>
 <data>
-	<module mod_name="Basic Shield Extender">
+	<module name="Basic Shield Extender">
 		<slot_type>hi_slot</slot_type>
 		<cpu effected_by="Shield Enhancements">18</cpu>
 		<pg>3</pg>
 		<shield_hp>22</shield_hp>
 	</module>
-	<module mod_name="Enhanced Shield Extender">
+	<module name="Enhanced Shield Extender">
 		<slot_type>hi_slot</slot_type>
 		<cpu effected_by="Shield Enhancements">36</cpu>
 		<pg>6</pg>
 		<shield_hp>33</shield_hp>
 	</module>
-	<module mod_name="Complex Shield Extender">
+	<module name="Complex Shield Extender">
 		<slot_type>hi_slot</slot_type>
 		<cpu effected_by="Shield Enhancements">54</cpu>
 		<pg>11</pg>
 		<shield_hp>66</shield_hp>
 	</module>
-	<module mod_name="Complex Shield Recharger">
+	<module name="Complex Shield Recharger">
 		<slot_type>hi_slot</slot_type>
 		<cpu effected_by="Shield Enhancements">90</cpu>
 		<pg>0</pg>
 		<shield_recharge>0.42</shield_recharge>
 	</module>
-	<module mod_name="Complex Shield Regulator">
+	<module name="Complex Shield Regulator">
 		<slot_type>low_slot</slot_type>
 		<cpu effected_by="Shield Enhancements">35</cpu>
 		<pg>3</pg>
 		<shield_recharge_delay>-0.25</shield_recharge_delay>
 		<shield_depleted_recharge_delay>-0.25</shield_depleted_recharge_delay>
 	</module>
-	<module mod_name="Complex Armor Plates">
+	<module name="Complex Armor Plates">
 		<slot_type>low_slot</slot_type>
 		<cpu>30</cpu>
 		<pg effected_by="Armor Upgrades">12</pg>
@@ -39,13 +39,13 @@
 		<movement_speed>-0.10</movement_speed>
 		<sprint_speed>-0.10</sprint_speed>
 	</module>
-	<module mod_name="Complex Armor Repairer">
+	<module name="Complex Armor Repairer">
 		<slot_type>low_slot</slot_type>
 		<cpu>45</cpu>
 		<pg effected_by="Armor Upgrades">11</pg>
 		<armor_repair_rate effected_by="Armor Repair Systems">5</armor_repair_rate>
 	</module>
-	<module mod_name="Complex Light Damage Modifier">
+	<module name="Complex Light Damage Modifier">
 		<slot_type>hi_slot</slot_type>
 		<cpu>90</cpu>
 		<pg>11</pg>
