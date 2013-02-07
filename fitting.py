@@ -23,7 +23,8 @@ from module import Module, Weapon
 class Fitting:
 	def __init__(self, character, ds_type, ds_name):
 		self.char = character
-		self.dropsuit = Dropsuit(self.char.skill_effect, ds_type, ds_name)
+		#self.dropsuit = Dropsuit(self.char.skill_effect, ds_type, ds_name)
+		self.dropsuit = Dropsuit(self.char, ds_type, ds_name)
 
 		self.heavy_weapon = []
 		self.light_weapon = []
@@ -42,6 +43,7 @@ class Fitting:
 		self.shield_recharge = self.dropsuit.stats['shield_recharge']
 		self.shield_recharge_delay = self.dropsuit.stats['shield_recharge_delay']
 		self.shield_depleted_recharge_delay = self.dropsuit.stats['shield_depleted_recharge_delay']
+		self.scan_profile = self.dropsuit.stats['scan_profile']
 
 	def show_stats(self):
 		""" Displays fitting status with all calculations, modules, and skills
@@ -53,6 +55,23 @@ class Fitting:
 				name_list.append(module.name)
 			return name_list
 
+		def get_bonus(bonus):
+			""" Find all bonus' to cpu or pg and return them. """
+			output = 0
+			for m in self.low_slot:
+				if bonus in m.stats:
+					output += m.stats[bonus]
+			return output
+
+		# Update dropsuit cpu/pg and current cpu/pg if there are cpu/pg upgrades.
+		cpu_bonus = self.dropsuit.stats['cpu'] * get_bonus('cpu_bonus')
+		pg_bonus = get_bonus('pg_bonus')
+		self.dropsuit.stats['cpu'] += cpu_bonus
+		self.dropsuit.stats['pg'] += pg_bonus
+		self.current_cpu += cpu_bonus
+		self.current_pg += pg_bonus
+
+		# Display dropsuit stats.
 		print 'CPU:                            %s/%s' % (self.current_cpu, self.dropsuit.stats['cpu'])
 		print 'PG:                             %s/%s' % (self.current_pg, self.dropsuit.stats['pg'])
 		print 'Heavy Weapon:                      %s' % get_mod_names(self.heavy_weapon)
@@ -70,11 +89,20 @@ class Fitting:
 		print 'Shield Recharge:                   %s' % self._get_multiplicative_stacking_stat('shield_recharge')
 		print 'Shield Recharge Delay:             %s' % self._get_multiplicative_stacking_stat('shield_recharge_delay')
 		print 'Shield Depleted Recharge Delay:    %s' % self._get_multiplicative_stacking_stat('shield_depleted_recharge_delay')
+		print 'Scan Profile:                      %s' % self._get_multiplicative_stacking_stat('scan_profile')
+		print 'Stamina:                           %s' % self._get_multiplicative_stacking_stat('stamina')
 
 	def show_module_stats(self):
 		""" Displays module stats with and without calculations. """
 		p = Character()
 		for mod in self.light_weapon:
+			print '\nPlain'
+			plain = Weapon(p.skill_effect,mod.name)
+			plain.show_stats()
+			print '\nWith Character Stats'
+			mod.show_stats()
+			print '======================================================'
+		for mod in self.sidearm:
 			print '\nPlain'
 			plain = Weapon(p.skill_effect,mod.name)
 			plain.show_stats()
@@ -90,7 +118,21 @@ class Fitting:
 			print '======================================================'
 		for mod in self.low_slot:
 			print '\nPlain'
-			plain = Module(p.skill_effect,mod.mod_name)
+			plain = Module(p.skill_effect,mod.name)
+			plain.show_stats()
+			print '\nWith Character Stats'
+			mod.show_stats()
+			print '======================================================'
+		for mod in self.grenade:
+			print '\nPlain'
+			plain = Weapon(p.skill_effect,mod.name)
+			plain.show_stats()
+			print '\nWith Character Stats'
+			mod.show_stats()
+			print '======================================================'
+		for mod in self.equipment:
+			print '\nPlain'
+			plain = Module(p.skill_effect,mod.name)
 			plain.show_stats()
 			print '\nWith Character Stats'
 			mod.show_stats()
@@ -173,14 +215,65 @@ class Fitting:
 
 
 class Dropsuit:
-	def __init__(self, char_skills, type, ds_name):
+	def __init__(self, char, ds_type, ds_name):
 		self.stats = {}
-		self._get_xml(char_skills, type, ds_name)
+		self.skill_effects = char.skill_effect
+		self.ds_type = ds_type
+		self.ds_name = ds_name
+
+		self._get_xml('data/dropsuit.xml')
+
 
 	def show_stats(self):
 		for key in self.stats:
 			print key, self.stats[key]
 
+	def _get_xml(self, src):
+		""" Extracts the dropsuit Values from an xml file using self.ds_type
+		and self.ds_name as search parameters. """
+
+		def is_number(s):
+			try:
+				float(s)
+				return True
+			except ValueError:
+				return False
+
+		def skill_modifiers(attrib):
+			""" Finds all skills in attrib.values and applies the appropriate
+			modifier.  If no modifier found, 1 is returned for no change.  Each
+			modifier found will multiply itself onto the output. """
+			skill_list = attrib.values()
+			output = 1
+			for skill in skill_list:
+				if skill in self.skill_effects:
+					output *= (1 + self.skill_effects[skill])
+			return output
+
+		xml_tree = ET.parse(src)
+		# Finds the desired target in xml file
+		for child in xml_tree.getroot():
+			if child.attrib['type'] == self.ds_type and child.attrib['ds_name'] == self.ds_name:
+				target = child
+				break
+
+		# Apply stats. Add skill modifiers when applicable.
+		for prop in target:
+			if is_number(prop.text):
+				self.stats[prop.tag] = float(prop.text) * skill_modifiers(prop.attrib)
+			else:
+				self.stats[prop.tag] = prop.text
+
+
+
+
+class Dropsuit2:
+	def __init__(self, char_skills, type, ds_name):
+		self.stats = {}
+		self._get_xml(char_skills, type, ds_name)
+	def show_stats(self):
+		for key in self.stats:
+			print key, self.stats[key]
 	def _get_xml(self, char_skills, type, ds_name):
 		"""Extracts dropsuit values from an xml and applies skill modifiers."""
 		def _get_stat(name, ds, cs=char_skills):
@@ -188,6 +281,7 @@ class Dropsuit:
 			mod = 0
 			try:
 				modifier = ds.find(name).get('effected_by')
+				print ds.find(name).attrib.values()
 				for m in ds.find(name).attrib.values():
 					mod = mod + char_skills[m]
 			except KeyError:
@@ -227,22 +321,43 @@ class Dropsuit:
 
 
 if __name__ == '__main__':
-	richard = Character()
 	plain = Character()
-	plain_fit = Fitting(plain,'God','Type-I')
-	#richard.set_skill('Light Weapon Upgrades',2)
-	#richard.set_skill('Assault Rifle Proficiency',0)
-	#richard.set_skill('Light Weapon Upgrades',1)
+	plain_fit = Fitting(plain,'Assault','Type-I')
 
-	fitting = Fitting(richard,'God','Type-I')
-	fitting.add_module('Complex Light Damage Modifier')
-	fitting.add_module('Complex Light Damage Modifier')
-	fitting.add_weapon('Duvolle Assault Rifle')
+	reimus = Character()
+	reimus.set_skill('Dropsuit Command', 1)
+	reimus.set_skill('Profile Dampening', 0)
+	reimus.set_skill('Circuitry', 3)
+	reimus.set_skill('Combat Engineering', 2)
+	reimus.set_skill('Vigor', 2)
+	reimus.set_skill('Endurance', 2)
+	reimus.set_skill('Shield Boost Systems', 5)
+	reimus.set_skill('Shield Enhancements', 4)
+	reimus.set_skill('Light Weapon Sharpshooter', 3)
+	reimus.set_skill('Weaponry', 5)
+	reimus.set_skill('Assault Rifle Proficiency', 2)
 
-	fitting.show_module_stats()
+	reimus_fit = Fitting(reimus,'Assault','Type-I')
+	reimus_fit.add_module('Complex Shield Extender')
+	reimus_fit.add_module('Complex Shield Extender')
+	reimus_fit.add_module('Militia CPU Upgrade')
+	reimus_fit.add_module('Militia PG Upgrade')
+	reimus_fit.add_module('Militia Nanite Injector')
+	reimus_fit.add_weapon('Assault Rifle')
+	reimus_fit.add_weapon('Submachine Gun')
+	reimus_fit.add_weapon('AV Grenade')
+
+	#richard = Character()
+	#richard_fit = Fitting(richard,'God','Type-I')
+	#richard_fit.add_module('Complex Light Damage Modifier')
+	#richard_fit.add_module('Complex Light Damage Modifier')
+	#richard_fit.add_weapon('Duvolle Assault Rifle')
+
+	#richard_fit.show_module_stats()
+	reimus_fit.show_module_stats()
 
 	print 'Plain Character Fitting'
 	plain_fit.show_stats()
 	print '====================================================='
 	print 'Richard Fitting'
-	fitting.show_stats()
+	reimus_fit.show_stats()

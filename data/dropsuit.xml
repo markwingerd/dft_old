@@ -11,7 +11,7 @@
 		<hi_slot>2</hi_slot>
 		<low_slot>2</low_slot>
 		<shield_hp effected_by="Shield Control">125</shield_hp>
-		<armor_hp effected_by="Mechanics">175</armor_hp>
+		<armor_hp effected_by="Field Mechanics">175</armor_hp>
 		<shield_recharge effected_by="Shield Boost Systems">25</shield_recharge>
 		<shield_recharge_delay>6.0</shield_recharge_delay>
 		<shield_depleted_recharge_delay>10.0</shield_depleted_recharge_delay>
@@ -38,7 +38,7 @@
 		<hi_slot>1</hi_slot>
 		<low_slot>2</low_slot>
 		<shield_hp effected_by="Shield Control">100</shield_hp>
-		<armor_hp effected_by="Mechanics">90</armor_hp>
+		<armor_hp effected_by="Field Mechanics">90</armor_hp>
 		<shield_recharge effected_by="Shield Boost Systems">40</shield_recharge>
 		<shield_recharge_delay>4.0</shield_recharge_delay>
 		<shield_depleted_recharge_delay>10.0</shield_depleted_recharge_delay>
@@ -65,7 +65,7 @@
 		<hi_slot>2</hi_slot>
 		<low_slot>2</low_slot>
 		<shield_hp effected_by="Shield Control">125</shield_hp>
-		<armor_hp effected_by="Mechanics">150</armor_hp>
+		<armor_hp effected_by="Field Mechanics">150</armor_hp>
 		<shield_recharge effected_by="Shield Boost Systems">25</shield_recharge>
 		<shield_recharge_delay>5.0</shield_recharge_delay>
 		<shield_depleted_recharge_delay>10.0</shield_depleted_recharge_delay>
@@ -92,7 +92,7 @@
 		<hi_slot>2</hi_slot>
 		<low_slot>1</low_slot>
 		<shield_hp effected_by="Shield Control">100</shield_hp>
-		<armor_hp effected_by="Mechanics">650</armor_hp>
+		<armor_hp effected_by="Field Mechanics">650</armor_hp>
 		<shield_recharge effected_by="Shield Boost Systems">15</shield_recharge>
 		<shield_recharge_delay>7.0</shield_recharge_delay>
 		<shield_depleted_recharge_delay>10.0</shield_depleted_recharge_delay>
@@ -119,7 +119,7 @@
 		<hi_slot>8</hi_slot>
 		<low_slot>8</low_slot>
 		<shield_hp effected_by="Shield Control">100</shield_hp>
-		<armor_hp effected_by="Mechanics">100</armor_hp>
+		<armor_hp effected_by="Field Mechanics">100</armor_hp>
 		<shield_recharge effected_by="Shield Boost Systems">100</shield_recharge>
 		<shield_recharge_delay>100</shield_recharge_delay>
 		<shield_depleted_recharge_delay>100</shield_depleted_recharge_delay>

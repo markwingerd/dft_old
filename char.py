@@ -66,5 +66,5 @@ if __name__ == '__main__':
 	char = Character()
 	#char.skill_info.show_skills()
 	char.set_skill('Shield Control',2)
-	char.set_skill('Mechanics',4)
+	char.set_skill('Field Mechanics',4)
 	print char.skill_effect

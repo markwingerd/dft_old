@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <data>
+	<module name="Militia Nanite Injector">
+		<slot_type>equipment</slot_type>
+		<cpu effected_by="Nanocircuitry">15</cpu>
+		<pg>2</pg>
+	</module>
 	<module name="Basic Shield Extender">
 		<slot_type>hi_slot</slot_type>
 		<cpu effected_by="Shield Enhancements">18</cpu>
@@ -44,6 +49,18 @@
 		<cpu>45</cpu>
 		<pg effected_by="Armor Upgrades">11</pg>
 		<armor_repair_rate effected_by="Armor Repair Systems">5</armor_repair_rate>
+	</module>
+	<module name="Militia CPU Upgrade">
+		<slot_type>low_slot</slot_type>
+		<cpu>0</cpu>
+		<pg>0</pg>
+		<cpu_bonus>0.10</cpu_bonus>
+	</module>
+	<module name="Militia PG Upgrade">
+		<slot_type>low_slot</slot_type>
+		<cpu>18</cpu>
+		<pg>0</pg>
+		<pg_bonus>8</pg_bonus>
 	</module>
 	<module name="Complex Light Damage Modifier">
 		<slot_type>hi_slot</slot_type>

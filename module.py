@@ -35,8 +35,8 @@ class Module:
 			print '{:<20} {:<15}'.format(key, self.stats[key])
 
 	def get(self, stat):
-		if hasattr(self, stat):
-			return getattr(self, stat)
+		if stat in self.stats:
+			return self.stats[stat]
 		else:
 			return None
 
@@ -114,12 +114,9 @@ class Weapon(Module):
 		weapons slot type (found in the modules 'enhances' cell. If so, it will 
 		add the bonuses for that module. 
 		CURRENTLY ONLY WORKS FOR DAMAGE!!! """
-		print 'hello'
 		slot_type = self.stats['slot_type']
-		print slot_type
 		for m in self.module_list:
 			try:
-				print m.stats['enhances']
 				if slot_type == m.stats['enhances']:
 					self.stats['damage'] = self.stats['damage'] * (1 + m.stats['damage'])
 			except KeyError:

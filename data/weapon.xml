@@ -1,14 +1,50 @@
 <data>
+	<weapon name="Assault Rifle">
+		<slot_type>light_weapon</slot_type>
+		<cpu effected_by="Light Weapon Upgrades">23</cpu>
+		<pg>3</pg>
+		<damage effected_by="Weaponry" effected_by2="Assault Rifle Proficiency">31</damage>
+		<rate_of_fire>750</rate_of_fire>
+		<reload_time>3.0</reload_time>
+		<clip_size>60</clip_size>
+		<max_ammo>300</max_ammo>
+		<accuracy_rating>56</accuracy_rating>
+		<max_range effected_by="Light Weapon Sharpshooter">78</max_range>
+		<optimal_range_high effected_by="Light Weapon Sharpshooter">35</optimal_range_high>
+		<optimal_range_low effected_by="Light Weapon Sharpshooter">1</optimal_range_low>
+	</weapon>
+	<weapon name="Submachine Gun">
+		<slot_type>sidearm</slot_type>
+		<cpu effected_by="Light Weapon Upgrades">15</cpu>
+		<pg>3</pg>
+		<damage effected_by="Weaponry" effected_by2="Submachine Gun Proficiency">21</damage>
+		<rate_of_fire>1000</rate_of_fire>
+		<reload_time>3.0</reload_time>
+		<clip_size>80</clip_size>
+		<max_ammo>480</max_ammo>
+		<accuracy_rating>50.4</accuracy_rating>
+		<max_range>78</max_range>
+		<optimal_range_high>35</optimal_range_high>
+		<optimal_range_low>1</optimal_range_low>
+	</weapon>
 	<weapon name="Duvolle Assault Rifle">
 		<slot_type>light_weapon</slot_type>
 		<cpu effected_by="Light Weapon Upgrades">90</cpu>
 		<pg>15</pg>
-		<damage effected_by="Assault Rifle Proficiency">36</damage>
+		<damage effected_by="Weaponry" effected_by2="Assault Rifle Proficiency">36</damage>
 		<clip_size>60</clip_size>
 		<max_ammo>400</max_ammo>
 		<accuracy_rating>50</accuracy_rating>
 		<max_range>87</max_range>
 		<optimal_range_high>39</optimal_range_high>
 		<optimal_range_low>1</optimal_range_low>
+	</weapon>
+	<weapon name="AV Grenade">
+		<slot_type>grenade</slot_type>
+		<cpu>15</cpu>
+		<pg>4</pg>
+		<damage>1000</damage>
+		<splash_damage>140</splash_damage>
+		<max_ammo>3</max_ammo>
 	</weapon>
 </data> 
