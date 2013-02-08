@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <data>
-	<dropsuit type="Assault" ds_name="Type-I">
+	<dropsuit name="Assault Type-I">
 		<cpu effected_by="Circuitry">150</cpu>
 		<pg effected_by="Combat Engineering">30</pg>
 		<heavy_weapon>0</heavy_weapon>
@@ -27,7 +27,7 @@
 		<melee_damage effected_by="Hand To Hand Combat">135.0</melee_damage>
 		<meta_level>1</meta_level>
 	</dropsuit>
-	<dropsuit type="Scout" ds_name="Type-I">
+	<dropsuit name="Scout Type-I">
 		<cpu effected_by="Circuitry">115</cpu>
 		<pg effected_by="Combat Engineering">30</pg>
 		<heavy_weapon>0</heavy_weapon>
@@ -54,7 +54,7 @@
 		<melee_damage effected_by="Hand To Hand Combat">135.0</melee_damage>
 		<meta_level>1</meta_level>
 	</dropsuit>
-	<dropsuit type="Logistics" ds_name="Type-I">
+	<dropsuit name="Logistics Type-I">
 		<cpu effected_by="Circuitry">195</cpu>
 		<pg effected_by="Combat Engineering">39</pg>
 		<heavy_weapon>0</heavy_weapon>
@@ -81,7 +81,7 @@
 		<melee_damage effected_by="Hand To Hand Combat">135.0</melee_damage>
 		<meta_level>1</meta_level>
 	</dropsuit>
-	<dropsuit type="Heavy" ds_name="Type-I">
+	<dropsuit name="Heavy Type-I">
 		<cpu effected_by="Circuitry">180</cpu>
 		<pg effected_by="Combat Engineering">36</pg>
 		<heavy_weapon>1</heavy_weapon>
@@ -108,7 +108,7 @@
 		<melee_damage effected_by="Hand To Hand Combat">135.0</melee_damage>
 		<meta_level>1</meta_level>
 	</dropsuit>
-	<dropsuit type="God" ds_name="Type-I">
+	<dropsuit name="God Type-I">
 		<cpu effected_by="Circuitry">100</cpu>
 		<pg effected_by="Combat Engineering">100</pg>
 		<heavy_weapon>1</heavy_weapon>

@@ -1,71 +1,54 @@
 <?xml version="1.0"?>
 <data>
-	<skill>
-		<name>Dropsuit Command</name>
+	<skill name="Dropsuit Command">
 		<effect>-0.05</effect>
 	</skill>
-	<skill>
-		<name>Endurance</name>
+	<skill name="Endurance">
 		<effect>0.05</effect>
 	</skill>
-	<skill>
-		<name>Vigor</name>
+	<skill name="Vigor">
 		<effect>0.05</effect>
 	</skill>
-	<skill>
-		<name>Profile Dampening</name>
+	<skill name="Profile Dampening">
 		<effect>-0.05</effect>
 	</skill>
-	<skill>
-		<name>Circuitry</name>
+	<skill name="Circuitry">
 		<effect>0.05</effect>
 	</skill>
-	<skill>
-		<name>Nanocircuitry</name>
+	<skill name="Nanocircuitry">
 		<effect>-0.05</effect>
 	</skill>
-	<skill>
-		<name>Combat Engineering</name>
+	<skill name="Combat Engineering">
 		<effect>0.05</effect>
 	</skill>
-	<skill>
-		<name>Shield Boost Systems</name>
+	<skill name="Shield Boost Systems">
 		<effect>0.03</effect>
 	</skill>
-	<skill>
-		<name>Shield Control</name>
+	<skill name="Shield Control">
 		<effect>0.05</effect>
 	</skill>
-	<skill>
-		<name>Shield Enhancements</name>
+	<skill name="Shield Enhancements">
 		<effect>-0.03</effect>
 	</skill>
-	<skill>
-		<name>Light Weapon Sharpshooter</name>
+	<skill name="Light Weapon Sharpshooter">
 		<effect>0.05</effect>
 	</skill>
-	<skill>
-		<name>Light Weapon Upgrades</name>
+	<skill name="Light Weapon Upgrades">
 		<effect>-0.05</effect>
 	</skill>
-	<skill>
-		<name>Assault Rifle Proficiency</name>
+	<skill name="Assault Rifle Proficiency">
 		<effect>0.03</effect>
 	</skill>
-	<skill>
-		<name>Weaponry</name>
+	<skill name="Weaponry">
 		<effect>0.02</effect>
 	</skill>
-	<skill>
-		<name>Armor Repair Systems</name>
+	<skill name="Armor Repair Systems">
 		<effect>0.03</effect>
 	</skill>
-	<skill>
-		<name>Armor Upgrades</name>
+	<skill name="Armor Upgrades">
 		<effect>-0.03</effect>
 	</skill>
-	<skill>
-		<name>Field Mechanics</name>
+	<skill name="Field Mechanics">
 		<effect>0.05</effect>
 	</skill>
 </data>

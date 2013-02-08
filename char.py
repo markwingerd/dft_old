@@ -34,8 +34,6 @@ class Character:
 
 class Skills:
 	def __init__(self):
-		# List of skills found
-		self.skill_list = []
 		# Dict of skills and their effects on stats {Skill_Name: Effect}
 		self.skill_effect = {}
 		self._get_skill_info()
@@ -55,12 +53,24 @@ class Skills:
 		xml_root = xml_tree.getroot()
 
 		for skill in xml_root.findall('skill'):
-			name = skill.find('name').text
+			name = skill.get('name')
 			effect = float(skill.find('effect').text)
-			self.skill_list.append(name)
 			self.skill_effect[name] = effect
 
-		#print self.skill_list
+
+class SkillsLibrary:
+	def __init__(self):
+		self.name = []
+
+		self._get_xml('data/skills.xml')
+
+
+	def _get_xml(self, src):
+		""" Finds all the names of every Skill in the xml file. """
+		xml_tree = ET.parse(src)
+
+		for child in xml_tree.getroot():
+			self.name.append(child.get('name'))
 
 if __name__ == '__main__':
 	char = Character()
@@ -68,3 +78,6 @@ if __name__ == '__main__':
 	char.set_skill('Shield Control',2)
 	char.set_skill('Field Mechanics',4)
 	print char.skill_effect
+
+	skillslib = SkillsLibrary()
+	print skillslib.name

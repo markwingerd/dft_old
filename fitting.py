@@ -21,10 +21,10 @@ from char import Character
 from module import Module, Weapon
 
 class Fitting:
-	def __init__(self, character, ds_type, ds_name):
+	def __init__(self, character, ds_name):
 		self.char = character
 		#self.dropsuit = Dropsuit(self.char.skill_effect, ds_type, ds_name)
-		self.dropsuit = Dropsuit(self.char, ds_type, ds_name)
+		self.dropsuit = Dropsuit(self.char, ds_name)
 
 		self.heavy_weapon = []
 		self.light_weapon = []
@@ -215,10 +215,9 @@ class Fitting:
 
 
 class Dropsuit:
-	def __init__(self, char, ds_type, ds_name):
+	def __init__(self, char, ds_name):
 		self.stats = {}
 		self.skill_effects = char.skill_effect
-		self.ds_type = ds_type
 		self.ds_name = ds_name
 
 		self._get_xml('data/dropsuit.xml')
@@ -253,7 +252,7 @@ class Dropsuit:
 		xml_tree = ET.parse(src)
 		# Finds the desired target in xml file
 		for child in xml_tree.getroot():
-			if child.attrib['type'] == self.ds_type and child.attrib['ds_name'] == self.ds_name:
+			if child.attrib['name'] == self.ds_name:
 				target = child
 				break
 
@@ -265,64 +264,24 @@ class Dropsuit:
 				self.stats[prop.tag] = prop.text
 
 
+class DropsuitLibrary:
+	def __init__(self):
+		self.name = []
+
+		self._get_xml('data/dropsuit.xml')
 
 
-class Dropsuit2:
-	def __init__(self, char_skills, type, ds_name):
-		self.stats = {}
-		self._get_xml(char_skills, type, ds_name)
-	def show_stats(self):
-		for key in self.stats:
-			print key, self.stats[key]
-	def _get_xml(self, char_skills, type, ds_name):
-		"""Extracts dropsuit values from an xml and applies skill modifiers."""
-		def _get_stat(name, ds, cs=char_skills):
-			stat = float(ds.find(name).text)
-			mod = 0
-			try:
-				modifier = ds.find(name).get('effected_by')
-				print ds.find(name).attrib.values()
-				for m in ds.find(name).attrib.values():
-					mod = mod + char_skills[m]
-			except KeyError:
-				mod = 0
-			return stat * ( 1 + mod )
+	def _get_xml(self, src):
+		""" Finds all the names of every dropsuit in the xml file. """
+		xml_tree = ET.parse(src)
 
-		xml_tree = ET.parse('data/dropsuit.xml')
-		xml_root = xml_tree.getroot()
-		for ds in xml_root:
-			if ds.attrib['type'] == type and ds.attrib['ds_name'] == ds_name:
-				break
-		self.stats['cpu'] = _get_stat('cpu', ds)
-		self.stats['pg'] = _get_stat('pg', ds)
-		self.stats['heavy_weapon'] = _get_stat('heavy_weapon', ds)
-		self.stats['light_weapon'] = _get_stat('light_weapon', ds)
-		self.stats['sidearm'] = _get_stat('sidearm', ds)
-		self.stats['grenade'] = _get_stat('grenade', ds)
-		self.stats['equipment'] = _get_stat('equipment', ds)
-		self.stats['hi_slot'] = _get_stat('hi_slot', ds)
-		self.stats['low_slot'] = _get_stat('low_slot', ds)
-		self.stats['shield_hp'] = _get_stat('shield_hp', ds)
-		self.stats['armor_hp'] = _get_stat('armor_hp', ds)
-		self.stats['shield_recharge'] = _get_stat('shield_recharge', ds)
-		self.stats['shield_recharge_delay'] = _get_stat('shield_recharge_delay', ds)
-		self.stats['shield_depleted_recharge_delay'] = _get_stat('shield_depleted_recharge_delay', ds)
-		self.stats['armor_repair_rate'] = _get_stat('armor_repair_rate', ds)
-		self.stats['movement_speed'] = _get_stat('movement_speed', ds)
-		self.stats['sprint_speed'] = _get_stat('sprint_speed', ds)
-		self.stats['sprint_duration'] = _get_stat('sprint_duration', ds)
-		self.stats['stamina'] = _get_stat('stamina', ds)
-		self.stats['stamina_recovery_rate'] = _get_stat('stamina_recovery_rate', ds)
-		self.stats['scan_profile'] = _get_stat('scan_profile', ds)
-		self.stats['scan_precision'] = _get_stat('scan_precision', ds)
-		self.stats['scan_radius'] = _get_stat('scan_radius', ds)
-		self.stats['melee_damage'] = _get_stat('melee_damage', ds)
-		self.stats['meta_level'] = _get_stat('meta_level', ds)
+		for child in xml_tree.getroot():
+			self.name.append(child.get('name'))
 
 
 if __name__ == '__main__':
 	plain = Character()
-	plain_fit = Fitting(plain,'Assault','Type-I')
+	plain_fit = Fitting(plain,'Assault Type-I')
 
 	reimus = Character()
 	reimus.set_skill('Dropsuit Command', 1)
@@ -337,7 +296,7 @@ if __name__ == '__main__':
 	reimus.set_skill('Weaponry', 5)
 	reimus.set_skill('Assault Rifle Proficiency', 2)
 
-	reimus_fit = Fitting(reimus,'Assault','Type-I')
+	reimus_fit = Fitting(reimus,'Assault Type-I')
 	reimus_fit.add_module('Complex Shield Extender')
 	reimus_fit.add_module('Complex Shield Extender')
 	reimus_fit.add_module('Militia CPU Upgrade')
@@ -361,3 +320,6 @@ if __name__ == '__main__':
 	print '====================================================='
 	print 'Richard Fitting'
 	reimus_fit.show_stats()
+
+	dsl = DropsuitLibrary()
+	print dsl.name
