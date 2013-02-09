@@ -126,22 +126,25 @@ class Weapon(Module):
 
 class ModuleLibrary:
 	def __init__(self):
-		self.name = []
+		self.names = []
 
 		self._get_xml('data/module.xml')
 
+	def get_names(self):
+		""" Returns module names as a tuple. """
+		return tuple(self.names)
 
 	def _get_xml(self, src):
 		""" Finds all the names of every module in the xml file. """
 		xml_tree = ET.parse(src)
 
 		for child in xml_tree.getroot():
-			self.name.append(child.get('name'))
+			self.names.append(child.get('name'))
 			
 
 class WeaponLibrary(ModuleLibrary):
 	def __init__(self):
-		self.name = []
+		self.names = []
 
 		self._get_xml('data/weapon.xml')
 
@@ -160,3 +163,5 @@ if __name__ == '__main__':
 
 	modlib = ModuleLibrary()
 	wealib = WeaponLibrary()
+	print modlib.get_names()
+	print wealib.get_names()
