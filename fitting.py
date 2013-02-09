@@ -266,17 +266,20 @@ class Dropsuit:
 
 class DropsuitLibrary:
 	def __init__(self):
-		self.name = []
+		self.names = []
 
 		self._get_xml('data/dropsuit.xml')
 
+	def get_names(self):
+		""" Returns dropsuit names as a tuple. """
+		return tuple(self.names)
 
 	def _get_xml(self, src):
 		""" Finds all the names of every dropsuit in the xml file. """
 		xml_tree = ET.parse(src)
 
 		for child in xml_tree.getroot():
-			self.name.append(child.get('name'))
+			self.names.append(child.get('name'))
 
 
 if __name__ == '__main__':
@@ -322,4 +325,4 @@ if __name__ == '__main__':
 	reimus_fit.show_stats()
 
 	dsl = DropsuitLibrary()
-	print dsl.name
+	print dsl.get_names()
