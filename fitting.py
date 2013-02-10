@@ -163,6 +163,24 @@ class Fitting:
 				self.current_pg = self.current_pg - weapon.stats['pg']
 				getattr(self, weapon.stats['slot_type']).append(weapon)
 
+	def get_cpu_over(self):
+		""" If the dropsuit is using more CPU then it has available, return the
+		percentage that it's over. Otherwise return None. """
+		if self.current_cpu < 0:
+			perc =(abs(self.current_cpu) / self.dropsuit.stats['cpu']) * 100
+			return round(perc, 1)
+		else:
+			return None
+
+	def get_pg_over(self):
+		""" If the dropsuit is using more PG then it has available, return the
+		percentage that it's over. Otherwise return None. """
+		if self.current_pg < 0:
+			perc =(abs(self.current_pg) / self.dropsuit.stats['pg']) * 100
+			return round(perc, 1)
+		else:
+			return None
+
 	def _get_additive_stat(self, stat):
 		output = self.dropsuit.stats[stat]
 		for m in self.hi_slot:
@@ -326,3 +344,5 @@ if __name__ == '__main__':
 
 	dsl = DropsuitLibrary()
 	print dsl.get_names()
+
+	print reimus_fit.get_cpu_over()
