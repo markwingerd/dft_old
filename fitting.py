@@ -81,14 +81,14 @@ class Fitting:
 		print 'Equipment:                         %s' % get_mod_names(self.equipment)
 		print 'Hi Slot:                           %s' % get_mod_names(self.hi_slot)
 		print 'Low Slot:                          %s' % get_mod_names(self.low_slot)
-		print 'Shield HP:                         %s' % self._get_additive_stat('shield_hp')
-		print 'Armor HP:                          %s' % self._get_additive_stat('armor_hp')
-		print 'Armor Repair Rate:                 %s' % self._get_additive_stat('armor_repair_rate')
+		print 'Shield HP:                         %s' % self.get_shield_hp()
+		print 'Shield Recharge:                   %s' % self.get_shield_recharge()
+		print 'Shield Recharge Delay:             %s' % self.get_shield_recharge_delay()
+		print 'Shield Depleted Recharge Delay:    %s' % self.get_shield_depleted_recharge_delay()
+		print 'Armor HP:                          %s' % self.get_armor_hp()
+		print 'Armor Repair Rate:                 %s' % self.get_armor_repair_rate()
 		print 'Movement Speed:                    %s' % self._get_multiplicative_stat('movement_speed')
 		print 'Sprint Speed:                      %s' % self._get_multiplicative_stacking_stat('sprint_speed')
-		print 'Shield Recharge:                   %s' % self._get_multiplicative_stacking_stat('shield_recharge')
-		print 'Shield Recharge Delay:             %s' % self._get_multiplicative_stacking_stat('shield_recharge_delay')
-		print 'Shield Depleted Recharge Delay:    %s' % self._get_multiplicative_stacking_stat('shield_depleted_recharge_delay')
 		print 'Scan Profile:                      %s' % self._get_multiplicative_stacking_stat('scan_profile')
 		print 'Stamina:                           %s' % self._get_multiplicative_stacking_stat('stamina')
 
@@ -165,21 +165,39 @@ class Fitting:
 
 	def get_cpu_over(self):
 		""" If the dropsuit is using more CPU then it has available, return the
-		percentage that it's over. Otherwise return None. """
+		percentage that it's over as a string. Otherwise return ''. """
 		if self.current_cpu < 0:
 			perc =(abs(self.current_cpu) / self.dropsuit.stats['cpu']) * 100
-			return round(perc, 1)
+			return '%s%%' % round(perc, 1)
 		else:
 			return None
 
 	def get_pg_over(self):
 		""" If the dropsuit is using more PG then it has available, return the
-		percentage that it's over. Otherwise return None. """
+		percentage that it's over as a string. Otherwise return ''. """
 		if self.current_pg < 0:
 			perc =(abs(self.current_pg) / self.dropsuit.stats['pg']) * 100
-			return round(perc, 1)
+			return '%s%%' % round(perc, 1)
 		else:
 			return None
+
+	def get_shield_hp(self):
+		return self._get_additive_stat('shield_hp')
+
+	def get_shield_recharge(self):
+		return self._get_multiplicative_stacking_stat('shield_recharge')
+
+	def get_shield_recharge_delay(self):
+		return self._get_multiplicative_stacking_stat('shield_recharge_delay')
+
+	def get_shield_depleted_recharge_delay(self):
+		return self._get_multiplicative_stacking_stat('shield_depleted_recharge_delay')
+
+	def get_armor_hp(self):
+		return self._get_additive_stat('armor_hp')
+
+	def get_armor_repair_rate(self):
+		return self._get_additive_stat('armor_repair_rate')
 
 	def _get_additive_stat(self, stat):
 		output = self.dropsuit.stats[stat]
