@@ -33,8 +33,10 @@ class Fitting:
 		self.equipment = []
 		self.hi_slot = []
 		self.low_slot = []
-		self.current_cpu = self.dropsuit.stats['cpu']
-		self.current_pg = self.dropsuit.stats['pg']
+		self.current_cpu = 0
+		self.current_pg = 0
+		self.max_cpu = self.dropsuit.stats['cpu']
+		self.max_pg = self.dropsuit.stats['pg']
 		self.shield_hp = self.dropsuit.stats['shield_hp']
 		self.armor_hp = self.dropsuit.stats['armor_hp']
 		self.armor_repair_rate = self.dropsuit.stats['armor_repair_rate']
@@ -63,17 +65,9 @@ class Fitting:
 					output += m.stats[bonus]
 			return output
 
-		# Update dropsuit cpu/pg and current cpu/pg if there are cpu/pg upgrades.
-		cpu_bonus = self.dropsuit.stats['cpu'] * get_bonus('cpu_bonus')
-		pg_bonus = get_bonus('pg_bonus')
-		self.dropsuit.stats['cpu'] += cpu_bonus
-		self.dropsuit.stats['pg'] += pg_bonus
-		self.current_cpu += cpu_bonus
-		self.current_pg += pg_bonus
-
 		# Display dropsuit stats.
-		print 'CPU:                            %s/%s' % (self.current_cpu, self.dropsuit.stats['cpu'])
-		print 'PG:                             %s/%s' % (self.current_pg, self.dropsuit.stats['pg'])
+		print 'CPU:                            %s/%s' % (self.current_cpu, self.max_cpu)
+		print 'PG:                             %s/%s' % (self.current_pg, self.max_pg)
 		print 'Heavy Weapon:                      %s' % get_mod_names(self.heavy_weapon)
 		print 'Light Weapon:                      %s' % get_mod_names(self.light_weapon)
 		print 'Sidearm:                           %s' % get_mod_names(self.sidearm)
@@ -146,9 +140,9 @@ class Fitting:
 		used_slots = len(getattr(self, slot_type))
 		max_slots = self.dropsuit.stats[slot_type]
 		if used_slots < max_slots:
-			if True: #self.current_cpu >= module.cpu and self.current_pg >= module.pg:
-				self.current_cpu = self.current_cpu - module.stats['cpu']
-				self.current_pg = self.current_pg - module.stats['pg']
+			if True: #cpu/pg reqs go here.
+				self._update_cpu(module)
+				self._update_pg(module)
 				getattr(self, module.stats['slot_type']).append(module)
 
 	def add_weapon(self, weapon_name):
@@ -159,8 +153,8 @@ class Fitting:
 		max_slots = self.dropsuit.stats[slot_type]
 		if used_slots < max_slots:
 			if True: #cpu/pg reqs go here.
-				self.current_cpu = self.current_cpu - weapon.stats['cpu']
-				self.current_pg = self.current_pg - weapon.stats['pg']
+				self._update_cpu(module)
+				self._update_pg(module)
 				getattr(self, weapon.stats['slot_type']).append(weapon)
 
 	def get_cpu_over(self):
@@ -182,22 +176,36 @@ class Fitting:
 			return None
 
 	def get_shield_hp(self):
-		return self._get_additive_stat('shield_hp')
+		return round(self._get_additive_stat('shield_hp'), 1)
 
 	def get_shield_recharge(self):
-		return self._get_multiplicative_stacking_stat('shield_recharge')
+		return round(self._get_multiplicative_stacking_stat('shield_recharge'), 1)
 
 	def get_shield_recharge_delay(self):
-		return self._get_multiplicative_stacking_stat('shield_recharge_delay')
+		return round(self._get_multiplicative_stacking_stat('shield_recharge_delay'), 1)
 
 	def get_shield_depleted_recharge_delay(self):
-		return self._get_multiplicative_stacking_stat('shield_depleted_recharge_delay')
+		return round(self._get_multiplicative_stacking_stat('shield_depleted_recharge_delay'), 1)
 
 	def get_armor_hp(self):
-		return self._get_additive_stat('armor_hp')
+		return round(self._get_additive_stat('armor_hp'), 1)
 
 	def get_armor_repair_rate(self):
-		return self._get_additive_stat('armor_repair_rate')
+		return round(self._get_additive_stat('armor_repair_rate'), 1)
+
+	def _update_cpu(self, module):
+		""" Called by add_module or add_weapon methods.  This will update the
+		fittings current_cpu and max_cpu when a module has been added. """
+		self.current_cpu += module.stats['cpu']
+		if 'cpu_bonus' in module.stats:
+			self.max_cpu += self.max_cpu * module.stats['cpu_bonus']
+
+	def _update_pg(self, module):
+		""" Called by add_module or add_weapon methods.  This will update the
+		fittings current_pg and max_pg when a module has been added. """
+		self.current_pg += module.stats['pg']
+		if 'pg_bonus' in module.stats:
+			self.max_pg += module.stats['pg_bonus']
 
 	def _get_additive_stat(self, stat):
 		output = self.dropsuit.stats[stat]
@@ -323,27 +331,29 @@ if __name__ == '__main__':
 	plain_fit = Fitting(plain,'Assault Type-I')
 
 	reimus = Character()
-	reimus.set_skill('Dropsuit Command', 1)
-	reimus.set_skill('Profile Dampening', 0)
-	reimus.set_skill('Circuitry', 3)
-	reimus.set_skill('Combat Engineering', 2)
-	reimus.set_skill('Vigor', 2)
-	reimus.set_skill('Endurance', 2)
-	reimus.set_skill('Shield Boost Systems', 5)
-	reimus.set_skill('Shield Enhancements', 4)
-	reimus.set_skill('Light Weapon Sharpshooter', 3)
-	reimus.set_skill('Weaponry', 5)
-	reimus.set_skill('Assault Rifle Proficiency', 2)
+	#reimus.set_skill('Dropsuit Command', 1)
+	#reimus.set_skill('Profile Dampening', 0)
+	#reimus.set_skill('Circuitry', 3)
+	#reimus.set_skill('Combat Engineering', 2)
+	#reimus.set_skill('Vigor', 2)
+	#reimus.set_skill('Endurance', 2)
+	#reimus.set_skill('Shield Boost Systems', 5)
+	#reimus.set_skill('Shield Enhancements', 4)
+	#reimus.set_skill('Light Weapon Sharpshooter', 3)
+	#reimus.set_skill('Weaponry', 5)
+	#reimus.set_skill('Assault Rifle Proficiency', 2)
 
 	reimus_fit = Fitting(reimus,'Assault Type-I')
 	reimus_fit.add_module('Complex Shield Extender')
 	reimus_fit.add_module('Complex Shield Extender')
 	reimus_fit.add_module('Militia CPU Upgrade')
-	reimus_fit.add_module('Militia PG Upgrade')
-	reimus_fit.add_module('Militia Nanite Injector')
-	reimus_fit.add_weapon('Assault Rifle')
-	reimus_fit.add_weapon('Submachine Gun')
-	reimus_fit.add_weapon('AV Grenade')
+	reimus_fit.add_module('Militia CPU Upgrade')
+	#reimus_fit.add_module('Militia PG Upgrade')
+	#reimus_fit.add_module('Militia Nanite Injector')
+	#reimus_fit.add_module('Militia CPU Upgrade')
+	#reimus_fit.add_weapon('Assault Rifle')
+	#reimus_fit.add_weapon('Submachine Gun')
+	#reimus_fit.add_weapon('AV Grenade')
 
 	#richard = Character()
 	#richard_fit = Fitting(richard,'God','Type-I')
