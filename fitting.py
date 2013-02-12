@@ -145,6 +145,53 @@ class Fitting:
 				self._update_pg(module)
 				getattr(self, module.stats['slot_type']).append(module)
 
+	def remove_module(self, mod_name):
+		""" Finds a module that needs to be deleted and removes it if it has 
+		been fitted. """
+			
+		for m in self.heavy_weapon:
+			if m.name in mod_name:
+				self.heavy_weapon.remove(m)
+				self._free_cpu(m)
+				self._free_pg(m)
+				break
+		for m in self.light_weapon:
+			if m.name in mod_name:
+				self.light_weapon.remove(m)
+				self._free_cpu(m)
+				self._free_pg(m)
+				break
+		for m in self.sidearm:
+			if m.name in mod_name:
+				self.sidearm.remove(m)
+				self._free_cpu(m)
+				self._free_pg(m)
+				break
+		for m in self.grenade:
+			if m.name in mod_name:
+				self.grenade.remove(m)
+				self._free_cpu(m)
+				self._free_pg(m)
+				break
+		for m in self.equipment:
+			if m.name in mod_name:
+				self.equipment.remove(m)
+				self._free_cpu(m)
+				self._free_pg(m)
+				break
+		for m in self.hi_slot:
+			if m.name in mod_name:
+				self.hi_slot.remove(m)
+				self._free_cpu(m)
+				self._free_pg(m)
+				break
+		for m in self.low_slot:
+			if m.name in mod_name:
+				self.low_slot.remove(m)
+				self._free_cpu(m)
+				self._free_pg(m)
+				break
+
 	def add_weapon(self, weapon_name):
 		""" Adds a weapon. THIS MUST bE CALLED AFTER MODULES HAVE BEEN ADDED. """
 		weapon = Weapon(self.char.skill_effect, weapon_name, self.hi_slot)
@@ -153,15 +200,15 @@ class Fitting:
 		max_slots = self.dropsuit.stats[slot_type]
 		if used_slots < max_slots:
 			if True: #cpu/pg reqs go here.
-				self._update_cpu(module)
-				self._update_pg(module)
+				self._update_cpu(weapon)
+				self._update_pg(weapon)
 				getattr(self, weapon.stats['slot_type']).append(weapon)
 
 	def get_cpu_over(self):
 		""" If the dropsuit is using more CPU then it has available, return the
 		percentage that it's over as a string. Otherwise return ''. """
-		if self.current_cpu < 0:
-			perc =(abs(self.current_cpu) / self.dropsuit.stats['cpu']) * 100
+		if self.current_cpu > self.max_cpu:
+			perc =( (self.current_cpu-self.max_cpu) / self.max_cpu) * 100
 			return '%s%%' % round(perc, 1)
 		else:
 			return None
@@ -169,8 +216,8 @@ class Fitting:
 	def get_pg_over(self):
 		""" If the dropsuit is using more PG then it has available, return the
 		percentage that it's over as a string. Otherwise return ''. """
-		if self.current_pg < 0:
-			perc =(abs(self.current_pg) / self.dropsuit.stats['pg']) * 100
+		if self.current_pg > self.max_cpu:
+			perc =( (self.current_pg-self.max_pg) / self.max_pg) * 100
 			return '%s%%' % round(perc, 1)
 		else:
 			return None
@@ -193,19 +240,72 @@ class Fitting:
 	def get_armor_repair_rate(self):
 		return round(self._get_additive_stat('armor_repair_rate'), 1)
 
+	def get_all_modules(self):
+		""" Returns a tuple of modules and weapons for the GUI. """
+		def get_output(icon, name, cpu, pg):
+			return '{:3.3} {:<30.30} {:>5.5} {:>5.5}'.format(icon, name, cpu, pg)
+
+		module_list = []
+		for mod in self.heavy_weapon:
+			module_list.append(get_output('H',mod.name, mod.stats['cpu'], mod.stats['pg']))
+		for i in range( len(self.heavy_weapon), int(self.dropsuit.stats['heavy_weapon']) ):
+			module_list.append(get_output('H','None','0','0'))
+		for mod in self.light_weapon:
+			module_list.append(get_output('L',mod.name, mod.stats['cpu'], mod.stats['pg']))
+		for i in range( len(self.light_weapon), int(self.dropsuit.stats['light_weapon']) ):
+			module_list.append(get_output('L','None','0','0'))
+		for mod in self.sidearm:
+			module_list.append(get_output('S',mod.name, mod.stats['cpu'], mod.stats['pg']))
+		for i in range( len(self.sidearm), int(self.dropsuit.stats['sidearm']) ):
+			module_list.append(get_output('S','None','0','0'))
+		for mod in self.grenade:
+			module_list.append(get_output('G',mod.name, mod.stats['cpu'], mod.stats['pg']))
+		for i in range( len(self.grenade), int(self.dropsuit.stats['grenade']) ):
+			module_list.append(get_output('G','None','0','0'))
+		for mod in self.equipment:
+			module_list.append(get_output('E',mod.name, mod.stats['cpu'], mod.stats['pg']))
+		for i in range( len(self.equipment), int(self.dropsuit.stats['equipment']) ):
+			module_list.append(get_output('E','None','0','0'))
+		for mod in self.hi_slot:
+			module_list.append(get_output('--',mod.name, mod.stats['cpu'], mod.stats['pg']))
+		for i in range( len(self.hi_slot), int(self.dropsuit.stats['hi_slot']) ):
+			module_list.append(get_output('--','None','0','0'))
+		for mod in self.low_slot:
+			module_list.append(get_output('-',mod.name, mod.stats['cpu'], mod.stats['pg']))
+		for i in range( len(self.low_slot), int(self.dropsuit.stats['hi_slot']) ):
+			module_list.append(get_output('-','None','0','0'))
+
+		return tuple(module_list)
+
 	def _update_cpu(self, module):
 		""" Called by add_module or add_weapon methods.  This will update the
-		fittings current_cpu and max_cpu when a module has been added. """
+		fittings current_cpu and max_cpu when a module has been added. 
+		ONLY  FOR ADDING CPU. """
 		self.current_cpu += module.stats['cpu']
 		if 'cpu_bonus' in module.stats:
 			self.max_cpu += self.max_cpu * module.stats['cpu_bonus']
 
 	def _update_pg(self, module):
 		""" Called by add_module or add_weapon methods.  This will update the
-		fittings current_pg and max_pg when a module has been added. """
+		fittings current_pg and max_pg when a module has been added. 
+		ONLY FOR ADDING PG"""
 		self.current_pg += module.stats['pg']
 		if 'pg_bonus' in module.stats:
 			self.max_pg += module.stats['pg_bonus']
+
+	def _free_cpu(self, module):
+		""" Called by remove_module. This will free CPU resources from the
+		fitting when a module has been removed. """
+		self.current_cpu -= module.stats['cpu']
+		if 'cpu_bonus' in module.stats:
+			self.max_cpu -= module.stats['cpu_bonus']
+
+	def _free_pg(self, module):
+		""" Called by remove_module. This will free CPU resources from the
+		fitting when a module has been removed. """
+		self.current_pg -= module.stats['pg']
+		if 'pg_bonus' in module.stats:
+			self.max_pg -= module.stats['pg_bonus']
 
 	def _get_additive_stat(self, stat):
 		output = self.dropsuit.stats[stat]
@@ -331,29 +431,29 @@ if __name__ == '__main__':
 	plain_fit = Fitting(plain,'Assault Type-I')
 
 	reimus = Character()
-	#reimus.set_skill('Dropsuit Command', 1)
-	#reimus.set_skill('Profile Dampening', 0)
-	#reimus.set_skill('Circuitry', 3)
-	#reimus.set_skill('Combat Engineering', 2)
-	#reimus.set_skill('Vigor', 2)
-	#reimus.set_skill('Endurance', 2)
-	#reimus.set_skill('Shield Boost Systems', 5)
-	#reimus.set_skill('Shield Enhancements', 4)
-	#reimus.set_skill('Light Weapon Sharpshooter', 3)
-	#reimus.set_skill('Weaponry', 5)
-	#reimus.set_skill('Assault Rifle Proficiency', 2)
+	reimus.set_skill('Dropsuit Command', 1)
+	reimus.set_skill('Profile Dampening', 0)
+	reimus.set_skill('Circuitry', 3)
+	reimus.set_skill('Combat Engineering', 2)
+	reimus.set_skill('Vigor', 2)
+	reimus.set_skill('Endurance', 2)
+	reimus.set_skill('Shield Boost Systems', 5)
+	reimus.set_skill('Shield Enhancements', 4)
+	reimus.set_skill('Light Weapon Sharpshooter', 3)
+	reimus.set_skill('Weaponry', 5)
+	reimus.set_skill('Assault Rifle Proficiency', 2)
 
 	reimus_fit = Fitting(reimus,'Assault Type-I')
 	reimus_fit.add_module('Complex Shield Extender')
 	reimus_fit.add_module('Complex Shield Extender')
 	reimus_fit.add_module('Militia CPU Upgrade')
 	reimus_fit.add_module('Militia CPU Upgrade')
-	#reimus_fit.add_module('Militia PG Upgrade')
-	#reimus_fit.add_module('Militia Nanite Injector')
-	#reimus_fit.add_module('Militia CPU Upgrade')
-	#reimus_fit.add_weapon('Assault Rifle')
-	#reimus_fit.add_weapon('Submachine Gun')
-	#reimus_fit.add_weapon('AV Grenade')
+	reimus_fit.add_module('Militia PG Upgrade')
+	reimus_fit.add_module('Militia Nanite Injector')
+	reimus_fit.add_module('Militia CPU Upgrade')
+	reimus_fit.add_weapon('Assault Rifle')
+	reimus_fit.add_weapon('Submachine Gun')
+	reimus_fit.add_weapon('AV Grenade')
 
 	#richard = Character()
 	#richard_fit = Fitting(richard,'God','Type-I')
@@ -374,3 +474,4 @@ if __name__ == '__main__':
 	print dsl.get_names()
 
 	print reimus_fit.get_cpu_over()
+	reimus_fit.get_all_modules()
