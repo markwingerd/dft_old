@@ -297,13 +297,17 @@ class Fitting:
 		""" Called by remove_module. This will free CPU resources from the
 		fitting when a module has been removed. """
 		self.current_cpu -= module.stats['cpu']
+		self.current_cpu = round(self.current_cpu, 3)
 		if 'cpu_bonus' in module.stats:
-			self.max_cpu -= module.stats['cpu_bonus']
+			# For the love of god, please note that this equation is far 
+			# different than the others. Especially the equal sign!!!!!
+			self.max_cpu = self.max_cpu / (1 + module.stats['cpu_bonus'])
 
 	def _free_pg(self, module):
 		""" Called by remove_module. This will free CPU resources from the
 		fitting when a module has been removed. """
 		self.current_pg -= module.stats['pg']
+		self.current_pg = round(self.current_pg, 3)
 		if 'pg_bonus' in module.stats:
 			self.max_pg -= module.stats['pg_bonus']
 
@@ -403,7 +407,7 @@ class Dropsuit:
 		# Apply stats. Add skill modifiers when applicable.
 		for prop in target:
 			if is_number(prop.text):
-				self.stats[prop.tag] = float(prop.text) * skill_modifiers(prop.attrib)
+				self.stats[prop.tag] = round(float(prop.text) * skill_modifiers(prop.attrib), 3)
 			else:
 				self.stats[prop.tag] = prop.text
 

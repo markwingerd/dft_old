@@ -54,7 +54,7 @@ class Skills:
 
 		for skill in xml_root.findall('skill'):
 			name = skill.get('name')
-			effect = float(skill.find('effect').text)
+			effect = round(float(skill.find('effect').text), 3)
 			self.skill_effect[name] = effect
 
 

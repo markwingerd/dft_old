@@ -89,7 +89,7 @@ class Module:
 				effecting_skills[prop.tag] = prop.attrib.values()
 			# Get the properties and convert them to a float if needed.
 			if is_number(prop.text):
-				properties[prop.tag] = float(prop.text)
+				properties[prop.tag] = round(float(prop.text), 3)
 			else:
 				properties[prop.tag] = prop.text
 
