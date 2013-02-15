@@ -16,10 +16,12 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import sys, os
+import pickle
 import xml.etree.ElementTree as ET
 
 class Character:
-	def __init__(self):
+	def __init__(self, name):
+		self.name = name
 		self.skills = Skills()
 		self.skill_level = {} # Used for module reqs
 		self.skill_effect = {} # Used for modifying modules
@@ -31,6 +33,49 @@ class Character:
 		self.skill_level[skill] = level
 		self.skill_effect[skill] = level * self.skills.skill_effect[skill]
 
+
+class CharacterLibrary:
+	def __init__(self):
+		self.character_list = {}
+
+		self._load_characters('characters.dat')
+
+	def get_character(self, char_name):
+		""" Returns a the specified character instance. """
+		for char in self.character_list:
+			if char_name == char.name:
+				#print char_name
+				pass
+
+	def get_character_list(self):
+		""" Returns a list of the names of all characters. """
+		return self.character_list.keys()
+
+	def save_character(self, character):
+		""" Will save all the character classes. """
+		self.character_list[character.name] = character
+
+		char_file = open(self._get_file_loc('characters.dat'), 'wb')
+		pickle.dump(self.character_list, char_file)
+		char_file.close()
+
+	def _load_characters(self, src_file):
+		""" Loads all characters from file and passes them into the
+		character_list """
+		try:
+			char_file = open(self._get_file_loc('characters.dat'), 'rb')
+			self.character_list = character = pickle.load(char_file)
+		except IOError:
+			print 'No character file found.'
+
+	def _get_file_loc(self, file_name):
+		""" Will return the path to the desired file depending on whether this
+		is an executable or in development. """
+		if getattr(sys, 'frozen', None):
+			basedir = sys._MEIPASS
+		else:
+			basedir = os.path.dirname('data/')
+		return os.path.join(basedir, file_name)
 
 
 class Skills:
@@ -82,11 +127,14 @@ class SkillsLibrary:
 			self.name.append(child.get('name'))
 
 if __name__ == '__main__':
-	char = Character()
-	#char.skill_info.show_skills()
-	char.set_skill('Shield Control',2)
-	char.set_skill('Field Mechanics',4)
-	print char.skill_effect
+	char1 = Character('Char1')
+	char1.set_skill('Shield Control',2)
+	char1.set_skill('Field Mechanics',4)
+	char2 = Character('Char2')
+	char2.set_skill('Weaponry',5)
+	char2.set_skill('Dropsuit Command',4)
 
-	skillslib = SkillsLibrary()
-	print skillslib.name
+	char_lib = CharacterLibrary()
+	char_lib.save_character(char1)
+	char_lib.save_character(char2)
+	print char_lib.get_character_list()
