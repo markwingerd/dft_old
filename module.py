@@ -15,7 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+import sys, os
 import xml.etree.ElementTree as ET
+import math
 
 from char import Character
 
@@ -26,7 +28,7 @@ class Module:
 		self.name = mod_name
 		self.skills = skills
 
-		properties, effecting_skills = self._get_xml('data/module.xml')
+		properties, effecting_skills = self._get_xml(self._get_file_loc('module.xml'))
 		self._add_stats(properties,effecting_skills)
 
 	def show_stats(self):
@@ -60,10 +62,18 @@ class Module:
 				# Skills effect this property. Get and apply the skill modifier.
 				skill_list = effecting_skills[key]
 				mod = _get_skill_modifier(skill_list)
-				self.stats[key] = properties[key] * (1 + mod)
+				self.stats[key] = math.floor(properties[key] * (1 + mod))
 			else:
 				self.stats[key] = properties[key]
 
+	def _get_file_loc(self, file_name):
+		""" Will return the path to the desired file depending on whether this
+		is an executable or in development. """
+		if getattr(sys, 'frozen', None):
+			basedir = sys._MEIPASS
+		else:
+			basedir = os.path.dirname('data/')
+		return os.path.join(basedir, file_name)
 
 	def _get_xml(self,src):
 		def is_number(s):
@@ -105,7 +115,7 @@ class Weapon(Module):
 		self.skills = skills
 		self.module_list = module_list
 
-		properties, effecting_skills = self._get_xml('data/weapon.xml')
+		properties, effecting_skills = self._get_xml(self._get_file_loc('weapon.xml'))
 		self._add_stats(properties,effecting_skills)
 		self._add_module_bonus()
 
@@ -128,11 +138,20 @@ class ModuleLibrary:
 	def __init__(self):
 		self.names = []
 
-		self._get_xml('data/module.xml')
+		self._get_xml(self._get_file_loc('module.xml'))
 
 	def get_names(self):
 		""" Returns module names as a tuple. """
 		return tuple(self.names)
+
+	def _get_file_loc(self, file_name):
+		""" Will return the path to the desired file depending on whether this
+		is an executable or in development. """
+		if getattr(sys, 'frozen', None):
+			basedir = sys._MEIPASS
+		else:
+			basedir = os.path.dirname('data/')
+		return os.path.join(basedir, file_name)
 
 	def _get_xml(self, src):
 		""" Finds all the names of every module in the xml file. """
@@ -146,7 +165,7 @@ class WeaponLibrary(ModuleLibrary):
 	def __init__(self):
 		self.names = []
 
-		self._get_xml('data/weapon.xml')
+		self._get_xml(self._get_file_loc('weapon.xml'))
 
 
 if __name__ == '__main__':

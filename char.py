@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+import sys, os
 import xml.etree.ElementTree as ET
 
 class Character:
@@ -36,7 +37,7 @@ class Skills:
 	def __init__(self):
 		# Dict of skills and their effects on stats {Skill_Name: Effect}
 		self.skill_effect = {}
-		self._get_skill_info()
+		self._get_xml(self._get_file_loc('skills.xml'))
 
 	def show_skills(self):
 		for s in self.skill_list:
@@ -46,10 +47,18 @@ class Skills:
 	def get_modifier_name(self, modifies):
 		return self.skill_modifies[modifies]
 
+	def _get_file_loc(self, file_name):
+		""" Will return the path to the desired file depending on whether this
+		is an executable or in development. """
+		if getattr(sys, 'frozen', None):
+			basedir = sys._MEIPASS
+		else:
+			basedir = os.path.dirname('data/')
+		return os.path.join(basedir, file_name)
 
-	def _get_skill_info(self):
+	def _get_xml(self, src):
 		""" Extracts skill information from an xml file. """
-		xml_tree = ET.parse('data/skills.xml')
+		xml_tree = ET.parse(src)
 		xml_root = xml_tree.getroot()
 
 		for skill in xml_root.findall('skill'):

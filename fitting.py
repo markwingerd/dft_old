@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+import sys, os
 import xml.etree.ElementTree as ET
 
 from char import Character
@@ -223,22 +224,22 @@ class Fitting:
 			return None
 
 	def get_shield_hp(self):
-		return round(self._get_additive_stat('shield_hp'), 1)
+		return round(self._get_additive_stat('shield_hp'), 2)
 
 	def get_shield_recharge(self):
-		return round(self._get_multiplicative_stacking_stat('shield_recharge'), 1)
+		return round(self._get_multiplicative_stacking_stat('shield_recharge'), 2)
 
 	def get_shield_recharge_delay(self):
-		return round(self._get_multiplicative_stacking_stat('shield_recharge_delay'), 1)
+		return round(self._get_multiplicative_stacking_stat('shield_recharge_delay'), 2)
 
 	def get_shield_depleted_recharge_delay(self):
-		return round(self._get_multiplicative_stacking_stat('shield_depleted_recharge_delay'), 1)
+		return round(self._get_multiplicative_stacking_stat('shield_depleted_recharge_delay'), 2)
 
 	def get_armor_hp(self):
-		return round(self._get_additive_stat('armor_hp'), 1)
+		return round(self._get_additive_stat('armor_hp'), 2)
 
 	def get_armor_repair_rate(self):
-		return round(self._get_additive_stat('armor_repair_rate'), 1)
+		return round(self._get_additive_stat('armor_repair_rate'), 2)
 
 	def get_all_modules(self):
 		""" Returns a tuple of modules and weapons for the GUI. """
@@ -368,12 +369,22 @@ class Dropsuit:
 		self.skill_effects = char.skill_effect
 		self.ds_name = ds_name
 
-		self._get_xml('data/dropsuit.xml')
+		self._get_xml(self. _get_file_loc('dropsuit.xml'))
 
 
 	def show_stats(self):
 		for key in self.stats:
 			print key, self.stats[key]
+
+
+	def _get_file_loc(self, file_name):
+		""" Will return the path to the desired file depending on whether this
+		is an executable or in development. """
+		if getattr(sys, 'frozen', None):
+			basedir = sys._MEIPASS
+		else:
+			basedir = os.path.dirname('data/')
+		return os.path.join(basedir, file_name)
 
 	def _get_xml(self, src):
 		""" Extracts the dropsuit Values from an xml file using self.ds_type
@@ -416,11 +427,20 @@ class DropsuitLibrary:
 	def __init__(self):
 		self.names = []
 
-		self._get_xml('data/dropsuit.xml')
+		self._get_xml(self._get_file_loc('dropsuit.xml'))
 
 	def get_names(self):
 		""" Returns dropsuit names as a tuple. """
 		return tuple(self.names)
+
+	def _get_file_loc(self, file_name):
+		""" Will return the path to the desired file depending on whether this
+		is an executable or in development. """
+		if getattr(sys, 'frozen', None):
+			basedir = sys._MEIPASS
+		else:
+			basedir = os.path.dirname('data/')
+		return os.path.join(basedir, file_name)
 
 	def _get_xml(self, src):
 		""" Finds all the names of every dropsuit in the xml file. """
@@ -437,13 +457,14 @@ if __name__ == '__main__':
 	reimus = Character()
 	reimus.set_skill('Dropsuit Command', 1)
 	reimus.set_skill('Profile Dampening', 0)
-	reimus.set_skill('Circuitry', 3)
+	reimus.set_skill('Nanocircuitry', 1)
+	reimus.set_skill('Circuitry', 4)
 	reimus.set_skill('Combat Engineering', 2)
-	reimus.set_skill('Vigor', 2)
-	reimus.set_skill('Endurance', 2)
-	reimus.set_skill('Shield Boost Systems', 5)
+	reimus.set_skill('Vigor', 0)
+	reimus.set_skill('Endurance', 0)
+	reimus.set_skill('Shield Boost Systems', 3)
 	reimus.set_skill('Shield Enhancements', 4)
-	reimus.set_skill('Light Weapon Sharpshooter', 3)
+	reimus.set_skill('Light Weapon Sharpshooter', 4)
 	reimus.set_skill('Weaponry', 5)
 	reimus.set_skill('Assault Rifle Proficiency', 2)
 

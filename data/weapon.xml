@@ -13,6 +13,20 @@
 		<optimal_range_high effected_by="Light Weapon Sharpshooter">35</optimal_range_high>
 		<optimal_range_low effected_by="Light Weapon Sharpshooter">1</optimal_range_low>
 	</weapon>
+	<weapon name="GEK-38 Assault Rifle">
+		<slot_type>light_weapon</slot_type>
+		<cpu effected_by="Light Weapon Upgrades">47</cpu>
+		<pg>6</pg>
+		<damage effected_by="Weaponry" effected_by2="Assault Rifle Proficiency">32.5</damage>
+		<rate_of_fire>750</rate_of_fire>
+		<reload_time>3.0</reload_time>
+		<clip_size>60</clip_size>
+		<max_ammo>300</max_ammo>
+		<accuracy_rating>56.6</accuracy_rating>
+		<max_range effected_by="Light Weapon Sharpshooter">83</max_range>
+		<optimal_range_high effected_by="Light Weapon Sharpshooter">37</optimal_range_high>
+		<optimal_range_low effected_by="Light Weapon Sharpshooter">1</optimal_range_low>
+	</weapon>
 	<weapon name="Submachine Gun">
 		<slot_type>sidearm</slot_type>
 		<cpu effected_by="Light Weapon Upgrades">15</cpu>
