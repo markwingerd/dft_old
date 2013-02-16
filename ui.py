@@ -4,7 +4,7 @@ import tkFont
 
 from fitting import Fitting, DropsuitLibrary, Dropsuit
 from module import ModuleLibrary, Module, WeaponLibrary, Weapon
-from char import Character
+from char import Character, CharacterLibrary
 
 __application_name__ = 'Dust Fitting Tool'
 
@@ -29,6 +29,7 @@ class DftUi(Frame):
         self.current_char.set_skill('Weaponry', 5)
         self.current_char.set_skill('Assault Rifle Proficiency', 2)
         self.current_fit = Fitting(self.current_char, 'Assault Type-I')
+        self.character_library = CharacterLibrary()
         self.weapon_library = WeaponLibrary()
         self.module_library = ModuleLibrary()
 
@@ -59,17 +60,20 @@ class DftUi(Frame):
     def combobox_character(self):
         """ Displays and manages the character selection for the main window. """
         # Get known characters.  API calls or data retrieval here.
-        character_names = ('Reimus Klinsman', 'Richard C Mongler', 'Test')
+        character_names = self.character_library.get_character_list()
 
         # Creates the Combobox which has all known characters and automatically
         # selects the first character. Also other widgets.
         lbl_character = Label(self, text='Character:')
-        cbx_character = ttk.Combobox(self, values=character_names, width=14)
-        cbx_character.current(0)
+        self.cbx_character = ttk.Combobox(self, values=character_names, width=14)
+        self.cbx_character.current(0)
 
         # Grid management.
         lbl_character.grid(column=0, row=0, sticky=NW, padx=3, pady=3)
-        cbx_character.grid(column=1, row=0, sticky=NW, padx=3, pady=3)
+        self.cbx_character.grid(column=1, row=0, sticky=NW, padx=3, pady=3)
+
+        # Binding.
+        self.cbx_character.bind('<<ComboboxSelected>>', self.change_character)
 
     def combobox_fitting(self):
         """ Displays and manages the current fitting to be displayed on the
@@ -214,6 +218,18 @@ class DftUi(Frame):
         # Display the change.
         self.fitting_display()
         self.stats_display()
+
+    def change_character(self, *args):
+        """ Changes the current characters for this fitting. """
+        name = self.cbx_character.get()
+        
+        # Change the character
+        self.current_character = self.character_library.get_character(name)
+        self.current_fit.change_character(self.current_character)
+
+        # Display the change.
+        self.stats_display()
+
 
 class DropsuitWindow(Frame):
     """ This handles the window for selecting a new dropsuit. """

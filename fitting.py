@@ -25,6 +25,7 @@ from util import XmlRetrieval, DataRetrieval
 class Fitting:
 	def __init__(self, character, ds_name):
 		self.char = character
+		self.ds_name = ds_name
 		#self.dropsuit = Dropsuit(self.char.skill_effect, ds_type, ds_name)
 		self.dropsuit = Dropsuit(self.char, ds_name)
 
@@ -49,6 +50,29 @@ class Fitting:
 		self.shield_depleted_recharge_delay = self.dropsuit.stats['shield_depleted_recharge_delay']
 		self.scan_profile = self.dropsuit.stats['scan_profile']
 
+	def change_character(self, char):
+		""" This method will reroll the whole fitting instance with the new 
+		character. It will need to collect all of the fitted modules before the
+		reroll.  After the roll it will readd all the modules. This is currently
+		the easiest way to change characters. """
+		# Get a list of all modules and all weapons
+		mod_list = []
+		wea_list = []
+		for m in self.hi_slot + self.low_slot + self.equipment:
+			mod_list.append(m.name)
+		for w in self.heavy_weapon + self.light_weapon + self.sidearm + self.grenade:
+			wea_list.append(w.name)
+
+		# Change base fitting stats by recalling the init function.
+		self.char = char
+		self.__init__(char, self.ds_name)
+
+		# Readd the modules and weapons.
+		for m in mod_list:
+			self.add_module(m)
+		for w in wea_list:
+			self.add_weapon(w)
+
 	def show_stats(self):
 		""" Displays fitting status with all calculations, modules, and skills
 		active. """
@@ -68,6 +92,7 @@ class Fitting:
 			return output
 
 		# Display dropsuit stats.
+		print 'Character Name:                    %s' % self.char.name
 		print 'CPU:                            %s/%s' % (self.current_cpu, self.max_cpu)
 		print 'PG:                             %s/%s' % (self.current_pg, self.max_pg)
 		print 'Heavy Weapon:                      %s' % get_mod_names(self.heavy_weapon)
@@ -415,6 +440,81 @@ class DropsuitLibrary:
 if __name__ == '__main__':
 	charlib = CharacterLibrary()
 
+	char = charlib.get_character('No Skills')
+	fit = Fitting(char, 'Assault Type-I')
+	fit.add_module('Complex Shield Extender')
+	fit.add_module('Complex Shield Extender')
+	fit.add_module('Basic CPU Upgrade')
+	fit.add_module('Militia PG Upgrade')
+	fit.add_module('Militia Nanite Injector')
+	fit.add_weapon('GEK-38 Assault Rifle')
+	fit.add_weapon('Submachine Gun')
+	fit.add_weapon('AV Grenade')
+	fit.show_stats()
+	print '\n\n\n'
+	char2 = charlib.get_character('Reimus Klinsman')
+	fit.change_character(char2)
+	fit.show_stats()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	"""
+	plain_fit = Fitting(charlib.get_character('No Skills'), 'Assault Type-I')
+
+	reimus_fit = Fitting(charlib.get_character('Reimus Klinsman'),'Assault Type-I')
+	reimus_fit.add_module('Complex Shield Extender')
+	reimus_fit.add_module('Complex Shield Extender')
+	reimus_fit.add_module('Militia CPU Upgrade')
+	reimus_fit.add_module('Militia PG Upgrade')
+	reimus_fit.add_module('Militia Nanite Injector')
+	reimus_fit.add_module('Militia CPU Upgrade')
+	reimus_fit.add_weapon('Assault Rifle')
+	reimus_fit.add_weapon('Submachine Gun')
+	reimus_fit.add_weapon('AV Grenade')
+
+	reimus_fit.show_module_stats()
+
+	print 'Plain Character Fitting'
+	plain_fit.show_stats()
+	print '====================================================='
+	print 'Richard Fitting'
+	reimus_fit.show_stats()
+
+	dsl = DropsuitLibrary()
+	print dsl.get_names()"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	"""reimus = Character('Reimus Klinsman')
 	reimus.set_skill('Dropsuit Command', 1)
 	reimus.set_skill('Profile Dampening', 0)
@@ -441,28 +541,3 @@ if __name__ == '__main__':
 	charlib.save_character(reimus)
 	charlib.save_character(richard)
 	charlib.save_character(plain)"""
-
-	plain_fit = Fitting(charlib.get_character('No Skills'), 'Assault Type-I')
-
-	reimus_fit = Fitting(charlib.get_character('Reimus Klinsman'),'Assault Type-I')
-	reimus_fit.add_module('Complex Shield Extender')
-	reimus_fit.add_module('Complex Shield Extender')
-	reimus_fit.add_module('Militia CPU Upgrade')
-	reimus_fit.add_module('Militia CPU Upgrade')
-	reimus_fit.add_module('Militia PG Upgrade')
-	reimus_fit.add_module('Militia Nanite Injector')
-	reimus_fit.add_module('Militia CPU Upgrade')
-	reimus_fit.add_weapon('Assault Rifle')
-	reimus_fit.add_weapon('Submachine Gun')
-	reimus_fit.add_weapon('AV Grenade')
-
-	reimus_fit.show_module_stats()
-
-	print 'Plain Character Fitting'
-	plain_fit.show_stats()
-	print '====================================================='
-	print 'Richard Fitting'
-	reimus_fit.show_stats()
-
-	dsl = DropsuitLibrary()
-	print dsl.get_names()
