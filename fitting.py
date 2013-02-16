@@ -18,8 +18,9 @@
 import sys, os
 import xml.etree.ElementTree as ET
 
-from char import Character
+from char import Character, CharacterLibrary
 from module import Module, Weapon
+from util import XmlRetrieval, DataRetrieval
 
 class Fitting:
 	def __init__(self, character, ds_name):
@@ -89,7 +90,7 @@ class Fitting:
 
 	def show_module_stats(self):
 		""" Displays module stats with and without calculations. """
-		p = Character()
+		p = Character('p')
 		for mod in self.light_weapon:
 			print '\nPlain'
 			plain = Weapon(p.skill_effect,mod.name)
@@ -369,92 +370,52 @@ class Dropsuit:
 		self.skill_effects = char.skill_effect
 		self.ds_name = ds_name
 
-		self._get_xml(self. _get_file_loc('dropsuit.xml'))
-
+		dropsuit_data = XmlRetrieval('dropsuit.xml')
+		properties, effecting_skills = dropsuit_data.get_target(ds_name)
+		self._add_stats(properties, effecting_skills)
 
 	def show_stats(self):
 		for key in self.stats:
 			print key, self.stats[key]
 
-
-	def _get_file_loc(self, file_name):
-		""" Will return the path to the desired file depending on whether this
-		is an executable or in development. """
-		if getattr(sys, 'frozen', None):
-			basedir = sys._MEIPASS
-		else:
-			basedir = os.path.dirname('data/')
-		return os.path.join(basedir, file_name)
-
-	def _get_xml(self, src):
-		""" Extracts the dropsuit Values from an xml file using self.ds_type
-		and self.ds_name as search parameters. """
-
-		def is_number(s):
-			try:
-				float(s)
-				return True
-			except ValueError:
-				return False
-
+	def _add_stats(self, properties, effecting_skills):
+		""" Adds the properties and effecting skills to the Dropsuit.stats
+		dictionary. """
 		def skill_modifiers(attrib):
 			""" Finds all skills in attrib.values and applies the appropriate
 			modifier.  If no modifier found, 1 is returned for no change.  Each
 			modifier found will multiply itself onto the output. """
-			skill_list = attrib.values()
+			skill_list = attrib
 			output = 1
 			for skill in skill_list:
 				if skill in self.skill_effects:
 					output *= (1 + self.skill_effects[skill])
 			return output
 
-		xml_tree = ET.parse(src)
-		# Finds the desired target in xml file
-		for child in xml_tree.getroot():
-			if child.attrib['name'] == self.ds_name:
-				target = child
-				break
-
 		# Apply stats. Add skill modifiers when applicable.
-		for prop in target:
-			if is_number(prop.text):
-				self.stats[prop.tag] = round(float(prop.text) * skill_modifiers(prop.attrib), 3)
+		for key in properties:
+			if key in effecting_skills:
+				stat = properties[key] * skill_modifiers(effecting_skills[key])
 			else:
-				self.stats[prop.tag] = prop.text
+				stat = properties[key]
+			self.stats[key] = round(stat, 3)
 
 
 class DropsuitLibrary:
 	def __init__(self):
-		self.names = []
+		dropsuit_data = XmlRetrieval('dropsuit.xml')
 
-		self._get_xml(self._get_file_loc('dropsuit.xml'))
+		self.names = dropsuit_data.get_list()		
 
 	def get_names(self):
 		""" Returns dropsuit names as a tuple. """
 		return tuple(self.names)
 
-	def _get_file_loc(self, file_name):
-		""" Will return the path to the desired file depending on whether this
-		is an executable or in development. """
-		if getattr(sys, 'frozen', None):
-			basedir = sys._MEIPASS
-		else:
-			basedir = os.path.dirname('data/')
-		return os.path.join(basedir, file_name)
-
-	def _get_xml(self, src):
-		""" Finds all the names of every dropsuit in the xml file. """
-		xml_tree = ET.parse(src)
-
-		for child in xml_tree.getroot():
-			self.names.append(child.get('name'))
-
 
 if __name__ == '__main__':
-	plain = Character()
-	plain_fit = Fitting(plain,'Assault Type-I')
+	charlib = CharacterLibrary()
 
-	reimus = Character()
+	"""reimus = Character('Reimus Klinsman')
 	reimus.set_skill('Dropsuit Command', 1)
 	reimus.set_skill('Profile Dampening', 0)
 	reimus.set_skill('Nanocircuitry', 1)
@@ -468,7 +429,22 @@ if __name__ == '__main__':
 	reimus.set_skill('Weaponry', 5)
 	reimus.set_skill('Assault Rifle Proficiency', 2)
 
-	reimus_fit = Fitting(reimus,'Assault Type-I')
+	richard = Character('Richard C Mongler')
+	richard.set_skill('Dropsuit Command', 1)
+	richard.set_skill('Endurance', 4)
+	richard.set_skill('Vigor', 3)
+	richard.set_skill('Profile Dampening', 3)
+	richard.set_skill('Field Mechanics', 1)
+
+	plain = Character('No Skills')
+
+	charlib.save_character(reimus)
+	charlib.save_character(richard)
+	charlib.save_character(plain)"""
+
+	plain_fit = Fitting(charlib.get_character('No Skills'), 'Assault Type-I')
+
+	reimus_fit = Fitting(charlib.get_character('Reimus Klinsman'),'Assault Type-I')
 	reimus_fit.add_module('Complex Shield Extender')
 	reimus_fit.add_module('Complex Shield Extender')
 	reimus_fit.add_module('Militia CPU Upgrade')
@@ -480,13 +456,6 @@ if __name__ == '__main__':
 	reimus_fit.add_weapon('Submachine Gun')
 	reimus_fit.add_weapon('AV Grenade')
 
-	#richard = Character()
-	#richard_fit = Fitting(richard,'God','Type-I')
-	#richard_fit.add_module('Complex Light Damage Modifier')
-	#richard_fit.add_module('Complex Light Damage Modifier')
-	#richard_fit.add_weapon('Duvolle Assault Rifle')
-
-	#richard_fit.show_module_stats()
 	reimus_fit.show_module_stats()
 
 	print 'Plain Character Fitting'
@@ -497,6 +466,3 @@ if __name__ == '__main__':
 
 	dsl = DropsuitLibrary()
 	print dsl.get_names()
-
-	print reimus_fit.get_cpu_over()
-	reimus_fit.get_all_modules()

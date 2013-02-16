@@ -20,6 +20,7 @@ import xml.etree.ElementTree as ET
 import math
 
 from char import Character
+from util import XmlRetrieval
 
 
 class Module:
@@ -28,7 +29,8 @@ class Module:
 		self.name = mod_name
 		self.skills = skills
 
-		properties, effecting_skills = self._get_xml(self._get_file_loc('module.xml'))
+		module_data = XmlRetrieval('module.xml')
+		properties, effecting_skills = module_data.get_target(mod_name)
 		self._add_stats(properties,effecting_skills)
 
 	def show_stats(self):
@@ -66,46 +68,6 @@ class Module:
 			else:
 				self.stats[key] = properties[key]
 
-	def _get_file_loc(self, file_name):
-		""" Will return the path to the desired file depending on whether this
-		is an executable or in development. """
-		if getattr(sys, 'frozen', None):
-			basedir = sys._MEIPASS
-		else:
-			basedir = os.path.dirname('data/')
-		return os.path.join(basedir, file_name)
-
-	def _get_xml(self,src):
-		def is_number(s):
-			""" Checks if a string is a number. """
-			try:
-				float(s)
-				return True
-			except ValueError:
-				return False
-
-		xml_tree = ET.parse(src)
-		# Finds the desired target in xml file
-		for child in xml_tree.getroot():
-			if child.attrib['name'] == self.name:
-				target = child
-				break
-		# Create a dictionary of the targets properties and effecting skills.
-		properties = {}
-		effecting_skills = {}
-		for prop in target:
-			# Get any xml attributes and save them to a dict for later use.
-			if 'effected_by' in prop.attrib.keys():
-				effecting_skills[prop.tag] = prop.attrib.values()
-			# Get the properties and convert them to a float if needed.
-			if is_number(prop.text):
-				properties[prop.tag] = round(float(prop.text), 3)
-			else:
-				properties[prop.tag] = prop.text
-
-		# Returns the properties list and effecting_skills list as a tuple
-		return (properties, effecting_skills)
-
 
 class Weapon(Module):
 	""" Req dropsuit and fitting to test properly. """
@@ -115,7 +77,8 @@ class Weapon(Module):
 		self.skills = skills
 		self.module_list = module_list
 
-		properties, effecting_skills = self._get_xml(self._get_file_loc('weapon.xml'))
+		weapon_data = XmlRetrieval('weapon.xml')
+		properties, effecting_skills = weapon_data.get_target(weapon_name)
 		self._add_stats(properties,effecting_skills)
 		self._add_module_bonus()
 
@@ -136,40 +99,24 @@ class Weapon(Module):
 
 class ModuleLibrary:
 	def __init__(self):
-		self.names = []
+		module_data = XmlRetrieval('module.xml')
 
-		self._get_xml(self._get_file_loc('module.xml'))
+		self.names = module_data.get_list()
 
 	def get_names(self):
 		""" Returns module names as a tuple. """
 		return tuple(self.names)
-
-	def _get_file_loc(self, file_name):
-		""" Will return the path to the desired file depending on whether this
-		is an executable or in development. """
-		if getattr(sys, 'frozen', None):
-			basedir = sys._MEIPASS
-		else:
-			basedir = os.path.dirname('data/')
-		return os.path.join(basedir, file_name)
-
-	def _get_xml(self, src):
-		""" Finds all the names of every module in the xml file. """
-		xml_tree = ET.parse(src)
-
-		for child in xml_tree.getroot():
-			self.names.append(child.get('name'))
 			
 
 class WeaponLibrary(ModuleLibrary):
 	def __init__(self):
-		self.names = []
+		weapon_data = XmlRetrieval('weapon.xml')
 
-		self._get_xml(self._get_file_loc('weapon.xml'))
+		self.names = weapon_data.get_list()
 
 
 if __name__ == '__main__':
-	r = Character()
+	r = Character('r')
 	r.set_skill('Shield Enhancements',5)
 	r.set_skill('Armor Upgrades',5)
 

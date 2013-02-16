@@ -15,7 +15,7 @@ class DftUi(Frame):
         # Main window initialization.
         Frame.__init__(self, parent)
         self.parent = parent
-        self.current_char = Character()
+        self.current_char = Character('Reimus Klinsman')
         self.current_char.set_skill('Dropsuit Command', 1)
         self.current_char.set_skill('Profile Dampening', 0)
         self.current_char.set_skill('Nanocircuitry', 1)
