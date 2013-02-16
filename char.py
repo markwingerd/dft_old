@@ -47,8 +47,8 @@ class CharacterLibrary:
 		return self.character_list[char_name]
 
 	def get_character_list(self):
-		""" Returns a list of the names of all characters. """
-		return self.character_list.keys()
+		""" Returns a list of the names of all characters as a tuple. """
+		return tuple(self.character_list.keys())
 
 	def save_character(self, character):
 		""" """
@@ -101,9 +101,9 @@ if __name__ == '__main__':
 	#char3.set_skill('Weaponry',5)
 	#char3.set_skill('Dropsuit Command',4)
 
-	#char_lib = CharacterLibrary()	
+	char_lib = CharacterLibrary()	
 	#char_lib.save_character(char3)
-	#print char_lib.get_character_list()
+	print char_lib.get_character_list()
 
 	#sk = Skills()
 	#print sk.skill_effect
