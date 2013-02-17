@@ -34,6 +34,18 @@ class Character:
 		self.skill_level[skill] = level
 		self.skill_effect[skill] = level * self.skills.skill_effect[skill]
 
+	def get_all_skills(self):
+		""" Returns a dictionary of all known skills and the characters skill
+		levels. """
+		output = {}
+		# Gets all known skills and if Character has a level for them, apply it.
+		for s in self.skills.get_names():
+			if s in self.skill_level:
+				output[s] = self.skill_level[s]
+			else:
+				output[s] = 0
+		return output
+
 
 class CharacterLibrary:
 	def __init__(self):
@@ -65,9 +77,11 @@ class Skills:
 		self._get_xml(self._get_file_loc('skills.xml'))
 
 	def show_skills(self):
-		for s in self.skill_list:
-			print '%s: %s' % (s, self.skill_effect[s])
-		print self.skill_modifies
+		print self.skill_effect
+
+	def get_names(self):
+		""" Returns a tuple of skill names. """
+		return tuple(self.skill_effect.keys())
 
 	def _get_file_loc(self, file_name):
 		""" Will return the path to the desired file depending on whether this
@@ -104,6 +118,8 @@ if __name__ == '__main__':
 	char_lib = CharacterLibrary()	
 	#char_lib.save_character(char3)
 	print char_lib.get_character_list()
+	char = char_lib.get_character('Reimus Klinsman')
+	print char.get_all_skills()
 
 	#sk = Skills()
 	#print sk.skill_effect
