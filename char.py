@@ -66,6 +66,9 @@ class CharacterLibrary:
 		""" """
 		self.character_data.save_data(character)
 
+	def delete_character(self, character):
+		self.character_data.delete_data(character)
+
 
 class Skills:
 	def __init__(self):

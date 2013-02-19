@@ -71,6 +71,13 @@ class DataRetrieval:
         pickle.dump(self.data, data_file)
         data_file.close()
 
+    def delete_data(self, obj):
+        del self.data[obj.name]
+
+        data_file = open(self.file_name, 'wb')
+        pickle.dump(self.data, data_file)
+        data_file.close()
+
     def _load(self):
         """ """
         try:
