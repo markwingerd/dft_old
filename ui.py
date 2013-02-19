@@ -2,7 +2,7 @@ from Tkinter import *
 import ttk
 import tkFont
 
-from fitting import Fitting, DropsuitLibrary, Dropsuit
+from fitting import Fitting, DropsuitLibrary, Dropsuit, FittingLibrary
 from module import ModuleLibrary, Module, WeaponLibrary, Weapon
 from char import Character, CharacterLibrary, Skills
 
@@ -16,10 +16,11 @@ class DftUi(Frame):
         Frame.__init__(self, parent)
         self.parent = parent
         self.character_library = CharacterLibrary()
+        self.fitting_library = FittingLibrary()
         self.weapon_library = WeaponLibrary()
         self.module_library = ModuleLibrary()
         self.current_char = Character('No Skills')
-        self.current_fit = Fitting(self.current_char, 'Assault Type-I')
+        self.current_fit = self.fitting_library.get_fitting(self.fitting_library.get_fitting_list()[0])
 
         # Call pertinent methods to display main window.
         self.menubar_main()
@@ -44,6 +45,7 @@ class DftUi(Frame):
         editMenu = Menu(menubar)
         editMenu.add_command(label='Edit Character', command=self.edit_character_window)
         editMenu.add_command(label='Delete Character', command=self.delete_character_window)
+        editMenu.add_command(label='Delete Fitting', command=self.delete_fitting_window)
 
         # Add the menus
         menubar.add_cascade(label='File', menu=fileMenu)
@@ -71,16 +73,19 @@ class DftUi(Frame):
         """ Displays and manages the current fitting to be displayed on the
         main window. """
         # Get known fits. API calls or data retrieval here.
-        fitting_names = ('Testing fit', )
+        fitting_names = self.fitting_library.get_fitting_list()
 
         # Creates nessessary widgets.
         lbl_fitting = Label(self, text='Fitting:')
-        cbx_fitting = ttk.Combobox(self, values=fitting_names)
-        cbx_fitting.current(0)
+        self.cbx_fitting = ttk.Combobox(self, values=fitting_names)
+        self.cbx_fitting.set(self.current_fit.name)
 
         # Grid management.
         lbl_fitting.grid(column=2, row=0, sticky=NE, padx=3, pady=3)
-        cbx_fitting.grid(column=3, row=0, sticky=NW, padx=3, pady=3)
+        self.cbx_fitting.grid(column=3, row=0, sticky=NW, padx=3, pady=3)
+
+        # Binding.
+        self.cbx_fitting.bind('<<ComboboxSelected>>', self.change_fitting)
 
     def menu_modules(self):
         """ Displays and manages the module selection menus for the main window. """
@@ -129,51 +134,44 @@ class DftUi(Frame):
         nbk_stats.grid_propagate(False)
         frm_overview = Frame(self, width=250, height=300)
         nbk_stats.add(frm_overview, text='Overview')
+        # Creates widgets for Dropsuit Type.
+        lfr_dropsuit_type = ttk.Labelframe(frm_overview, text='Resources')
+        lbl_dropsuit_type = Label(lfr_dropsuit_type, text='Dropsuit: %s' % self.current_fit.ds_name).grid(column=0, row=0)
         # Creates widgets for Resources.
         lfr_resources = ttk.Labelframe(frm_overview, text='Resources')
-        lbl_cpu1 = Label(lfr_resources, text='CPU:')
-        lbl_cpu2 = Label(lfr_resources, text=cpu_text)
-        lbl_cpu3 = Label(lfr_resources, text=cpu_over)
-        lbl_pg1 = Label(lfr_resources, text='PG:')
-        lbl_pg2 = Label(lfr_resources, text=pg_text)
-        lbl_pg3 = Label(lfr_resources, text=pg_over)
+        lbl_cpu1 = Label(lfr_resources, text='CPU:').grid(column=0, row=0, sticky=W)
+        lbl_cpu2 = Label(lfr_resources, text=cpu_text).grid(column=1, row=0)
+        lbl_cpu3 = Label(lfr_resources, text=cpu_over).grid(column=2, row=0, sticky=E)
+        lbl_pg1 = Label(lfr_resources, text='PG:').grid(column=0, row=1, sticky=W)
+        lbl_pg2 = Label(lfr_resources, text=pg_text).grid(column=1, row=1)
+        lbl_pg3 = Label(lfr_resources, text=pg_over).grid(column=2, row=1, sticky=E)
         # Creates widgets for Defenses.
         lfr_defenses = ttk.Labelframe(frm_overview, text='Defenses')
-        lbl_shield1 = Label(lfr_defenses, text='Shield HP:')
-        lbl_shield2 = Label(lfr_defenses, text=self.current_fit.get_shield_hp())
-        lbl_recharge1 = Label(lfr_defenses, text='Recharge:')
-        lbl_recharge2 = Label(lfr_defenses, text=self.current_fit.get_shield_recharge())
-        lbl_armor1 = Label(lfr_defenses, text='Armor HP:')
-        lbl_armor2 = Label(lfr_defenses, text=self.current_fit.get_armor_hp())
-        lbl_repair1 = Label(lfr_defenses, text='Repair:')
-        lbl_repair2 = Label(lfr_defenses, text=self.current_fit.get_armor_repair_rate())
+        lbl_shield1 = Label(lfr_defenses, text='Shield HP:').grid(column=0, row=0, sticky=W)
+        lbl_shield2 = Label(lfr_defenses, text=self.current_fit.get_shield_hp()).grid(column=1, row=0, sticky=E)
+        lbl_recharge1 = Label(lfr_defenses, text='Recharge:').grid(column=0, row=1, sticky=W)
+        lbl_recharge2 = Label(lfr_defenses, text=self.current_fit.get_shield_recharge()).grid(column=1, row=1, sticky=E)
+        lbl_armor1 = Label(lfr_defenses, text='Armor HP:').grid(column=0, row=2, sticky=W)
+        lbl_armor2 = Label(lfr_defenses, text=self.current_fit.get_armor_hp()).grid(column=1, row=2, sticky=E)
+        lbl_repair1 = Label(lfr_defenses, text='Repair:').grid(column=0, row=3, sticky=W)
+        lbl_repair2 = Label(lfr_defenses, text=self.current_fit.get_armor_repair_rate()).grid(column=1, row=3, sticky=E)
+        # Creates widgets for main offenses.
+        lfr_offenses = ttk.Labelframe(frm_overview, text='Main Offense')
+        lbl_weapon = Label(lfr_offenses, text='Hi').grid(column=0, row=0)
 
         # Grid management.
         nbk_stats.grid(column=4, row=0, rowspan=3, sticky=W+E+N+S, padx=3, pady=3)
-        # Resource grid management.
-        lfr_resources.grid(column=0, row=0, sticky=EW)
-        lbl_cpu1.grid(column=0, row=0, sticky=W)
-        lbl_cpu2.grid(column=1, row=0)
-        lbl_cpu3.grid(column=2, row=0, sticky=E)
-        lbl_pg1.grid(column=0, row=1, sticky=W)
-        lbl_pg2.grid(column=1, row=1)
-        lbl_pg3.grid(column=2, row=1, sticky=E)
-        # Defenses grid management.
-        lfr_defenses.grid(column=0, row=1, sticky=EW)
-        lbl_shield1.grid(column=0, row=0, sticky=W)
-        lbl_shield2.grid(column=1, row=0, sticky=E)
-        lbl_recharge1.grid(column=0, row=1, sticky=W)
-        lbl_recharge2.grid(column=1, row=1, sticky=E)
-        lbl_armor1.grid(column=0, row=2, sticky=W)
-        lbl_armor2.grid(column=1, row=2, sticky=E)
-        lbl_repair1.grid(column=0, row=3, sticky=W)
-        lbl_repair2.grid(column=1, row=3, sticky=E)
+        lfr_dropsuit_type.grid(column=0, row=0, columnspan=2)
+        lfr_resources.grid(column=0, row=1, sticky=EW)
+        lfr_defenses.grid(column=0, row=2, sticky=EW)
+        lfr_offenses.grid(column=0, row=3, sticky=EW)
 
     def new_dropsuit_window(self):
         """ Handles creating a whole new dropsuit. """
         dropsuit_window = DropsuitWindow(self)
 
     def add_character_window(self):
+        """ """
         add_character_window = AddCharacterWindow(self)
 
     def edit_character_window(self):
@@ -181,16 +179,22 @@ class DftUi(Frame):
         character_edit_window = CharacterEditWindow(self, self.current_char.name)
 
     def delete_character_window(self):
+        """ """
         delete_character = DeleteCharacterWindow(self)
 
+    def delete_fitting_window(self):
+        """ """
+        delete_fitting = DeleteFittingWindow(self)
 
-    def load_new_dropsuit(self, dropsuit):
+    def load_new_dropsuit(self, fitting_name, dropsuit):
         """ Called from the DropsuitWindow class.  This will load the dropsuit
         given by DropsuitWindow into the current fit. """
         # Change the fit to hold the selected dropsuit.
-        self.current_fit = Fitting(self.current_char, dropsuit)
+        self.current_fit = Fitting(fitting_name, self.current_char, dropsuit)
+        self.fitting_library.save_fitting(self.current_fit)
 
         # Call the fitting_display and stats_display functions.
+        self.combobox_fitting()
         self.fitting_display()
         self.stats_display()
 
@@ -206,6 +210,9 @@ class DftUi(Frame):
         else:
             self.current_fit.add_weapon(module_name)
 
+        # Save the changes.
+        self.fitting_library.save_fitting(self.current_fit)
+
         # Display the change.
         self.fitting_display()
         self.stats_display()
@@ -218,6 +225,9 @@ class DftUi(Frame):
 
         self.current_fit.remove_module(module_name)
 
+        # Save the changes.
+        self.fitting_library.save_fitting(self.current_fit)
+
         # Display the change.
         self.fitting_display()
         self.stats_display()
@@ -229,6 +239,17 @@ class DftUi(Frame):
         # Change the character
         self.current_char = self.character_library.get_character(name)
         self.current_fit.change_character(self.current_char)
+
+        # Display the change.
+        self.fitting_display()
+        self.stats_display()
+
+    def change_fitting(self, *args):
+        """ Changes the current fitting. """
+        fitting_name = self.cbx_fitting.get()
+
+        # Change the current fitting.
+        self.current_fit = self.fitting_library.get_fitting(fitting_name)
 
         # Display the change.
         self.fitting_display()
@@ -247,6 +268,19 @@ class DftUi(Frame):
         self.stats_display()
         # Reloads the character dropdown menu. Needed if a new character is added.
         self.combobox_character()
+
+    def update_fitting(self, fitting):
+        """ Called by DeleteFittingWindow. """
+        self.fitting_library = FittingLibrary()
+
+        # Selects a fitting and makes it active.
+        misc_fitting = self.fitting_library.get_fitting_list()[0]
+        self.current_fit = self.fitting_library.get_fitting(misc_fitting)
+
+        # Display the changes.
+        self.combobox_fitting()
+        self.fitting_display()
+        self.stats_display()
             
 
 class DropsuitWindow(Frame):
@@ -255,6 +289,7 @@ class DropsuitWindow(Frame):
         # Dropsuit Window initialization
         self.parent = parent
         self.window = Toplevel(self.parent)
+        self.fitting_library = FittingLibrary()
         self.dropsuit_library = DropsuitLibrary()
 
         # Call pertinent methods for this window.
@@ -263,26 +298,38 @@ class DropsuitWindow(Frame):
     def menu_dropsuits(self):
         """ Handles the main menu items to select a dropsuit. """
         # Get known dropsuit names.
+        self.fitting_name = StringVar()
         dropsuit_names = StringVar(value=self.dropsuit_library.get_names())
 
         # Creates the widgets needed for this menu.
+        lbl_enter_name = Label(self.window, text='Enter Character Name')
+        ent_fitting_name = Entry(self.window, textvariable=self.fitting_name)
         lbl_dropsuits = Label(self.window, text='Select Dropsuit')
         self.lbx_dropsuits = Listbox(self.window, listvariable=dropsuit_names, height=10)
+        btn_cancel = Button(self.window, text='Cancel', command=self.cancel)
+        btn_okay = Button(self.window, text='Okay', command=self.okay)
 
         # Grid management.
-        lbl_dropsuits.grid(column=0, row=0, sticky=(N, W), padx=3, pady=3)
-        self.lbx_dropsuits.grid(column=0, row=1, sticky=(W), padx=3, pady=3)
+        lbl_enter_name.grid(column=0, row=0, columnspan=2, sticky=W)
+        ent_fitting_name.grid(column=0, row=1, columnspan=2, sticky=EW)
+        lbl_dropsuits.grid(column=0, row=2, sticky=(N, W), padx=3, pady=3)
+        self.lbx_dropsuits.grid(column=0, row=3, sticky=(W), padx=3, pady=3)
+        btn_cancel.grid(column=0, row=4, sticky=E)
+        btn_okay.grid(column=1, row=4, sticky=E)
 
-        # Bindings
-        self.lbx_dropsuits.bind('<Double-1>', self.select_dropsuit)
+    def cancel(self, *args):
+        """ """
+        self.window.destroy()
 
-    def select_dropsuit(self, *args):
+    def okay(self, *args):
         # Find what is selected.
         listbox_index = self.lbx_dropsuits.curselection()
         dropsuit_name = self.lbx_dropsuits.get(listbox_index)
 
         # Pass the dropsuit to the main class DftUi
-        self.parent.load_new_dropsuit(dropsuit_name)
+        self.parent.load_new_dropsuit(self.fitting_name.get(), dropsuit_name)
+
+        self.window.destroy()
 
 
 class AddCharacterWindow(Frame):
@@ -475,6 +522,46 @@ class DeleteCharacterWindow(Frame):
         # Update main window to show some other character.
         other_character = self.character_library.get_character_list()[0]
         self.parent.update_character(other_character)
+        self.window.destroy()
+
+
+class DeleteFittingWindow(Frame):
+    """ Handles the window for deleting a Fitting. """
+    def __init__(self, parent):
+        self.parent = parent
+        self.window = Toplevel(self.parent)
+        self.fitting_library = FittingLibrary()
+
+        # Call pertinent methods for this window.
+        self.combobox_select_fitting()
+
+    def combobox_select_fitting(self):
+        """ Gets fitting from the user with an entrybox, adds Okay and Cancel buttons. """
+        fitting_list = self.fitting_library.get_fitting_list()
+
+        lbl_enter_name = Label(self.window, text='Select fitting to delete')
+        self.cbx_select_fitting = ttk.Combobox(self.window, values=fitting_list)
+        btn_cancel = Button(self.window, text='Cancel', command=self.cancel)
+        btn_delete = Button(self.window, text='Okay', command=self.delete)
+
+        # Grid management
+        lbl_enter_name.grid(column=0, row=0, columnspan=2, sticky=W)
+        self.cbx_select_fitting.grid(column=0, row=1, columnspan=2, sticky=EW)
+        btn_cancel.grid(column=0, row=2, sticky=E)
+        btn_delete.grid(column=1, row=2, sticky=E)
+
+    def cancel(self, *args):
+        self.window.destroy()
+
+    def delete(self, *args):
+        """  """
+        name = self.cbx_select_fitting.get()
+        fitting = self.fitting_library.get_fitting(name)
+        self.fitting_library.delete_fitting(fitting)
+
+        # Update main window to show some other fitting.
+        other_fitting = self.fitting_library.get_fitting_list()[0]
+        self.parent.update_fitting(other_fitting)
         self.window.destroy()
 
 
