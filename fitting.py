@@ -23,7 +23,8 @@ from module import Module, Weapon
 from util import XmlRetrieval, DataRetrieval
 
 class Fitting:
-	def __init__(self, character, ds_name):
+	def __init__(self, name, character, ds_name):
+		self.name = name
 		self.char = character
 		self.ds_name = ds_name
 		#self.dropsuit = Dropsuit(self.char.skill_effect, ds_type, ds_name)
@@ -65,7 +66,7 @@ class Fitting:
 
 		# Change base fitting stats by recalling the init function.
 		self.char = char
-		self.__init__(char, self.ds_name)
+		self.__init__(self.name, char, self.ds_name)
 
 		# Readd the modules and weapons.
 		for m in mod_list:
@@ -426,6 +427,28 @@ class Dropsuit:
 			self.stats[key] = round(stat, 3)
 
 
+class FittingLibrary:
+	def __init__(self):
+		self.fitting_data = DataRetrieval('fittings.dat')
+
+		self.fitting_list = self.fitting_data.data
+
+	def get_fitting(self, fitting_name):
+		""" Returns a the specified fitting instance. """
+		return self.fitting_list[fitting_name]
+
+	def get_fitting_list(self):
+		""" Returns a list of the names of all fitting names as a tuple. """
+		return tuple(self.fitting_list.keys())
+
+	def save_fitting(self, fitting):
+		""" """
+		self.fitting_data.save_data(fitting)
+
+	def delete_fitting(self, fitting):
+		self.fitting_data.delete_data(fitting)
+
+
 class DropsuitLibrary:
 	def __init__(self):
 		dropsuit_data = XmlRetrieval('dropsuit.xml')
@@ -438,10 +461,12 @@ class DropsuitLibrary:
 
 
 if __name__ == '__main__':
+
+	"""
 	charlib = CharacterLibrary()
 
 	char = charlib.get_character('No Skills')
-	fit = Fitting(char, 'Assault Type-I')
+	fit = Fitting('Test fit number 2', char, 'Assault Type-I')
 	fit.add_module('Complex Shield Extender')
 	fit.add_module('Complex Shield Extender')
 	fit.add_module('Basic CPU Upgrade')
@@ -451,12 +476,15 @@ if __name__ == '__main__':
 	fit.add_weapon('Submachine Gun')
 	fit.add_weapon('AV Grenade')
 	fit.show_stats()
-	print '\n\n\n'
-	char2 = charlib.get_character('Reimus Klinsman')
-	fit.change_character(char2)
+
+	fitlib = FittingLibrary()
+	fitlib.save_fitting(fit)
+"""
+
+	fitlib = FittingLibrary()
+	print fitlib.get_fitting_list()
+	fit = fitlib.get_fitting('Test fit')
 	fit.show_stats()
-
-
 
 
 
