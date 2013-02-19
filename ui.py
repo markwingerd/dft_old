@@ -4,7 +4,7 @@ import tkFont
 
 from fitting import Fitting, DropsuitLibrary, Dropsuit
 from module import ModuleLibrary, Module, WeaponLibrary, Weapon
-from char import Character, CharacterLibrary
+from char import Character, CharacterLibrary, Skills
 
 __application_name__ = 'Dust Fitting Tool'
 
@@ -15,23 +15,11 @@ class DftUi(Frame):
         # Main window initialization.
         Frame.__init__(self, parent)
         self.parent = parent
-        self.current_char = Character('Reimus Klinsman')
-        self.current_char.set_skill('Dropsuit Command', 1)
-        self.current_char.set_skill('Profile Dampening', 0)
-        self.current_char.set_skill('Nanocircuitry', 1)
-        self.current_char.set_skill('Circuitry', 4)
-        self.current_char.set_skill('Combat Engineering', 2)
-        self.current_char.set_skill('Vigor', 0)
-        self.current_char.set_skill('Endurance', 0)
-        self.current_char.set_skill('Shield Boost Systems', 3)
-        self.current_char.set_skill('Shield Enhancements', 4)
-        self.current_char.set_skill('Light Weapon Sharpshooter', 4)
-        self.current_char.set_skill('Weaponry', 5)
-        self.current_char.set_skill('Assault Rifle Proficiency', 2)
-        self.current_fit = Fitting(self.current_char, 'Assault Type-I')
         self.character_library = CharacterLibrary()
         self.weapon_library = WeaponLibrary()
         self.module_library = ModuleLibrary()
+        self.current_char = Character('No Skills')
+        self.current_fit = Fitting(self.current_char, 'Assault Type-I')
 
         # Call pertinent methods to display main window.
         self.menubar_main()
@@ -52,10 +40,14 @@ class DftUi(Frame):
         fileMenu = Menu(menubar)
         fileMenu.add_command(label='New Dropsuit', command=self.new_dropsuit_window)
         fileMenu.add_command(label='New Vehicle')
-        fileMenu.add_command(label='New Character')
+        fileMenu.add_command(label='New Character', command=self.add_character_window)
+        editMenu = Menu(menubar)
+        editMenu.add_command(label='Edit Character', command=self.edit_character_window)
+        editMenu.add_command(label='Delete Character', command=self.delete_character_window)
 
         # Add the menus
         menubar.add_cascade(label='File', menu=fileMenu)
+        menubar.add_cascade(label='Edit', menu=editMenu)
 
     def combobox_character(self):
         """ Displays and manages the character selection for the main window. """
@@ -66,7 +58,7 @@ class DftUi(Frame):
         # selects the first character. Also other widgets.
         lbl_character = Label(self, text='Character:')
         self.cbx_character = ttk.Combobox(self, values=character_names, width=14)
-        self.cbx_character.current(0)
+        self.cbx_character.set('No Skills')
 
         # Grid management.
         lbl_character.grid(column=0, row=0, sticky=NW, padx=3, pady=3)
@@ -179,7 +171,18 @@ class DftUi(Frame):
 
     def new_dropsuit_window(self):
         """ Handles creating a whole new dropsuit. """
-        self.dropsuit_window = DropsuitWindow(self)
+        dropsuit_window = DropsuitWindow(self)
+
+    def add_character_window(self):
+        add_character_window = AddCharacterWindow(self)
+
+    def edit_character_window(self):
+        """ Runs the class which deals with editing or adding a character. """
+        character_edit_window = CharacterEditWindow(self, self.current_char.name)
+
+    def delete_character_window(self):
+        delete_character = DeleteCharacterWindow(self)
+
 
     def load_new_dropsuit(self, dropsuit):
         """ Called from the DropsuitWindow class.  This will load the dropsuit
@@ -224,12 +227,27 @@ class DftUi(Frame):
         name = self.cbx_character.get()
         
         # Change the character
-        self.current_character = self.character_library.get_character(name)
-        self.current_fit.change_character(self.current_character)
+        self.current_char = self.character_library.get_character(name)
+        self.current_fit.change_character(self.current_char)
 
         # Display the change.
+        self.fitting_display()
         self.stats_display()
 
+    def update_character(self, character):
+        """ Called by CharacterEditWindow.  This will update a character with
+        the changed skills. """
+        # Reload character data. THIS IS A HACK. Add better methods for changing and updating characters.
+        self.character_library = CharacterLibrary()
+        self.current_char = self.character_library.get_character(self.current_char.name)
+        self.current_fit.change_character(self.current_char)
+
+        # Display the changes.
+        self.fitting_display()
+        self.stats_display()
+        # Reloads the character dropdown menu. Needed if a new character is added.
+        self.combobox_character()
+            
 
 class DropsuitWindow(Frame):
     """ This handles the window for selecting a new dropsuit. """
@@ -265,6 +283,199 @@ class DropsuitWindow(Frame):
 
         # Pass the dropsuit to the main class DftUi
         self.parent.load_new_dropsuit(dropsuit_name)
+
+
+class AddCharacterWindow(Frame):
+    """ Handles the window for adding a character.  Gets the characters name
+    from the user, and opens the character edit window. """
+    def __init__(self, parent):
+        self.parent = parent
+        self.window = Toplevel(self.parent)
+        self.character_library = CharacterLibrary()
+
+        # Call pertinent methods for this window.
+        self.entrybox_name()
+
+    def entrybox_name(self):
+        """ Gets name from the user with an entrybox, adds Okay and Cancel buttons. """
+        self.character_name = StringVar()
+
+        lbl_enter_name = Label(self.window, text='Enter Character Name')
+        ent_character_name = Entry(self.window, textvariable=self.character_name)
+        btn_cancel = Button(self.window, text='Cancel', command=self.cancel)
+        btn_okay = Button(self.window, text='Okay', command=self.okay)
+
+        # Grid management
+        lbl_enter_name.grid(column=0, row=0, columnspan=2, sticky=W)
+        ent_character_name.grid(column=0, row=1, columnspan=2, sticky=EW)
+        btn_cancel.grid(column=0, row=2, sticky=E)
+        btn_okay.grid(column=1, row=2, sticky=E)
+
+    def cancel(self, *args):
+        self.window.destroy()
+
+    def okay(self, *args):
+        """ Saves the blank character, opens the CharacterEditWindow, closes
+        itself. """
+        new_character = Character(self.character_name.get())
+        self.character_library.save_character(new_character)
+        character_edit_window = CharacterEditWindow(self.parent, self.character_name.get())
+        self.window.destroy()
+
+
+class CharacterEditWindow(Frame):
+    """ This handles the window for editing a character. """
+    def __init__(self, parent, character_name):
+        # CharacterEdit Window initialization
+        self.parent = parent
+        self.window = Toplevel(self.parent)
+        self.character_library = CharacterLibrary()
+        self.character = self.character_library.get_character(character_name)
+
+        # Call pertinent methods for this window.
+        self.combobox_character()
+        self.menu_skills()
+
+    def combobox_character(self):
+        """ Displays and manages the character selection for the 
+        CharacterEditWindow. """
+        # Get known characters.  API calls or data retrieval here.
+        character_names = self.character_library.get_character_list()
+
+        # Creates the Combobox which has all known characters and automatically
+        # selects the first character. Also other widgets.
+        lbl_character = Label(self.window, text='Character:')
+        self.cbx_character = ttk.Combobox(self.window, values=character_names, width=14)
+        self.cbx_character.set(self.character.name)
+
+        # Grid management.
+        lbl_character.grid(column=0, row=0, sticky=NW, padx=3, pady=3)
+        self.cbx_character.grid(column=1, row=0, sticky=NW, padx=3, pady=3)
+
+        # Binding.
+        self.cbx_character.bind('<<ComboboxSelected>>', self.change_character)
+
+    def menu_skills(self):
+        """ Shows available skills a character can use. """
+        # Get known skills and their level, and convert them into a tuple for 
+        # display.
+        display = []
+        skills_dict = self.character.get_all_skills()
+        for name in skills_dict:
+            display.append('{:<27.27} {:1}'.format(name, skills_dict[name]))
+        skill_names = StringVar(value=tuple(display))
+        # Initialize the lbl_current_skill variable.  THIS IS A HACK to allow 
+        # the change_skill method to know which skill is selected.
+        self.current_skill = StringVar(value=display[0][:27].rstrip())
+
+        # Creates the widgets needed for this menu.
+        lbl_skills = Label(self.window, text='Change Skills')
+        self.lbx_skills = Listbox(self.window, listvariable=skill_names, width=30, height=20, font='TkFixedFont')
+        lbl_current_skill = Label(self.window, textvariable=self.current_skill)
+        self.cbx_levels = ttk.Combobox(self.window, values=(0, 1, 2, 3, 4, 5), width=8)
+        btn_change_skill = Button(self.window, text='Change', command=self.change_skill)
+        btn_done = Button(self.window, text='Done', command=self.done)
+        # Initialize the first selection in lbx_skills.
+        self.lbx_skills.selection_set(0)
+
+        # Grid management.
+        lbl_skills.grid(column=0, row=1, columnspan=2, sticky=NW, padx=3, pady=3)
+        self.lbx_skills.grid(column=0, row=2, columnspan=2, sticky=NW, padx=3, pady=3)
+        lbl_current_skill.grid(column=0, row=3, columnspan=2, sticky=W, padx=3, pady=3)
+        self.cbx_levels.grid(column=0, row=4, sticky=E, padx=3, pady=3)
+        btn_change_skill.grid(column=1, row=4, sticky=W, padx=3, pady=3)
+        btn_done.grid(column=1, row=5, sticky=E, padx=3, pady=3)
+
+        # Bindings
+        self.lbx_skills.bind('<<ListboxSelect>>', self.current_skill_changed)
+
+    def current_skill_changed(self, *args):
+        """ Called when an item in the listbox is selected. Updates the 
+        combobox with the selected items level and the lbl_current_skill."""
+        # Find the selected items level.
+        listbox_index = self.lbx_skills.curselection()
+        listbox_string = self.lbx_skills.get(listbox_index)
+        skill = listbox_string[:27].rstrip()
+        level = listbox_string[28].rstrip()
+
+        # Change the combobox selection and label.
+        self.cbx_levels.set(level)
+        self.current_skill.set(skill)
+
+    def change_skill(self, *args):
+        """ Opens the dialog to select a skill level and changes it in the
+        character class. """
+        # Use the lbl_current_skill HACK to find the skill and use the combobox
+        # to determine how to change the characters skill.
+        skill = self.current_skill.get()
+        level = self.cbx_levels.get()
+
+        # Change the skill in the character.
+        self.character.set_skill(skill, int(level))
+
+        # Saves changes to the character.
+        self.character_library.save_character(self.character)
+
+        # Update the listbox by calling its function. Reset the selected skill.
+        self.current_skill.set('')
+        self.menu_skills()
+
+    def change_character(self, *args):
+        """ Changes the character. """
+        # Get the name of the character to change to.
+        name = self.cbx_character.get()
+        
+        # Change the character
+        self.character = self.character_library.get_character(name)
+
+        # Display the change.
+        self.menu_skills()
+
+    def done(self, *args):
+        """ Close window, call a function from the main UI to pass the modified
+        character class. """
+        self.parent.update_character(self.character)
+        self.window.destroy()
+
+
+class DeleteCharacterWindow(Frame):
+    """ Handles the window for deleting a character. """
+    def __init__(self, parent):
+        self.parent = parent
+        self.window = Toplevel(self.parent)
+        self.character_library = CharacterLibrary()
+
+        # Call pertinent methods for this window.
+        self.combobox_select_name()
+
+    def combobox_select_name(self):
+        """ Gets name from the user with an entrybox, adds Okay and Cancel buttons. """
+        character_list = self.character_library.get_character_list()
+
+        lbl_enter_name = Label(self.window, text='Select character to delete')
+        self.cbx_select_character = ttk.Combobox(self.window, values=character_list)
+        btn_cancel = Button(self.window, text='Cancel', command=self.cancel)
+        btn_delete = Button(self.window, text='Okay', command=self.delete)
+
+        # Grid management
+        lbl_enter_name.grid(column=0, row=0, columnspan=2, sticky=W)
+        self.cbx_select_character.grid(column=0, row=1, columnspan=2, sticky=EW)
+        btn_cancel.grid(column=0, row=2, sticky=E)
+        btn_delete.grid(column=1, row=2, sticky=E)
+
+    def cancel(self, *args):
+        self.window.destroy()
+
+    def delete(self, *args):
+        """  """
+        name = self.cbx_select_character.get()
+        character = self.character_library.get_character(name)
+        self.character_library.delete_character(character)
+
+        # Update main window to show some other character.
+        other_character = self.character_library.get_character_list()[0]
+        self.parent.update_character(other_character)
+        self.window.destroy()
 
 
 if __name__ == '__main__':
