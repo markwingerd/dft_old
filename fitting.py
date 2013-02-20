@@ -250,6 +250,35 @@ class Fitting:
 		else:
 			return None
 
+	def get_primary_weapon_name(self):
+		""" Returns the module name of the Heavy or Light weapon. """
+		if self.heavy_weapon:
+			return self.heavy_weapon[0].name
+		elif self.light_weapon:
+			return self.light_weapon[0].name
+		return None
+
+	def get_primary_stats(self, stat):
+		if self.heavy_weapon:
+			return self.heavy_weapon[0].stats[stat]
+		elif self.light_weapon:
+			return self.light_weapon[0].stats[stat]
+		return None
+
+	def get_primary_dps(self):
+		if self.heavy_weapon:
+			return self.heavy_weapon[0].stats['damage'] * (self.heavy_weapon[0].stats['rate_of_fire']/60)
+		elif self.light_weapon:
+			return self.light_weapon[0].stats['damage'] * (self.light_weapon[0].stats['rate_of_fire']/60)
+		return None
+
+	def get_primary_dpm(self):
+		if self.heavy_weapon:
+			return self.heavy_weapon[0].stats['damage'] * self.heavy_weapon[0].stats['clip_size']
+		elif self.light_weapon:
+			return self.light_weapon[0].stats['damage'] * self.light_weapon[0].stats['clip_size']
+		return None
+
 	def get_shield_hp(self):
 		return round(self._get_additive_stat('shield_hp'), 2)
 
@@ -267,6 +296,15 @@ class Fitting:
 
 	def get_armor_repair_rate(self):
 		return round(self._get_additive_stat('armor_repair_rate'), 2)
+
+	def get_scan_profile(self):
+		return round(self._get_multiplicative_stacking_stat('scan_profile'), 2)
+
+	def get_scan_precision(self):
+		return round(self._get_multiplicative_stacking_stat('scan_precision'), 2)
+
+	def get_scan_radius(self):
+		return round(self._get_multiplicative_stacking_stat('scan_radius'), 2)
 
 	def get_all_modules(self):
 		""" Returns a tuple of modules and weapons for the GUI. """
@@ -483,7 +521,7 @@ if __name__ == '__main__':
 
 	fitlib = FittingLibrary()
 	print fitlib.get_fitting_list()
-	fit = fitlib.get_fitting('Test fit')
+	fit = fitlib.get_fitting(fitlib.get_fitting_list()[0])
 	fit.show_stats()
 
 

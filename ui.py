@@ -141,30 +141,47 @@ class DftUi(Frame):
         lfr_resources = ttk.Labelframe(frm_overview, text='Resources')
         lbl_cpu1 = Label(lfr_resources, text='CPU:').grid(column=0, row=0, sticky=W)
         lbl_cpu2 = Label(lfr_resources, text=cpu_text).grid(column=1, row=0)
-        lbl_cpu3 = Label(lfr_resources, text=cpu_over).grid(column=2, row=0, sticky=E)
-        lbl_pg1 = Label(lfr_resources, text='PG:').grid(column=0, row=1, sticky=W)
-        lbl_pg2 = Label(lfr_resources, text=pg_text).grid(column=1, row=1)
-        lbl_pg3 = Label(lfr_resources, text=pg_over).grid(column=2, row=1, sticky=E)
+        lbl_pg1 = Label(lfr_resources, text='PG:').grid(column=2, row=0, sticky=W)
+        lbl_pg2 = Label(lfr_resources, text=pg_text).grid(column=3, row=0)
+        lbl_cpu3 = Label(lfr_resources, text=cpu_over).grid(column=1, row=1, sticky=E)
+        lbl_pg3 = Label(lfr_resources, text=pg_over).grid(column=3, row=1, sticky=E)
+        # Creates widgets for main offenses.
+        lfr_offenses = ttk.Labelframe(frm_overview, text='Main Offense')
+        lbl_weapon = Label(lfr_offenses, text='Primary Weapon: %s' % self.current_fit.get_primary_weapon_name()).grid(column=0, row=0, columnspan=4)
+        lbl_dmg1 = Label(lfr_offenses, text='Damage: ').grid(column=0, row=1, sticky=W)
+        lbl_dmg2 = Label(lfr_offenses, text=self.current_fit.get_primary_stats('damage')).grid(column=1, row=1, sticky=E)
+        lbl_rof1 = Label(lfr_offenses, text='RoF:').grid(column=2, row=1, sticky=W)
+        lbl_rof2 = Label(lfr_offenses, text=self.current_fit.get_primary_stats('rate_of_fire')).grid(column=3, row=1, sticky=E)
+        lbl_dps1 = Label(lfr_offenses, text='DPS: ').grid(column=0, row=2, sticky=W)
+        lbl_dps2 = Label(lfr_offenses, text=self.current_fit.get_primary_dps()).grid(column=1, row=2, sticky=E)
+        lbl_dpm1 = Label(lfr_offenses, text='DPMag: ').grid(column=2, row=2, sticky=W)
+        lbl_dpm2 = Label(lfr_offenses, text=self.current_fit.get_primary_dpm()).grid(column=3, row=2, sticky=E)
         # Creates widgets for Defenses.
         lfr_defenses = ttk.Labelframe(frm_overview, text='Defenses')
         lbl_shield1 = Label(lfr_defenses, text='Shield HP:').grid(column=0, row=0, sticky=W)
         lbl_shield2 = Label(lfr_defenses, text=self.current_fit.get_shield_hp()).grid(column=1, row=0, sticky=E)
-        lbl_recharge1 = Label(lfr_defenses, text='Recharge:').grid(column=0, row=1, sticky=W)
-        lbl_recharge2 = Label(lfr_defenses, text=self.current_fit.get_shield_recharge()).grid(column=1, row=1, sticky=E)
-        lbl_armor1 = Label(lfr_defenses, text='Armor HP:').grid(column=0, row=2, sticky=W)
-        lbl_armor2 = Label(lfr_defenses, text=self.current_fit.get_armor_hp()).grid(column=1, row=2, sticky=E)
-        lbl_repair1 = Label(lfr_defenses, text='Repair:').grid(column=0, row=3, sticky=W)
-        lbl_repair2 = Label(lfr_defenses, text=self.current_fit.get_armor_repair_rate()).grid(column=1, row=3, sticky=E)
-        # Creates widgets for main offenses.
-        lfr_offenses = ttk.Labelframe(frm_overview, text='Main Offense')
-        lbl_weapon = Label(lfr_offenses, text='Hi').grid(column=0, row=0)
-
+        lbl_recharge1 = Label(lfr_defenses, text='Recharge:').grid(column=2, row=0, sticky=W)
+        lbl_recharge2 = Label(lfr_defenses, text=self.current_fit.get_shield_recharge()).grid(column=3, row=0, sticky=E)
+        lbl_armor1 = Label(lfr_defenses, text='Armor HP:').grid(column=0, row=1, sticky=W)
+        lbl_armor2 = Label(lfr_defenses, text=self.current_fit.get_armor_hp()).grid(column=1, row=1, sticky=E)
+        lbl_repair1 = Label(lfr_defenses, text='Repair:').grid(column=2, row=1, sticky=W)
+        lbl_repair2 = Label(lfr_defenses, text=self.current_fit.get_armor_repair_rate()).grid(column=3, row=1, sticky=E)
+        # Creates widgets for Sensors.
+        lfr_sensors = ttk.Labelframe(frm_overview, text='Sensors')
+        lbl_prof1 = Label(lfr_sensors, text='Scan Profile: ').grid(column=0, row=0, sticky=W)
+        lbl_prof2 = Label(lfr_sensors, text=self.current_fit.get_scan_profile()).grid(column=1, row=0, sticky=E)
+        lbl_prec1 = Label(lfr_sensors, text='Scan Precision: ').grid(column=0, row=1, sticky=W)
+        lbl_prec2 = Label(lfr_sensors, text=self.current_fit.get_scan_precision()).grid(column=1, row=1, sticky=E)
+        lbl_radi1 = Label(lfr_sensors, text='Scan Radius: ').grid(column=0, row=2, sticky=W)
+        lbl_radi2 = Label(lfr_sensors, text=self.current_fit.get_scan_radius()).grid(column=1, row=2, sticky=E)
+        
         # Grid management.
         nbk_stats.grid(column=4, row=0, rowspan=3, sticky=W+E+N+S, padx=3, pady=3)
         lfr_dropsuit_type.grid(column=0, row=0, columnspan=2)
         lfr_resources.grid(column=0, row=1, sticky=EW)
-        lfr_defenses.grid(column=0, row=2, sticky=EW)
-        lfr_offenses.grid(column=0, row=3, sticky=EW)
+        lfr_offenses.grid(column=0, row=2, sticky=EW)
+        lfr_defenses.grid(column=0, row=3, sticky=EW)
+        lfr_sensors.grid(column=0, row=4, sticky=EW)
 
     def new_dropsuit_window(self):
         """ Handles creating a whole new dropsuit. """
@@ -568,8 +585,9 @@ class DeleteFittingWindow(Frame):
 if __name__ == '__main__':
     root = Tk()
     root.title(__application_name__)
+    root.geometry('828x357+300+300')
 
     app = DftUi(root)
-    app.pack()
+    app.grid()
 
     root.mainloop()
