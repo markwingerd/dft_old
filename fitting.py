@@ -237,16 +237,16 @@ class Fitting:
 		percentage that it's over as a string. Otherwise return ''. """
 		if self.current_cpu > self.max_cpu:
 			perc =( (self.current_cpu-self.max_cpu) / self.max_cpu) * 100
-			return '%s%%' % round(perc, 1)
+			return '%s%% over' % round(perc, 1)
 		else:
 			return None
 
 	def get_pg_over(self):
 		""" If the dropsuit is using more PG then it has available, return the
 		percentage that it's over as a string. Otherwise return ''. """
-		if self.current_pg > self.max_cpu:
+		if self.current_pg > self.max_pg:
 			perc =( (self.current_pg-self.max_pg) / self.max_pg) * 100
-			return '%s%%' % round(perc, 1)
+			return '%s%% over' % round(perc, 1)
 		else:
 			return None
 

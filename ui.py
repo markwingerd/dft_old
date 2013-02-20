@@ -94,7 +94,7 @@ class DftUi(Frame):
 
         # Creates the widgets needed for this menu.
         lbl_modules = Label(self, text='Modules')
-        self.lbx_modules = Listbox(self, listvariable=module_names, width=25, height=20)
+        self.lbx_modules = Listbox(self, listvariable=module_names, width=25, height=18, bg='white')
 
         # Grid management.
         lbl_modules.grid(column=0, row=1, columnspan=2, sticky=NW, padx=3, pady=3)
@@ -109,9 +109,9 @@ class DftUi(Frame):
         fitting_list = StringVar(value=self.current_fit.get_all_modules())
 
         # Creates the widgets needed for this display.
-        frm_fitting = Frame(self, width=350, height=300, borderwidth=2, relief='sunken')
+        frm_fitting = Frame(self, width=350, height=300)
         frm_fitting.grid_propagate(False) #Forces the frame to keep its size.
-        self.lbx_fitting = Listbox(frm_fitting, listvariable=fitting_list, width=48, height=20, font='TkFixedFont')
+        self.lbx_fitting = Listbox(frm_fitting, listvariable=fitting_list, width=48, height=20, font='TkFixedFont', bg='white')
         self.lbx_fitting.grid_propagate(False)
 
         # Grid management.
@@ -135,37 +135,49 @@ class DftUi(Frame):
         frm_overview = Frame(self, width=250, height=300)
         nbk_stats.add(frm_overview, text='Overview')
         # Creates widgets for Dropsuit Type.
-        lfr_dropsuit_type = ttk.Labelframe(frm_overview, text='Resources')
-        lbl_dropsuit_type = Label(lfr_dropsuit_type, text='Dropsuit: %s' % self.current_fit.ds_name).grid(column=0, row=0)
+        lfr_dropsuit_type = ttk.Labelframe(frm_overview, text='Dropsuit Type:')
+        lbl_dropsuit_type = Label(lfr_dropsuit_type, text=self.current_fit.ds_name).grid(column=0, row=0)
         # Creates widgets for Resources.
         lfr_resources = ttk.Labelframe(frm_overview, text='Resources')
         lbl_cpu1 = Label(lfr_resources, text='CPU:').grid(column=0, row=0, sticky=W)
         lbl_cpu2 = Label(lfr_resources, text=cpu_text).grid(column=1, row=0)
-        lbl_pg1 = Label(lfr_resources, text='PG:').grid(column=2, row=0, sticky=W)
+        lbl_pg1 = Label(lfr_resources, text='PG:').grid(column=2, row=0, sticky=W, padx=10)
         lbl_pg2 = Label(lfr_resources, text=pg_text).grid(column=3, row=0)
         lbl_cpu3 = Label(lfr_resources, text=cpu_over).grid(column=1, row=1, sticky=E)
         lbl_pg3 = Label(lfr_resources, text=pg_over).grid(column=3, row=1, sticky=E)
+        lfr_resources.columnconfigure(0, minsize=30)
+        lfr_resources.columnconfigure(1, minsize=90)
+        lfr_resources.columnconfigure(2, minsize=20)
+        lfr_resources.columnconfigure(3, minsize=75)
         # Creates widgets for main offenses.
         lfr_offenses = ttk.Labelframe(frm_overview, text='Main Offense')
         lbl_weapon = Label(lfr_offenses, text='Primary Weapon: %s' % self.current_fit.get_primary_weapon_name()).grid(column=0, row=0, columnspan=4)
         lbl_dmg1 = Label(lfr_offenses, text='Damage: ').grid(column=0, row=1, sticky=W)
         lbl_dmg2 = Label(lfr_offenses, text=self.current_fit.get_primary_stats('damage')).grid(column=1, row=1, sticky=E)
-        lbl_rof1 = Label(lfr_offenses, text='RoF:').grid(column=2, row=1, sticky=W)
+        lbl_rof1 = Label(lfr_offenses, text='RoF:').grid(column=2, row=1, sticky=W, padx=10)
         lbl_rof2 = Label(lfr_offenses, text=self.current_fit.get_primary_stats('rate_of_fire')).grid(column=3, row=1, sticky=E)
         lbl_dps1 = Label(lfr_offenses, text='DPS: ').grid(column=0, row=2, sticky=W)
         lbl_dps2 = Label(lfr_offenses, text=self.current_fit.get_primary_dps()).grid(column=1, row=2, sticky=E)
-        lbl_dpm1 = Label(lfr_offenses, text='DPMag: ').grid(column=2, row=2, sticky=W)
+        lbl_dpm1 = Label(lfr_offenses, text='DPMag: ').grid(column=2, row=2, sticky=W, padx=10)
         lbl_dpm2 = Label(lfr_offenses, text=self.current_fit.get_primary_dpm()).grid(column=3, row=2, sticky=E)
+        lfr_offenses.columnconfigure(0, minsize=60)
+        lfr_offenses.columnconfigure(1, minsize=45)
+        lfr_offenses.columnconfigure(2, minsize=60)
+        lfr_offenses.columnconfigure(3, minsize=60)
         # Creates widgets for Defenses.
         lfr_defenses = ttk.Labelframe(frm_overview, text='Defenses')
         lbl_shield1 = Label(lfr_defenses, text='Shield HP:').grid(column=0, row=0, sticky=W)
         lbl_shield2 = Label(lfr_defenses, text=self.current_fit.get_shield_hp()).grid(column=1, row=0, sticky=E)
-        lbl_recharge1 = Label(lfr_defenses, text='Recharge:').grid(column=2, row=0, sticky=W)
+        lbl_recharge1 = Label(lfr_defenses, text='Recharge:').grid(column=2, row=0, sticky=W, padx=10)
         lbl_recharge2 = Label(lfr_defenses, text=self.current_fit.get_shield_recharge()).grid(column=3, row=0, sticky=E)
         lbl_armor1 = Label(lfr_defenses, text='Armor HP:').grid(column=0, row=1, sticky=W)
         lbl_armor2 = Label(lfr_defenses, text=self.current_fit.get_armor_hp()).grid(column=1, row=1, sticky=E)
-        lbl_repair1 = Label(lfr_defenses, text='Repair:').grid(column=2, row=1, sticky=W)
+        lbl_repair1 = Label(lfr_defenses, text='Repair:').grid(column=2, row=1, sticky=W, padx=10)
         lbl_repair2 = Label(lfr_defenses, text=self.current_fit.get_armor_repair_rate()).grid(column=3, row=1, sticky=E)
+        lfr_defenses.columnconfigure(0, minsize=70)
+        lfr_defenses.columnconfigure(1, minsize=50)
+        lfr_defenses.columnconfigure(2, minsize=70)
+        lfr_defenses.columnconfigure(3, minsize=35)
         # Creates widgets for Sensors.
         lfr_sensors = ttk.Labelframe(frm_overview, text='Sensors')
         lbl_prof1 = Label(lfr_sensors, text='Scan Profile: ').grid(column=0, row=0, sticky=W)
@@ -177,11 +189,12 @@ class DftUi(Frame):
         
         # Grid management.
         nbk_stats.grid(column=4, row=0, rowspan=3, sticky=W+E+N+S, padx=3, pady=3)
-        lfr_dropsuit_type.grid(column=0, row=0, columnspan=2)
+        lfr_dropsuit_type.grid(column=0, row=0, sticky=EW)
         lfr_resources.grid(column=0, row=1, sticky=EW)
         lfr_offenses.grid(column=0, row=2, sticky=EW)
         lfr_defenses.grid(column=0, row=3, sticky=EW)
         lfr_sensors.grid(column=0, row=4, sticky=EW)
+        frm_overview.columnconfigure(0, minsize=250)
 
     def new_dropsuit_window(self):
         """ Handles creating a whole new dropsuit. """
@@ -585,7 +598,8 @@ class DeleteFittingWindow(Frame):
 if __name__ == '__main__':
     root = Tk()
     root.title(__application_name__)
-    root.geometry('828x357+300+300')
+    root.geometry('828x329+300+300')
+    root.resizable(width=False, height=False)
 
     app = DftUi(root)
     app.grid()
