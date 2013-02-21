@@ -90,7 +90,7 @@ class Skills:
 		""" Will return the path to the desired file depending on whether this
 		is an executable or in development. """
 		if getattr(sys, 'frozen', None):
-			basedir = sys._MEIPASS
+			basedir = sys._MEIPASS + '/data/'
 		else:
 			basedir = os.path.dirname('data/')
 		return os.path.join(basedir, file_name)
