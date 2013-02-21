@@ -95,10 +95,13 @@ class DftUi(Frame):
         # Creates the widgets needed for this menu.
         lbl_modules = Label(self, text='Modules')
         self.lbx_modules = Listbox(self, listvariable=module_names, width=25, height=18, bg='white')
+        scb_modules = Scrollbar(self, orient=VERTICAL, command=self.lbx_modules.yview)
 
         # Grid management.
         lbl_modules.grid(column=0, row=1, columnspan=2, sticky=NW, padx=3, pady=3)
         self.lbx_modules.grid(column=0, row=2, columnspan=2, sticky=NW, padx=3, pady=3)
+        scb_modules.grid(column=1, row=2, sticky=NE+S, pady=4)
+        self.lbx_modules['yscrollcommand'] = scb_modules.set
 
         # Bindings
         self.lbx_modules.bind('<Double-1>', self.add_module)
@@ -151,7 +154,7 @@ class DftUi(Frame):
         lfr_resources.columnconfigure(3, minsize=75)
         # Creates widgets for main offenses.
         lfr_offenses = ttk.Labelframe(frm_overview, text='Main Offense')
-        lbl_weapon = Label(lfr_offenses, text='Primary Weapon: %s' % self.current_fit.get_primary_weapon_name()).grid(column=0, row=0, columnspan=4)
+        lbl_weapon = Label(lfr_offenses, text=self.current_fit.get_primary_weapon_name()).grid(column=0, row=0, columnspan=4)
         lbl_dmg1 = Label(lfr_offenses, text='Damage: ').grid(column=0, row=1, sticky=W)
         lbl_dmg2 = Label(lfr_offenses, text=self.current_fit.get_primary_stats('damage')).grid(column=1, row=1, sticky=E)
         lbl_rof1 = Label(lfr_offenses, text='RoF:').grid(column=2, row=1, sticky=W, padx=10)
@@ -333,19 +336,22 @@ class DropsuitWindow(Frame):
 
         # Creates the widgets needed for this menu.
         lbl_enter_name = Label(self.window, text='Enter Character Name')
-        ent_fitting_name = Entry(self.window, textvariable=self.fitting_name)
+        ent_fitting_name = Entry(self.window, textvariable=self.fitting_name, bg='white')
         lbl_dropsuits = Label(self.window, text='Select Dropsuit')
-        self.lbx_dropsuits = Listbox(self.window, listvariable=dropsuit_names, height=10)
+        self.lbx_dropsuits = Listbox(self.window, listvariable=dropsuit_names, height=10, bg='white')
+        scb_dropsuits = Scrollbar(self.window, orient=VERTICAL, command=self.lbx_dropsuits.yview)
         btn_cancel = Button(self.window, text='Cancel', command=self.cancel)
         btn_okay = Button(self.window, text='Okay', command=self.okay)
 
         # Grid management.
         lbl_enter_name.grid(column=0, row=0, columnspan=2, sticky=W)
         ent_fitting_name.grid(column=0, row=1, columnspan=2, sticky=EW)
-        lbl_dropsuits.grid(column=0, row=2, sticky=(N, W), padx=3, pady=3)
-        self.lbx_dropsuits.grid(column=0, row=3, sticky=(W), padx=3, pady=3)
-        btn_cancel.grid(column=0, row=4, sticky=E)
-        btn_okay.grid(column=1, row=4, sticky=E)
+        lbl_dropsuits.grid(column=0, row=2, columnspan=2, sticky=(N, W), padx=3, pady=3)
+        self.lbx_dropsuits.grid(column=0, row=3, sticky=EW, padx=3, pady=3)
+        scb_dropsuits.grid(column=1, row=3, sticky=NE+S)
+        self.lbx_dropsuits['yscrollcommand'] = scb_dropsuits.set
+        btn_cancel.grid(column=0, row=4)
+        btn_okay.grid(column=0, row=4, columnspan=2, sticky=E)
 
     def cancel(self, *args):
         """ """
@@ -378,7 +384,7 @@ class AddCharacterWindow(Frame):
         self.character_name = StringVar()
 
         lbl_enter_name = Label(self.window, text='Enter Character Name')
-        ent_character_name = Entry(self.window, textvariable=self.character_name)
+        ent_character_name = Entry(self.window, textvariable=self.character_name, bg='white')
         btn_cancel = Button(self.window, text='Cancel', command=self.cancel)
         btn_okay = Button(self.window, text='Okay', command=self.okay)
 
@@ -427,7 +433,7 @@ class CharacterEditWindow(Frame):
 
         # Grid management.
         lbl_character.grid(column=0, row=0, sticky=NW, padx=3, pady=3)
-        self.cbx_character.grid(column=1, row=0, sticky=NW, padx=3, pady=3)
+        self.cbx_character.grid(column=1, row=0, columnspan=2, sticky=NW, padx=3, pady=3)
 
         # Binding.
         self.cbx_character.bind('<<ComboboxSelected>>', self.change_character)
@@ -439,15 +445,16 @@ class CharacterEditWindow(Frame):
         display = []
         skills_dict = self.character.get_all_skills()
         for name in skills_dict:
-            display.append('{:<27.27} {:1}'.format(name, skills_dict[name]))
+            display.append('{:<29.29} {:1}'.format(name, skills_dict[name]))
         skill_names = StringVar(value=tuple(display))
         # Initialize the lbl_current_skill variable.  THIS IS A HACK to allow 
         # the change_skill method to know which skill is selected.
-        self.current_skill = StringVar(value=display[0][:27].rstrip())
+        self.current_skill = StringVar(value=display[0][:29].rstrip())
 
         # Creates the widgets needed for this menu.
         lbl_skills = Label(self.window, text='Change Skills')
-        self.lbx_skills = Listbox(self.window, listvariable=skill_names, width=30, height=20, font='TkFixedFont')
+        self.lbx_skills = Listbox(self.window, listvariable=skill_names, width=33, height=20, font='TkFixedFont', bg='white')
+        scb_skills = Scrollbar(self.window, orient=VERTICAL, command=self.lbx_skills.yview)
         lbl_current_skill = Label(self.window, textvariable=self.current_skill)
         self.cbx_levels = ttk.Combobox(self.window, values=(0, 1, 2, 3, 4, 5), width=8)
         btn_change_skill = Button(self.window, text='Change', command=self.change_skill)
@@ -456,12 +463,14 @@ class CharacterEditWindow(Frame):
         self.lbx_skills.selection_set(0)
 
         # Grid management.
-        lbl_skills.grid(column=0, row=1, columnspan=2, sticky=NW, padx=3, pady=3)
-        self.lbx_skills.grid(column=0, row=2, columnspan=2, sticky=NW, padx=3, pady=3)
-        lbl_current_skill.grid(column=0, row=3, columnspan=2, sticky=W, padx=3, pady=3)
+        lbl_skills.grid(column=0, row=1, columnspan=3, sticky=NW, padx=3, pady=3)
+        self.lbx_skills.grid(column=0, row=2, columnspan=3, sticky=NW, padx=3, pady=3)
+        scb_skills.grid(column=2, row=2, sticky=NE+S)
+        self.lbx_skills['yscrollcommand'] = scb_skills.set
+        lbl_current_skill.grid(column=0, row=3, columnspan=3, sticky=W, padx=3, pady=3)
         self.cbx_levels.grid(column=0, row=4, sticky=E, padx=3, pady=3)
         btn_change_skill.grid(column=1, row=4, sticky=W, padx=3, pady=3)
-        btn_done.grid(column=1, row=5, sticky=E, padx=3, pady=3)
+        btn_done.grid(column=2, row=4, sticky=E, padx=3, pady=3)
 
         # Bindings
         self.lbx_skills.bind('<<ListboxSelect>>', self.current_skill_changed)
@@ -472,8 +481,8 @@ class CharacterEditWindow(Frame):
         # Find the selected items level.
         listbox_index = self.lbx_skills.curselection()
         listbox_string = self.lbx_skills.get(listbox_index)
-        skill = listbox_string[:27].rstrip()
-        level = listbox_string[28].rstrip()
+        skill = listbox_string[:29].rstrip()
+        level = listbox_string[30].rstrip()
 
         # Change the combobox selection and label.
         self.cbx_levels.set(level)

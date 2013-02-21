@@ -9,6 +9,12 @@
 	<skill name="Vigor">
 		<effect>0.05</effect>
 	</skill>
+	<skill name="Long Range Scanning">
+		<effect>0.05</effect>
+	</skill>
+	<skill name="Profile Analysis">
+		<effect>-0.05</effect>
+	</skill>
 	<skill name="Profile Dampening">
 		<effect>-0.05</effect>
 	</skill>
@@ -33,10 +39,28 @@
 	<skill name="Light Weapon Sharpshooter">
 		<effect>0.05</effect>
 	</skill>
+	<skill name="Heavy Weapon Upgrades">
+		<effect>-0.05</effect>
+	</skill>
 	<skill name="Light Weapon Upgrades">
 		<effect>-0.05</effect>
 	</skill>
 	<skill name="Assault Rifle Proficiency">
+		<effect>0.03</effect>
+	</skill>
+	<skill name="Forge Gun Proficiency">
+		<effect>0.03</effect>
+	</skill>
+	<skill name="Hand To Hand Combat">
+		<effect>0.10</effect>
+	</skill>
+	<skill name="Heavy Machine Gun Proficiency">
+		<effect>0.03</effect>
+	</skill>
+	<skill name="Shotgun Proficiency">
+		<effect>0.03</effect>
+	</skill>
+	<skill name="Submachine Gun Proficiency">
 		<effect>0.03</effect>
 	</skill>
 	<skill name="Weaponry">

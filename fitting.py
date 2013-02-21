@@ -172,6 +172,7 @@ class Fitting:
 				self._update_cpu(module)
 				self._update_pg(module)
 				getattr(self, module.stats['slot_type']).append(module)
+				self._update_module_bonus() # Must be called after the module has been added to the list
 
 	def remove_module(self, mod_name):
 		""" Finds a module that needs to be deleted and removes it if it has 
@@ -182,42 +183,49 @@ class Fitting:
 				self.heavy_weapon.remove(m)
 				self._free_cpu(m)
 				self._free_pg(m)
+				self._update_module_bonus()
 				break
 		for m in self.light_weapon:
 			if m.name in mod_name:
 				self.light_weapon.remove(m)
 				self._free_cpu(m)
 				self._free_pg(m)
+				self._update_module_bonus()
 				break
 		for m in self.sidearm:
 			if m.name in mod_name:
 				self.sidearm.remove(m)
 				self._free_cpu(m)
 				self._free_pg(m)
+				self._update_module_bonus()
 				break
 		for m in self.grenade:
 			if m.name in mod_name:
 				self.grenade.remove(m)
 				self._free_cpu(m)
 				self._free_pg(m)
+				self._update_module_bonus()
 				break
 		for m in self.equipment:
 			if m.name in mod_name:
 				self.equipment.remove(m)
 				self._free_cpu(m)
 				self._free_pg(m)
+				self._update_module_bonus()
 				break
 		for m in self.hi_slot:
 			if m.name in mod_name:
 				self.hi_slot.remove(m)
 				self._free_cpu(m)
 				self._free_pg(m)
+				self._update_module_bonus()
 				break
 		for m in self.low_slot:
 			if m.name in mod_name:
 				self.low_slot.remove(m)
 				self._free_cpu(m)
 				self._free_pg(m)
+				self._update_module_bonus()
 				break
 
 	def add_weapon(self, weapon_name):
@@ -260,16 +268,16 @@ class Fitting:
 
 	def get_primary_stats(self, stat):
 		if self.heavy_weapon:
-			return self.heavy_weapon[0].stats[stat]
+			return round(self.heavy_weapon[0].stats[stat], 1)
 		elif self.light_weapon:
-			return self.light_weapon[0].stats[stat]
+			return round(self.light_weapon[0].stats[stat], 1)
 		return None
 
 	def get_primary_dps(self):
 		if self.heavy_weapon:
-			return self.heavy_weapon[0].stats['damage'] * (self.heavy_weapon[0].stats['rate_of_fire']/60)
+			return round(self.heavy_weapon[0].stats['damage'] * (self.heavy_weapon[0].stats['rate_of_fire']/60), 1)
 		elif self.light_weapon:
-			return self.light_weapon[0].stats['damage'] * (self.light_weapon[0].stats['rate_of_fire']/60)
+			return round(self.light_weapon[0].stats['damage'] * (self.light_weapon[0].stats['rate_of_fire']/60), 1)
 		return None
 
 	def get_primary_dpm(self):
@@ -376,6 +384,13 @@ class Fitting:
 		self.current_pg = round(self.current_pg, 3)
 		if 'pg_bonus' in module.stats:
 			self.max_pg -= module.stats['pg_bonus']
+
+	def _update_module_bonus(self):
+		""" This will update weapons with any modules that give a bonus to them.
+		This is intended to be a hotfix. """
+		for w in self.heavy_weapon + self.light_weapon + self.sidearm:
+			w.__init__(self.char.skill_effect, w.name, self.hi_slot)
+
 
 	def _get_additive_stat(self, stat):
 		output = self.dropsuit.stats[stat]
@@ -521,7 +536,8 @@ if __name__ == '__main__':
 
 	fitlib = FittingLibrary()
 	print fitlib.get_fitting_list()
-	fit = fitlib.get_fitting(fitlib.get_fitting_list()[0])
+	fit = fitlib.get_fitting(fitlib.get_fitting_list()[1])
+	fit.show_module_stats()
 	fit.show_stats()
 
 

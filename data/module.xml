@@ -36,12 +36,42 @@
 		<pg>0</pg>
 		<shield_recharge>0.42</shield_recharge>
 	</module>
+	<module name="Basic Shield Regulator">
+		<slot_type>low_slot</slot_type>
+		<cpu effected_by="Shield Enhancements">11</cpu>
+		<pg>1</pg>
+		<shield_recharge_delay>-0.10</shield_recharge_delay>
+		<shield_depleted_recharge_delay>-0.10</shield_depleted_recharge_delay>
+	</module>
+	<module name="Enhanced Shield Regulator">
+		<slot_type>low_slot</slot_type>
+		<cpu effected_by="Shield Enhancements">24</cpu>
+		<pg>2</pg>
+		<shield_recharge_delay>-0.20</shield_recharge_delay>
+		<shield_depleted_recharge_delay>-0.20</shield_depleted_recharge_delay>
+	</module>
 	<module name="Complex Shield Regulator">
 		<slot_type>low_slot</slot_type>
 		<cpu effected_by="Shield Enhancements">35</cpu>
 		<pg>3</pg>
 		<shield_recharge_delay>-0.25</shield_recharge_delay>
 		<shield_depleted_recharge_delay>-0.25</shield_depleted_recharge_delay>
+	</module>
+	<module name="Basic Armor Plates">
+		<slot_type>low_slot</slot_type>
+		<cpu>10</cpu>
+		<pg effected_by="Armor Upgrades">1</pg>
+		<armor_hp>65</armor_hp>
+		<movement_speed>-0.03</movement_speed>
+		<sprint_speed>-0.03</sprint_speed>
+	</module>
+	<module name="Enhanced Armor Plates">
+		<slot_type>low_slot</slot_type>
+		<cpu>20</cpu>
+		<pg effected_by="Armor Upgrades">6</pg>
+		<armor_hp>87</armor_hp>
+		<movement_speed>-0.05</movement_speed>
+		<sprint_speed>-0.05</sprint_speed>
 	</module>
 	<module name="Complex Armor Plates">
 		<slot_type>low_slot</slot_type>
@@ -50,6 +80,18 @@
 		<armor_hp>115</armor_hp>
 		<movement_speed>-0.10</movement_speed>
 		<sprint_speed>-0.10</sprint_speed>
+	</module>
+	<module name="Basic Armor Repairer">
+		<slot_type>low_slot</slot_type>
+		<cpu>20</cpu>
+		<pg effected_by="Armor Upgrades">1</pg>
+		<armor_repair_rate effected_by="Armor Repair Systems">2</armor_repair_rate>
+	</module>
+	<module name="Enhanced Armor Repairer">
+		<slot_type>low_slot</slot_type>
+		<cpu>35</cpu>
+		<pg effected_by="Armor Upgrades">5</pg>
+		<armor_repair_rate effected_by="Armor Repair Systems">3</armor_repair_rate>
 	</module>
 	<module name="Complex Armor Repairer">
 		<slot_type>low_slot</slot_type>
@@ -69,11 +111,112 @@
 		<pg>0</pg>
 		<cpu_bonus>0.16</cpu_bonus>
 	</module>
+	<module name="Enhanced CPU Upgrade">
+		<slot_type>low_slot</slot_type>
+		<cpu>0</cpu>
+		<pg>0</pg>
+		<cpu_bonus>0.25</cpu_bonus>
+	</module>
+	<module name="Complex CPU Upgrade">
+		<slot_type>low_slot</slot_type>
+		<cpu>0</cpu>
+		<pg>0</pg>
+		<cpu_bonus>0.35</cpu_bonus>
+	</module>
+	<module name="Basic Range Amplifier">
+		<slot_type>low_slot</slot_type>
+		<cpu>15</cpu>
+		<pg>0</pg>
+		<scan_radius>0.25</scan_radius>
+	</module>
+	<module name="Enhanced Range Amplifier">
+		<slot_type>low_slot</slot_type>
+		<cpu>24</cpu>
+		<pg>0</pg>
+		<scan_radius>0.35</scan_radius>
+	</module>
+	<module name="Complex Range Amplifier">
+		<slot_type>low_slot</slot_type>
+		<cpu>33</cpu>
+		<pg>0</pg>
+		<scan_radius>0.45</scan_radius>
+	</module>
+	<module name="Basic Profile Dampener">
+		<slot_type>low_slot</slot_type>
+		<cpu>15</cpu>
+		<pg>0</pg>
+		<scan_profile>-0.15</scan_profile>
+	</module>
+	<module name="Enhanced Profile Dampener">
+		<slot_type>low_slot</slot_type>
+		<cpu>24</cpu>
+		<pg>0</pg>
+		<scan_profile>-0.20</scan_profile>
+	</module>
+	<module name="Complex Profile Dampener">
+		<slot_type>low_slot</slot_type>
+		<cpu>33</cpu>
+		<pg>0</pg>
+		<scan_profile>-0.25</scan_profile>
+	</module>
 	<module name="Militia PG Upgrade">
 		<slot_type>low_slot</slot_type>
 		<cpu>18</cpu>
 		<pg>0</pg>
 		<pg_bonus>8</pg_bonus>
+	</module>
+	<module name="Basic PG Upgrade">
+		<slot_type>low_slot</slot_type>
+		<cpu>14</cpu>
+		<pg>0</pg>
+		<pg_bonus>8</pg_bonus>
+	</module>
+	<module name="Enhanced PG Upgrade">
+		<slot_type>low_slot</slot_type>
+		<cpu>17</cpu>
+		<pg>0</pg>
+		<pg_bonus>11</pg_bonus>
+	</module>
+	<module name="Complex PG Upgrade">
+		<slot_type>low_slot</slot_type>
+		<cpu>24</cpu>
+		<pg>0</pg>
+		<pg_bonus>14</pg_bonus>
+	</module>
+	<module name="Basic Heavy Damage Modifier">
+		<slot_type>hi_slot</slot_type>
+		<cpu>23</cpu>
+		<pg>3</pg>
+		<enhances>heavy_weapon</enhances>
+		<damage>0.03</damage>
+	</module>
+	<module name="Enhanced Heavy Damage Modifier">
+		<slot_type>hi_slot</slot_type>
+		<cpu>45</cpu>
+		<pg>5</pg>
+		<enhances>heavy_weapon</enhances>
+		<damage>0.05</damage>
+	</module>
+	<module name="Complex Heavy Damage Modifier">
+		<slot_type>hi_slot</slot_type>
+		<cpu>90</cpu>
+		<pg>11</pg>
+		<enhances>heavy_weapon</enhances>
+		<damage>0.10</damage>
+	</module>
+	<module name="Basic Light Damage Modifier">
+		<slot_type>hi_slot</slot_type>
+		<cpu>23</cpu>
+		<pg>3</pg>
+		<enhances>light_weapon</enhances>
+		<damage>0.03</damage>
+	</module>
+	<module name="Enhanced Light Damage Modifier">
+		<slot_type>hi_slot</slot_type>
+		<cpu>45</cpu>
+		<pg>5</pg>
+		<enhances>light_weapon</enhances>
+		<damage>0.05</damage>
 	</module>
 	<module name="Complex Light Damage Modifier">
 		<slot_type>hi_slot</slot_type>
