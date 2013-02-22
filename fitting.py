@@ -346,7 +346,7 @@ class Fitting:
 			module_list.append(get_output('--','None','0','0'))
 		for mod in self.low_slot:
 			module_list.append(get_output('-',mod.name, mod.stats['cpu'], mod.stats['pg']))
-		for i in range( len(self.low_slot), int(self.dropsuit.stats['hi_slot']) ):
+		for i in range( len(self.low_slot), int(self.dropsuit.stats['low_slot']) ):
 			module_list.append(get_output('-','None','0','0'))
 
 		return tuple(module_list)
