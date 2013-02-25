@@ -1,78 +1,92 @@
 <?xml version="1.0"?>
 <data>
-	<skill name="Dropsuit Command">
-		<effect>-0.05</effect>
-	</skill>
-	<skill name="Endurance">
-		<effect>0.05</effect>
-	</skill>
-	<skill name="Vigor">
-		<effect>0.05</effect>
-	</skill>
-	<skill name="Long Range Scanning">
-		<effect>0.05</effect>
-	</skill>
-	<skill name="Profile Analysis">
-		<effect>-0.05</effect>
-	</skill>
-	<skill name="Profile Dampening">
-		<effect>-0.05</effect>
-	</skill>
-	<skill name="Circuitry">
-		<effect>0.05</effect>
-	</skill>
-	<skill name="Nanocircuitry">
-		<effect>-0.05</effect>
-	</skill>
-	<skill name="Combat Engineering">
-		<effect>0.05</effect>
-	</skill>
-	<skill name="Shield Boost Systems">
-		<effect>0.03</effect>
-	</skill>
-	<skill name="Shield Control">
-		<effect>0.05</effect>
-	</skill>
-	<skill name="Shield Enhancements">
-		<effect>-0.03</effect>
-	</skill>
-	<skill name="Light Weapon Sharpshooter">
-		<effect>0.05</effect>
-	</skill>
-	<skill name="Heavy Weapon Upgrades">
-		<effect>-0.05</effect>
-	</skill>
-	<skill name="Light Weapon Upgrades">
-		<effect>-0.05</effect>
-	</skill>
-	<skill name="Assault Rifle Proficiency">
-		<effect>0.03</effect>
-	</skill>
-	<skill name="Forge Gun Proficiency">
-		<effect>0.03</effect>
-	</skill>
-	<skill name="Hand To Hand Combat">
-		<effect>0.10</effect>
-	</skill>
-	<skill name="Heavy Machine Gun Proficiency">
-		<effect>0.03</effect>
-	</skill>
-	<skill name="Shotgun Proficiency">
-		<effect>0.03</effect>
-	</skill>
-	<skill name="Submachine Gun Proficiency">
-		<effect>0.03</effect>
-	</skill>
-	<skill name="Weaponry">
-		<effect>0.02</effect>
-	</skill>
-	<skill name="Armor Repair Systems">
-		<effect>0.03</effect>
-	</skill>
-	<skill name="Armor Upgrades">
-		<effect>-0.03</effect>
-	</skill>
-	<skill name="Field Mechanics">
-		<effect>0.05</effect>
-	</skill>
+	<dropsuits>
+		<skill name="Dropsuit Command">
+			<effect>-0.05</effect>
+		</skill>
+	</dropsuits>
+	<mobility>
+		<skill name="Endurance">
+			<effect>0.05</effect>
+		</skill>
+		<skill name="Vigor">
+			<effect>0.05</effect>
+		</skill>
+	</mobility>
+	<electronics>
+		<skill name="Long Range Scanning">
+			<effect>0.05</effect>
+		</skill>
+		<skill name="Profile Analysis">
+			<effect>-0.05</effect>
+		</skill>
+		<skill name="Profile Dampening">
+			<effect>-0.05</effect>
+		</skill>
+		<skill name="Circuitry">
+			<effect>0.05</effect>
+		</skill>
+		<skill name="Nanocircuitry">
+			<effect>-0.05</effect>
+		</skill>
+	</electronics>
+	<engineering>
+		<skill name="Combat Engineering">
+			<effect>0.05</effect>
+		</skill>
+		<skill name="Shield Boost Systems">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Shield Control">
+			<effect>0.05</effect>
+		</skill>
+		<skill name="Shield Enhancements">
+			<effect>-0.03</effect>
+		</skill>
+	</engineering>
+	<weapon_enhancements>
+		<skill name="Heavy Weapon Upgrades">
+			<effect>-0.05</effect>
+		</skill>
+		<skill name="Light Weapon Sharpshooter">
+			<effect>0.05</effect>
+		</skill>
+		<skill name="Light Weapon Upgrades">
+			<effect>-0.05</effect>
+		</skill>
+	</weapon_enhancements>
+	<weapons>
+		<skill name="Assault Rifle Proficiency">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Forge Gun Proficiency">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Hand To Hand Combat">
+			<effect>0.10</effect>
+		</skill>
+		<skill name="Heavy Machine Gun Proficiency">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Shotgun Proficiency">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Submachine Gun Proficiency">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Weaponry">
+			<effect>0.02</effect>
+		</skill>
+	</weapons>
+	<mechanics>
+		<skill name="Armor Repair Systems">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Armor Upgrades">
+			<effect>-0.03</effect>
+		</skill>
+		<skill name="Field Mechanics">
+			<effect>0.05</effect>
+		</skill>
+	</mechanics>
 </data>

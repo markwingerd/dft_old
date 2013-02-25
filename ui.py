@@ -26,7 +26,8 @@ class DftUi(Frame):
         self.menubar_main()
         self.combobox_character()
         self.combobox_fitting()
-        self.menu_modules()
+        #self.menu_modules()
+        self.tree_modules()
         self.fitting_display()
         self.stats_display()
 
@@ -58,11 +59,13 @@ class DftUi(Frame):
 
         # Creates the Combobox which has all known characters and automatically
         # selects the first character. Also other widgets.
-        lbl_character = Label(self, text='Character:')
-        self.cbx_character = ttk.Combobox(self, values=character_names, width=14)
+        frm_character = Frame(self)
+        lbl_character = Label(frm_character, text='Character:')
+        self.cbx_character = ttk.Combobox(frm_character, values=character_names, width=14)
         self.cbx_character.set('No Skills')
 
         # Grid management.
+        frm_character.grid(column=0, row=0)
         lbl_character.grid(column=0, row=0, sticky=NW, padx=3, pady=3)
         self.cbx_character.grid(column=1, row=0, sticky=NW, padx=3, pady=3)
 
@@ -76,16 +79,50 @@ class DftUi(Frame):
         fitting_names = self.fitting_library.get_fitting_list()
 
         # Creates nessessary widgets.
-        lbl_fitting = Label(self, text='Fitting:')
-        self.cbx_fitting = ttk.Combobox(self, values=fitting_names)
+        frm_fitting = Frame(self)
+        lbl_fitting = Label(frm_fitting, text='Fitting:')
+        self.cbx_fitting = ttk.Combobox(frm_fitting, values=fitting_names)
         self.cbx_fitting.set(self.current_fit.name)
 
         # Grid management.
+        frm_fitting.grid(column=1, row=0)
         lbl_fitting.grid(column=2, row=0, sticky=NE, padx=3, pady=3)
         self.cbx_fitting.grid(column=3, row=0, sticky=NW, padx=3, pady=3)
 
         # Binding.
         self.cbx_fitting.bind('<<ComboboxSelected>>', self.change_fitting)
+
+    def tree_modules(self):
+        """ """
+        frm_modules = Frame(self)
+        self.tre_modules = ttk.Treeview(frm_modules, height=14, columns=('cpu', 'pg'))
+        scb_modules = Scrollbar(frm_modules, orient=VERTICAL, command=self.tre_modules.yview)
+        self.tre_modules.column('#0', width=150, minwidth=150)
+        self.tre_modules.column('cpu', width=30, minwidth=30)
+        self.tre_modules.column('pg', width=30, minwidth=30)
+        self.tre_modules.heading('cpu', text='CPU')
+        self.tre_modules.heading('pg', text='PG')
+        for parent in self.weapon_library.get_parents():
+            self.tre_modules.insert('', 'end', parent, text=parent, tag='ttk')
+            for child in self.weapon_library.get_children(parent):
+                self.tre_modules.insert(parent, 'end', child[0], text=child[0], tag='ttk')
+                self.tre_modules.set(child[0], 'cpu', child[1])
+                self.tre_modules.set(child[0], 'pg', child[2])
+        for parent in self.module_library.get_parents():
+            self.tre_modules.insert('', 'end', parent, text=parent, tag='ttk')
+            for child in self.module_library.get_children(parent):
+                self.tre_modules.insert(parent, 'end', child[0], text=child[0], tag='ttk')
+                self.tre_modules.set(child[0], 'cpu', child[1])
+                self.tre_modules.set(child[0], 'pg', child[2])
+
+        # Grid management.
+        frm_modules.grid(column=0, row=1)
+        self.tre_modules.grid(column=0, row=0, sticky=NW, padx=3, pady=3)
+        scb_modules.grid(column=1, row=0, sticky=NE+S, pady=4)
+        self.tre_modules.configure(yscrollcommand=scb_modules.set)
+
+        # Bindings
+        self.tre_modules.bind('<Double-1>', self.add_module)
 
     def menu_modules(self):
         """ Displays and manages the module selection menus for the main window. """
@@ -112,13 +149,11 @@ class DftUi(Frame):
         fitting_list = StringVar(value=self.current_fit.get_all_modules())
 
         # Creates the widgets needed for this display.
-        frm_fitting = Frame(self, width=350, height=300)
-        frm_fitting.grid_propagate(False) #Forces the frame to keep its size.
-        self.lbx_fitting = Listbox(frm_fitting, listvariable=fitting_list, width=48, height=20, font='TkFixedFont', bg='white')
-        self.lbx_fitting.grid_propagate(False)
+        frm_fitting_display = Frame(self, width=350, height=300)
+        self.lbx_fitting = Listbox(frm_fitting_display, listvariable=fitting_list, width=48, height=20, font='TkFixedFont', bg='white')
 
         # Grid management.
-        frm_fitting.grid(column=2, row=1, columnspan=2, rowspan=2, sticky=W+E+N+S, padx=3, pady=3)
+        frm_fitting_display.grid(column=1, row=1, sticky=W+E+N+S)
         self.lbx_fitting.grid(column=0, row=0, sticky=W+E+N+S)
 
         # Bindings
@@ -133,8 +168,8 @@ class DftUi(Frame):
         pg_over = self.current_fit.get_pg_over()
 
         # Creates the holding widgets.
-        nbk_stats = ttk.Notebook(self, width=250, height=300)
-        nbk_stats.grid_propagate(False)
+        nbk_stats = ttk.Notebook(self, width=252, height=300)
+        #nbk_stats.grid_propagate(False)
         frm_overview = Frame(self, width=250, height=300)
         nbk_stats.add(frm_overview, text='Overview')
         # Creates widgets for Dropsuit Type.
@@ -191,7 +226,7 @@ class DftUi(Frame):
         lbl_radi2 = Label(lfr_sensors, text=self.current_fit.get_scan_radius()).grid(column=1, row=2, sticky=E)
         
         # Grid management.
-        nbk_stats.grid(column=4, row=0, rowspan=3, sticky=W+E+N+S, padx=3, pady=3)
+        nbk_stats.grid(column=2, row=0, rowspan=3, sticky=W+E+N+S, padx=3, pady=3)
         lfr_dropsuit_type.grid(column=0, row=0, sticky=EW)
         lfr_resources.grid(column=0, row=1, sticky=EW)
         lfr_offenses.grid(column=0, row=2, sticky=EW)
@@ -234,8 +269,7 @@ class DftUi(Frame):
     def add_module(self, *args):
         """ Adds a module to the fitting. """
         # Find what is selected.
-        listbox_index = self.lbx_modules.curselection()
-        module_name = self.lbx_modules.get(listbox_index)
+        module_name = self.tre_modules.selection()[0]
 
         # Check to see if its a module or weapon, get the item requested.
         if module_name in self.module_library.get_names():
@@ -438,6 +472,10 @@ class CharacterEditWindow(Frame):
         # Binding.
         self.cbx_character.bind('<<ComboboxSelected>>', self.change_character)
 
+    def tree_skills(self):
+        """ Shows available skills a character can use. """
+        pass
+
     def menu_skills(self):
         """ Shows available skills a character can use. """
         # Get known skills and their level, and convert them into a tuple for 
@@ -446,14 +484,14 @@ class CharacterEditWindow(Frame):
         skills_dict = self.character.get_all_skills()
         for name in skills_dict:
             display.append('{:<29.29} {:1}'.format(name, skills_dict[name]))
-        skill_names = StringVar(value=tuple(display))
+        self.skill_names = StringVar(value=tuple(display))
         # Initialize the lbl_current_skill variable.  THIS IS A HACK to allow 
         # the change_skill method to know which skill is selected.
         self.current_skill = StringVar(value=display[0][:29].rstrip())
 
         # Creates the widgets needed for this menu.
         lbl_skills = Label(self.window, text='Change Skills')
-        self.lbx_skills = Listbox(self.window, listvariable=skill_names, width=33, height=20, font='TkFixedFont', bg='white')
+        self.lbx_skills = Listbox(self.window, listvariable=self.skill_names, width=33, height=20, font='TkFixedFont', bg='white')
         scb_skills = Scrollbar(self.window, orient=VERTICAL, command=self.lbx_skills.yview)
         lbl_current_skill = Label(self.window, textvariable=self.current_skill)
         self.cbx_levels = ttk.Combobox(self.window, values=(0, 1, 2, 3, 4, 5), width=8)
@@ -606,8 +644,9 @@ class DeleteFittingWindow(Frame):
 
 if __name__ == '__main__':
     root = Tk()
+
     root.title(__application_name__)
-    root.geometry('828x329+300+300')
+    root.geometry('833x329+300+300')
     root.resizable(width=False, height=False)
 
     app = DftUi(root)
