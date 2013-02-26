@@ -34,6 +34,14 @@ class Character:
         self.skill_level[skill] = level
         self.skill_effect[skill] = level * self.skills.skill_effect[skill]
 
+    def get_skill_level(self, skill_name):
+        """ Returns the skill level. If none found in the self.skill_level dict
+        then return 0 as the level. """
+        if skill_name in self.skill_level:
+            return self.skill_level[skill_name]
+        else:
+            return 0
+
     def get_all_skills(self):
         """ Returns a dictionary of all known skills and the characters skill
         levels. """
@@ -45,6 +53,12 @@ class Character:
             else:
                 output[s] = 0
         return output
+
+    def get_parent_skills(self):
+        return self.skills.get_parents()
+
+    def get_children_skills(self, parent):
+        return self.skills.get_children(parent)
 
 
 class CharacterLibrary:
