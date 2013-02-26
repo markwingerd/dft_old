@@ -1,0 +1,104 @@
+(dp0
+S'No Skills'
+p1
+(ichar
+Character
+p2
+(dp3
+S'skills'
+p4
+(ichar
+Skills
+p5
+(dp6
+S'file_name'
+p7
+S'data/skills.xml'
+p8
+sS'skill_effect'
+p9
+(dp10
+S'Armor Repair Systems'
+p11
+F0.03
+sS'Endurance'
+p12
+F0.05
+sS'Profile Dampening'
+p13
+F-0.05
+sS'Profile Analysis'
+p14
+F-0.05
+sS'Vigor'
+p15
+F0.05
+sS'Assault Rifle Proficiency'
+p16
+F0.03
+sS'Combat Engineering'
+p17
+F0.05
+sS'Weaponry'
+p18
+F0.02
+sS'Shield Boost Systems'
+p19
+F0.03
+sS'Long Range Scanning'
+p20
+F0.05
+sS'Light Weapon Upgrades'
+p21
+F-0.05
+sS'Heavy Machine Gun Proficiency'
+p22
+F0.03
+sS'Heavy Weapon Upgrades'
+p23
+F-0.05
+sS'Forge Gun Proficiency'
+p24
+F0.03
+sS'Armor Upgrades'
+p25
+F-0.03
+sS'Shotgun Proficiency'
+p26
+F0.03
+sS'Shield Control'
+p27
+F0.05
+sS'Hand To Hand Combat'
+p28
+F0.1
+sS'Nanocircuitry'
+p29
+F-0.05
+sS'Field Mechanics'
+p30
+F0.05
+sS'Shield Enhancements'
+p31
+F-0.03
+sS'Circuitry'
+p32
+F0.05
+sS'Light Weapon Sharpshooter'
+p33
+F0.05
+sS'Submachine Gun Proficiency'
+p34
+F0.03
+sS'Dropsuit Command'
+p35
+F-0.05
+ssbsg9
+(dp36
+sS'name'
+p37
+g1
+sS'skill_level'
+p38
+(dp39
+sbs.
