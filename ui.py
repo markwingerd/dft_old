@@ -356,6 +356,7 @@ class DropsuitWindow(Frame):
         # Dropsuit Window initialization
         self.parent = parent
         self.window = Toplevel(self.parent)
+        self.window.resizable(width=False, height=False)
         self.fitting_library = FittingLibrary()
         self.dropsuit_library = DropsuitLibrary()
 
@@ -408,6 +409,7 @@ class AddCharacterWindow(Frame):
     def __init__(self, parent):
         self.parent = parent
         self.window = Toplevel(self.parent)
+        self.window.resizable(width=False, height=False)
         self.character_library = CharacterLibrary()
 
         # Call pertinent methods for this window.
@@ -446,6 +448,7 @@ class CharacterEditWindow(Frame):
         # CharacterEdit Window initialization
         self.parent = parent
         self.window = Toplevel(self.parent)
+        self.window.resizable(width=False, height=False)
         self.character_library = CharacterLibrary()
         self.character = self.character_library.get_character(character_name)
 
@@ -568,6 +571,7 @@ class DeleteCharacterWindow(Frame):
     def __init__(self, parent):
         self.parent = parent
         self.window = Toplevel(self.parent)
+        self.window.resizable(width=False, height=False)
         self.character_library = CharacterLibrary()
 
         # Call pertinent methods for this window.
@@ -608,6 +612,7 @@ class DeleteFittingWindow(Frame):
     def __init__(self, parent):
         self.parent = parent
         self.window = Toplevel(self.parent)
+        self.window.resizable(width=False, height=False)
         self.fitting_library = FittingLibrary()
 
         # Call pertinent methods for this window.
@@ -647,7 +652,6 @@ if __name__ == '__main__':
     root = Tk()
 
     root.title(__application_name__)
-    root.geometry('833x329+300+300')
     root.resizable(width=False, height=False)
 
     app = DftUi(root)
