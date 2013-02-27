@@ -464,7 +464,7 @@ class CharacterEditWindow(Frame):
         frm_skills = Frame(self.window)
         self.tre_skills = ttk.Treeview(frm_skills, height=14, columns=('level'))
         scb_skills = Scrollbar(frm_skills, orient=VERTICAL, command=self.tre_skills.yview)
-        self.tre_skills.column('#0', width=150, minwidth=150)
+        self.tre_skills.column('#0', width=250, minwidth=150)
         self.tre_skills.column('level', width=30, minwidth=30)
         self.tre_skills.heading('level', text='Lvl')
         for parent in self.character.get_parent_skills():
