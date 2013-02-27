@@ -129,7 +129,7 @@ class DftUi(Frame):
         fitting_list = StringVar(value=self.current_fit.get_all_modules())
 
         # Creates the widgets needed for this display.
-        frm_fitting_display = Frame(self, width=350, height=300)
+        frm_fitting_display = Frame(self, height=300)
         self.lbx_fitting = Listbox(frm_fitting_display, listvariable=fitting_list, width=48, height=20, font='TkFixedFont', bg='white')
 
         # Grid management.
@@ -148,9 +148,9 @@ class DftUi(Frame):
         pg_over = self.current_fit.get_pg_over()
 
         # Creates the holding widgets.
-        nbk_stats = ttk.Notebook(self, width=252, height=300)
+        nbk_stats = ttk.Notebook(self, height=300)
         #nbk_stats.grid_propagate(False)
-        frm_overview = Frame(self, width=250, height=300)
+        frm_overview = Frame(self, height=300)
         nbk_stats.add(frm_overview, text='Overview')
         # Creates widgets for Dropsuit Type.
         lfr_dropsuit_type = ttk.Labelframe(frm_overview, text='Dropsuit Type:')
@@ -350,7 +350,7 @@ class DropsuitWindow(Frame):
         dropsuit_names = StringVar(value=self.dropsuit_library.get_names())
 
         # Creates the widgets needed for this menu.
-        lbl_enter_name = Label(self.window, text='Enter Character Name')
+        lbl_enter_name = Label(self.window, text='Enter Dropsuit Fitting Name')
         ent_fitting_name = Entry(self.window, textvariable=self.fitting_name, bg='white')
         lbl_dropsuits = Label(self.window, text='Select Dropsuit')
         self.lbx_dropsuits = Listbox(self.window, listvariable=dropsuit_names, height=10, bg='white')
