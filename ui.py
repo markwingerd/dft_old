@@ -26,7 +26,6 @@ class DftUi(Frame):
         self.menubar_main()
         self.combobox_character()
         self.combobox_fitting()
-        #self.menu_modules()
         self.tree_modules()
         self.fitting_display()
         self.stats_display()
@@ -123,25 +122,6 @@ class DftUi(Frame):
 
         # Bindings
         self.tre_modules.bind('<Double-1>', self.add_module)
-
-    def menu_modules(self):
-        """ Displays and manages the module selection menus for the main window. """
-        # Get known modules names.
-        module_names = StringVar(value=self.weapon_library.get_names() + self.module_library.get_names())
-
-        # Creates the widgets needed for this menu.
-        lbl_modules = Label(self, text='Modules')
-        self.lbx_modules = Listbox(self, listvariable=module_names, width=25, height=18, bg='white')
-        scb_modules = Scrollbar(self, orient=VERTICAL, command=self.lbx_modules.yview)
-
-        # Grid management.
-        lbl_modules.grid(column=0, row=1, columnspan=2, sticky=NW, padx=3, pady=3)
-        self.lbx_modules.grid(column=0, row=2, columnspan=2, sticky=NW, padx=3, pady=3)
-        scb_modules.grid(column=1, row=2, sticky=NE+S, pady=4)
-        self.lbx_modules['yscrollcommand'] = scb_modules.set
-
-        # Bindings
-        self.lbx_modules.bind('<Double-1>', self.add_module)
 
     def fitting_display(self):
         """ Displays all the current fitting information. """
