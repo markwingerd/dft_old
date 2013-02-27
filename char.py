@@ -30,6 +30,9 @@ class Character:
     def show_skills(self):
         print self.skill_level
 
+    def get_all_skills(self):
+        return self.skills.get_names()
+
     def set_skill(self, skill, level):
         self.skill_level[skill] = level
         self.skill_effect[skill] = level * self.skills.skill_effect[skill]
