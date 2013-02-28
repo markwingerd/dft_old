@@ -148,9 +148,9 @@ class DftUi(Frame):
         pg_over = self.current_fit.get_pg_over()
 
         # Creates the holding widgets.
-        nbk_stats = ttk.Notebook(self, height=300)
+        nbk_stats = ttk.Notebook(self)
         #nbk_stats.grid_propagate(False)
-        frm_overview = Frame(self, height=300)
+        frm_overview = Frame(self)
         nbk_stats.add(frm_overview, text='Overview')
         # Creates widgets for Dropsuit Type.
         lfr_dropsuit_type = ttk.Labelframe(frm_overview, text='Dropsuit Type:')
