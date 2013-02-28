@@ -73,8 +73,8 @@
 		<weapon name="Duvolle Assault Rifle">
 			<slot_type>light_weapon</slot_type>
 			<cpu effected_by="Light Weapon Upgrades">90</cpu>
-			<pg>15</pg>
-			<damage effected_by="Weaponry" effected_by2="Assault Rifle Proficiency">36</damage>
+			<pg>13</pg>
+			<damage effected_by="Weaponry" effected_by2="Assault Rifle Proficiency">34.1</damage>
 			<rate_of_fire>750</rate_of_fire>
 			<clip_size>60</clip_size>
 			<max_ammo>400</max_ammo>
