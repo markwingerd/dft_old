@@ -2,9 +2,6 @@ import os, sys
 import pickle
 import xml.etree.ElementTree as ET
 
-#from char import Character, Skills
-#import char
-
 class XmlRetrieval:
     def __init__(self, file_name):
         self.file_name = get_file_loc(file_name)
@@ -16,11 +13,7 @@ class XmlRetrieval:
         effecting_skills = {}
 
         xml_tree = ET.parse(self.file_name)
-        # Finds the desired target in xml file
-        for child in xml_tree.getroot():
-            if child.attrib['name'] == target_name:
-                target = child
-                break
+        target = xml_tree.find('.//*[@name="%s"]' % target_name)
 
         # Extracts targets data.
         for prop in target:
@@ -41,10 +34,36 @@ class XmlRetrieval:
 
         xml_tree = ET.parse(self.file_name)
 
-        for child in xml_tree.getroot():
-           names_list.append(child.get('name'))
+        parents = xml_tree.findall('.//*[@name]/..')
+
+        for parent in parents:
+            for child in parent:
+                names_list.append(child.attrib['name'])
 
         return names_list
+
+    def get_parents(self):
+        """ Returns a list of all parents in the xml file. """
+        parent_list = []
+
+        xml_tree = ET.parse(self.file_name)
+        parents = xml_tree.findall('.//*[@name]/..')
+        for parent in parents:
+            parent_list.append(parent.tag)
+
+        return parent_list
+
+    def get_children(self, target):
+        """ Returns all the children of a given parent. """
+        children_list = []
+
+        xml_tree = ET.parse(self.file_name)
+        parent = xml_tree.findall('.//%s/' % target)
+        for child in parent:
+            tup = (child.attrib['name'], child.find('cpu').text, child.find('pg').text)
+            children_list.append(tup)
+
+        return children_list
 
     def _is_number(self, s):
         """ Returns true if a string is a number. """
@@ -99,24 +118,9 @@ def get_file_loc(file_name):
 
 if __name__ == '__main__':
     mod = XmlRetrieval('module.xml')
-    wea = XmlRetrieval('weapon.xml')
-    ds = XmlRetrieval('dropsuit.xml')
-    sk = XmlRetrieval('skills.xml')
 
+    #ds._get_target('Assault Type-II')
 
-    print mod.get_target('Complex Shield Extender')
-    print wea.get_target('Assault Rifle')
-    print ds.get_target('Assault Type-I')
-    print sk.get_target('Weaponry')
-
-    print mod.get_list()
-    print wea.get_list()
-    print ds.get_list()
-    print sk.get_list()
-
-    print '\n\n\n'
-
-    #test1 = char.Character('Test1')
-    char = DataRetrieval('characters.dat')
-    print char.data
-    #char.save_data(test1)
+    print mod.get_target('Nanite Injector')
+    print mod.get_parents()
+    print mod.get_children('nanite_injector')

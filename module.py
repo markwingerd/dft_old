@@ -99,35 +99,35 @@ class Weapon(Module):
 
 class ModuleLibrary:
 	def __init__(self):
-		module_data = XmlRetrieval('module.xml')
+		self.module_data = XmlRetrieval('module.xml')
 
-		self.names = module_data.get_list()
+		self.names = self.module_data.get_list()
 
 	def get_names(self):
 		""" Returns module names as a tuple. """
 		return tuple(self.names)
+
+	def get_parents(self):
+		return self.module_data.get_parents()
+
+	def get_children(self, parent):
+		return self.module_data.get_children(parent)
 			
 
 class WeaponLibrary(ModuleLibrary):
 	def __init__(self):
-		weapon_data = XmlRetrieval('weapon.xml')
+		self.weapon_data = XmlRetrieval('weapon.xml')
 
-		self.names = weapon_data.get_list()
+		self.names = self.weapon_data.get_list()
+
+	def get_parents(self):
+		return self.weapon_data.get_parents()
+
+	def get_children(self, parent):
+		return self.weapon_data.get_children(parent)
 
 
 if __name__ == '__main__':
-	r = Character('r')
-	r.set_skill('Shield Enhancements',5)
-	r.set_skill('Armor Upgrades',5)
-
-	extender = Module(r.skill_effect, 'Complex Shield Extender')
-	plate = Module(r.skill_effect, 'Complex Armor Plates')
-
-	extender.show_stats()
-	print '\n\n\n'
-	plate.show_stats()
-
 	modlib = ModuleLibrary()
-	wealib = WeaponLibrary()
-	print modlib.get_names()
-	print wealib.get_names()
+	print modlib.get_parents()
+	print modlib.get_children('shields')

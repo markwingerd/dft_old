@@ -177,7 +177,6 @@ class Fitting:
 	def remove_module(self, mod_name):
 		""" Finds a module that needs to be deleted and removes it if it has 
 		been fitted. """
-			
 		for m in self.heavy_weapon:
 			if m.name in mod_name:
 				self.heavy_weapon.remove(m)
@@ -282,9 +281,9 @@ class Fitting:
 
 	def get_primary_dpm(self):
 		if self.heavy_weapon:
-			return self.heavy_weapon[0].stats['damage'] * self.heavy_weapon[0].stats['clip_size']
+			return round(self.heavy_weapon[0].stats['damage'] * self.heavy_weapon[0].stats['clip_size'], 2)
 		elif self.light_weapon:
-			return self.light_weapon[0].stats['damage'] * self.light_weapon[0].stats['clip_size']
+			return round(self.light_weapon[0].stats['damage'] * self.light_weapon[0].stats['clip_size'], 2)
 		return None
 
 	def get_shield_hp(self):
@@ -346,7 +345,7 @@ class Fitting:
 			module_list.append(get_output('--','None','0','0'))
 		for mod in self.low_slot:
 			module_list.append(get_output('-',mod.name, mod.stats['cpu'], mod.stats['pg']))
-		for i in range( len(self.low_slot), int(self.dropsuit.stats['hi_slot']) ):
+		for i in range( len(self.low_slot), int(self.dropsuit.stats['low_slot']) ):
 			module_list.append(get_output('-','None','0','0'))
 
 		return tuple(module_list)

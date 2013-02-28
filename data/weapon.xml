@@ -1,193 +1,205 @@
 <data>
-	<weapon name="Locus Grenade">
-		<slot_type>grenade</slot_type>
-		<cpu>9</cpu>
-		<pg>2</pg>
-		<splash_damage>400</splash_damage>
-		<blast_radius>6</blast_radius>
-		<max_ammo>3</max_ammo>
-	</weapon>
-	<weapon name="Sleek Locus Grenade">
-		<slot_type>grenade</slot_type>
-		<cpu>9</cpu>
-		<pg>2</pg>
-		<splash_damage>200</splash_damage>
-		<blast_radius>9</blast_radius>
-		<max_ammo>3</max_ammo>
-	</weapon>
-	<weapon name="M1 Locus Grenade">
-		<slot_type>grenade</slot_type>
-		<cpu>18</cpu>
-		<pg>3</pg>
-		<splash_damage>500</splash_damage>
-		<blast_radius>6.6</blast_radius>
-		<max_ammo>3</max_ammo>
-	</weapon>
-	<weapon name="Core Locus Grenade">
-		<slot_type>grenade</slot_type>
-		<cpu>48</cpu>
-		<pg>6</pg>
-		<splash_damage>600</splash_damage>
-		<blast_radius>7.2</blast_radius>
-		<max_ammo>3</max_ammo>
-	</weapon>
-	<weapon name="Assault Rifle">
-		<slot_type>light_weapon</slot_type>
-		<cpu effected_by="Light Weapon Upgrades">23</cpu>
-		<pg>3</pg>
-		<damage effected_by="Weaponry" effected_by2="Assault Rifle Proficiency">31</damage>
-		<rate_of_fire>750</rate_of_fire>
-		<reload_time>3.0</reload_time>
-		<clip_size>60</clip_size>
-		<max_ammo>300</max_ammo>
-		<accuracy_rating>56</accuracy_rating>
-		<max_range effected_by="Light Weapon Sharpshooter">78</max_range>
-		<optimal_range_high effected_by="Light Weapon Sharpshooter">35</optimal_range_high>
-		<optimal_range_low effected_by="Light Weapon Sharpshooter">1</optimal_range_low>
-	</weapon>
-	<weapon name="GEK-38 Assault Rifle">
-		<slot_type>light_weapon</slot_type>
-		<cpu effected_by="Light Weapon Upgrades">47</cpu>
-		<pg>6</pg>
-		<damage effected_by="Weaponry" effected_by2="Assault Rifle Proficiency">32.5</damage>
-		<rate_of_fire>750</rate_of_fire>
-		<reload_time>3.0</reload_time>
-		<clip_size>60</clip_size>
-		<max_ammo>300</max_ammo>
-		<accuracy_rating>56.6</accuracy_rating>
-		<max_range effected_by="Light Weapon Sharpshooter">83</max_range>
-		<optimal_range_high effected_by="Light Weapon Sharpshooter">37</optimal_range_high>
-		<optimal_range_low effected_by="Light Weapon Sharpshooter">1</optimal_range_low>
-	</weapon>
-	<weapon name="Duvolle Assault Rifle">
-		<slot_type>light_weapon</slot_type>
-		<cpu effected_by="Light Weapon Upgrades">90</cpu>
-		<pg>15</pg>
-		<damage effected_by="Weaponry" effected_by2="Assault Rifle Proficiency">36</damage>
-		<rate_of_fire>750</rate_of_fire>
-		<clip_size>60</clip_size>
-		<max_ammo>400</max_ammo>
-		<accuracy_rating>50</accuracy_rating>
-		<max_range>87</max_range>
-		<optimal_range_high>39</optimal_range_high>
-		<optimal_range_low>1</optimal_range_low>
-	</weapon>
-	<weapon name="Forge Gun">
-		<slot_type>heavy_weapon</slot_type>
-		<cpu effected_by="Heavy Weapon Upgrades">53</cpu>
-		<pg>5</pg>
-		<direct_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1200</direct_damage>
-		<damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1200</damage>
-		<splash_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">210</splash_damage>
-		<blast_radius>2.5</blast_radius>
-		<charge-up_time>3.5</charge-up_time>
-		<rate_of_fire>17.14</rate_of_fire>
-		<clip_size>4</clip_size>
-		<max_ammo>16</max_ammo>
-	</weapon>
-	<weapon name="9K330 Forge Gun">
-		<slot_type>heavy_weapon</slot_type>
-		<cpu effected_by="Heavy Weapon Upgrades">72</cpu>
-		<pg>8</pg>
-		<direct_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1320</direct_damage>
-		<damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1320</damage>
-		<splash_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">231</splash_damage>
-		<blast_radius>2.8</blast_radius>
-		<charge-up_time>3.5</charge-up_time>
-		<rate_of_fire>17.14</rate_of_fire>
-		<clip_size>4</clip_size>
-		<max_ammo>16</max_ammo>
-	</weapon>
-	<weapon name="Heavy Machine Gun">
-		<slot_type>heavy_weapon</slot_type>
-		<cpu effected_by="Heavy Weapon Upgrades">53</cpu>
-		<pg>5</pg>
-		<damage effected_by="Weaponry" effected_by2="Heavy Machine Gun Proficiency">16</damage>
-		<rate_of_fire>2000</rate_of_fire>
-		<accuracy_rating>61.5</accuracy_rating>
-		<clip_size>425</clip_size>
-		<max_ammo>1500</max_ammo>
-		<reload_time>8</reload_time>
-		<heat_build-up_per_second>14</heat_build-up_per_second>
-		<cooldown>4</cooldown>
-		<seize_duration>10</seize_duration>
-	</weapon>
-	<weapon name="MH-82 Heavy Machine Gun">
-		<slot_type>heavy_weapon</slot_type>
-		<cpu effected_by="Heavy Weapon Upgrades">72</cpu>
-		<pg>8</pg>
-		<damage effected_by="Weaponry" effected_by2="Heavy Machine Gun Proficiency">16.8</damage>
-		<rate_of_fire>2000</rate_of_fire>
-		<accuracy_rating>61.5</accuracy_rating>
-		<clip_size>425</clip_size>
-		<max_ammo>1500</max_ammo>
-		<reload_time>8</reload_time>
-		<heat_build-up_per_second>11.9</heat_build-up_per_second>
-		<cooldown>4</cooldown>
-		<seize_duration>10</seize_duration>
-	</weapon>
-	<weapon name="Boundless Heavy Machine Gun">
-		<slot_type>heavy_weapon</slot_type>
-		<cpu effected_by="Heavy Weapon Upgrades">92</cpu>
-		<pg>10</pg>
-		<damage effected_by="Weaponry" effected_by2="Heavy Machine Gun Proficiency">17.2</damage>
-		<rate_of_fire>2000</rate_of_fire>
-		<accuracy_rating>61.5</accuracy_rating>
-		<clip_size>425</clip_size>
-		<max_ammo>1500</max_ammo>
-		<reload_time>8</reload_time>
-		<heat_build-up_per_second>10.5</heat_build-up_per_second>
-		<cooldown>4</cooldown>
-		<seize_duration>10</seize_duration>
-	</weapon>
-	<weapon name="Submachine Gun">
-		<slot_type>sidearm</slot_type>
-		<cpu>15</cpu>
-		<pg>3</pg>
-		<damage effected_by="Weaponry" effected_by2="Submachine Gun Proficiency">21</damage>
-		<rate_of_fire>1000</rate_of_fire>
-		<reload_time>3.0</reload_time>
-		<clip_size>80</clip_size>
-		<max_ammo>480</max_ammo>
-		<accuracy_rating>50.4</accuracy_rating>
-		<max_range>78</max_range>
-		<optimal_range_high>35</optimal_range_high>
-		<optimal_range_low>1</optimal_range_low>
-	</weapon>
-	<weapon name="Shotgun">
-		<slot_type>light_weapon</slot_type>
-		<cpu effected_by="Light Weapon Upgrades">30</cpu>
-		<pg>4</pg>
-		<damage effected_by="Weaponry">36</damage>
-		<rate_of_fire effected_by="Shotgun Proficiency">85.7</rate_of_fire>
-		<reload_time>0.6</reload_time>
-		<clip_size>8</clip_size>
-		<max_ammo>32</max_ammo>
-		<accuracy_rating>34.2</accuracy_rating>
-		<max_range>78</max_range>
-		<optimal_range_high>35</optimal_range_high>
-		<optimal_range_low>1</optimal_range_low>
-	</weapon>
-	<weapon name="CRG-3 Shotgun">
-		<slot_type>light_weapon</slot_type>
-		<cpu effected_by="Light Weapon Upgrades">51</cpu>
-		<pg>7</pg>
-		<damage effected_by="Weaponry">37.8</damage>
-		<rate_of_fire effected_by="Shotgun Proficiency">85.7</rate_of_fire>
-		<reload_time>0.6</reload_time>
-		<clip_size>8</clip_size>
-		<max_ammo>32</max_ammo>
-		<accuracy_rating>34.2</accuracy_rating>
-		<max_range>78</max_range>
-		<optimal_range_high>35</optimal_range_high>
-		<optimal_range_low>1</optimal_range_low>
-	</weapon>
-	<weapon name="AV Grenade">
-		<slot_type>grenade</slot_type>
-		<cpu>15</cpu>
-		<pg>4</pg>
-		<damage>1000</damage>
-		<splash_damage>140</splash_damage>
-		<max_ammo>3</max_ammo>
-	</weapon>
+	<grenades>
+		<weapon name="Locus Grenade">
+			<slot_type>grenade</slot_type>
+			<cpu>9</cpu>
+			<pg>2</pg>
+			<splash_damage>400</splash_damage>
+			<blast_radius>6</blast_radius>
+			<max_ammo>3</max_ammo>
+		</weapon>
+		<weapon name="Sleek Locus Grenade">
+			<slot_type>grenade</slot_type>
+			<cpu>9</cpu>
+			<pg>2</pg>
+			<splash_damage>200</splash_damage>
+			<blast_radius>9</blast_radius>
+			<max_ammo>3</max_ammo>
+		</weapon>
+		<weapon name="M1 Locus Grenade">
+			<slot_type>grenade</slot_type>
+			<cpu>18</cpu>
+			<pg>3</pg>
+			<splash_damage>500</splash_damage>
+			<blast_radius>6.6</blast_radius>
+			<max_ammo>3</max_ammo>
+		</weapon>
+		<weapon name="Core Locus Grenade">
+			<slot_type>grenade</slot_type>
+			<cpu>48</cpu>
+			<pg>6</pg>
+			<splash_damage>600</splash_damage>
+			<blast_radius>7.2</blast_radius>
+			<max_ammo>3</max_ammo>
+		</weapon>
+		<weapon name="AV Grenade">
+			<slot_type>grenade</slot_type>
+			<cpu>15</cpu>
+			<pg>4</pg>
+			<damage>1000</damage>
+			<splash_damage>140</splash_damage>
+			<max_ammo>3</max_ammo>
+		</weapon>
+	</grenades>
+	<assault_rifles>
+		<weapon name="Assault Rifle">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades">23</cpu>
+			<pg>3</pg>
+			<damage effected_by="Weaponry" effected_by2="Assault Rifle Proficiency">31</damage>
+			<rate_of_fire>750</rate_of_fire>
+			<reload_time>3.0</reload_time>
+			<clip_size>60</clip_size>
+			<max_ammo>300</max_ammo>
+			<accuracy_rating>56</accuracy_rating>
+			<max_range effected_by="Light Weapon Sharpshooter">78</max_range>
+			<optimal_range_high effected_by="Light Weapon Sharpshooter">35</optimal_range_high>
+			<optimal_range_low effected_by="Light Weapon Sharpshooter">1</optimal_range_low>
+		</weapon>
+		<weapon name="GEK-38 Assault Rifle">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades">47</cpu>
+			<pg>6</pg>
+			<damage effected_by="Weaponry" effected_by2="Assault Rifle Proficiency">32.5</damage>
+			<rate_of_fire>750</rate_of_fire>
+			<reload_time>3.0</reload_time>
+			<clip_size>60</clip_size>
+			<max_ammo>300</max_ammo>
+			<accuracy_rating>56.6</accuracy_rating>
+			<max_range effected_by="Light Weapon Sharpshooter">83</max_range>
+			<optimal_range_high effected_by="Light Weapon Sharpshooter">37</optimal_range_high>
+			<optimal_range_low effected_by="Light Weapon Sharpshooter">1</optimal_range_low>
+		</weapon>
+		<weapon name="Duvolle Assault Rifle">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades">90</cpu>
+			<pg>13</pg>
+			<damage effected_by="Weaponry" effected_by2="Assault Rifle Proficiency">34.1</damage>
+			<rate_of_fire>750</rate_of_fire>
+			<clip_size>60</clip_size>
+			<max_ammo>400</max_ammo>
+			<accuracy_rating>50</accuracy_rating>
+			<max_range>87</max_range>
+			<optimal_range_high>39</optimal_range_high>
+			<optimal_range_low>1</optimal_range_low>
+		</weapon>
+	</assault_rifles>
+	<forge_guns>
+		<weapon name="Forge Gun">
+			<slot_type>heavy_weapon</slot_type>
+			<cpu effected_by="Heavy Weapon Upgrades">53</cpu>
+			<pg>5</pg>
+			<direct_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1200</direct_damage>
+			<damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1200</damage>
+			<splash_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">210</splash_damage>
+			<blast_radius>2.5</blast_radius>
+			<charge-up_time>3.5</charge-up_time>
+			<rate_of_fire>17.14</rate_of_fire>
+			<clip_size>4</clip_size>
+			<max_ammo>16</max_ammo>
+		</weapon>
+		<weapon name="9K330 Forge Gun">
+			<slot_type>heavy_weapon</slot_type>
+			<cpu effected_by="Heavy Weapon Upgrades">72</cpu>
+			<pg>8</pg>
+			<direct_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1320</direct_damage>
+			<damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1320</damage>
+			<splash_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">231</splash_damage>
+			<blast_radius>2.8</blast_radius>
+			<charge-up_time>3.5</charge-up_time>
+			<rate_of_fire>17.14</rate_of_fire>
+			<clip_size>4</clip_size>
+			<max_ammo>16</max_ammo>
+		</weapon>
+	</forge_guns>
+	<heavy_machine_guns>
+		<weapon name="Heavy Machine Gun">
+			<slot_type>heavy_weapon</slot_type>
+			<cpu effected_by="Heavy Weapon Upgrades">53</cpu>
+			<pg>5</pg>
+			<damage effected_by="Weaponry" effected_by2="Heavy Machine Gun Proficiency">16</damage>
+			<rate_of_fire>2000</rate_of_fire>
+			<accuracy_rating>61.5</accuracy_rating>
+			<clip_size>425</clip_size>
+			<max_ammo>1500</max_ammo>
+			<reload_time>8</reload_time>
+			<heat_build-up_per_second>14</heat_build-up_per_second>
+			<cooldown>4</cooldown>
+			<seize_duration>10</seize_duration>
+		</weapon>
+		<weapon name="MH-82 Heavy Machine Gun">
+			<slot_type>heavy_weapon</slot_type>
+			<cpu effected_by="Heavy Weapon Upgrades">72</cpu>
+			<pg>8</pg>
+			<damage effected_by="Weaponry" effected_by2="Heavy Machine Gun Proficiency">16.8</damage>
+			<rate_of_fire>2000</rate_of_fire>
+			<accuracy_rating>61.5</accuracy_rating>
+			<clip_size>425</clip_size>
+			<max_ammo>1500</max_ammo>
+			<reload_time>8</reload_time>
+			<heat_build-up_per_second>11.9</heat_build-up_per_second>
+			<cooldown>4</cooldown>
+			<seize_duration>10</seize_duration>
+		</weapon>
+		<weapon name="Boundless Heavy Machine Gun">
+			<slot_type>heavy_weapon</slot_type>
+			<cpu effected_by="Heavy Weapon Upgrades">92</cpu>
+			<pg>10</pg>
+			<damage effected_by="Weaponry" effected_by2="Heavy Machine Gun Proficiency">17.2</damage>
+			<rate_of_fire>2000</rate_of_fire>
+			<accuracy_rating>61.5</accuracy_rating>
+			<clip_size>425</clip_size>
+			<max_ammo>1500</max_ammo>
+			<reload_time>8</reload_time>
+			<heat_build-up_per_second>10.5</heat_build-up_per_second>
+			<cooldown>4</cooldown>
+			<seize_duration>10</seize_duration>
+		</weapon>
+	</heavy_machine_guns>
+	<submachine_guns>
+		<weapon name="Submachine Gun">
+			<slot_type>sidearm</slot_type>
+			<cpu>15</cpu>
+			<pg>3</pg>
+			<damage effected_by="Weaponry" effected_by2="Submachine Gun Proficiency">21</damage>
+			<rate_of_fire>1000</rate_of_fire>
+			<reload_time>3.0</reload_time>
+			<clip_size>80</clip_size>
+			<max_ammo>480</max_ammo>
+			<accuracy_rating>50.4</accuracy_rating>
+			<max_range>78</max_range>
+			<optimal_range_high>35</optimal_range_high>
+			<optimal_range_low>1</optimal_range_low>
+		</weapon>
+	</submachine_guns>
+	<shotguns>
+		<weapon name="Shotgun">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades">30</cpu>
+			<pg>4</pg>
+			<damage effected_by="Weaponry">36</damage>
+			<rate_of_fire effected_by="Shotgun Proficiency">85.7</rate_of_fire>
+			<reload_time>0.6</reload_time>
+			<clip_size>8</clip_size>
+			<max_ammo>32</max_ammo>
+			<accuracy_rating>34.2</accuracy_rating>
+			<max_range>78</max_range>
+			<optimal_range_high>35</optimal_range_high>
+			<optimal_range_low>1</optimal_range_low>
+		</weapon>
+		<weapon name="CRG-3 Shotgun">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades">51</cpu>
+			<pg>7</pg>
+			<damage effected_by="Weaponry">37.8</damage>
+			<rate_of_fire effected_by="Shotgun Proficiency">85.7</rate_of_fire>
+			<reload_time>0.6</reload_time>
+			<clip_size>8</clip_size>
+			<max_ammo>32</max_ammo>
+			<accuracy_rating>34.2</accuracy_rating>
+			<max_range>78</max_range>
+			<optimal_range_high>35</optimal_range_high>
+			<optimal_range_low>1</optimal_range_low>
+		</weapon>
+	</shotguns>
 </data> 
