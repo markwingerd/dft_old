@@ -29,10 +29,19 @@
 		<skill name="Nanocircuitry">
 			<effect>-0.05</effect>
 		</skill>
+		<skill name="Systems Hacking">
+			<effect>-0.05</effect>
+		</skill>
 	</electronics>
 	<engineering>
 		<skill name="Combat Engineering">
 			<effect>0.05</effect>
+		</skill>
+		<skill name="Powergrid Upgrades">
+			<effect>-0.05</effect>
+		</skill>
+		<skill name="Shield Adaptation">
+			<effect>-0.03</effect>
 		</skill>
 		<skill name="Shield Boost Systems">
 			<effect>0.03</effect>
@@ -45,14 +54,77 @@
 		</skill>
 	</engineering>
 	<handheld_weapon_upgrades>
+		<skill name="Heavy Weapon Capacity">
+			<effect>0.05</effect>
+		</skill>
+		<skill name="Heavy Weapon Capacity Proficiency">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Heavy Weapon Rapid Reload">
+			<effect>-0.03</effect>
+		</skill>
+		<skill name="Heavy Weapon Rapid Reload Proficiency">
+			<effect>-0.02</effect>
+		</skill>
+		<skill name="Heavy Weapon Sharpshooter">
+			<effect>0.05</effect>
+		</skill>
+		<skill name="Heavy Weapon Sharpshooter Proficiency">
+			<effect>0.03</effect>
+		</skill>
 		<skill name="Heavy Weapon Upgrades">
 			<effect>-0.05</effect>
+		</skill>
+		<skill name="Heavy Weapon Upgrades Proficiency">
+			<effect>-0.03</effect>
+		</skill>
+		<skill name="Light Weapon Capacity">
+			<effect>0.05</effect>
+		</skill>
+		<skill name="Light Weapon Capacity Proficiency">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Light Weapon Rapid Reload">
+			<effect>-0.03</effect>
+		</skill>
+		<skill name="Light Weapon Rapid Reload Proficiency">
+			<effect>-0.02</effect>
 		</skill>
 		<skill name="Light Weapon Sharpshooter">
 			<effect>0.05</effect>
 		</skill>
+		<skill name="Light Weapon Sharpshooter Proficiency">
+			<effect>0.03</effect>
+		</skill>
 		<skill name="Light Weapon Upgrades">
 			<effect>-0.05</effect>
+		</skill>
+		<skill name="Light Weapon Upgrades Proficiency">
+			<effect>-0.03</effect>
+		</skill>
+		<skill name="Sidearm Weapon Capacity">
+			<effect>0.05</effect>
+		</skill>
+		<skill name="Sidearm Weapon Capacity Proficiency">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Sidearm Weapon Rapid Reload">
+			<effect>-0.03</effect>
+		</skill>
+		<skill name="Sidearm Weapon Rapid Reload Proficiency">
+			<effect>-0.02</effect>
+		</skill>
+		<skill name="Sidearm Weapon Sharpshooter">
+			<effect>0.05</effect>
+		</skill>
+		<skill name="Sidearm Weapon Sharpshooter Proficiency">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Sidearm Weapon Upgrades">
+			<effect>-0.05</effect>
+		</skill>
+		<skill name="Sidearm Weapon Upgrades Proficiency">
+			<effect>-0.03</effect>
 		</skill>
 	</handheld_weapon_upgrades>
 	<handheld_weapons>
@@ -68,6 +140,21 @@
 		<skill name="Heavy Machine Gun Proficiency">
 			<effect>0.03</effect>
 		</skill>
+		<skill name="Mass Driver Proficiency">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Nova Knife Proficiency">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Scrambler Pistol Proficiency">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Sniper Rifle Proficiency">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Swarm Launcher Proficiency">
+			<effect>0.03</effect>
+		</skill>
 		<skill name="Shotgun Proficiency">
 			<effect>0.03</effect>
 		</skill>
@@ -79,6 +166,9 @@
 		</skill>
 	</handheld_weapons>
 	<mechanics>
+		<skill name="Armor Adaptation">
+			<effect>-0.03</effect>
+		</skill>
 		<skill name="Armor Repair Systems">
 			<effect>0.03</effect>
 		</skill>
@@ -89,4 +179,33 @@
 			<effect>0.05</effect>
 		</skill>
 	</mechanics>
+	<turret_operation>
+		<skill name="Large Hybrid Turret Operation">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Large Hybrid Turret Proficiency">
+			<effect>0.02</effect>
+		</skill>
+		<skill name="Large Missile Turret Operation">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Large Missile Turret Proficiency">
+			<effect>0.02</effect>
+		</skill>
+		<skill name="Small Hybrid Turret Operation">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Small Hybrid Turret Proficiency">
+			<effect>0.02</effect>
+		</skill>
+		<skill name="Small Missile Turret Operation">
+			<effect>0.03</effect>
+		</skill>
+		<skill name="Small Missile Turret Proficiency">
+			<effect>0.02</effect>
+		</skill>
+		<skill name="Turret Operation">
+			<effect>0.02</effect>
+		</skill>
+	</turret_operation>
 </data>

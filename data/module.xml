@@ -13,7 +13,153 @@
 			<pg>2</pg>
 			<armor_repaired_on_revive>0.30</armor_repaired_on_revive>
 		</module>
+		<module name="KIN-012 Nanite Injector">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">32</cpu>
+			<pg>4</pg>
+			<armor_repaired_on_revive>0.50</armor_repaired_on_revive>
+		</module>
+		<module name="Necromancer KIN-012 Nanite Injector">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">48</cpu>
+			<pg>8</pg>
+			<armor_repaired_on_revive>0.80</armor_repaired_on_revive>
+		</module>
+		<module name="Wiyrkomi Nanite Injector">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">48</cpu>
+			<pg>8</pg>
+			<armor_repaired_on_revive>0.80</armor_repaired_on_revive>
+		</module>
 	</nanite_injector>
+	<repair_tool>
+		<module name="Militia Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>15</cpu>
+			<pg>7</pg>
+			<repair_rate_on_dropsuit>25</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>75</repair_rate_on_vehicle>
+			<max_repair_distance>15</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>15</cpu>
+			<pg>2</pg>
+			<repair_rate_on_dropsuit>25</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>75</repair_rate_on_vehicle>
+			<max_repair_distance>15</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="Flux Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>24</cpu>
+			<pg>4</pg>
+			<repair_rate_on_dropsuit>25</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>75</repair_rate_on_vehicle>
+			<max_repair_distance>22.5</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="Stable Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>15</cpu>
+			<pg>2</pg>
+			<repair_rate_on_dropsuit>25</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>75</repair_rate_on_vehicle>
+			<max_repair_distance>15</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="Inert Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>15</cpu>
+			<pg>2</pg>
+			<repair_rate_on_dropsuit>19</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>56</repair_rate_on_vehicle>
+			<max_repair_distance>15</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="Triage Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>15</cpu>
+			<pg>2</pg>
+			<repair_rate_on_dropsuit>31</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>56</repair_rate_on_vehicle>
+			<max_repair_distance>15</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="A/7 Inert Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>32</cpu>
+			<pg>4</pg>
+			<repair_rate_on_dropsuit>24</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>73</repair_rate_on_vehicle>
+			<max_repair_distance>18</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="BDR-2 Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>32</cpu>
+			<pg>4</pg>
+			<repair_rate_on_dropsuit>33</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>98</repair_rate_on_vehicle>
+			<max_repair_distance>18</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="BDR-5 Axis Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>32</cpu>
+			<pg>4</pg>
+			<repair_rate_on_dropsuit>24</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>112</repair_rate_on_vehicle>
+			<max_repair_distance>18</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="Fractal A/7 Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>48</cpu>
+			<pg>8</pg>
+			<repair_rate_on_dropsuit>36</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>107</repair_rate_on_vehicle>
+			<max_repair_distance>22.1</max_repair_distance>
+			<max_targets>2</max_targets>
+		</module>
+		<module name="Core Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>48</cpu>
+			<pg>8</pg>
+			<repair_rate_on_dropsuit>35</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>105</repair_rate_on_vehicle>
+			<max_repair_distance>21</max_repair_distance>
+			<max_targets>2</max_targets>
+		</module>
+		<module name="Lai Dai Flux Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>48</cpu>
+			<pg>8</pg>
+			<repair_rate_on_dropsuit>35</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>105</repair_rate_on_vehicle>
+			<max_repair_distance>31.5</max_repair_distance>
+			<max_targets>2</max_targets>
+		</module>
+		<module name="Schizm Viziam Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>32</cpu>
+			<pg>4</pg>
+			<repair_rate_on_dropsuit>35</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>105</repair_rate_on_vehicle>
+			<max_repair_distance>21</max_repair_distance>
+			<max_targets>2</max_targets>
+			</module>
+		<module name="Six Kin Repair Tool">
+		<slot_type>equipment</slot_type>
+			<cpu>48</cpu>
+			<pg>8</pg>
+			<repair_rate_on_dropsuit>44</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>79</repair_rate_on_vehicle>
+			<max_repair_distance>21</max_repair_distance>
+			<max_targets>2</max_targets>
+		</module>
+	</repair_tool>
 	<shields>
 		<module name="Basic Shield Extender">
 			<slot_type>hi_slot</slot_type>

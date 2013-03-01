@@ -44,44 +44,45 @@
 	<assault_rifles>
 		<weapon name="Assault Rifle">
 			<slot_type>light_weapon</slot_type>
-			<cpu effected_by="Light Weapon Upgrades">23</cpu>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">23</cpu>
 			<pg>3</pg>
 			<damage effected_by="Weaponry" effected_by2="Assault Rifle Proficiency">31</damage>
 			<rate_of_fire>750</rate_of_fire>
-			<reload_time>3.0</reload_time>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">3.0</reload_time>
 			<clip_size>60</clip_size>
-			<max_ammo>300</max_ammo>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">300</max_ammo>
 			<accuracy_rating>56</accuracy_rating>
-			<max_range effected_by="Light Weapon Sharpshooter">78</max_range>
-			<optimal_range_high effected_by="Light Weapon Sharpshooter">35</optimal_range_high>
-			<optimal_range_low effected_by="Light Weapon Sharpshooter">1</optimal_range_low>
+			<max_range effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">78</max_range>
+			<optimal_range_high effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">35</optimal_range_high>
+			<optimal_range_low effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">1</optimal_range_low>
 		</weapon>
 		<weapon name="GEK-38 Assault Rifle">
 			<slot_type>light_weapon</slot_type>
-			<cpu effected_by="Light Weapon Upgrades">47</cpu>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">47</cpu>
 			<pg>6</pg>
 			<damage effected_by="Weaponry" effected_by2="Assault Rifle Proficiency">32.5</damage>
 			<rate_of_fire>750</rate_of_fire>
-			<reload_time>3.0</reload_time>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">3.0</reload_time>
 			<clip_size>60</clip_size>
-			<max_ammo>300</max_ammo>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">300</max_ammo>
 			<accuracy_rating>56.6</accuracy_rating>
-			<max_range effected_by="Light Weapon Sharpshooter">83</max_range>
-			<optimal_range_high effected_by="Light Weapon Sharpshooter">37</optimal_range_high>
-			<optimal_range_low effected_by="Light Weapon Sharpshooter">1</optimal_range_low>
+			<max_range effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">83</max_range>
+			<optimal_range_high effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">37</optimal_range_high>
+			<optimal_range_low effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">1</optimal_range_low>
 		</weapon>
 		<weapon name="Duvolle Assault Rifle">
 			<slot_type>light_weapon</slot_type>
-			<cpu effected_by="Light Weapon Upgrades">90</cpu>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">90</cpu>
 			<pg>13</pg>
 			<damage effected_by="Weaponry" effected_by2="Assault Rifle Proficiency">34.1</damage>
 			<rate_of_fire>750</rate_of_fire>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">3.0</reload_time>
 			<clip_size>60</clip_size>
-			<max_ammo>400</max_ammo>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">300</max_ammo>
 			<accuracy_rating>50</accuracy_rating>
-			<max_range>87</max_range>
-			<optimal_range_high>39</optimal_range_high>
-			<optimal_range_low>1</optimal_range_low>
+			<max_range effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">87</max_range>
+			<optimal_range_high effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">39</optimal_range_high>
+			<optimal_range_low effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">1</optimal_range_low>
 		</weapon>
 	</assault_rifles>
 	<forge_guns>
