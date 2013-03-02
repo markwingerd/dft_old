@@ -109,6 +109,60 @@
 			<melee_damage effected_by="Hand To Hand Combat">285</melee_damage>
 			<meta_level>4</meta_level>
 		</dropsuit>
+		<dropsuit name="Scout VK.0">
+			<cpu effected_by="Circuitry">230</cpu>
+			<pg effected_by="Combat Engineering">60</pg>
+			<heavy_weapon>0</heavy_weapon>
+			<light_weapon>1</light_weapon>
+			<sidearm>1</sidearm>
+			<grenade>1</grenade>
+			<equipment>2</equipment>
+			<hi_slot>3</hi_slot>
+			<low_slot>3</low_slot>
+			<shield_hp effected_by="Shield Control">100</shield_hp>
+			<armor_hp effected_by="Field Mechanics">90</armor_hp>
+			<shield_recharge effected_by="Shield Boost Systems">40</shield_recharge>
+			<shield_recharge_delay>4</shield_recharge_delay>
+			<shield_depleted_recharge_delay>10</shield_depleted_recharge_delay>
+			<armor_repair_rate>0</armor_repair_rate>
+			<movement_speed>5.6</movement_speed>
+			<sprint_speed>7.8</sprint_speed>
+			<sprint_duration>19.5</sprint_duration>
+			<stamina effected_by="Endurance" effected_by2="Vigor">195</stamina>
+			<stamina_recovery_rate effected_by="Vigor">18</stamina_recovery_rate>
+			<scan_profile effected_by="Dropsuit Command" effected_by2="Profile Dampening">45</scan_profile>
+			<scan_precision effected_by="Profile Analysis">45</scan_precision>
+			<scan_radius effected_by="Long Range Scanning">25</scan_radius>
+			<melee_damage effected_by="Hand To Hand Combat">135</melee_damage>
+			<meta_level>7</meta_level>
+		</dropsuit>
+		<dropsuit name="Scout VK.1">
+			<cpu effected_by="Circuitry">253</cpu>
+			<pg effected_by="Combat Engineering">66</pg>
+			<heavy_weapon>0</heavy_weapon>
+			<light_weapon>1</light_weapon>
+			<sidearm>0</sidearm>
+			<grenade>1</grenade>
+			<equipment>3</equipment>
+			<hi_slot>3</hi_slot>
+			<low_slot>3</low_slot>
+			<shield_hp effected_by="Shield Control">70</shield_hp>
+			<armor_hp effected_by="Field Mechanics">135</armor_hp>
+			<shield_recharge effected_by="Shield Boost Systems">40</shield_recharge>
+			<shield_recharge_delay>4</shield_recharge_delay>
+			<shield_depleted_recharge_delay>10</shield_depleted_recharge_delay>
+			<armor_repair_rate>0</armor_repair_rate>
+			<movement_speed>5.5</movement_speed>
+			<sprint_speed>7.7</sprint_speed>
+			<sprint_duration>18.5</sprint_duration>
+			<stamina effected_by="Endurance" effected_by2="Vigor">185</stamina>
+			<stamina_recovery_rate effected_by="Vigor">18</stamina_recovery_rate>
+			<scan_profile effected_by="Dropsuit Command" effected_by2="Profile Dampening">45</scan_profile>
+			<scan_precision effected_by="Profile Analysis">45</scan_precision>
+			<scan_radius effected_by="Long Range Scanning">25</scan_radius>
+			<melee_damage effected_by="Hand To Hand Combat">135</melee_damage>
+			<meta_level>8</meta_level>
+		</dropsuit>
 	</scout>
 		<assault>
 		<dropsuit name="Assault Type-I">
@@ -219,6 +273,60 @@
 			<melee_damage effected_by="Hand To Hand Combat">135</melee_damage>
 			<meta_level>4</meta_level>
 		</dropsuit>
+		<dropsuit name="Assault VK.0">
+			<cpu effected_by="Circuitry">300</cpu>
+			<pg effected_by="Combat Engineering">60</pg>
+			<heavy_weapon>0</heavy_weapon>
+			<light_weapon>1</light_weapon>
+			<sidearm>1</sidearm>
+			<grenade>1</grenade>
+			<equipment>2</equipment>
+			<hi_slot>3</hi_slot>
+			<low_slot>4</low_slot>
+			<shield_hp effected_by="Shield Control">125</shield_hp>
+			<armor_hp effected_by="Field Mechanics">175</armor_hp>
+			<shield_recharge effected_by="Shield Boost Systems">25</shield_recharge>
+			<shield_recharge_delay>6</shield_recharge_delay>
+			<shield_depleted_recharge_delay>10</shield_depleted_recharge_delay>
+			<armor_repair_rate>0</armor_repair_rate>
+			<movement_speed>5</movement_speed>
+			<sprint_speed>7</sprint_speed>
+			<sprint_duration>15</sprint_duration>
+			<stamina effected_by="Endurance" effected_by2="Vigor">150</stamina>
+			<stamina_recovery_rate effected_by="Vigor">15</stamina_recovery_rate>
+			<scan_profile effected_by="Dropsuit Command" effected_by2="Profile Dampening">50</scan_profile>
+			<scan_precision effected_by="Profile Analysis">55</scan_precision>
+			<scan_radius effected_by="Long Range Scanning">15</scan_radius>
+			<melee_damage effected_by="Hand To Hand Combat">135</melee_damage>
+			<meta_level>7</meta_level>
+		</dropsuit>
+		<dropsuit name="Assault VK.1">
+			<cpu effected_by="Circuitry">330</cpu>
+			<pg effected_by="Combat Engineering">66</pg>
+			<heavy_weapon>0</heavy_weapon>
+			<light_weapon>1</light_weapon>
+			<sidearm>1</sidearm>
+			<grenade>1</grenade>
+			<equipment>1</equipment>
+			<hi_slot>4</hi_slot>
+			<low_slot>3</low_slot>
+			<shield_hp effected_by="Shield Control">225</shield_hp>
+			<armor_hp effected_by="Field Mechanics">105</armor_hp>
+			<shield_recharge effected_by="Shield Boost Systems">25</shield_recharge>
+			<shield_recharge_delay>4.8</shield_recharge_delay>
+			<shield_depleted_recharge_delay>10</shield_depleted_recharge_delay>
+			<armor_repair_rate>0</armor_repair_rate>
+			<movement_speed>5.1</movement_speed>
+			<sprint_speed>7.1</sprint_speed>
+			<sprint_duration>15</sprint_duration>
+			<stamina effected_by="Endurance" effected_by2="Vigor">150</stamina>
+			<stamina_recovery_rate effected_by="Vigor">17.2</stamina_recovery_rate>
+			<scan_profile effected_by="Dropsuit Command" effected_by2="Profile Dampening">50</scan_profile>
+			<scan_precision effected_by="Profile Analysis">55</scan_precision>
+			<scan_radius effected_by="Long Range Scanning">15</scan_radius>
+			<melee_damage effected_by="Hand To Hand Combat">135</melee_damage>
+			<meta_level>8</meta_level>
+		</dropsuit>
 	</assault>
 	<logistics>
 		<dropsuit name="Logistics Type-I">
@@ -228,7 +336,7 @@
 			<light_weapon>1</light_weapon>
 			<sidearm>0</sidearm>
 			<grenade>1</grenade>
-			<equipment>2</equipment>
+			<equipment>3</equipment>
 			<hi_slot>2</hi_slot>
 			<low_slot>2</low_slot>
 			<shield_hp effected_by="Shield Control">125</shield_hp>
@@ -247,6 +355,141 @@
 			<scan_radius effected_by="Long Range Scanning">15.0</scan_radius>
 			<melee_damage effected_by="Hand To Hand Combat">135.0</melee_damage>
 			<meta_level>1</meta_level>
+		</dropsuit>
+		<dropsuit name="Logistics Type-II">
+			<cpu effected_by="Circuitry">195</cpu>
+			<pg effected_by="Combat Engineering">39</pg>
+			<heavy_weapon>0</heavy_weapon>
+			<light_weapon>1</light_weapon>
+			<sidearm>0</sidearm>
+			<grenade>1</grenade>
+			<equipment>2</equipment>
+			<hi_slot>2</hi_slot>
+			<low_slot>2</low_slot>
+			<shield_hp effected_by="Shield Control">125</shield_hp>
+			<armor_hp effected_by="Field Mechanics">150</armor_hp>
+			<shield_recharge effected_by="Shield Boost Systems">25</shield_recharge>
+			<shield_recharge_delay>5.0</shield_recharge_delay>
+			<shield_depleted_recharge_delay>10.0</shield_depleted_recharge_delay>
+			<armor_repair_rate>0.0</armor_repair_rate>
+			<movement_speed>5</movement_speed>
+			<sprint_speed>7</sprint_speed>
+			<sprint_duration>19.8</sprint_duration>
+			<stamina effected_by="Endurance" effected_by2="Vigor">198.0</stamina>
+			<stamina_recovery_rate effected_by="Vigor">24.0</stamina_recovery_rate>
+			<scan_profile effected_by="Dropsuit Command" effected_by2="Profile Dampening">50</scan_profile>
+			<scan_precision effected_by="Profile Analysis">50</scan_precision>
+			<scan_radius effected_by="Long Range Scanning">15.0</scan_radius>
+			<melee_damage effected_by="Hand To Hand Combat">135.0</melee_damage>
+			<meta_level>2</meta_level>
+		</dropsuit>
+		<dropsuit name="Logistics A-Series">
+			<cpu effected_by="Circuitry">273</cpu>
+			<pg effected_by="Combat Engineering">55</pg>
+			<heavy_weapon>0</heavy_weapon>
+			<light_weapon>1</light_weapon>
+			<sidearm>0</sidearm>
+			<grenade>1</grenade>
+			<equipment>3</equipment>
+			<hi_slot>3</hi_slot>
+			<low_slot>3</low_slot>
+			<shield_hp effected_by="Shield Control">125</shield_hp>
+			<armor_hp effected_by="Field Mechanics">150</armor_hp>
+			<shield_recharge effected_by="Shield Boost Systems">25</shield_recharge>
+			<shield_recharge_delay>5.0</shield_recharge_delay>
+			<shield_depleted_recharge_delay>10.0</shield_depleted_recharge_delay>
+			<armor_repair_rate>0.0</armor_repair_rate>
+			<movement_speed>4.7</movement_speed>
+			<sprint_speed>6.6</sprint_speed>
+			<sprint_duration>12</sprint_duration>
+			<stamina effected_by="Endurance" effected_by2="Vigor">120.0</stamina>
+			<stamina_recovery_rate effected_by="Vigor">12.0</stamina_recovery_rate>
+			<scan_profile effected_by="Dropsuit Command" effected_by2="Profile Dampening">50</scan_profile>
+			<scan_precision effected_by="Profile Analysis">50</scan_precision>
+			<scan_radius effected_by="Long Range Scanning">15.0</scan_radius>
+			<melee_damage effected_by="Hand To Hand Combat">135.0</melee_damage>
+			<meta_level>3</meta_level>
+		</dropsuit>
+		<dropsuit name="Logistics B-Series">
+			<cpu effected_by="Circuitry">273</cpu>
+			<pg effected_by="Combat Engineering">55</pg>
+			<heavy_weapon>0</heavy_weapon>
+			<light_weapon>1</light_weapon>
+			<sidearm>0</sidearm>
+			<grenade>1</grenade>
+			<equipment>2</equipment>
+			<hi_slot>3</hi_slot>
+			<low_slot>3</low_slot>
+			<shield_hp effected_by="Shield Control">125</shield_hp>
+			<armor_hp effected_by="Field Mechanics">150</armor_hp>
+			<shield_recharge effected_by="Shield Boost Systems">25</shield_recharge>
+			<shield_recharge_delay>5.0</shield_recharge_delay>
+			<shield_depleted_recharge_delay>10.0</shield_depleted_recharge_delay>
+			<armor_repair_rate>0.0</armor_repair_rate>
+			<movement_speed>5.1</movement_speed>
+			<sprint_speed>7.2</sprint_speed>
+			<sprint_duration>19.8</sprint_duration>
+			<stamina effected_by="Endurance" effected_by2="Vigor">198.0</stamina>
+			<stamina_recovery_rate effected_by="Vigor">24.0</stamina_recovery_rate>
+			<scan_profile effected_by="Dropsuit Command" effected_by2="Profile Dampening">50</scan_profile>
+			<scan_precision effected_by="Profile Analysis">50</scan_precision>
+			<scan_radius effected_by="Long Range Scanning">15.0</scan_radius>
+			<melee_damage effected_by="Hand To Hand Combat">135.0</melee_damage>
+			<meta_level>4</meta_level>
+		</dropsuit>
+		<dropsuit name="Logistics VK.0">
+			<cpu effected_by="Circuitry">390</cpu>
+			<pg effected_by="Combat Engineering">78</pg>
+			<heavy_weapon>0</heavy_weapon>
+			<light_weapon>1</light_weapon>
+			<sidearm>0</sidearm>
+			<grenade>1</grenade>
+			<equipment>4</equipment>
+			<hi_slot>4</hi_slot>
+			<low_slot>4</low_slot>
+			<shield_hp effected_by="Shield Control">125</shield_hp>
+			<armor_hp effected_by="Field Mechanics">150</armor_hp>
+			<shield_recharge effected_by="Shield Boost Systems">25</shield_recharge>
+			<shield_recharge_delay>5.0</shield_recharge_delay>
+			<shield_depleted_recharge_delay>10.0</shield_depleted_recharge_delay>
+			<armor_repair_rate>0.0</armor_repair_rate>
+			<movement_speed>4.7</movement_speed>
+			<sprint_speed>6.6</sprint_speed>
+			<sprint_duration>12</sprint_duration>
+			<stamina effected_by="Endurance" effected_by2="Vigor">120.0</stamina>
+			<stamina_recovery_rate effected_by="Vigor">12.0</stamina_recovery_rate>
+			<scan_profile effected_by="Dropsuit Command" effected_by2="Profile Dampening">50</scan_profile>
+			<scan_precision effected_by="Profile Analysis">50</scan_precision>
+			<scan_radius effected_by="Long Range Scanning">15.0</scan_radius>
+			<melee_damage effected_by="Hand To Hand Combat">135.0</melee_damage>
+			<meta_level>7</meta_level>
+		</dropsuit>
+		<dropsuit name="Logistics VK.1">
+			<cpu effected_by="Circuitry">390</cpu>
+			<pg effected_by="Combat Engineering">78</pg>
+			<heavy_weapon>0</heavy_weapon>
+			<light_weapon>1</light_weapon>
+			<sidearm>0</sidearm>
+			<grenade>1</grenade>
+			<equipment>3</equipment>
+			<hi_slot>4</hi_slot>
+			<low_slot>4</low_slot>
+			<shield_hp effected_by="Shield Control">125</shield_hp>
+			<armor_hp effected_by="Field Mechanics">150</armor_hp>
+			<shield_recharge effected_by="Shield Boost Systems">25</shield_recharge>
+			<shield_recharge_delay>5.0</shield_recharge_delay>
+			<shield_depleted_recharge_delay>10.0</shield_depleted_recharge_delay>
+			<armor_repair_rate>0.0</armor_repair_rate>
+			<movement_speed>5.3</movement_speed>
+			<sprint_speed>7.4</sprint_speed>
+			<sprint_duration>19.8</sprint_duration>
+			<stamina effected_by="Endurance" effected_by2="Vigor">198.0</stamina>
+			<stamina_recovery_rate effected_by="Vigor">24.0</stamina_recovery_rate>
+			<scan_profile effected_by="Dropsuit Command" effected_by2="Profile Dampening">50</scan_profile>
+			<scan_precision effected_by="Profile Analysis">50</scan_precision>
+			<scan_radius effected_by="Long Range Scanning">15.0</scan_radius>
+			<melee_damage effected_by="Hand To Hand Combat">135.0</melee_damage>
+			<meta_level>8</meta_level>
 		</dropsuit>
 	</logistics>
 	<heavy>
@@ -358,6 +601,60 @@
 			<melee_damage effected_by="Hand To Hand Combat">135</melee_damage>
 			<meta_level>5</meta_level>
 		</dropsuit>
+		<dropsuit name="Heavy VK.0">
+			<cpu effected_by="Circuitry">270</cpu>
+			<pg effected_by="Combat Engineering">54</pg>
+			<heavy_weapon>1</heavy_weapon>
+			<light_weapon>0</light_weapon>
+			<sidearm>1</sidearm>
+			<grenade>1</grenade>
+			<equipment>0</equipment>
+			<hi_slot>3</hi_slot>
+			<low_slot>2</low_slot>
+			<shield_hp effected_by="Shield Control">100</shield_hp>
+			<armor_hp effected_by="Field Mechanics">650</armor_hp>
+			<shield_recharge effected_by="Shield Boost Systems">15</shield_recharge>
+			<shield_recharge_delay>7</shield_recharge_delay>
+			<shield_depleted_recharge_delay>10</shield_depleted_recharge_delay>
+			<armor_repair_rate>0</armor_repair_rate>
+			<movement_speed>3.6</movement_speed>
+			<sprint_speed>5.1</sprint_speed>
+			<sprint_duration>9</sprint_duration>
+			<stamina effected_by="Endurance" effected_by2="Vigor">90</stamina>
+			<stamina_recovery_rate effected_by="Vigor">12</stamina_recovery_rate>
+			<scan_profile effected_by="Dropsuit Command" effected_by2="Profile Dampening">65</scan_profile>
+			<scan_precision effected_by="Profile Analysis">60</scan_precision>
+			<scan_radius effected_by="Long Range Scanning">15</scan_radius>
+			<melee_damage effected_by="Hand To Hand Combat">135</melee_damage>
+			<meta_level>7</meta_level>
+		</dropsuit>
+		<dropsuit name="Heavy VK.1">
+			<cpu effected_by="Circuitry">270</cpu>
+			<pg effected_by="Combat Engineering">54</pg>
+			<heavy_weapon>1</heavy_weapon>
+			<light_weapon>0</light_weapon>
+			<sidearm>1</sidearm>
+			<grenade>1</grenade>
+			<equipment>0</equipment>
+			<hi_slot>3</hi_slot>
+			<low_slot>2</low_slot>
+			<shield_hp effected_by="Shield Control">320</shield_hp>
+			<armor_hp effected_by="Field Mechanics">422</armor_hp>
+			<shield_recharge effected_by="Shield Boost Systems">25.5</shield_recharge>
+			<shield_recharge_delay>5.9</shield_recharge_delay>
+			<shield_depleted_recharge_delay>10</shield_depleted_recharge_delay>
+			<armor_repair_rate>0</armor_repair_rate>
+			<movement_speed>3.9</movement_speed>
+			<sprint_speed>5.5</sprint_speed>
+			<sprint_duration>12.6</sprint_duration>
+			<stamina effected_by="Endurance" effected_by2="Vigor">126</stamina>
+			<stamina_recovery_rate effected_by="Vigor">12</stamina_recovery_rate>
+			<scan_profile effected_by="Dropsuit Command" effected_by2="Profile Dampening">65</scan_profile>
+			<scan_precision effected_by="Profile Analysis">60</scan_precision>
+			<scan_radius effected_by="Long Range Scanning">15</scan_radius>
+			<melee_damage effected_by="Hand To Hand Combat">135</melee_damage>
+			<meta_level>8</meta_level>
+		</dropsuit>
 	</heavy>
 	<test>
 		<dropsuit name="God Type-I">
@@ -387,5 +684,6 @@
 			<melee_damage effected_by="Hand To Hand Combat">100.0</melee_damage>
 			<meta_level>1</meta_level>
 		</dropsuit>
+
 	</test>
 </data>

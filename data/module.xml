@@ -13,7 +13,512 @@
 			<pg>2</pg>
 			<armor_repaired_on_revive>0.30</armor_repaired_on_revive>
 		</module>
+		<module name="KIN-012 Nanite Injector">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">32</cpu>
+			<pg>4</pg>
+			<armor_repaired_on_revive>0.50</armor_repaired_on_revive>
+		</module>
+		<module name="Necromancer KIN-012 Nanite Injector">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">48</cpu>
+			<pg>8</pg>
+			<armor_repaired_on_revive>0.80</armor_repaired_on_revive>
+		</module>
+		<module name="Wiyrkomi Nanite Injector">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">48</cpu>
+			<pg>8</pg>
+			<armor_repaired_on_revive>0.80</armor_repaired_on_revive>
+		</module>
 	</nanite_injector>
+	<repair_tool>
+		<module name="Militia Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>15</cpu>
+			<pg>7</pg>
+			<repair_rate_on_dropsuit>25</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>75</repair_rate_on_vehicle>
+			<max_repair_distance>15</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>15</cpu>
+			<pg>2</pg>
+			<repair_rate_on_dropsuit>25</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>75</repair_rate_on_vehicle>
+			<max_repair_distance>15</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="Flux Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>24</cpu>
+			<pg>4</pg>
+			<repair_rate_on_dropsuit>25</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>75</repair_rate_on_vehicle>
+			<max_repair_distance>22.5</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="Stable Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>15</cpu>
+			<pg>2</pg>
+			<repair_rate_on_dropsuit>25</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>75</repair_rate_on_vehicle>
+			<max_repair_distance>15</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="Inert Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>15</cpu>
+			<pg>2</pg>
+			<repair_rate_on_dropsuit>19</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>56</repair_rate_on_vehicle>
+			<max_repair_distance>15</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="Triage Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>15</cpu>
+			<pg>2</pg>
+			<repair_rate_on_dropsuit>31</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>56</repair_rate_on_vehicle>
+			<max_repair_distance>15</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="A/7 Inert Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>32</cpu>
+			<pg>4</pg>
+			<repair_rate_on_dropsuit>24</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>73</repair_rate_on_vehicle>
+			<max_repair_distance>18</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="BDR-2 Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>32</cpu>
+			<pg>4</pg>
+			<repair_rate_on_dropsuit>33</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>98</repair_rate_on_vehicle>
+			<max_repair_distance>18</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="BDR-5 Axis Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>32</cpu>
+			<pg>4</pg>
+			<repair_rate_on_dropsuit>24</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>112</repair_rate_on_vehicle>
+			<max_repair_distance>18</max_repair_distance>
+			<max_targets>1</max_targets>
+		</module>
+		<module name="Fractal A/7 Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>48</cpu>
+			<pg>8</pg>
+			<repair_rate_on_dropsuit>36</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>107</repair_rate_on_vehicle>
+			<max_repair_distance>22.1</max_repair_distance>
+			<max_targets>2</max_targets>
+		</module>
+		<module name="Core Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>48</cpu>
+			<pg>8</pg>
+			<repair_rate_on_dropsuit>35</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>105</repair_rate_on_vehicle>
+			<max_repair_distance>21</max_repair_distance>
+			<max_targets>2</max_targets>
+		</module>
+		<module name="Lai Dai Flux Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>48</cpu>
+			<pg>8</pg>
+			<repair_rate_on_dropsuit>35</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>105</repair_rate_on_vehicle>
+			<max_repair_distance>31.5</max_repair_distance>
+			<max_targets>2</max_targets>
+		</module>
+		<module name="Schizm Viziam Repair Tool">
+			<slot_type>equipment</slot_type>
+			<cpu>32</cpu>
+			<pg>4</pg>
+			<repair_rate_on_dropsuit>35</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>105</repair_rate_on_vehicle>
+			<max_repair_distance>21</max_repair_distance>
+			<max_targets>2</max_targets>
+			</module>
+		<module name="Six Kin Repair Tool">
+		<slot_type>equipment</slot_type>
+			<cpu>48</cpu>
+			<pg>8</pg>
+			<repair_rate_on_dropsuit>44</repair_rate_on_dropsuit>
+			<repair_rate_on_vehicle>79</repair_rate_on_vehicle>
+			<max_repair_distance>21</max_repair_distance>
+			<max_targets>2</max_targets>
+		</module>
+	</repair_tool>
+	<nanohive>
+		<module name="Militia Nanohive">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">30</cpu>
+			<pg>6</pg>
+			<max_active>2</max_active>
+			<max_carried>2</max_carried>
+			<max_nanite_clusters>64</max_nanite_clusters>
+			<effective_range>4</effective_range>
+			<ammo_resupply_rate>15</ammo_resupply_rate>
+			<health>200</health>
+		</module>
+		<module name="Compact Nanohive">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">10</cpu>
+			<pg>2</pg>
+			<max_active>1</max_active>
+			<max_carried>1</max_carried>
+			<max_nanite_clusters>24</max_nanite_clusters>
+			<effective_range>2</effective_range>
+			<ammo_resupply_rate>25</ammo_resupply_rate>
+			<health>200</health>
+		</module>
+		<module name=" Nanohive">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">21</cpu>
+			<pg>4</pg>
+			<max_active>2</max_active>
+			<max_carried>2</max_carried>
+			<max_nanite_clusters>64</max_nanite_clusters>
+			<effective_range>4</effective_range>
+			<ammo_resupply_rate>15</ammo_resupply_rate>
+			<health>200</health>
+		</module>
+		<module name="Gauged Nanohive">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">21</cpu>
+			<pg>4</pg>
+			<max_active>3</max_active>
+			<max_carried>3</max_carried>
+			<max_nanite_clusters>64</max_nanite_clusters>
+			<effective_range>4</effective_range>
+			<ammo_resupply_rate>15</ammo_resupply_rate>
+			<health>200</health>
+		</module>
+		<module name="Quantum Nanohive">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">21</cpu>
+			<pg>4</pg>
+			<max_active>2</max_active>
+			<max_carried>2</max_carried>
+			<max_nanite_clusters>64</max_nanite_clusters>
+			<effective_range>4.2</effective_range>
+			<ammo_resupply_rate>17.2</ammo_resupply_rate>
+			<health>200</health>
+		</module>
+		<module name="Stable Nanohive">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">21</cpu>
+			<pg>4</pg>
+			<max_active>2</max_active>
+			<max_carried>2</max_carried>
+			<max_nanite_clusters>64</max_nanite_clusters>
+			<effective_range>4</effective_range>
+			<ammo_resupply_rate>15</ammo_resupply_rate>
+			<health>200</health>
+		</module>
+		<module name="K-2 Nanohive">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">42</cpu>
+			<pg>7</pg>
+			<max_active>2</max_active>
+			<max_carried>2</max_carried>
+			<max_nanite_clusters>77</max_nanite_clusters>
+			<effective_range>6</effective_range>
+			<ammo_resupply_rate>18.8</ammo_resupply_rate>
+			<health>300</health>
+		</module>
+		<module name="Cistern K-17D Nanohive (R)">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">42</cpu>
+			<pg>7</pg>
+			<max_active>2</max_active>
+			<max_carried>2</max_carried>
+			<max_nanite_clusters>77</max_nanite_clusters>
+			<effective_range>6</effective_range>
+			<ammo_resupply_rate>18.8</ammo_resupply_rate>
+			<health>315</health>
+		</module>
+		<module name="R11-4 Flux Nanohive">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">42</cpu>
+			<pg>7</pg>
+			<max_active>2</max_active>
+			<max_carried>2</max_carried>
+			<max_nanite_clusters>77</max_nanite_clusters>
+			<effective_range>6.6</effective_range>
+			<ammo_resupply_rate>18.8</ammo_resupply_rate>
+			<health>300</health>
+		</module>
+		<module name="X-3 Quantum Nanohive">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">42</cpu>
+			<pg>7</pg>
+			<max_active>2</max_active>
+			<max_carried>2</max_carried>
+			<max_nanite_clusters>77</max_nanite_clusters>
+			<effective_range>6</effective_range>
+			<ammo_resupply_rate>21.5</ammo_resupply_rate>
+			<health>300</health>
+		</module>
+		<module name="K-CR Triage Nanohive">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">59</cpu>
+			<pg>9</pg>
+			<max_active>2</max_active>
+			<max_carried>2</max_carried>
+			<max_nanite_clusters>84</max_nanite_clusters>
+			<effective_range>7.5</effective_range>
+			<ammo_resupply_rate>0</ammo_resupply_rate>
+			<health>300</health>
+		</module>
+		<module name="K17/D Nanohive (R) ">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">42</cpu>
+			<pg>7</pg>
+			<max_active>2</max_active>
+			<max_carried>2</max_carried>
+			<max_nanite_clusters>64</max_nanite_clusters>
+			<effective_range>4</effective_range>
+			<ammo_resupply_rate>15</ammo_resupply_rate>
+			<health>200</health>
+		</module>
+		<module name="Ishokone Flux Nanohive">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">59</cpu>
+			<pg>11</pg>
+			<max_active>2</max_active>
+			<max_carried>3</max_carried>
+			<max_nanite_clusters>77</max_nanite_clusters>
+			<effective_range>7.7</effective_range>
+			<ammo_resupply_rate>22.5</ammo_resupply_rate>
+			<health>400</health>
+		</module>
+		<module name="Ishokone Gauged Nanohive">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">59</cpu>
+			<pg>11</pg>
+			<max_active>3</max_active>
+			<max_carried>4</max_carried>
+			<max_nanite_clusters>77</max_nanite_clusters>
+			<effective_range>7</effective_range>
+			<ammo_resupply_rate>22.5</ammo_resupply_rate>
+			<health>400</health>
+		</module>
+		<module name="Wiyrkomi Triage Nanohive">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">59</cpu>
+			<pg>11</pg>
+			<max_active>2</max_active>
+			<max_carried>3</max_carried>
+			<max_nanite_clusters>108</max_nanite_clusters>
+			<effective_range>8.8</effective_range>
+			<ammo_resupply_rate>0</ammo_resupply_rate>
+			<health>400</health>
+		</module>
+	</nanohive>
+	<drop_uplink>
+		<module name="Militia Drop Uplink">
+			<slot_type>equipment</slot_type>
+			<cpu>50</cpu>
+			<pg>15</pg>
+			<max_active>1</max_active>
+			<max_carried>2</max_carried>
+			<spawn_time_modifer>0</spawn_time_modifer>
+			<max_spawns_per_unit>10</max_spawns_per_unit>
+			<health>200</health>
+		</module>
+		<module name="Drop Uplink">
+			<slot_type>equipment</slot_type>
+			<cpu>38</cpu>
+			<pg>9</pg>
+			<max_active>1</max_active>
+			<max_carried>2</max_carried>
+			<spawn_time_modifer>0</spawn_time_modifer>
+			<max_spawns_per_unit>10</max_spawns_per_unit>
+			<health>200</health>
+		</module>
+		<module name="Flux Drop Uplink">
+			<slot_type>equipment</slot_type>
+			<cpu>38</cpu>
+			<pg>9</pg>
+			<max_active>1</max_active>
+			<max_carried>2</max_carried>
+			<spawn_time_modifer>-0.50</spawn_time_modifer>
+			<max_spawns_per_unit>10</max_spawns_per_unit>
+			<health>200</health>
+		</module>
+		<module name="Gauged Drop Uplink">
+			<slot_type>equipment</slot_type>
+			<cpu>38</cpu>
+			<pg>9</pg>
+			<max_active>2</max_active>
+			<max_carried>4</max_carried>
+			<spawn_time_modifer>0</spawn_time_modifer>
+			<max_spawns_per_unit>10</max_spawns_per_unit>
+			<health>200</health>
+		</module>
+		<module name="Quantum Drop Uplink">
+			<slot_type>equipment</slot_type>
+			<cpu>38</cpu>
+			<pg>9</pg>
+			<max_active>1</max_active>
+			<max_carried>2</max_carried>
+			<spawn_time_modifer>0</spawn_time_modifer>
+			<max_spawns_per_unit>12</max_spawns_per_unit>
+			<health>200</health>
+		</module>
+		<module name="Stable Drop Uplink">
+			<slot_type>equipment</slot_type>
+			<cpu>38</cpu>
+			<pg>9</pg>
+			<max_active>1</max_active>
+			<max_carried>2</max_carried>
+			<spawn_time_modifer>0</spawn_time_modifer>
+			<max_spawns_per_unit>10</max_spawns_per_unit>
+			<health>200</health>
+		</module>
+		<module name="Dawnpyre R-9 Drop Uplink">
+			<slot_type>equipment</slot_type>
+			<cpu>71</cpu>
+			<pg>14</pg>
+			<max_active>1</max_active>
+			<max_carried>2</max_carried>
+			<spawn_time_modifer>-0.19</spawn_time_modifer>
+			<max_spawns_per_unit>20</max_spawns_per_unit>
+			<health>200</health>
+		</module>
+		<module name="R-9 Drop Uplink">
+			<slot_type>equipment</slot_type>
+			<cpu>48</cpu>
+			<pg>11</pg>
+			<max_active>1</max_active>
+			<max_carried>2</max_carried>
+			<spawn_time_modifer>-0.10</spawn_time_modifer>
+			<max_spawns_per_unit>15</max_spawns_per_unit>
+			<health>300</health>
+		</module>
+		<module name="N-11/A Flux Drop Uplink">
+			<slot_type>equipment</slot_type>
+			<cpu>48</cpu>
+			<pg>11</pg>
+			<max_active>1</max_active>
+			<max_carried>2</max_carried>
+			<spawn_time_modifer>-0.19</spawn_time_modifer>
+			<max_spawns_per_unit>15</max_spawns_per_unit>
+			<health>300</health>
+		</module>
+		<module name="P-13 Quantum Drop Uplink">
+			<slot_type>equipment</slot_type>
+			<cpu>48</cpu>
+			<pg>11</pg>
+			<max_active>1</max_active>
+			<max_carried>2</max_carried>
+			<spawn_time_modifer>-0.10</spawn_time_modifer>
+			<max_spawns_per_unit>18</max_spawns_per_unit>
+			<health>300</health>
+		</module>
+		<module name="Allotek Stable Drop Uplink">
+			<slot_type>equipment</slot_type>
+			<cpu>71</cpu>
+			<pg>14</pg>
+			<max_active>2</max_active>
+			<max_carried>3</max_carried>
+			<spawn_time_modifer>-0.20</spawn_time_modifer>
+			<max_spawns_per_unit>20</max_spawns_per_unit>
+			<health>400</health>
+		</module>
+		<module name="Imperial Drop Uplink">
+			<slot_type>equipment</slot_type>
+			<cpu>71</cpu>
+			<pg>14</pg>
+			<max_active>2</max_active>
+			<max_carried>3</max_carried>
+			<spawn_time_modifer>-0.20</spawn_time_modifer>
+			<max_spawns_per_unit>20</max_spawns_per_unit>
+			<health>400</health>
+		</module>
+		<module name="Ishukone Gauged Drop Uplink">
+			<slot_type>equipment</slot_type>
+			<cpu>71</cpu>
+			<pg>14</pg>
+			<max_active>3</max_active>
+			<max_carried>3</max_carried>
+			<spawn_time_modifer>-0.20</spawn_time_modifer>
+			<max_spawns_per_unit>20</max_spawns_per_unit>
+			<health>400</health>
+		</module>
+		<module name="Abyss Carthum Drop Uplink">
+			<slot_type>equipment</slot_type>
+			<cpu>71</cpu>
+			<pg>14</pg>
+			<max_active>1</max_active>
+			<max_carried>2</max_carried>
+			<spawn_time_modifer>-0.60</spawn_time_modifer>
+			<max_spawns_per_unit>5</max_spawns_per_unit>
+			<health>400</health>
+		</module>
+	</drop_uplink>
+	<remote_explosives>
+		<module name="Remote Explosives">
+			<slot_type>equipment</slot_type>
+			<cpu>32</cpu>
+			<pg>6</pg>
+			<max_active>5</max_active>
+			<blast_radius>5</blast_radius>
+			<max_carried>2</max_carried>
+		</module>
+		<module name="Proximity Explosive">
+			<slot_type>equipment</slot_type>
+			<cpu>21</cpu>
+			<pg>4</pg>
+			<max_active>6</max_active>
+			<blast_radius>5</blast_radius>
+			<max_carried>3</max_carried>
+		</module>
+		<module name="F/45 Remote Explosives">
+			<slot_type>equipment</slot_type>
+			<cpu>45</cpu>
+			<pg>8</pg>
+			<max_active>5</max_active>
+			<blast_radius>5</blast_radius>
+			<max_carried>3</max_carried>
+		</module>
+		<module name="F/49 Proximity Explosive">
+			<slot_type>equipment</slot_type>
+			<cpu>36</cpu>
+			<pg>6</pg>
+			<max_active>6</max_active>
+			<blast_radius>5</blast_radius>
+			<max_carried>3</max_carried>
+		</module>
+		<module name="Boundless Proximity Explosive">
+			<slot_type>equipment</slot_type>
+			<cpu>53</cpu>
+			<pg>7</pg>
+			<max_active>6</max_active>
+			<blast_radius>5</blast_radius>
+			<max_carried>3</max_carried>
+		</module>
+		<module name="Boundless Remote Explosives">
+			<slot_type>equipment</slot_type>
+			<cpu>63</cpu>
+			<pg>10</pg>
+			<max_active>5</max_active>
+			<blast_radius>7.5</blast_radius>
+			<max_carried>3</max_carried>
+		</module>
+	</remote_explosives>
 	<shields>
 		<module name="Basic Shield Extender">
 			<slot_type>hi_slot</slot_type>

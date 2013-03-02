@@ -1,5 +1,5 @@
 (dp0
-S'Max Skills'
+S'Test'
 p1
 (ichar
 Character
@@ -18,309 +18,912 @@ p8
 sS'skill_effect'
 p9
 (dp10
-S'Armor Repair Systems'
+S'Heavy Weapon Capacity'
 p11
-F0.03
-sS'Endurance'
+F0.05
+sS'Large Missile Turret Operation'
 p12
-F0.05
-sS'Profile Dampening'
+F0.03
+sS'Armor Repair Systems'
 p13
-F-0.05
-sS'Profile Analysis'
+F0.03
+sS'Small Hybrid Turret Proficiency'
 p14
-F-0.05
-sS'Vigor'
-p15
-F0.05
-sS'Assault Rifle Proficiency'
-p16
-F0.03
-sS'Combat Engineering'
-p17
-F0.05
-sS'Weaponry'
-p18
 F0.02
-sS'Shield Boost Systems'
-p19
-F0.03
-sS'Long Range Scanning'
-p20
+sS'Armor Adaptation'
+p15
+F-0.03
+sS'Endurance'
+p16
 F0.05
-sS'Light Weapon Upgrades'
+sS'Small Hybrid Turret Operation'
+p17
+F0.03
+sS'Profile Dampening'
+p18
+F-0.05
+sS'Light Weapon Upgrades Proficiency'
+p19
+F-0.03
+sS'Nova Knife Proficiency'
+p20
+F0.03
+sS'Profile Analysis'
 p21
 F-0.05
-sS'Heavy Machine Gun Proficiency'
+sS'Sidearm Weapon Rapid Reload Proficiency'
 p22
-F0.03
-sS'Heavy Weapon Upgrades'
+F-0.02
+sS'Light Weapon Sharpshooter Proficiency'
 p23
-F-0.05
-sS'Forge Gun Proficiency'
-p24
 F0.03
-sS'Armor Upgrades'
+sS'Vigor'
+p24
+F0.05
+sS'Assault Rifle Proficiency'
 p25
-F-0.03
-sS'Shotgun Proficiency'
+F0.03
+sS'Heavy Machine Gun Proficiency'
 p26
 F0.03
-sS'Shield Control'
+sS'Combat Engineering'
 p27
 F0.05
-sS'Hand To Hand Combat'
+sS'Heavy Weapon Upgrades Proficiency'
 p28
-F0.1
-sS'Nanocircuitry'
-p29
-F-0.05
-sS'Field Mechanics'
-p30
-F0.05
-sS'Shield Enhancements'
-p31
 F-0.03
-sS'Circuitry'
+sS'Weaponry'
+p29
+F0.02
+sS'Shield Boost Systems'
+p30
+F0.03
+sS'Small Missile Turret Proficiency'
+p31
+F0.02
+sS'Large Missile Turret Proficiency'
 p32
-F0.05
-sS'Light Weapon Sharpshooter'
+F0.02
+sS'Long Range Scanning'
 p33
 F0.05
-sS'Submachine Gun Proficiency'
+sS'Swarm Launcher Proficiency'
 p34
 F0.03
-sS'Dropsuit Command'
+sS'Light Weapon Rapid Reload'
 p35
+F-0.03
+sS'Sidearm Weapon Upgrades'
+p36
 F-0.05
-ssbsg9
-(dp36
-S'Armor Repair Systems'
+sS'Sidearm Weapon Upgrades Proficiency'
 p37
-F0.15
-sS'Endurance'
+F-0.03
+sS'Heavy Weapon Sharpshooter Proficiency'
 p38
-F0.25
-sS'Profile Dampening'
+F0.03
+sS'Sidearm Weapon Capacity Proficiency'
 p39
-F-0.25
-sS'Profile Analysis'
+F0.03
+sS'Light Weapon Capacity Proficiency'
 p40
-F-0.25
-sS'Vigor'
+F0.03
+sS'Heavy Weapon Upgrades'
 p41
-F0.25
-sS'Assault Rifle Proficiency'
+F-0.05
+sS'Systems Hacking'
 p42
-F0.15
-sS'Combat Engineering'
+F-0.05
+sS'Forge Gun Proficiency'
 p43
-F0.25
-sS'Weaponry'
+F0.03
+sS'Armor Upgrades'
 p44
-F0.1
-sS'Shield Boost Systems'
+F-0.03
+sS'Light Weapon Rapid Reload Proficiency'
 p45
-F0.15
-sS'Long Range Scanning'
+F-0.02
+sS'Heavy Weapon Rapid Reload'
 p46
-F0.25
+F-0.03
 sS'Light Weapon Upgrades'
 p47
-F-0.25
-sS'Heavy Machine Gun Proficiency'
+F-0.05
+sS'Light Weapon Capacity'
 p48
-F0.15
-sS'Heavy Weapon Upgrades'
-p49
-F-0.25
-sS'Forge Gun Proficiency'
-p50
-F0.15
-sS'Armor Upgrades'
-p51
-F-0.15
+F0.05
 sS'Shotgun Proficiency'
+p49
+F0.03
+sS'Heavy Weapon Capacity Proficiency'
+p50
+F0.03
+sS'Powergrid Upgrades'
+p51
+F-0.05
+sS'Submachine Gun Proficiency'
 p52
-F0.15
+F0.03
 sS'Shield Control'
 p53
-F0.25
+F0.05
 sS'Hand To Hand Combat'
 p54
-F0.5
-sS'Nanocircuitry'
+F0.1
+sS'Turret Operation'
 p55
-F-0.25
-sS'Field Mechanics'
+F0.02
+sS'Sidearm Weapon Rapid Reload'
 p56
-F0.25
-sS'Shield Enhancements'
+F-0.03
+sS'Large Hybrid Turret Operation'
 p57
-F-0.15
-sS'Circuitry'
+F0.03
+sS'Nanocircuitry'
 p58
-F0.25
-sS'Light Weapon Sharpshooter'
+F-0.05
+sS'Small Missile Turret Operation'
 p59
-F0.25
-sS'Submachine Gun Proficiency'
+F0.03
+sS'Large Hybrid Turret Proficiency'
 p60
-F0.15
-sS'Dropsuit Command'
+F0.02
+sS'Field Mechanics'
 p61
-F-0.25
-ssS'name'
+F0.05
+sS'Shield Enhancements'
 p62
+F-0.03
+sS'Sidearm Weapon Sharpshooter'
+p63
+F0.05
+sS'Sidearm Weapon Sharpshooter Proficiency'
+p64
+F0.03
+sS'Scrambler Pistol Proficiency'
+p65
+F0.03
+sS'Mass Driver Proficiency'
+p66
+F0.03
+sS'Circuitry'
+p67
+F0.05
+sS'Sidearm Weapon Capacity'
+p68
+F0.05
+sS'Shield Adaptation'
+p69
+F-0.03
+sS'Heavy Weapon Sharpshooter'
+p70
+F0.05
+sS'Light Weapon Sharpshooter'
+p71
+F0.05
+sS'Heavy Weapon Rapid Reload Proficiency'
+p72
+F-0.02
+sS'Dropsuit Command'
+p73
+F-0.05
+sS'Sniper Rifle Proficiency'
+p74
+F0.03
+ssbsg9
+(dp75
+S'Heavy Weapon Capacity'
+p76
+F0.25
+ssS'name'
+p77
 g1
 sS'skill_level'
-p63
-(dp64
-g37
+p78
+(dp79
+g76
 I5
-sg38
-I5
-sg39
-I5
-sg40
-I5
-sg41
-I5
-sg42
-I5
-sg43
-I5
-sg44
-I5
-sg45
-I5
-sg46
-I5
-sg47
-I5
-sg48
-I5
-sg49
-I5
-sg50
-I5
-sg51
-I5
-sg52
-I5
-sg53
-I5
-sg54
-I5
-sg55
-I5
-sg56
-I5
-sg57
-I5
-sg58
-I5
-sg59
-I5
-sg60
-I5
-sg61
-I5
-ssbsS'No Skills'
-p65
+ssbsS'Max Skills'
+p80
 (ichar
 Character
-p66
-(dp67
+p81
+(dp82
 g4
 (ichar
 Skills
-p68
-(dp69
+p83
+(dp84
 g7
 S'data/skills.xml'
-p70
+p85
 sg9
-(dp71
-S'Armor Repair Systems'
-p72
+(dp86
+S'Heavy Weapon Capacity'
+p87
+F0.05
+sS'Large Missile Turret Operation'
+p88
 F0.03
+sS'Armor Repair Systems'
+p89
+F0.03
+sS'Small Hybrid Turret Proficiency'
+p90
+F0.02
+sS'Armor Adaptation'
+p91
+F-0.03
 sS'Endurance'
-p73
+p92
 F0.05
 sS'Profile Dampening'
-p74
+p93
 F-0.05
+sS'Light Weapon Upgrades Proficiency'
+p94
+F-0.03
 sS'Profile Analysis'
-p75
+p95
 F-0.05
+sS'Sidearm Weapon Rapid Reload Proficiency'
+p96
+F-0.02
+sS'Light Weapon Sharpshooter Proficiency'
+p97
+F0.03
 sS'Vigor'
-p76
+p98
 F0.05
 sS'Assault Rifle Proficiency'
-p77
+p99
 F0.03
-sS'Combat Engineering'
-p78
-F0.05
-sS'Weaponry'
-p79
-F0.02
-sS'Shield Boost Systems'
-p80
-F0.03
-sS'Long Range Scanning'
-p81
-F0.05
-sS'Light Weapon Upgrades'
-p82
-F-0.05
-sS'Heavy Machine Gun Proficiency'
-p83
-F0.03
-sS'Heavy Weapon Upgrades'
-p84
-F-0.05
-sS'Forge Gun Proficiency'
-p85
-F0.03
-sS'Armor Upgrades'
-p86
-F-0.03
-sS'Shotgun Proficiency'
-p87
-F0.03
-sS'Shield Control'
-p88
-F0.05
-sS'Hand To Hand Combat'
-p89
-F0.1
-sS'Nanocircuitry'
-p90
-F-0.05
-sS'Field Mechanics'
-p91
-F0.05
-sS'Shield Enhancements'
-p92
-F-0.03
-sS'Circuitry'
-p93
-F0.05
-sS'Light Weapon Sharpshooter'
-p94
-F0.05
-sS'Submachine Gun Proficiency'
-p95
+sS'Light Weapon Capacity Proficiency'
+p100
 F0.03
 sS'Dropsuit Command'
-p96
+p101
 F-0.05
+sS'Scrambler Pistol Proficiency'
+p102
+F0.03
+sS'Combat Engineering'
+p103
+F0.05
+sS'Heavy Weapon Upgrades Proficiency'
+p104
+F-0.03
+sS'Light Weapon Rapid Reload Proficiency'
+p105
+F-0.02
+sS'Weaponry'
+p106
+F0.02
+sS'Shield Boost Systems'
+p107
+F0.03
+sS'Small Missile Turret Proficiency'
+p108
+F0.02
+sS'Large Missile Turret Proficiency'
+p109
+F0.02
+sS'Long Range Scanning'
+p110
+F0.05
+sS'Swarm Launcher Proficiency'
+p111
+F0.03
+sS'Sidearm Weapon Capacity'
+p112
+F0.05
+sS'Light Weapon Rapid Reload'
+p113
+F-0.03
+sS'Nova Knife Proficiency'
+p114
+F0.03
+sS'Sidearm Weapon Upgrades Proficiency'
+p115
+F-0.03
+sS'Heavy Weapon Sharpshooter Proficiency'
+p116
+F0.03
+sS'Sidearm Weapon Capacity Proficiency'
+p117
+F0.03
+sS'Heavy Machine Gun Proficiency'
+p118
+F0.03
+sS'Heavy Weapon Upgrades'
+p119
+F-0.05
+sS'Forge Gun Proficiency'
+p120
+F0.03
+sS'Armor Upgrades'
+p121
+F-0.03
+sS'Small Hybrid Turret Operation'
+p122
+F0.03
+sS'Heavy Weapon Rapid Reload'
+p123
+F-0.03
+sS'Light Weapon Upgrades'
+p124
+F-0.05
+sS'Light Weapon Capacity'
+p125
+F0.05
+sS'Shotgun Proficiency'
+p126
+F0.03
+sS'Heavy Weapon Capacity Proficiency'
+p127
+F0.03
+sS'Powergrid Upgrades'
+p128
+F-0.05
+sS'Heavy Weapon Rapid Reload Proficiency'
+p129
+F-0.02
+sS'Shield Control'
+p130
+F0.05
+sS'Hand To Hand Combat'
+p131
+F0.1
+sS'Turret Operation'
+p132
+F0.02
+sS'Large Hybrid Turret Operation'
+p133
+F0.03
+sS'Nanocircuitry'
+p134
+F-0.05
+sS'Small Missile Turret Operation'
+p135
+F0.03
+sS'Large Hybrid Turret Proficiency'
+p136
+F0.02
+sS'Field Mechanics'
+p137
+F0.05
+sS'Shield Enhancements'
+p138
+F-0.03
+sS'Sidearm Weapon Sharpshooter'
+p139
+F0.05
+sS'Sidearm Weapon Sharpshooter Proficiency'
+p140
+F0.03
+sS'Systems Hacking'
+p141
+F-0.05
+sS'Mass Driver Proficiency'
+p142
+F0.03
+sS'Circuitry'
+p143
+F0.05
+sS'Sidearm Weapon Upgrades'
+p144
+F-0.05
+sS'Shield Adaptation'
+p145
+F-0.03
+sS'Heavy Weapon Sharpshooter'
+p146
+F0.05
+sS'Light Weapon Sharpshooter'
+p147
+F0.05
+sS'Submachine Gun Proficiency'
+p148
+F0.03
+sS'Sidearm Weapon Rapid Reload'
+p149
+F-0.03
+sS'Sniper Rifle Proficiency'
+p150
+F0.03
 ssbsg9
-(dp97
-sg62
-g65
-sg63
-(dp98
+(dp151
+S'Heavy Weapon Capacity'
+p152
+F0.25
+sS'Armor Repair Systems'
+p153
+F0.15
+sS'Armor Adaptation'
+p154
+F-0.15
+sS'Endurance'
+p155
+F0.25
+sS'Profile Dampening'
+p156
+F-0.25
+sS'Light Weapon Upgrades Proficiency'
+p157
+F-0.15
+sS'Nova Knife Proficiency'
+p158
+F0.15
+sS'Swarm Launcher Proficiency'
+p159
+F0.15
+sS'Profile Analysis'
+p160
+F-0.25
+sS'Sidearm Weapon Rapid Reload Proficiency'
+p161
+F-0.1
+sS'Light Weapon Sharpshooter Proficiency'
+p162
+F0.15
+sS'Vigor'
+p163
+F0.25
+sS'Assault Rifle Proficiency'
+p164
+F0.15
+sS'Heavy Machine Gun Proficiency'
+p165
+F0.15
+sS'Combat Engineering'
+p166
+F0.25
+sS'Heavy Weapon Upgrades Proficiency'
+p167
+F-0.15
+sS'Weaponry'
+p168
+F0.1
+sS'Shield Boost Systems'
+p169
+F0.15
+sS'Long Range Scanning'
+p170
+F0.25
+sS'Shield Control'
+p171
+F0.25
+sS'Light Weapon Rapid Reload'
+p172
+F-0.15
+sS'Sidearm Weapon Upgrades'
+p173
+F-0.25
+sS'Sidearm Weapon Upgrades Proficiency'
+p174
+F-0.15
+sS'Heavy Weapon Sharpshooter Proficiency'
+p175
+F0.15
+sS'Sidearm Weapon Capacity Proficiency'
+p176
+F0.15
+sS'Light Weapon Capacity Proficiency'
+p177
+F0.15
+sS'Heavy Weapon Upgrades'
+p178
+F-0.25
+sS'Forge Gun Proficiency'
+p179
+F0.15
+sS'Armor Upgrades'
+p180
+F-0.15
+sS'Light Weapon Rapid Reload Proficiency'
+p181
+F-0.1
+sS'Heavy Weapon Rapid Reload'
+p182
+F-0.15
+sS'Light Weapon Upgrades'
+p183
+F-0.25
+sS'Light Weapon Capacity'
+p184
+F0.25
+sS'Shotgun Proficiency'
+p185
+F0.15
+sS'Heavy Weapon Capacity Proficiency'
+p186
+F0.15
+sS'Powergrid Upgrades'
+p187
+F-0.25
+sS'Submachine Gun Proficiency'
+p188
+F0.15
+sS'Hand To Hand Combat'
+p189
+F0.5
+sS'Sidearm Weapon Rapid Reload'
+p190
+F-0.15
+sS'Nanocircuitry'
+p191
+F-0.25
+sS'Systems Hacking'
+p192
+F-0.25
+sS'Field Mechanics'
+p193
+F0.25
+sS'Shield Enhancements'
+p194
+F-0.15
+sS'Sidearm Weapon Sharpshooter'
+p195
+F0.25
+sS'Sidearm Weapon Sharpshooter Proficiency'
+p196
+F0.15
+sS'Scrambler Pistol Proficiency'
+p197
+F0.15
+sS'Mass Driver Proficiency'
+p198
+F0.15
+sS'Circuitry'
+p199
+F0.25
+sS'Sidearm Weapon Capacity'
+p200
+F0.25
+sS'Shield Adaptation'
+p201
+F-0.15
+sS'Heavy Weapon Sharpshooter'
+p202
+F0.25
+sS'Light Weapon Sharpshooter'
+p203
+F0.25
+sS'Heavy Weapon Rapid Reload Proficiency'
+p204
+F-0.1
+sS'Dropsuit Command'
+p205
+F-0.25
+sS'Sniper Rifle Proficiency'
+p206
+F0.15
+ssg77
+g80
+sg78
+(dp207
+g152
+I5
+sg153
+I5
+sg154
+I5
+sg155
+I5
+sg156
+I5
+sg157
+I5
+sg158
+I5
+sg159
+I5
+sg160
+I5
+sg161
+I5
+sg162
+I5
+sg163
+I5
+sg164
+I5
+sg165
+I5
+sg166
+I5
+sg167
+I5
+sg168
+I5
+sg169
+I5
+sg170
+I5
+sg171
+I5
+sg172
+I5
+sg173
+I5
+sg174
+I5
+sg175
+I5
+sg176
+I5
+sg177
+I5
+sg178
+I5
+sg179
+I5
+sg180
+I5
+sg181
+I5
+sg182
+I5
+sg183
+I5
+sg184
+I5
+sg185
+I5
+sg186
+I5
+sg187
+I5
+sg188
+I5
+sg189
+I5
+sg190
+I5
+sg191
+I5
+sg192
+I5
+sg193
+I5
+sg194
+I5
+sg195
+I5
+sg196
+I5
+sg197
+I5
+sg198
+I5
+sg199
+I5
+sg200
+I5
+sg201
+I5
+sg202
+I5
+sg203
+I5
+sg204
+I5
+sg205
+I5
+sg206
+I5
+ssbsS'No Skills'
+p208
+(ichar
+Character
+p209
+(dp210
+g4
+(ichar
+Skills
+p211
+(dp212
+g7
+S'data/skills.xml'
+p213
+sg9
+(dp214
+S'Heavy Weapon Capacity'
+p215
+F0.05
+sS'Large Missile Turret Operation'
+p216
+F0.03
+sS'Armor Repair Systems'
+p217
+F0.03
+sS'Small Hybrid Turret Proficiency'
+p218
+F0.02
+sS'Armor Adaptation'
+p219
+F-0.03
+sS'Endurance'
+p220
+F0.05
+sS'Small Hybrid Turret Operation'
+p221
+F0.03
+sS'Profile Dampening'
+p222
+F-0.05
+sS'Light Weapon Upgrades Proficiency'
+p223
+F-0.03
+sS'Profile Analysis'
+p224
+F-0.05
+sS'Sidearm Weapon Rapid Reload Proficiency'
+p225
+F-0.02
+sS'Small Missile Turret Proficiency'
+p226
+F0.02
+sS'Vigor'
+p227
+F0.05
+sS'Assault Rifle Proficiency'
+p228
+F0.03
+sS'Heavy Machine Gun Proficiency'
+p229
+F0.03
+sS'Sidearm Weapon Upgrades'
+p230
+F-0.05
+sS'Combat Engineering'
+p231
+F0.05
+sS'Heavy Weapon Upgrades Proficiency'
+p232
+F-0.03
+sS'Weaponry'
+p233
+F0.02
+sS'Shield Boost Systems'
+p234
+F0.03
+sS'Light Weapon Sharpshooter Proficiency'
+p235
+F0.03
+sS'Large Missile Turret Proficiency'
+p236
+F0.02
+sS'Long Range Scanning'
+p237
+F0.05
+sS'Swarm Launcher Proficiency'
+p238
+F0.03
+sS'Light Weapon Rapid Reload'
+p239
+F-0.03
+sS'Nova Knife Proficiency'
+p240
+F0.03
+sS'Sidearm Weapon Upgrades Proficiency'
+p241
+F-0.03
+sS'Heavy Weapon Sharpshooter Proficiency'
+p242
+F0.03
+sS'Sidearm Weapon Capacity Proficiency'
+p243
+F0.03
+sS'Light Weapon Capacity Proficiency'
+p244
+F0.03
+sS'Heavy Weapon Upgrades'
+p245
+F-0.05
+sS'Systems Hacking'
+p246
+F-0.05
+sS'Forge Gun Proficiency'
+p247
+F0.03
+sS'Armor Upgrades'
+p248
+F-0.03
+sS'Light Weapon Rapid Reload Proficiency'
+p249
+F-0.02
+sS'Heavy Weapon Rapid Reload'
+p250
+F-0.03
+sS'Light Weapon Upgrades'
+p251
+F-0.05
+sS'Light Weapon Capacity'
+p252
+F0.05
+sS'Shotgun Proficiency'
+p253
+F0.03
+sS'Heavy Weapon Capacity Proficiency'
+p254
+F0.03
+sS'Powergrid Upgrades'
+p255
+F-0.05
+sS'Submachine Gun Proficiency'
+p256
+F0.03
+sS'Shield Control'
+p257
+F0.05
+sS'Hand To Hand Combat'
+p258
+F0.1
+sS'Turret Operation'
+p259
+F0.02
+sS'Sidearm Weapon Rapid Reload'
+p260
+F-0.03
+sS'Large Hybrid Turret Operation'
+p261
+F0.03
+sS'Nanocircuitry'
+p262
+F-0.05
+sS'Small Missile Turret Operation'
+p263
+F0.03
+sS'Large Hybrid Turret Proficiency'
+p264
+F0.02
+sS'Field Mechanics'
+p265
+F0.05
+sS'Shield Enhancements'
+p266
+F-0.03
+sS'Sidearm Weapon Sharpshooter'
+p267
+F0.05
+sS'Sidearm Weapon Sharpshooter Proficiency'
+p268
+F0.03
+sS'Scrambler Pistol Proficiency'
+p269
+F0.03
+sS'Mass Driver Proficiency'
+p270
+F0.03
+sS'Circuitry'
+p271
+F0.05
+sS'Sidearm Weapon Capacity'
+p272
+F0.05
+sS'Shield Adaptation'
+p273
+F-0.03
+sS'Heavy Weapon Sharpshooter'
+p274
+F0.05
+sS'Light Weapon Sharpshooter'
+p275
+F0.05
+sS'Heavy Weapon Rapid Reload Proficiency'
+p276
+F-0.02
+sS'Dropsuit Command'
+p277
+F-0.05
+sS'Sniper Rifle Proficiency'
+p278
+F0.03
+ssbsg9
+(dp279
+sg77
+g208
+sg78
+(dp280
 sbs.
