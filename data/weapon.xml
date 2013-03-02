@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <data>
 	<grenades>
 		<weapon name="Locus Grenade">
@@ -88,7 +89,7 @@
 	<forge_guns>
 		<weapon name="Forge Gun">
 			<slot_type>heavy_weapon</slot_type>
-			<cpu effected_by="Heavy Weapon Upgrades">53</cpu>
+			<cpu effected_by="Heavy Weapon Upgrades" effected_by2="Heavy Weapon Upgrades Proficiency">53</cpu>
 			<pg>5</pg>
 			<direct_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1200</direct_damage>
 			<damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1200</damage>
@@ -97,11 +98,11 @@
 			<charge-up_time>3.5</charge-up_time>
 			<rate_of_fire>17.14</rate_of_fire>
 			<clip_size>4</clip_size>
-			<max_ammo>16</max_ammo>
+			<max_ammo effected_by="Heavy Weapon Capacity" effected_by2="Heavy Weapon Capacity Proficiency">16</max_ammo>
 		</weapon>
 		<weapon name="9K330 Forge Gun">
 			<slot_type>heavy_weapon</slot_type>
-			<cpu effected_by="Heavy Weapon Upgrades">72</cpu>
+			<cpu effected_by="Heavy Weapon Upgrades" effected_by2="Heavy Weapon Upgrades Proficiency">72</cpu>
 			<pg>8</pg>
 			<direct_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1320</direct_damage>
 			<damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1320</damage>
@@ -110,97 +111,301 @@
 			<charge-up_time>3.5</charge-up_time>
 			<rate_of_fire>17.14</rate_of_fire>
 			<clip_size>4</clip_size>
-			<max_ammo>16</max_ammo>
+			<max_ammo effected_by="Heavy Weapon Capacity" effected_by2="Heavy Weapon Capacity Proficiency">16</max_ammo>
+		</weapon>
+		<weapon name="Kaalakiota Forge Gun">
+			<slot_type>heavy_weapon</slot_type>
+			<cpu effected_by="Heavy Weapon Upgrades" effected_by2="Heavy Weapon Upgrades Proficiency">92</cpu>
+			<pg>10</pg>
+			<direct_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1440</direct_damage>
+			<damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1440</damage>
+			<splash_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">252</splash_damage>
+			<blast_radius>3.0</blast_radius>
+			<charge-up_time>3.5</charge-up_time>
+			<rate_of_fire>17.14</rate_of_fire>
+			<clip_size>4</clip_size>
+			<max_ammo effected_by="Heavy Weapon Capacity" effected_by2="Heavy Weapon Capacity Proficiency">16</max_ammo>
 		</weapon>
 	</forge_guns>
 	<heavy_machine_guns>
 		<weapon name="Heavy Machine Gun">
 			<slot_type>heavy_weapon</slot_type>
-			<cpu effected_by="Heavy Weapon Upgrades">53</cpu>
+			<cpu effected_by="Heavy Weapon Upgrades" effected_by2="Heavy Weapon Upgrades Proficiency">53</cpu>
 			<pg>5</pg>
 			<damage effected_by="Weaponry" effected_by2="Heavy Machine Gun Proficiency">16</damage>
 			<rate_of_fire>2000</rate_of_fire>
 			<accuracy_rating>61.5</accuracy_rating>
 			<clip_size>425</clip_size>
-			<max_ammo>1500</max_ammo>
-			<reload_time>8</reload_time>
+			<max_ammo effected_by="Heavy Weapon Capacity" effected_by2="Heavy Weapon Capacity Proficiency">1500</max_ammo>
+			<reload_time effected_by="Heavy Weapon Rapid Reload" effected_by2="Heavy Rapid Reload Proficiency">8</reload_time>
 			<heat_build-up_per_second>14</heat_build-up_per_second>
 			<cooldown>4</cooldown>
 			<seize_duration>10</seize_duration>
+			<max_range effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">59</max_range>
+			<optimal_range_high effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">34</optimal_range_high>
+			<optimal_range_low effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">1</optimal_range_low>
+		</weapon>
+		<weapon name="Assault Heavy Machine Gun">
+			<slot_type>heavy_weapon</slot_type>
+			<cpu effected_by="Heavy Weapon Upgrades" effected_by2="Heavy Weapon Upgrades Proficiency">64</cpu>
+			<pg>6</pg>
+			<damage effected_by="Weaponry" effected_by2="Heavy Machine Gun Proficiency">12</damage>
+			<rate_of_fire>2000</rate_of_fire>
+			<accuracy_rating>61.5</accuracy_rating>
+			<clip_size>425</clip_size>
+			<max_ammo effected_by="Heavy Weapon Capacity" effected_by2="Heavy Weapon Capacity Proficiency">1500</max_ammo>
+			<reload_time effected_by="Heavy Weapon Rapid Reload" effected_by2="Heavy Rapid Reload Proficiency">8</reload_time>
+			<heat_build-up_per_second>14</heat_build-up_per_second>
+			<cooldown>4</cooldown>
+			<seize_duration>10</seize_duration>
+			<max_range effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">80</max_range>
+			<optimal_range_high effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">49</optimal_range_high>
+			<optimal_range_low effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">1</optimal_range_low>
+		</weapon>
+		<weapon name="Burst Heavy Machine Gun">
+			<slot_type>heavy_weapon</slot_type>
+			<cpu effected_by="Heavy Weapon Upgrades" effected_by2="Heavy Weapon Upgrades Proficiency">53</cpu>
+			<pg>5</pg>
+			<damage effected_by="Weaponry" effected_by2="Heavy Machine Gun Proficiency">12</damage>
+			<rate_of_fire>4000</rate_of_fire>
+			<accuracy_rating>60.5</accuracy_rating>
+			<clip_size>425</clip_size>
+			<max_ammo effected_by="Heavy Weapon Capacity" effected_by2="Heavy Weapon Capacity Proficiency">1500</max_ammo>
+			<reload_time effected_by="Heavy Weapon Rapid Reload" effected_by2="Heavy Rapid Reload Proficiency">8</reload_time>
+			<heat_build-up_per_second>39.9</heat_build-up_per_second>
+			<cooldown>4</cooldown>
+			<seize_duration>10</seize_duration>
+			<max_range effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">59</max_range>
+			<optimal_range_high effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">40</optimal_range_high>
+			<optimal_range_low effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">1</optimal_range_low>
 		</weapon>
 		<weapon name="MH-82 Heavy Machine Gun">
 			<slot_type>heavy_weapon</slot_type>
-			<cpu effected_by="Heavy Weapon Upgrades">72</cpu>
+			<cpu effected_by="Heavy Weapon Upgrades" effected_by2="Heavy Weapon Upgrades Proficiency">72</cpu>
 			<pg>8</pg>
 			<damage effected_by="Weaponry" effected_by2="Heavy Machine Gun Proficiency">16.8</damage>
 			<rate_of_fire>2000</rate_of_fire>
 			<accuracy_rating>61.5</accuracy_rating>
 			<clip_size>425</clip_size>
-			<max_ammo>1500</max_ammo>
-			<reload_time>8</reload_time>
+			<max_ammo effected_by="Heavy Weapon Capacity" effected_by2="Heavy Weapon Capacity Proficiency">1500</max_ammo>
+			<reload_time effected_by="Heavy Weapon Rapid Reload" effected_by2="Heavy Rapid Reload Proficiency">8</reload_time>
 			<heat_build-up_per_second>11.9</heat_build-up_per_second>
 			<cooldown>4</cooldown>
 			<seize_duration>10</seize_duration>
+			<max_range effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">62</max_range>
+			<optimal_range_high effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">38</optimal_range_high>
+			<optimal_range_low effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">1</optimal_range_low>
 		</weapon>
 		<weapon name="Boundless Heavy Machine Gun">
 			<slot_type>heavy_weapon</slot_type>
-			<cpu effected_by="Heavy Weapon Upgrades">92</cpu>
+			<cpu effected_by="Heavy Weapon Upgrades" effected_by2="Heavy Weapon Upgrades Proficiency">92</cpu>
 			<pg>10</pg>
-			<damage effected_by="Weaponry" effected_by2="Heavy Machine Gun Proficiency">17.2</damage>
+			<damage effected_by="Weaponry" effected_by2="Heavy Machine Gun Proficiency">17.6</damage>
 			<rate_of_fire>2000</rate_of_fire>
 			<accuracy_rating>61.5</accuracy_rating>
 			<clip_size>425</clip_size>
-			<max_ammo>1500</max_ammo>
-			<reload_time>8</reload_time>
-			<heat_build-up_per_second>10.5</heat_build-up_per_second>
+			<max_ammo effected_by="Heavy Weapon Capacity" effected_by2="Heavy Weapon Capacity Proficiency">1500</max_ammo>
+			<reload_time effected_by="Heavy Weapon Rapid Reload" effected_by2="Heavy Rapid Reload Proficiency">8</reload_time>
+			<heat_build-up_per_second>29.8</heat_build-up_per_second>
 			<cooldown>4</cooldown>
 			<seize_duration>10</seize_duration>
+			<max_range effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">65</max_range>
+			<optimal_range_high effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">38</optimal_range_high>
+			<optimal_range_low effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">1</optimal_range_low>
 		</weapon>
 	</heavy_machine_guns>
 	<submachine_guns>
 		<weapon name="Submachine Gun">
 			<slot_type>sidearm</slot_type>
-			<cpu>15</cpu>
+			<cpu effected_by="Sidearm Weapon Upgrades" effected_by2="Sidearm Weapon Upgrades Proficiency">15</cpu>
 			<pg>3</pg>
 			<damage effected_by="Weaponry" effected_by2="Submachine Gun Proficiency">21</damage>
 			<rate_of_fire>1000</rate_of_fire>
-			<reload_time>3.0</reload_time>
+			<reload_time effected_by="Sidearm Weapon Rapid Reload" effected_by2="Sidearm Weapon Rapid Reload Proficiency">3.0</reload_time>
 			<clip_size>80</clip_size>
-			<max_ammo>480</max_ammo>
+			<max_ammo effected_by="Sidearm Weapon Capacity" effected_by2="Sidearm Weapon Capacity Proficiency">480</max_ammo>
 			<accuracy_rating>50.4</accuracy_rating>
-			<max_range>78</max_range>
-			<optimal_range_high>35</optimal_range_high>
-			<optimal_range_low>1</optimal_range_low>
+			<max_range effected_by="Sidearm Weapon Sharpshooter" effected_by2="Sidearm Weapon Sharpshooter Proficiency">39</max_range>
+			<optimal_range_high effected_by="Sidearm Weapon Sharpshooter" effected_by2="Sidearm Weapon Sharpshooter Proficiency">15</optimal_range_high>
+			<optimal_range_low effected_by="Sidearm Weapon Sharpshooter" effected_by2="Sidearm Weapon Sharpshooter Proficiency">1</optimal_range_low>
+		</weapon>
+		<weapon name="M512-A Submachine Gun">
+			<slot_type>sidearm</slot_type>
+			<cpu effected_by="Sidearm Weapon Upgrades" effected_by2="Sidearm Weapon Upgrades Proficiency">35</cpu>
+			<pg>6</pg>
+			<damage effected_by="Weaponry" effected_by2="Submachine Gun Proficiency">22</damage>
+			<rate_of_fire>1000</rate_of_fire>
+			<reload_time effected_by="Sidearm Weapon Rapid Reload" effected_by2="Sidearm Weapon Rapid Reload Proficiency">3.0</reload_time>
+			<clip_size>80</clip_size>
+			<max_ammo effected_by="Sidearm Weapon Capacity" effected_by2="Sidearm Weapon Capacity Proficiency">480</max_ammo>
+			<accuracy_rating>51.1</accuracy_rating>
+			<max_range effected_by="Sidearm Weapon Sharpshooter" effected_by2="Sidearm Weapon Sharpshooter Proficiency">41</max_range>
+			<optimal_range_high effected_by="Sidearm Weapon Sharpshooter" effected_by2="Sidearm Weapon Sharpshooter Proficiency">16</optimal_range_high>
+			<optimal_range_low effected_by="Sidearm Weapon Sharpshooter" effected_by2="Sidearm Weapon Sharpshooter Proficiency">1</optimal_range_low>
+		</weapon>
+		<weapon name="Six Kin Submachine Gun">
+			<slot_type>sidearm</slot_type>
+			<cpu effected_by="Sidearm Weapon Upgrades" effected_by2="Sidearm Weapon Upgrades Proficiency">57</cpu>
+			<pg>10</pg>
+			<damage effected_by="Weaponry" effected_by2="Submachine Gun Proficiency">23.1</damage>
+			<rate_of_fire>1000</rate_of_fire>
+			<reload_time effected_by="Sidearm Weapon Rapid Reload" effected_by2="Sidearm Weapon Rapid Reload Proficiency">3.0</reload_time>
+			<clip_size>80</clip_size>
+			<max_ammo effected_by="Sidearm Weapon Capacity" effected_by2="Sidearm Weapon Capacity Proficiency">480</max_ammo>
+			<accuracy_rating>51.8</accuracy_rating>
+			<max_range effected_by="Sidearm Weapon Sharpshooter" effected_by2="Sidearm Weapon Sharpshooter Proficiency">43</max_range>
+			<optimal_range_high effected_by="Sidearm Weapon Sharpshooter" effected_by2="Sidearm Weapon Sharpshooter Proficiency">17</optimal_range_high>
+			<optimal_range_low effected_by="Sidearm Weapon Sharpshooter" effected_by2="Sidearm Weapon Sharpshooter Proficiency">1</optimal_range_low>
 		</weapon>
 	</submachine_guns>
 	<shotguns>
 		<weapon name="Shotgun">
 			<slot_type>light_weapon</slot_type>
-			<cpu effected_by="Light Weapon Upgrades">30</cpu>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">30</cpu>
 			<pg>4</pg>
 			<damage effected_by="Weaponry">36</damage>
 			<rate_of_fire effected_by="Shotgun Proficiency">85.7</rate_of_fire>
-			<reload_time>0.6</reload_time>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">0.6</reload_time>
 			<clip_size>8</clip_size>
-			<max_ammo>32</max_ammo>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">32</max_ammo>
 			<accuracy_rating>34.2</accuracy_rating>
-			<max_range>78</max_range>
-			<optimal_range_high>35</optimal_range_high>
-			<optimal_range_low>1</optimal_range_low>
+			<max_range effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">29</max_range>
+			<optimal_range_high effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">5</optimal_range_high>
+			<optimal_range_low effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">1</optimal_range_low>
 		</weapon>
 		<weapon name="CRG-3 Shotgun">
 			<slot_type>light_weapon</slot_type>
-			<cpu effected_by="Light Weapon Upgrades">51</cpu>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">51</cpu>
 			<pg>7</pg>
 			<damage effected_by="Weaponry">37.8</damage>
 			<rate_of_fire effected_by="Shotgun Proficiency">85.7</rate_of_fire>
-			<reload_time>0.6</reload_time>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">0.6</reload_time>
 			<clip_size>8</clip_size>
-			<max_ammo>32</max_ammo>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">32</max_ammo>
 			<accuracy_rating>34.2</accuracy_rating>
-			<max_range>78</max_range>
-			<optimal_range_high>35</optimal_range_high>
-			<optimal_range_low>1</optimal_range_low>
+			<max_range effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">31</max_range>
+			<optimal_range_high effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">8</optimal_range_high>
+			<optimal_range_low effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">1</optimal_range_low>
+		</weapon>
+		<weapon name="Credorn Shotgun">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">93</cpu>
+			<pg>14</pg>
+			<damage effected_by="Weaponry">39.6</damage>
+			<rate_of_fire effected_by="Shotgun Proficiency">85.7</rate_of_fire>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">0.6</reload_time>
+			<clip_size>8</clip_size>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">32</max_ammo>
+			<accuracy_rating>34.2</accuracy_rating>
+			<max_range effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">33</max_range>
+			<optimal_range_high effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">9</optimal_range_high>
+			<optimal_range_low effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">1</optimal_range_low>
 		</weapon>
 	</shotguns>
+	<laser_rifles>
+		<weapon name="Laser Rifle">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">53</cpu>
+			<pg>5</pg>
+			<damage effected_by="Weaponry">15.0</damage>
+			<rate_of_fire>768</rate_of_fire>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">4</reload_time>
+			<clip_size>100</clip_size>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">500</max_ammo>
+			<accuracy_rating>53.7</accuracy_rating>
+			<max_range effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">81</max_range>
+			<optimal_range_high effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">78</optimal_range_high>
+			<optimal_range_low effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">61</optimal_range_low>
+		</weapon>
+		<weapon name="ELM-7 Laser Rifle">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">72</cpu>
+			<pg>8</pg>
+			<damage effected_by="Weaponry">15.0</damage>
+			<rate_of_fire>768</rate_of_fire>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">4</reload_time>
+			<clip_size>100</clip_size>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">500</max_ammo>
+			<accuracy_rating>53.7</accuracy_rating>
+			<max_range effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">84</max_range>
+			<optimal_range_high effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">79</optimal_range_high>
+			<optimal_range_low effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">62</optimal_range_low>
+		</weapon>
+		<weapon name="Viziam Laser Rifle">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">92</cpu>
+			<pg>10</pg>
+			<damage effected_by="Weaponry">20.0</damage>
+			<rate_of_fire>768</rate_of_fire>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">4</reload_time>
+			<clip_size>100</clip_size>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">500</max_ammo>
+			<accuracy_rating>53.7</accuracy_rating>
+			<max_range effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">84</max_range>
+			<optimal_range_high effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">79</optimal_range_high>
+			<optimal_range_low effected_by="Light Weapon Sharpshooter" effected_by2="Light Weapon Sharpshooter Proficiency">62</optimal_range_low>
+		</weapon>
+	</laser_rifles>
+	<sniper_rifles>
+		<weapon name="Sniper Rifle">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">30</cpu>
+			<pg>4</pg>
+			<damage effected_by="Weaponry" effected_by2="Sniper Rifle Proficiency">190</damage>
+			<rate_of_fire>50</rate_of_fire>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">4</reload_time>
+			<clip_size>3</clip_size>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">25</max_ammo>
+		</weapon>
+		<weapon name="Tactical Sniper Rifle">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">30</cpu>
+			<pg>4</pg>
+			<damage effected_by="Weaponry" effected_by2="Sniper Rifle Proficiency">161.5</damage>
+			<rate_of_fire>100</rate_of_fire>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">4</reload_time>
+			<clip_size>3</clip_size>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">30</max_ammo>
+		</weapon>
+		<weapon name="NT-511 Sniper Rifle">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">93</cpu>
+			<pg>14</pg>
+			<damage effected_by="Weaponry" effected_by2="Sniper Rifle Proficiency">199.5</damage>
+			<rate_of_fire>50</rate_of_fire>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">4</reload_time>
+			<clip_size>3</clip_size>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">25</max_ammo>
+		</weapon>
+		<weapon name="C15-A Tactical Sniper Rifle">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">93</cpu>
+			<pg>14</pg>
+			<damage effected_by="Weaponry" effected_by2="Sniper Rifle Proficiency">169.6</damage>
+			<rate_of_fire>100</rate_of_fire>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">4</reload_time>
+			<clip_size>3</clip_size>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">30</max_ammo>
+		</weapon>
+		<weapon name="Ishukone Sniper Rifle">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">93</cpu>
+			<pg>14</pg>
+			<damage effected_by="Weaponry" effected_by2="Sniper Rifle Proficiency">209</damage>
+			<rate_of_fire>50</rate_of_fire>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">4</reload_time>
+			<clip_size>3</clip_size>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">25</max_ammo>
+		</weapon>
+		<weapon name="Kaalakiota Tactical Sniper Rifle">
+			<slot_type>light_weapon</slot_type>
+			<cpu effected_by="Light Weapon Upgrades" effected_by2="Light Weapon Upgrades Proficiency">93</cpu>
+			<pg>14</pg>
+			<damage effected_by="Weaponry" effected_by2="Sniper Rifle Proficiency">177.6</damage>
+			<rate_of_fire>100</rate_of_fire>
+			<reload_time effected_by="Light Weapon Rapid Reload" effected_by2="Light Weapon Rapid Reload Proficiency">4</reload_time>
+			<clip_size>3</clip_size>
+			<max_ammo effected_by="Light Weapon Capacity" effected_by2="Light Weapon Capacity Proficiency">30</max_ammo>
+		</weapon>
+	</sniper_rifles>
 </data> 
