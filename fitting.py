@@ -314,6 +314,41 @@ class Fitting:
 		return round(self._get_multiplicative_stacking_stat('scan_radius'), 2)
 
 	def get_all_modules(self):
+		""" """
+		module_list = []
+
+		for mod in self.heavy_weapon:
+			module_list.append(('H', mod.name, mod.stats['cpu'], mod.stats['pg']))
+		for mod in range( len(self.heavy_weapon), int(self.dropsuit.stats['heavy_weapon']) ):
+			module_list.append(('H', 'None', '0', '0'))
+		for mod in self.light_weapon:
+			module_list.append(('L', mod.name, mod.stats['cpu'], mod.stats['pg']))
+		for mod in range( len(self.light_weapon), int(self.dropsuit.stats['light_weapon']) ):
+			module_list.append(('L', 'None', '0', '0'))
+		for mod in self.sidearm:
+			module_list.append(('S', mod.name, mod.stats['cpu'], mod.stats['pg']))
+		for mod in range( len(self.sidearm), int(self.dropsuit.stats['sidearm']) ):
+			module_list.append(('S', 'None', '0', '0'))
+		for mod in self.grenade:
+			module_list.append(('G', mod.name, mod.stats['cpu'], mod.stats['pg']))
+		for mod in range( len(self.grenade), int(self.dropsuit.stats['grenade']) ):
+			module_list.append(('G', 'None', '0', '0'))
+		for mod in self.equipment:
+			module_list.append(('E', mod.name, mod.stats['cpu'], mod.stats['pg']))
+		for mod in range( len(self.equipment), int(self.dropsuit.stats['equipment']) ):
+			module_list.append(('E', 'None', '0', '0'))
+		for mod in self.hi_slot:
+			module_list.append(('--', mod.name, mod.stats['cpu'], mod.stats['pg']))
+		for mod in range( len(self.hi_slot), int(self.dropsuit.stats['hi_slot']) ):
+			module_list.append(('--', 'None', '0', '0'))
+		for mod in self.low_slot:
+			module_list.append(('-', mod.name, mod.stats['cpu'], mod.stats['pg']))
+		for mod in range( len(self.low_slot), int(self.dropsuit.stats['low_slot']) ):
+			module_list.append(('-', 'None', '0', '0'))
+
+		return module_list
+
+	def _get_all_modules(self):
 		""" Returns a tuple of modules and weapons for the GUI. """
 		def get_output(icon, name, cpu, pg):
 			return '{:3.3} {:<30.30} {:>5.5} {:>5.5}'.format(icon, name, cpu, pg)

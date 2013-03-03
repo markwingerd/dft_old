@@ -124,20 +124,29 @@ class DftUi(Frame):
         self.tre_modules.bind('<Double-1>', self.add_module)
 
     def fitting_display(self):
-        """ Displays all the current fitting information. """
-        # Set variables.
-        fitting_list = StringVar(value=self.current_fit.get_all_modules())
+        """ Displays all the current fitted modules. """
+        # Create widgets
+        frm_fitting = Frame(self)
+        self.tre_fitting = ttk.Treeview(frm_fitting, height=14, columns=('name', 'cpu', 'pg'))
+        self.tre_fitting.column('#0', width=30, minwidth=30)
+        self.tre_fitting.column('name', width=300, minwidth=300)
+        self.tre_fitting.column('cpu', width=30, minwidth=30)
+        self.tre_fitting.column('pg', width=30, minwidth=30)
+        self.tre_fitting.heading('name', text='Item Name')
+        self.tre_fitting.heading('cpu', text='CPU')
+        self.tre_fitting.heading('pg', text='PG')
+        for i, item in enumerate(self.current_fit.get_all_modules()):
+            self.tre_fitting.insert('', 'end', i+1, text=item[0])
+            self.tre_fitting.set(i+1, 'name', item[1])
+            self.tre_fitting.set(i+1, 'cpu', item[2])
+            self.tre_fitting.set(i+1, 'pg', item[3])
 
-        # Creates the widgets needed for this display.
-        frm_fitting_display = Frame(self, height=300)
-        self.lbx_fitting = Listbox(frm_fitting_display, listvariable=fitting_list, width=48, height=20, font='TkFixedFont', bg='white')
-
-        # Grid management.
-        frm_fitting_display.grid(column=1, row=1, sticky=W+E+N+S)
-        self.lbx_fitting.grid(column=0, row=0, sticky=W+E+N+S)
+        # Grid management
+        frm_fitting.grid(column=1, row=1, sticky=W+E+N+S)
+        self.tre_fitting.grid(column=0, row=0)
 
         # Bindings
-        self.lbx_fitting.bind('<Double-1>', self.remove_module)
+        self.tre_fitting.bind('<Double-1>', self.remove_module)
 
     def stats_display(self):
         """ Displays fitting stats. """
@@ -267,8 +276,8 @@ class DftUi(Frame):
     def remove_module(self, *args):
         """ Removes a module from the fitting. """
         # Find what is selected.
-        listbox_index = self.lbx_fitting.curselection()
-        module_name = self.lbx_fitting.get(listbox_index)
+        tree_id = self.tre_fitting.selection()[0]
+        module_name = self.tre_fitting.item(tree_id)['values'][0]
 
         self.current_fit.remove_module(module_name)
 
