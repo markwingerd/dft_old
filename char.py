@@ -69,6 +69,11 @@ class Character:
         return self.skills.get_children(parent)
 
 
+class InvalidCharacterException(Exception):
+    """Exception raised when a referenced character doesn't exist"""
+    pass
+
+
 class CharacterLibrary:
     def __init__(self):
         self.character_data = DataRetrieval('characters.dat')
@@ -79,7 +84,10 @@ class CharacterLibrary:
 
     def get_character(self, char_name):
         """ Returns a the specified character instance. """
-        return self.character_list[char_name]
+        try:
+            return self.character_list[char_name]
+        except KeyError:
+            raise InvalidCharacterException(char_name)
 
     def get_character_list(self):
         """ Returns a list of the names of all characters as a tuple. """
