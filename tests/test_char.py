@@ -7,9 +7,13 @@ import unittest
 from mock import patch
 
 try:
-    from dft.char import Character, InvalidSkillException
+    from char import (
+        Character,
+        CharacterLibrary,
+        InvalidSkillException
+        )
 except ImportError:
-    print "Please place the parent directory to 'dft' on the PYTHONPATH"
+    print "Please place the 'dft' directory on the PYTHONPATH"
     sys.exit(1)
 
 
@@ -78,7 +82,7 @@ class TestCharacterSkills(unittest.TestCase):
         # should return 0
         self.assertEqual(self.test_char.get_skill_level(skill_name), skill_level)
 
-    @patch("dft.char.Skills.get_names")
+    @patch("char.Skills.get_names")
     def test_get_all_skills(self, get_names):
         """ Test the get_all_skills method of Character
             For this test we will overwrite the list of skills
@@ -102,7 +106,7 @@ class TestCharacterSkills(unittest.TestCase):
         self.assertEqual(self.test_char.get_all_skills(),
                          expected_skills)
 
-    @patch("dft.char.Skills.get_names")
+    @patch("char.Skills.get_names")
     def test_get_all_skills_default(self, get_names):
         """ Test the get_all_skills method of Character
             and give the default of 0 if the skill doesn't exist
@@ -125,6 +129,28 @@ class TestCharacterSkills(unittest.TestCase):
         self.assertEqual(self.test_char.get_all_skills(),
                          expected_skills)
 
+
+class TestCharacterLibrary(unittest.TestCase):
+    """ Tests for the CharacterLibrary Class """
+
+    def test_instantiation(self):
+        """Instantiation of the class"""
+        # Just tests that it doesn't raise any Exceptions
+        char_library = CharacterLibrary()
+
+    def test_get_character(self):
+        """Get a character out of the store"""
+        char_library = CharacterLibrary()
+        # overwrite the data in the library to something
+        # we can test
+        char_name = 'Bob'
+        test_char = Character(char_name)
+        char_library.character_list = {test_char.name: test_char}
+
+        # now get the character from the library and assert that it
+        # is our character
+        returned_char = char_library.get_character(char_name)
+        self.assertEqual(test_char, returned_char)
 
 if __name__=='__main__':
     unittest.main()
