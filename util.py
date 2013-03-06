@@ -109,12 +109,13 @@ class DataRetrieval:
 def get_file_loc(file_name):
     """ Will return the path to the desired file depending on whether this
     is an executable or in development. """
+    #TODO: This duplicates a method in char._get_file_loc... needs refactoring
     if getattr(sys, 'frozen', None):
         basedir = sys._MEIPASS + '/data/'
     else:
-        basedir = os.path.dirname('data/')
+        basedir = os.path.join(os.path.dirname(__file__),'data')
     return os.path.join(basedir, file_name)
-        
+
 
 if __name__ == '__main__':
     mod = XmlRetrieval('module.xml')
