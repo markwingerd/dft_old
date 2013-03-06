@@ -10,7 +10,8 @@ try:
     from char import (
         Character,
         CharacterLibrary,
-        InvalidSkillException
+        InvalidSkillException,
+        InvalidCharacterException
         )
 except ImportError:
     print "Please place the 'dft' directory on the PYTHONPATH"
@@ -138,19 +139,56 @@ class TestCharacterLibrary(unittest.TestCase):
         # Just tests that it doesn't raise any Exceptions
         char_library = CharacterLibrary()
 
-    def test_get_character(self):
-        """Get a character out of the store"""
-        char_library = CharacterLibrary()
+class TestCharacterLibraryGet(unittest.TestCase):
+    """ Tests for the CharacterLibrary Classes Get method """
+
+    def setUp(self):
+        """Create our Character and CharacterLibrary test data"""
+        self.char_library = CharacterLibrary()
         # overwrite the data in the library to something
         # we can test
-        char_name = 'Bob'
-        test_char = Character(char_name)
-        char_library.character_list = {test_char.name: test_char}
+        self.char_name = 'Bob'
+        self.test_char = Character(self.char_name)
+        self.char_library.character_list = {self.test_char.name: self.test_char}
 
+    def test_get_character(self):
+        """Get a character out of the library"""
         # now get the character from the library and assert that it
         # is our character
-        returned_char = char_library.get_character(char_name)
-        self.assertEqual(test_char, returned_char)
+        returned_char = self.char_library.get_character(self.char_name)
+        self.assertEqual(self.test_char, returned_char)
+
+    def test_get_character_not_exist(self):
+        """Try to get a character from the library that doesn't exist"""
+        # We try to get a character by name that doesn't exist in the library
+        # This should raise an InvalidCharacterException
+        with self.assertRaises(InvalidCharacterException):
+            returned_char = self.char_library.get_character("i dont exist")
+
+
+class TestCharacterLibraryGetList(unittest.TestCase):
+    """ Tests for the CharacterLibrary Classes Get_character_list method """
+
+    def setUp(self):
+        """Create our Character and CharacterLibrary test data"""
+        self.char_library = CharacterLibrary()
+        # overwrite the data in the library to something
+        # we can test
+        self.char_names = ['Bob', 'Fish', 'Wibble']
+        self.char_library.character_list = {}
+
+        # Loop creating all the chars in the char_names list
+        for char_name in self.char_names:
+            test_char = Character(char_name)
+            self.char_library.character_list[test_char.name] = test_char
+
+    def test_get_character_list(self):
+        """Get the character list from the library"""
+        # Check that we get all of the characters we are expecting
+        char_list = self.char_library.get_character_list()
+        # Returns a tuple not a list
+        self.assertEqual(tuple(self.char_names), char_list)
+
 
 if __name__=='__main__':
     unittest.main()
