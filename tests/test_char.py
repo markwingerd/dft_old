@@ -3,6 +3,8 @@
 
 import sys
 import unittest
+# Mock module required "pip install mock"
+from mock import patch
 
 try:
     from dft.char import Character, InvalidSkillException
@@ -46,7 +48,8 @@ class TestCharacterSkills(unittest.TestCase):
 
     def test_character_set_invalid_skill(self):
         """ Test setting an invalid skill.
-            Should raise an InvalidSkillException"""
+            If the skill doesn't exist then we would expect
+            an InvalidSkillException raised"""
         skill_name = 'I dont exist'
         skill_level = 1
 
@@ -66,7 +69,8 @@ class TestCharacterSkills(unittest.TestCase):
 
     def test_character_get_unknown_skill_level(self):
         """ Get the skill level for an unknown skill
-            Should return 0"""
+            It is possible to request a skill thats not
+            saved against the character and it should return 0"""
         skill_name = 'I dont exist'
         skill_level = 0
 
@@ -74,6 +78,52 @@ class TestCharacterSkills(unittest.TestCase):
         # should return 0
         self.assertEqual(self.test_char.get_skill_level(skill_name), skill_level)
 
+    @patch("dft.char.Skills.get_names")
+    def test_get_all_skills(self, get_names):
+        """ Test the get_all_skills method of Character
+            For this test we will overwrite the list of skills
+            with a mock object so that we can test all skills
+            are returned. Otherwise as soon as we add a new skill
+            to the data this test would break... incorrectly"""
+        # this is our fake return from any call to get_names
+        get_names.return_value = ['test skill 1',
+                                  'test skill 2',
+                                  'test skill 3']
+        # Set up the expected skill values
+        self.test_char.skill_level['test skill 1']=1
+        self.test_char.skill_level['test skill 2']=2
+        self.test_char.skill_level['test skill 3']=3
+
+        # The is the result we expect to get back
+        expected_skills = {'test skill 1': 1,
+                           'test skill 2': 2,
+                           'test skill 3': 3}
+
+        self.assertEqual(self.test_char.get_all_skills(),
+                         expected_skills)
+
+    @patch("dft.char.Skills.get_names")
+    def test_get_all_skills_default(self, get_names):
+        """ Test the get_all_skills method of Character
+            and give the default of 0 if the skill doesn't exist
+            on that character.
+            For this test we will overwrite the list of skills
+            with a mock object so that we can test all skills
+            are returned. Otherwise as soon as we add a new skill
+            to the data this test would break... incorrectly"""
+        # this is our fake return from any call to get_names
+        get_names.return_value = ['test skill 1',
+                                  'test skill 2',
+                                  'test skill 3']
+        # We don't set up any default values
+
+        # The is the result we expect to get back
+        expected_skills = {'test skill 1': 0,
+                           'test skill 2': 0,
+                           'test skill 3': 0}
+
+        self.assertEqual(self.test_char.get_all_skills(),
+                         expected_skills)
 
 
 if __name__=='__main__':
