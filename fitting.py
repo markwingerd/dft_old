@@ -304,6 +304,21 @@ class Fitting:
 	def get_armor_repair_rate(self):
 		return round(self._get_additive_stat('armor_repair_rate'), 2)
 
+	def get_movement_speed(self):
+		return round(self._get_multiplicative_stacking_stat('movement_speed'), 2)
+
+	def get_sprint_speed(self):
+		return round(self._get_multiplicative_stacking_stat('sprint_speed'), 2)
+
+	def get_sprint_duration(self):
+		return round(self._get_multiplicative_stacking_stat('sprint_duration'), 2)
+
+	def get_stamina_recovery(self):
+		""" Returns the amount of time it takes to fully recover stamina. """
+		stam = self._get_multiplicative_stacking_stat('stamina')
+		recov = self._get_multiplicative_stacking_stat('stamina_recovery_rate')
+		return round(stam/recov, 2)
+
 	def get_scan_profile(self):
 		return round(self._get_multiplicative_stacking_stat('scan_profile'), 2)
 
@@ -347,6 +362,109 @@ class Fitting:
 			module_list.append(('-', 'None', '0', '0'))
 
 		return module_list
+
+	def get_overview_abilities(self):
+		""" Returns a list of general stats and abilities that a user should
+		know about this fit.  Returned list contains tuples consisting of name 
+		and statlist pairs. """
+		overview = []
+
+		stats = []
+		stats.append( ('CPU:', '%s/%s' % (self.current_cpu, self.max_cpu)) )
+		if self.get_cpu_over():
+			stats.append( ('Over:', self.get_cpu_over()) )
+		else:
+			stats.append( ('', '') )
+		stats.append( ('PG:', '%s/%s' % (self.current_pg, self.max_pg)) )
+		if self.get_pg_over():
+			stats.append( ('Over:', self.get_pg_over()))
+		else:
+			stats.append( ('', '') )
+		overview.append( ('Resources', stats) )
+
+		for weapon in self.heavy_weapon + self.light_weapon + self.sidearm:
+			overview.append( (weapon.name, weapon.get_information()) )
+			break
+
+		stats = []
+		stats.append( ('Shield Hp:', self.get_shield_hp()) )
+		stats.append( ('Recharge:', self.get_shield_recharge()) )
+		stats.append( ('Armor Hp:', self.get_armor_hp()) )
+		stats.append( ('Repair:', self.get_armor_repair_rate()) )
+		overview.append( ('Defenses', stats))
+
+		stats = []
+		stats.append( ('Scan Profile:', self.get_scan_profile()) )
+		stats.append( ('Scan Precision:', self.get_scan_precision()) )
+		overview.append( ('Sensors', stats) )
+
+		stats = []
+		stats.append( ('Speed:', self.get_movement_speed()) )
+		stats.append( ('Sprint:', self.get_sprint_speed()) )
+		overview.append( ('Mobility', stats) )
+
+		return overview
+
+	def get_offensive_abilities(self):
+		""" Returns a list of offensive abilities this fit possesses for the 
+		GUI. Returned list contains tuples consisting of name and statlist 
+		pairs. """
+		abilities = []
+		for weapon in self.heavy_weapon + self.light_weapon + self.sidearm + self.grenade:
+			abilities.append( (weapon.name, weapon.get_information()) )
+		if not abilities:
+			pass
+		return abilities
+
+	def get_defensive_abilities(self):
+		""" Returns a list of defensive abilities this fit possesses for the 
+		GUI. """
+		defenses = []
+
+		stats = []
+		time_to_recharge = round((self.get_shield_hp()/self.get_shield_recharge())+self.get_shield_depleted_recharge_delay(), 1)
+		stats.append( ('Shield Hp:', self.get_shield_hp()) )
+		stats.append( ('Recharge:', self.get_shield_recharge()) )
+		stats.append( ('Delay:', self.get_shield_recharge_delay()) )
+		stats.append( ('Depleted:', self.get_shield_depleted_recharge_delay()) )
+		stats.append( ('Full Recharge:', time_to_recharge))
+		defenses.append( ('Shields', stats) )
+
+		stats = []
+		stats.append( ('Armor Hp:', self.get_armor_hp()) )
+		if self.get_armor_repair_rate():
+			time_to_repair = round(self.get_armor_hp()/self.get_armor_repair_rate(), 1)
+			stats.append( ('Repair:', self.get_armor_repair_rate()) )
+			stats.append( ('Full Repair:', time_to_repair))
+		defenses.append( ('Armor:', stats) )
+
+		stats = []
+		stats.append( ('Speed:', self.get_movement_speed()) )
+		stats.append( ('Sprint:', self.get_sprint_speed()) )
+		stats.append( ('Duration:', self.get_sprint_duration()) )
+		stats.append( ('Recovery:', self.get_stamina_recovery()) )
+		defenses.append( ('Mobility', stats) )
+
+		stats = []
+		stats.append( ('Scan Profile:', self.get_scan_profile()) )
+		defenses.append( ('Stealth', stats) )
+
+		return defenses
+
+	def get_systems_abilities(self):
+		""" Returns a list of systems/equipment abilities this fit possesses for
+		the GUI. """
+		systems = []
+
+		stats = []
+		stats.append( ('Precision:', self.get_scan_precision()) )
+		stats.append( ('Radius:', self.get_scan_radius()) )
+		systems.append( ('Sensors', stats) )
+
+		for mod in self.equipment:
+			systems.append(mod.get_information())
+
+		return systems
 
 	def _get_all_modules(self):
 		""" Returns a tuple of modules and weapons for the GUI. """
@@ -484,7 +602,7 @@ class Dropsuit:
 		self.ds_name = ds_name
 
 		dropsuit_data = XmlRetrieval('dropsuit.xml')
-		properties, effecting_skills = dropsuit_data.get_target(ds_name)
+		self.parent, properties, effecting_skills = dropsuit_data.get_target(ds_name)
 		self._add_stats(properties, effecting_skills)
 
 	def show_stats(self):
@@ -548,112 +666,24 @@ class DropsuitLibrary:
 
 
 if __name__ == '__main__':
-
-	"""
-	charlib = CharacterLibrary()
-
-	char = charlib.get_character('No Skills')
-	fit = Fitting('Test fit number 2', char, 'Assault Type-I')
-	fit.add_module('Complex Shield Extender')
-	fit.add_module('Complex Shield Extender')
-	fit.add_module('Basic CPU Upgrade')
-	fit.add_module('Militia PG Upgrade')
-	fit.add_module('Militia Nanite Injector')
-	fit.add_weapon('GEK-38 Assault Rifle')
-	fit.add_weapon('Submachine Gun')
-	fit.add_weapon('AV Grenade')
-	fit.show_stats()
-
 	fitlib = FittingLibrary()
-	fitlib.save_fitting(fit)
-"""
+	fit = fitlib.get_fitting('My Fitting')
 
-	fitlib = FittingLibrary()
-	print fitlib.get_fitting_list()
-	fit = fitlib.get_fitting(fitlib.get_fitting_list()[1])
-	fit.show_module_stats()
-	fit.show_stats()
+	for i, item in enumerate(fit.get_offensive_abilities()):
+		print '#%s - %s' % (i, item[0])
+		for name, value in item[1]:
+			print '\t\t%s: %s' % (name, value)
 
+	print '\n\n\n'
 
+	for i, item in enumerate(fit.get_defensive_abilities()):
+		print '#%s - %s' % (i, item[0])
+		for name, value in item[1]:
+			print '\t\t%s: %s' % (name, value)
 
+	print '\n\n\n'
 
-
-
-
-
-
-
-
-
-
-
-
-
-	"""
-	plain_fit = Fitting(charlib.get_character('No Skills'), 'Assault Type-I')
-
-	reimus_fit = Fitting(charlib.get_character('Reimus Klinsman'),'Assault Type-I')
-	reimus_fit.add_module('Complex Shield Extender')
-	reimus_fit.add_module('Complex Shield Extender')
-	reimus_fit.add_module('Militia CPU Upgrade')
-	reimus_fit.add_module('Militia PG Upgrade')
-	reimus_fit.add_module('Militia Nanite Injector')
-	reimus_fit.add_module('Militia CPU Upgrade')
-	reimus_fit.add_weapon('Assault Rifle')
-	reimus_fit.add_weapon('Submachine Gun')
-	reimus_fit.add_weapon('AV Grenade')
-
-	reimus_fit.show_module_stats()
-
-	print 'Plain Character Fitting'
-	plain_fit.show_stats()
-	print '====================================================='
-	print 'Richard Fitting'
-	reimus_fit.show_stats()
-
-	dsl = DropsuitLibrary()
-	print dsl.get_names()"""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	"""reimus = Character('Reimus Klinsman')
-	reimus.set_skill('Dropsuit Command', 1)
-	reimus.set_skill('Profile Dampening', 0)
-	reimus.set_skill('Nanocircuitry', 1)
-	reimus.set_skill('Circuitry', 4)
-	reimus.set_skill('Combat Engineering', 2)
-	reimus.set_skill('Vigor', 0)
-	reimus.set_skill('Endurance', 0)
-	reimus.set_skill('Shield Boost Systems', 3)
-	reimus.set_skill('Shield Enhancements', 4)
-	reimus.set_skill('Light Weapon Sharpshooter', 4)
-	reimus.set_skill('Weaponry', 5)
-	reimus.set_skill('Assault Rifle Proficiency', 2)
-
-	richard = Character('Richard C Mongler')
-	richard.set_skill('Dropsuit Command', 1)
-	richard.set_skill('Endurance', 4)
-	richard.set_skill('Vigor', 3)
-	richard.set_skill('Profile Dampening', 3)
-	richard.set_skill('Field Mechanics', 1)
-
-	plain = Character('No Skills')
-
-	charlib.save_character(reimus)
-	charlib.save_character(richard)
-	charlib.save_character(plain)"""
+	for i, item in enumerate(fit.get_systems_abilities()):
+		print '#%s - %s' % (i, item[0])
+		for name, value in item[1]:
+			print '\t\t%s: %s' % (name, value)

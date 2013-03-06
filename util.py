@@ -26,7 +26,10 @@ class XmlRetrieval:
             else:
                 properties[prop.tag] = prop.text
 
-        return (properties, effecting_skills)
+        # Gets the parent name.
+        parent = xml_tree.find('.//*[@name="%s"]/..' % target_name).tag
+
+        return (parent, properties, effecting_skills)
 
     def get_list(self):
         """ Returns a list of all items in an xml file. """
