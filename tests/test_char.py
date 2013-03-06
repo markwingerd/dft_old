@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 # Unittests for the char module
 
-
 import sys
 import unittest
 
-from dft.char import Character, InvalidSkillException
+try:
+    from dft.char import Character, InvalidSkillException
+except ImportError:
+    print "Please place the parent directory to 'dft' on the PYTHONPATH"
+    sys.exit(1)
 
 
 class TestCharacter(unittest.TestCase):
@@ -50,6 +53,26 @@ class TestCharacterSkills(unittest.TestCase):
         with self.assertRaises(InvalidSkillException):
             self.test_char.set_skill(skill_name, skill_level)
 
+    def test_character_get_skill_level(self):
+        """ Get the skill level for a skill """
+        skill_name = 'Dropsuit Command'
+        skill_level = 1
+
+        # first we set the skill
+        self.test_char.set_skill(skill_name, skill_level)
+
+        # then we make our call to get_skill_level to test it
+        self.assertEqual(self.test_char.get_skill_level(skill_name), skill_level)
+
+    def test_character_get_unknown_skill_level(self):
+        """ Get the skill level for an unknown skill
+            Should return 0"""
+        skill_name = 'I dont exist'
+        skill_level = 0
+
+        # Any skill that doesn't exist on this character
+        # should return 0
+        self.assertEqual(self.test_char.get_skill_level(skill_name), skill_level)
 
 
 
