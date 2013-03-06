@@ -31,7 +31,7 @@ class Character:
         # Not currently referenced anywhere
         print self.skill_level
 
-    def get_all_skills(self):
+    def get_all_skill_names(self):
         return self.skills.get_names()
 
     def set_skill(self, skill, level):
