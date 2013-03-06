@@ -73,6 +73,7 @@ class CharacterLibrary:
     def __init__(self):
         self.character_data = DataRetrieval('characters.dat')
 
+        # Ironically self.character_list is a dictionary
         self.character_list = self.character_data.data
         #self._load_characters('characters.dat')
 
