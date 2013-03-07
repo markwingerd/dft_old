@@ -118,6 +118,7 @@ class Skills:
         self._get_xml(self.file_name)
 
     def show_skills(self):
+        # Not used anywhere!
         print self.skill_effect
 
     def get_names(self):
