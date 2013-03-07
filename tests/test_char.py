@@ -247,5 +247,46 @@ class TestCharacterLibrarySave(unittest.TestCase):
         self.assertEqual(saved_char.get_skill_level(skill_name), 1)
 
 
+class TestCharacterLibraryDelete(unittest.TestCase):
+    """ Tests for the CharacterLibrary Classes Delete Character method """
+
+    def setUp(self):
+        """Create our CharacterLibrary with a single character"""
+        self.char_library = CharacterLibrary('test_characters.dat')
+        # Create a new character and save it
+        self.char_name = 'Delete Test'
+        self.char = Character(self.char_name)
+        self.char_library.save_character(self.char)
+
+    def tearDown(self):
+        """ Remove that data file after use """
+        current_path = os.path.dirname(__file__)
+        test_file_path = os.path.join(current_path,
+                                      '..',
+                                      'data',
+                                      'test_characters.dat')
+        os.remove(test_file_path)
+
+    def test_delete_character(self):
+        """Delete a character from the library"""
+        self.char_library.delete_character(self.char)
+        # check the character is gone
+        self.assertNotIn(self.char_name,
+                         self.char_library.character_list.keys())
+
+    def test_delete_character_not_in_library(self):
+        """Delete a character that isn't in the library"""
+        # This doesn't error.. if try to delete something that
+        # isn't there we don't really care.  The important fact
+        # it that it isn't there!
+        char_name = "I'm not there"
+        new_char = Character(char_name)
+
+        self.char_library.delete_character(new_char)
+        # check the character is gone
+        self.assertNotIn(char_name,
+                         self.char_library.character_list.keys())
+
+
 if __name__=='__main__':
     unittest.main()
