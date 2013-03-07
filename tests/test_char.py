@@ -2,6 +2,7 @@
 # Unittests for the char module
 
 import sys
+import os
 import unittest
 # Mock module required "pip install mock"
 from mock import patch
@@ -139,6 +140,7 @@ class TestCharacterLibrary(unittest.TestCase):
         # Just tests that it doesn't raise any Exceptions
         char_library = CharacterLibrary()
 
+
 class TestCharacterLibraryGet(unittest.TestCase):
     """ Tests for the CharacterLibrary Classes Get method """
 
@@ -188,6 +190,61 @@ class TestCharacterLibraryGetList(unittest.TestCase):
         char_list = self.char_library.get_character_list()
         # Returns a tuple not a list
         self.assertEqual(tuple(self.char_names), char_list)
+
+
+class TestCharacterLibrarySave(unittest.TestCase):
+    """ Tests for the CharacterLibrary Classes Save Character method """
+
+    def setUp(self):
+        """Create our CharacterLibrary with no data"""
+        self.char_library = CharacterLibrary('test_characters.dat')
+
+    def tearDown(self):
+        """ Remove that data file after use """
+        current_path = os.path.dirname(__file__)
+        test_file_path = os.path.join(current_path,
+                                      '..',
+                                      'data',
+                                      'test_characters.dat')
+        os.remove(test_file_path)
+
+    def test_save_character(self):
+        """Create a new character and save it in the library"""
+        # Create a new character
+        char_name = 'Save Test'
+        char = Character(char_name)
+        count_before = len(self.char_library.character_list)
+        # Save the character
+        self.char_library.save_character(char)
+        # Check we now have 1 more character in the data store
+        count_after = len(self.char_library.character_list)
+        self.assertEqual(count_after, count_before+1)
+        # Check that our character is in the library
+        self.assertIn(char.name, self.char_library.get_character_list())
+
+    def test_save_existing_character(self):
+        """Save the same character twice and it should overwrite
+           and _not_ create two characters of the same name"""
+        # Create a new character and save it
+        char_name = 'Save Test'
+        skill_name = 'Dropsuit Command'
+        char = Character(char_name)
+        self.char_library.save_character(char)
+
+        count_before = len(self.char_library.character_list)
+        # Change the Character and Save it again
+        char.set_skill(skill_name,1)
+        self.char_library.save_character(char)
+        # Check we now have the same number of characters
+        count_after = len(self.char_library.character_list)
+        self.assertEqual(count_after, count_before)
+        # Check that our character is in the library once
+        char_list = self.char_library.get_character_list()
+        self.assertIn(char.name, char_list)
+        self.assertEqual(char_list.count(char_name),1)
+        # Check that our skill change was saved
+        saved_char = self.char_library.get_character(char_name)
+        self.assertEqual(saved_char.get_skill_level(skill_name), 1)
 
 
 if __name__=='__main__':
