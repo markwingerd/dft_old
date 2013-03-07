@@ -4,6 +4,7 @@
 import sys
 import os
 import unittest
+from cStringIO import StringIO
 # Mock module required "pip install mock"
 from mock import patch
 
@@ -11,6 +12,7 @@ try:
     from char import (
         Character,
         CharacterLibrary,
+        Skills,
         InvalidSkillException,
         InvalidCharacterException
         )
@@ -286,6 +288,61 @@ class TestCharacterLibraryDelete(unittest.TestCase):
         # check the character is gone
         self.assertNotIn(char_name,
                          self.char_library.character_list.keys())
+
+
+def patch_get_xml(self, src):
+    """This function will be patched in to replace Skill._get_xml
+       In this function we can make up some test data without messing
+       about with data files on disk"""
+    self.skill_effect = {'Monkey Spanking': 0.4,
+                         'Chicken Riding': 0.3}
+
+
+class TestSkills(unittest.TestCase):
+    """Tests for the Skills class"""
+
+    @patch("char.Skills._get_xml", patch_get_xml)
+    def test_get_skill_names(self):
+        """Get all the skill names"""
+        test_skills = Skills()
+        self.assertEqual(test_skills.get_names(),
+                         ("Monkey Spanking", "Chicken Riding"))
+
+
+class TestSkillCategories(unittest.TestCase):
+    """Tests for the Skills parents and children method"""
+
+    @patch("char.Skills._get_xml", patch_get_xml)
+    def setUp(self):
+        """Setup some temp data to test with"""
+        self.test_skills = Skills()
+        # Here we overwrite the filename with a file-like object
+        # ElementTree will happily work with either
+        test_xml = """<?xml version="1.0"?>
+        <data><dropsuit_command>
+        <skill name="Dropsuit Command">
+        <effect>-0.05</effect>
+        </skill></dropsuit_command>
+        <mechanics>
+        <skill name="Armor Adaptation">
+        <effect>-0.03</effect>
+        </skill></mechanics></data>"""
+        self.test_skills.file_name = StringIO(test_xml)
+
+    def test_get_skill_categories(self):
+        """Get all the skill categories"""
+        self.assertEqual(self.test_skills.get_parents(),
+                         ["dropsuit_command", "mechanics"])
+
+    def test_get_skills_in_category(self):
+        """Get skills in category"""
+        self.assertEqual(self.test_skills.get_children('mechanics'),
+                         ['Armor Adaptation'])
+
+    def test_get_skills_in_category_not_exist(self):
+        """Get skills in category when the category doesn't exist"""
+        self.assertEqual(self.test_skills.get_children('Bubble Blowing'),
+                         [])
 
 
 if __name__=='__main__':
