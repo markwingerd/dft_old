@@ -183,7 +183,7 @@
 			<ammo_resupply_rate>25</ammo_resupply_rate>
 			<health>200</health>
 		</module>
-		<module name=" Nanohive">
+		<module name="Nanohive">
 			<slot_type>equipment</slot_type>
 			<cpu effected_by="Nanocircuitry">21</cpu>
 			<pg>4</pg>
@@ -334,7 +334,7 @@
 			<pg>15</pg>
 			<max_active>1</max_active>
 			<max_carried>2</max_carried>
-			<spawn_time_modifer>0</spawn_time_modifer>
+			<spawn_time_modifier>0</spawn_time_modifier>
 			<max_spawns_per_unit>10</max_spawns_per_unit>
 			<health>200</health>
 		</module>
@@ -344,7 +344,7 @@
 			<pg>9</pg>
 			<max_active>1</max_active>
 			<max_carried>2</max_carried>
-			<spawn_time_modifer>0</spawn_time_modifer>
+			<spawn_time_modifier>0</spawn_time_modifier>
 			<max_spawns_per_unit>10</max_spawns_per_unit>
 			<health>200</health>
 		</module>
@@ -354,7 +354,7 @@
 			<pg>9</pg>
 			<max_active>1</max_active>
 			<max_carried>2</max_carried>
-			<spawn_time_modifer>-0.50</spawn_time_modifer>
+			<spawn_time_modifier>-0.50</spawn_time_modifier>
 			<max_spawns_per_unit>10</max_spawns_per_unit>
 			<health>200</health>
 		</module>
@@ -364,7 +364,7 @@
 			<pg>9</pg>
 			<max_active>2</max_active>
 			<max_carried>4</max_carried>
-			<spawn_time_modifer>0</spawn_time_modifer>
+			<spawn_time_modifier>0</spawn_time_modifier>
 			<max_spawns_per_unit>10</max_spawns_per_unit>
 			<health>200</health>
 		</module>
@@ -374,7 +374,7 @@
 			<pg>9</pg>
 			<max_active>1</max_active>
 			<max_carried>2</max_carried>
-			<spawn_time_modifer>0</spawn_time_modifer>
+			<spawn_time_modifier>0</spawn_time_modifier>
 			<max_spawns_per_unit>12</max_spawns_per_unit>
 			<health>200</health>
 		</module>
@@ -384,7 +384,7 @@
 			<pg>9</pg>
 			<max_active>1</max_active>
 			<max_carried>2</max_carried>
-			<spawn_time_modifer>0</spawn_time_modifer>
+			<spawn_time_modifier>0</spawn_time_modifier>
 			<max_spawns_per_unit>10</max_spawns_per_unit>
 			<health>200</health>
 		</module>
@@ -394,7 +394,7 @@
 			<pg>14</pg>
 			<max_active>1</max_active>
 			<max_carried>2</max_carried>
-			<spawn_time_modifer>-0.19</spawn_time_modifer>
+			<spawn_time_modifier>-0.19</spawn_time_modifier>
 			<max_spawns_per_unit>20</max_spawns_per_unit>
 			<health>200</health>
 		</module>
@@ -404,7 +404,7 @@
 			<pg>11</pg>
 			<max_active>1</max_active>
 			<max_carried>2</max_carried>
-			<spawn_time_modifer>-0.10</spawn_time_modifer>
+			<spawn_time_modifier>-0.10</spawn_time_modifier>
 			<max_spawns_per_unit>15</max_spawns_per_unit>
 			<health>300</health>
 		</module>
@@ -414,7 +414,7 @@
 			<pg>11</pg>
 			<max_active>1</max_active>
 			<max_carried>2</max_carried>
-			<spawn_time_modifer>-0.19</spawn_time_modifer>
+			<spawn_time_modifier>-0.19</spawn_time_modifier>
 			<max_spawns_per_unit>15</max_spawns_per_unit>
 			<health>300</health>
 		</module>
@@ -424,7 +424,7 @@
 			<pg>11</pg>
 			<max_active>1</max_active>
 			<max_carried>2</max_carried>
-			<spawn_time_modifer>-0.10</spawn_time_modifer>
+			<spawn_time_modifier>-0.10</spawn_time_modifier>
 			<max_spawns_per_unit>18</max_spawns_per_unit>
 			<health>300</health>
 		</module>
@@ -434,7 +434,7 @@
 			<pg>14</pg>
 			<max_active>2</max_active>
 			<max_carried>3</max_carried>
-			<spawn_time_modifer>-0.20</spawn_time_modifer>
+			<spawn_time_modifier>-0.20</spawn_time_modifier>
 			<max_spawns_per_unit>20</max_spawns_per_unit>
 			<health>400</health>
 		</module>
@@ -444,7 +444,7 @@
 			<pg>14</pg>
 			<max_active>2</max_active>
 			<max_carried>3</max_carried>
-			<spawn_time_modifer>-0.20</spawn_time_modifer>
+			<spawn_time_modifier>-0.20</spawn_time_modifier>
 			<max_spawns_per_unit>20</max_spawns_per_unit>
 			<health>400</health>
 		</module>
@@ -454,7 +454,7 @@
 			<pg>14</pg>
 			<max_active>3</max_active>
 			<max_carried>3</max_carried>
-			<spawn_time_modifer>-0.20</spawn_time_modifer>
+			<spawn_time_modifier>-0.20</spawn_time_modifier>
 			<max_spawns_per_unit>20</max_spawns_per_unit>
 			<health>400</health>
 		</module>
@@ -464,7 +464,7 @@
 			<pg>14</pg>
 			<max_active>1</max_active>
 			<max_carried>2</max_carried>
-			<spawn_time_modifer>-0.60</spawn_time_modifer>
+			<spawn_time_modifier>-0.60</spawn_time_modifier>
 			<max_spawns_per_unit>5</max_spawns_per_unit>
 			<health>400</health>
 		</module>
