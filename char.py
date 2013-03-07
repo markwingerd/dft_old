@@ -75,8 +75,8 @@ class InvalidCharacterException(Exception):
 
 
 class CharacterLibrary:
-    def __init__(self):
-        self.character_data = DataRetrieval('characters.dat')
+    def __init__(self, filename='characters.dat'):
+        self.character_data = DataRetrieval(filename)
 
         # Ironically self.character_list is a dictionary
         self.character_list = self.character_data.data
