@@ -25,18 +25,30 @@ from util import XmlRetrieval
 
 class Module:
     def __init__(self, skills, mod_name):
+        """
+        skills - A dictionary of skill, value pairs
+                 e.g. {'Nanocircuitry': 0.05}
+        module - The name of the module
+                 e.g. "Militia Nanite Injector"
+        """
         self.stats = {}
         self.name = mod_name
         self.skills = skills
 
         module_data = XmlRetrieval('module.xml')
+        # Properties include: slot_type, cpu, pg
+        # Effecting_skills are the names of skills (list) which will adjust the
+        # value of the Property, in a dictionary in the format
+        # {'property':['skill', 'skill']}
         properties, effecting_skills = module_data.get_target(mod_name)
         self._add_stats(properties,effecting_skills)
 
     def show_stats(self):
         print self.name
-        for key in self.stats:
-            print '{:<20} {:<15}'.format(key, self.stats[key])
+        keys = self.stats.keys()
+        keys.sort()
+        for key in keys:
+            print '{:<20} {:<15}'.format(key, self.stats[key]).strip()
 
     def get(self, stat):
         if stat in self.stats:
