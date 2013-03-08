@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+#coding:utf-8
+
 # Unittests for the char module
 
 import sys
