@@ -37,7 +37,6 @@
 			<slot_type>grenade</slot_type>
 			<cpu>15</cpu>
 			<pg>4</pg>
-			<damage>1000</damage>
 			<splash_damage>140</splash_damage>
 			<max_ammo>3</max_ammo>
 		</weapon>
@@ -92,11 +91,9 @@
 			<cpu effected_by="Heavy Weapon Upgrades" effected_by2="Heavy Weapon Upgrades Proficiency">53</cpu>
 			<pg>5</pg>
 			<direct_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1200</direct_damage>
-			<damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1200</damage>
 			<splash_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">210</splash_damage>
 			<blast_radius>2.5</blast_radius>
 			<charge-up_time>3.5</charge-up_time>
-			<rate_of_fire>17.14</rate_of_fire>
 			<clip_size>4</clip_size>
 			<max_ammo effected_by="Heavy Weapon Capacity" effected_by2="Heavy Weapon Capacity Proficiency">16</max_ammo>
 		</weapon>
@@ -105,11 +102,9 @@
 			<cpu effected_by="Heavy Weapon Upgrades" effected_by2="Heavy Weapon Upgrades Proficiency">72</cpu>
 			<pg>8</pg>
 			<direct_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1320</direct_damage>
-			<damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1320</damage>
 			<splash_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">231</splash_damage>
 			<blast_radius>2.8</blast_radius>
 			<charge-up_time>3.5</charge-up_time>
-			<rate_of_fire>17.14</rate_of_fire>
 			<clip_size>4</clip_size>
 			<max_ammo effected_by="Heavy Weapon Capacity" effected_by2="Heavy Weapon Capacity Proficiency">16</max_ammo>
 		</weapon>
@@ -118,11 +113,9 @@
 			<cpu effected_by="Heavy Weapon Upgrades" effected_by2="Heavy Weapon Upgrades Proficiency">92</cpu>
 			<pg>10</pg>
 			<direct_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1440</direct_damage>
-			<damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">1440</damage>
 			<splash_damage effected_by="Weaponry" effected_by2="Forge Gun Proficiency">252</splash_damage>
 			<blast_radius>3.0</blast_radius>
 			<charge-up_time>3.5</charge-up_time>
-			<rate_of_fire>17.14</rate_of_fire>
 			<clip_size>4</clip_size>
 			<max_ammo effected_by="Heavy Weapon Capacity" effected_by2="Heavy Weapon Capacity Proficiency">16</max_ammo>
 		</weapon>
@@ -206,7 +199,7 @@
 			<clip_size>425</clip_size>
 			<max_ammo effected_by="Heavy Weapon Capacity" effected_by2="Heavy Weapon Capacity Proficiency">1500</max_ammo>
 			<reload_time effected_by="Heavy Weapon Rapid Reload" effected_by2="Heavy Rapid Reload Proficiency">8</reload_time>
-			<heat_build-up_per_second>29.8</heat_build-up_per_second>
+			<heat_build-up_per_second>9.8</heat_build-up_per_second>
 			<cooldown>4</cooldown>
 			<seize_duration>10</seize_duration>
 			<max_range effected_by="Heavy Weapon Sharpshooter" effected_by2="Heavy Weapon Sharpshooter Proficiency">65</max_range>

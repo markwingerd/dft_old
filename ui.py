@@ -124,22 +124,84 @@ class DftUi(Frame):
         self.tre_modules.bind('<Double-1>', self.add_module)
 
     def fitting_display(self):
-        """ Displays all the current fitting information. """
-        # Set variables.
-        fitting_list = StringVar(value=self.current_fit.get_all_modules())
+        """ Displays all the current fitted modules. """
+        # Create widgets
+        frm_fitting = Frame(self)
+        self.tre_fitting = ttk.Treeview(frm_fitting, height=14, columns=('name', 'cpu', 'pg'))
+        self.tre_fitting.column('#0', width=30, minwidth=30)
+        self.tre_fitting.column('name', width=300, minwidth=300)
+        self.tre_fitting.column('cpu', width=30, minwidth=30)
+        self.tre_fitting.column('pg', width=30, minwidth=30)
+        self.tre_fitting.heading('name', text='Item Name')
+        self.tre_fitting.heading('cpu', text='CPU')
+        self.tre_fitting.heading('pg', text='PG')
+        for i, item in enumerate(self.current_fit.get_all_modules()):
+            self.tre_fitting.insert('', 'end', i+1, text=item[0])
+            self.tre_fitting.set(i+1, 'name', item[1])
+            self.tre_fitting.set(i+1, 'cpu', item[2])
+            self.tre_fitting.set(i+1, 'pg', item[3])
 
-        # Creates the widgets needed for this display.
-        frm_fitting_display = Frame(self, height=300)
-        self.lbx_fitting = Listbox(frm_fitting_display, listvariable=fitting_list, width=48, height=20, font='TkFixedFont', bg='white')
-
-        # Grid management.
-        frm_fitting_display.grid(column=1, row=1, sticky=W+E+N+S)
-        self.lbx_fitting.grid(column=0, row=0, sticky=W+E+N+S)
+        # Grid management
+        frm_fitting.grid(column=1, row=1, sticky=W+E+N+S)
+        self.tre_fitting.grid(column=0, row=0)
 
         # Bindings
-        self.lbx_fitting.bind('<Double-1>', self.remove_module)
+        self.tre_fitting.bind('<Double-1>', self.remove_module)
 
-    def stats_display(self):
+    def stats_display(self, tab_id=0):
+        """ """
+        # Create widgets
+        self.nbk_stats = ttk.Notebook(self, width=300)
+        frm_overview = Frame(self.nbk_stats)
+        frm_offense = Frame(self.nbk_stats)
+        frm_defense = Frame(self.nbk_stats)
+        frm_systems = Frame(self.nbk_stats)
+        self.nbk_stats.add(frm_overview, text='Overview')
+        self.nbk_stats.add(frm_offense, text='Offense')
+        self.nbk_stats.add(frm_defense, text='Defense')
+        self.nbk_stats.add(frm_systems, text='Systems')
+        self.nbk_stats.select(tab_id)
+        # Do overview stuff here
+        for i, item in enumerate(self.current_fit.get_overview_abilities()):
+            lbf = ttk.Labelframe(frm_overview, text=item[0])
+            for j, stat in enumerate(item[1]):
+                Label(lbf, text=stat[0]).grid(column=j%2, row=int(j/2), sticky=W, padx=10)
+                Label(lbf, text=stat[1]).grid(column=j%2, row=int(j/2), sticky=E)
+            lbf.grid(column=0, row=i, sticky=W+E+N+S)
+            lbf.columnconfigure(0, minsize=147)
+            lbf.columnconfigure(1, minsize=147)
+        # Creates widgets for Offensive abilities.
+        for i, item in enumerate(self.current_fit.get_offensive_abilities()):
+            lbf = ttk.Labelframe(frm_offense, text=item[0])
+            for j, stat in enumerate(item[1]):
+                Label(lbf, text=stat[0]).grid(column=j%2, row=int(j/2), sticky=W, padx=10)
+                Label(lbf, text=stat[1]).grid(column=j%2, row=int(j/2), sticky=E)
+            lbf.grid(column=0, row=i, sticky=W+E+N+S)
+            lbf.columnconfigure(0, minsize=147)
+            lbf.columnconfigure(1, minsize=147)
+        # Creates widgets for Defensive abilities.
+        for i, item in enumerate(self.current_fit.get_defensive_abilities()):
+            lbf = ttk.Labelframe(frm_defense, text=item[0])
+            for j, stat in enumerate(item[1]):
+                Label(lbf, text=stat[0]).grid(column=j%2, row=int(j/2), sticky=W, padx=10)
+                Label(lbf, text=stat[1]).grid(column=j%2, row=int(j/2), sticky=E)
+            lbf.grid(column=0, row=i, sticky=W+E+N+S)
+            lbf.columnconfigure(0, minsize=147)
+            lbf.columnconfigure(1, minsize=147)
+        # Creates widgets for Systems/Equipment Abilities
+        for i, item in enumerate(self.current_fit.get_systems_abilities()):
+            lbf = ttk.Labelframe(frm_systems, text=item[0])
+            for j, stat in enumerate(item[1]):
+                Label(lbf, text=stat[0]).grid(column=j%2, row=int(j/2), sticky=W, padx=10)
+                Label(lbf, text=stat[1]).grid(column=j%2, row=int(j/2), sticky=E)
+            lbf.grid(column=0, row=i, sticky=W+E+N+S)
+            lbf.columnconfigure(0, minsize=147)
+            lbf.columnconfigure(1, minsize=147)
+
+        # Grid management
+        self.nbk_stats.grid(column=2, row=0, rowspan=3, sticky=W+E+N+S)
+
+    def stats_display2(self):
         """ Displays fitting stats. """
         # Initialize variables.
         cpu_text = '%s/%s' % (self.current_fit.current_cpu, self.current_fit.max_cpu)
@@ -262,13 +324,13 @@ class DftUi(Frame):
 
         # Display the change.
         self.fitting_display()
-        self.stats_display()
+        self.stats_display(self.nbk_stats.index('current'))
 
     def remove_module(self, *args):
         """ Removes a module from the fitting. """
         # Find what is selected.
-        listbox_index = self.lbx_fitting.curselection()
-        module_name = self.lbx_fitting.get(listbox_index)
+        tree_id = self.tre_fitting.selection()[0]
+        module_name = self.tre_fitting.item(tree_id)['values'][0]
 
         self.current_fit.remove_module(module_name)
 
@@ -277,7 +339,7 @@ class DftUi(Frame):
 
         # Display the change.
         self.fitting_display()
-        self.stats_display()
+        self.stats_display(self.nbk_stats.index('current'))
 
     def change_character(self, *args):
         """ Changes the current characters for this fitting. """
@@ -289,7 +351,7 @@ class DftUi(Frame):
 
         # Display the change.
         self.fitting_display()
-        self.stats_display()
+        self.stats_display(self.nbk_stats.index('current'))
 
     def change_fitting(self, *args):
         """ Changes the current fitting. """
@@ -300,7 +362,7 @@ class DftUi(Frame):
 
         # Display the change.
         self.fitting_display()
-        self.stats_display()
+        self.stats_display(self.nbk_stats.index('current'))
 
     def update_character(self, character):
         """ Called by CharacterEditWindow.  This will update a character with
@@ -312,7 +374,7 @@ class DftUi(Frame):
 
         # Display the changes.
         self.fitting_display()
-        self.stats_display()
+        self.stats_display(self.nbk_stats.index('current'))
         # Reloads the character dropdown menu. Needed if a new character is added.
         self.combobox_character()
 
@@ -327,7 +389,7 @@ class DftUi(Frame):
         # Display the changes.
         self.combobox_fitting()
         self.fitting_display()
-        self.stats_display()
+        self.stats_display(self.nbk_stats.index('current'))
             
 
 class DropsuitWindow(Frame):
