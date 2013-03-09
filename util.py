@@ -1,10 +1,28 @@
 import os, sys
 import pickle
 import xml.etree.ElementTree as ET
+import cStringIO
+
+
+class ElementNotFoundException(Exception):
+    """
+    Exception raised when looking for an Element with a given
+    name attribute and it is not found
+    """
+    pass
+
 
 class XmlRetrieval:
-    def __init__(self, file_name):
-        self.file_name = get_file_loc(file_name)
+    def __init__(self, data):
+        """
+        Data can be a StingIO object or a string containing the relative
+        path to the data file
+        """
+        if isinstance(data, cStringIO.InputType):
+            self.data = data
+        else:
+            # If it's not a StringIO we will assume it's a filepath
+            self.data = get_file_loc(data)
 
     def get_target(self, target_name):
         """Will return the targets xml data. """
@@ -12,8 +30,11 @@ class XmlRetrieval:
         properties = {}
         effecting_skills = {}
 
-        xml_tree = ET.parse(self.file_name)
+        xml_tree = ET.parse(self.data)
         target = xml_tree.find('.//*[@name="%s"]' % target_name)
+
+        if target is None:
+            raise ElementNotFoundException
 
         # Extracts targets data.
         for prop in target:
@@ -32,7 +53,7 @@ class XmlRetrieval:
         """ Returns a list of all items in an xml file. """
         names_list = []
 
-        xml_tree = ET.parse(self.file_name)
+        xml_tree = ET.parse(self.data)
 
         parents = xml_tree.findall('.//*[@name]/..')
 
@@ -46,7 +67,7 @@ class XmlRetrieval:
         """ Returns a list of all parents in the xml file. """
         parent_list = []
 
-        xml_tree = ET.parse(self.file_name)
+        xml_tree = ET.parse(self.data)
         parents = xml_tree.findall('.//*[@name]/..')
         for parent in parents:
             parent_list.append(parent.tag)
@@ -57,10 +78,12 @@ class XmlRetrieval:
         """ Returns all the children of a given parent. """
         children_list = []
 
-        xml_tree = ET.parse(self.file_name)
+        xml_tree = ET.parse(self.data)
         parent = xml_tree.findall('.//%s/' % target)
         for child in parent:
-            tup = (child.attrib['name'], child.find('cpu').text, child.find('pg').text)
+            tup = (child.attrib['name'],
+                   child.find('cpu').text,
+                   child.find('pg').text)
             children_list.append(tup)
 
         return children_list
