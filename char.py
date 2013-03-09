@@ -23,25 +23,24 @@ from util import DataRetrieval
 class Character:
     def __init__(self, name):
         self.name = name
-        self.skills = Skills()
-        self.skill_level = {} # Used for module reqs
-        self.skill_effect = {} # Used for modifying modules
-
-    def show_skills(self):
-        print self.skill_level
-
-    def get_all_skills(self):
-        return self.skills.get_names()
+        self.skill_dict = SkillLibrary().skill_dict
+        self.leveled_skill_effects = {} # Used for modifying modules
+        self.skillpoints_used = 0
 
     def set_skill(self, skill, level):
-        self.skill_level[skill] = level
-        self.skill_effect[skill] = level * self.skills.skill_effect[skill]
+        self.skill_dict[skill].set_level(level)
+        self.leveled_skill_effects[skill] = level * self.skill_dict[skill].effect
+        # Recalculate how much skillpoints have been used on skills.
+        self.skillpoints_used = 0
+        for skill in self.skill_dict.values():
+            self.skillpoints_used += skill.get_sp_used()
+        print self.skillpoints_used
 
     def get_skill_level(self, skill_name):
         """ Returns the skill level. If none found in the self.skill_level dict
         then return 0 as the level. """
-        if skill_name in self.skill_level:
-            return self.skill_level[skill_name]
+        if skill_name in self.skill_dict:
+            return self.skill_dict[skill_name].level
         else:
             return 0
 
@@ -50,18 +49,9 @@ class Character:
         levels. """
         output = {}
         # Gets all known skills and if Character has a level for them, apply it.
-        for s in self.skills.get_names():
-            if s in self.skill_level:
-                output[s] = self.skill_level[s]
-            else:
-                output[s] = 0
+        for skill_name, skill in self.skill_dict.iteritems():
+            output[skill_name] = skill.level
         return output
-
-    def get_parent_skills(self):
-        return self.skills.get_parents()
-
-    def get_children_skills(self, parent):
-        return self.skills.get_children(parent)
 
 
 class CharacterLibrary:
@@ -87,44 +77,69 @@ class CharacterLibrary:
         self.character_data.delete_data(character)
 
 
-class Skills:
+class Skill:
+    def __init__(self, name, skill_category, effect, multiplier, prerequisites):
+        self.name = name
+        self.skill_category = skill_category
+        self.effect = round(float(effect), 2)
+        self.multiplier = int(multiplier)
+        self.prerequisites = prerequisites
+        self.level = 0
+
+    def set_level(self, level):
+        if 0 <= level <= 5:
+            self.level = level
+
+    def get_sp_used(self):
+        """ Converts a skills multiplier into SP based on the level. """
+        if self.level == 1:
+            return 6220 * self.multiplier
+        if self.level == 2:
+            return 24870 * self.multiplier
+        if self.level == 3:
+            return 68400 * self.multiplier
+        if self.level == 4:
+            return 155460 * self.multiplier
+        if self.level == 5:
+            return 3109920 * self.multiplier
+        else:
+            return 0
+
+
+class SkillLibrary:
     def __init__(self):
-        # Dict of skills and their effects on stats {Skill_Name: Effect}
-        self.skill_effect = {}
+        self.skill_dict = {}
         self.file_name = self._get_file_loc('skills.xml')
         
-        # THIS STILL USES THE OLDER VERSION TO RETRIEVE XML.... ITS TOO
-        # DIFFERENT TO USE THE OTHER SHIT. FUCK. IL FIX IT LATER
-        self._get_xml(self.file_name)
+        self._build_skills()
 
-    def show_skills(self):
-        print self.skill_effect
-
-    def get_names(self):
-        """ Returns a tuple of skill names. """
-        return tuple(self.skill_effect.keys())
-
-    def get_parents(self):
+    def get_all_skill_categories(self):
         """ Returns a list of all parents in the xml file. """
-        parent_list = []
+        skill_categories = []
 
-        xml_tree = ET.parse(self.file_name)
-        parents = xml_tree.findall('.//*[@name]/..')
-        for parent in parents:
-            parent_list.append(parent.tag)
+        for skill in self.skill_dict.values():
+            if skill.skill_category not in skill_categories:
+                skill_categories.append(skill.skill_category)
 
-        return parent_list
+        return skill_categories
 
-    def get_children(self, target):
+    def get_skill_by_category(self, category):
         """ Returns all the children of a given parent. """
-        children_list = []
+        skills_by_category = []
 
-        xml_tree = ET.parse(self.file_name)
-        parent = xml_tree.findall('.//%s/' % target)
-        for child in parent:
-            children_list.append(child.attrib['name'])
+        for skill in self.skill_dict.values():
+            if category == skill.skill_category:
+                skills_by_category.append(skill.name)
 
-        return children_list
+        return skills_by_category
+
+    def _build_skills(self):
+        """ Get a list of all data needed for every skill found in the
+        skills.xml file and instantiates a skill class to hold the data. That
+        object will be added to a dictionary of skills. """
+        skill_data_list = self._get_xml()
+        for name, skill_category, effect, multiplier, prereq in skill_data_list:
+            self.skill_dict[name] = Skill(name, skill_category, effect, multiplier, prereq)
 
     def _get_file_loc(self, file_name):
         """ Will return the path to the desired file depending on whether this
@@ -135,37 +150,36 @@ class Skills:
             basedir = os.path.dirname('data/')
         return os.path.join(basedir, file_name)
 
-    def _get_xml(self, src):
-        """ Extracts skill information from an xml file. """
-        xml_tree = ET.parse(src)
+    def _get_xml(self):
+        """ Extracts skill information from an xml file. And returns that data
+        as a list of tuples. """
+        skill_data = []
+         # THIS STILL USES THE OLDER VERSION TO RETRIEVE XML.... ITS TOO
+        # DIFFERENT TO USE THE OTHER SHIT. FUCK. IL FIX IT LATER
+        xml_tree = ET.parse(self.file_name)
         xml_root = xml_tree.getroot()
 
         for skill in xml_root.findall('.//skill'):
             name = skill.get('name')
+            skill_category = xml_tree.find('.//*[@name="%s"]/..' % name).tag
             effect = round(float(skill.find('effect').text), 3)
-            self.skill_effect[name] = effect
+            multiplier = int(skill.find('multiplier').text)
+            prerequisites = []
+            for prereq in skill.findall('./prerequisites/prerequisite'):
+                prerequisites.append( (prereq.attrib['skill'], int(prereq.text)) )
+            skill_data.append( (name, skill_category, effect, multiplier, prerequisites) )
+
+        return skill_data
 
 
 if __name__ == '__main__':
-    pass
-    #char1 = Character('Char1')
-    #char1.set_skill('Shield Control',2)
-    #char1.set_skill('Field Mechanics',4)
-    #char2 = Character('Char2')
-    #char2.set_skill('Weaponry',5)
-    #char2.set_skill('Dropsuit Command',4)
-    #char3 = Character('Char3')
-    #char3.set_skill('Weaponry',5)
-    #char3.set_skill('Dropsuit Command',4)
-
-    char_lib = CharacterLibrary()   
-    #char_lib.save_character(char3)
-    print char_lib.get_character_list()
-    char = char_lib.get_character('Reimus')
-    print char.get_all_skills()
-    s = Skills()
-    print s.get_parents()
-    print s.get_children('engineering')
-
+    char_lib = CharacterLibrary()
+    print 'CHARACTER LIST: ', char_lib.get_character_list()
+    char = char_lib.get_character('No Skills')
+    print 'SHOW ALL SKILLS: ', char.get_all_skills()
+    s = SkillLibrary()
+    print 'SHOW PARENTS: ', s.get_all_skill_categories()
+    print 'SHOW CHILDREN OF HWU: ', s.get_skill_by_category('handheld_weapon_upgrades')
+    #print 'SHOW ALL MILTIPLIERS: ', s.skill_multiplier
     #sk = Skills()
     #print sk.skill_effect
