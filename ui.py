@@ -532,8 +532,7 @@ class CharacterEditWindow(Frame):
         self.tre_skills.heading('level', text='Lvl')
         for parent in self.skill_library.get_all_skill_categories():
             self.tre_skills.insert('', 'end', parent, text=parent, tag='ttk')
-            for child in self.skill_library.get_skill_by_category(parent):skills.insert(parent, 'end', child, text=child, tag='ttk')
-                #else:
+            for child in self.skill_library.get_skill_by_category(parent):
                 self.tre_skills.insert(parent, 'end', child, text=child, tag=('ttk', child))
                 self.tre_skills.set(child, 'level', self.character.get_skill_level(child))
 
