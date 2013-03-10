@@ -12,24 +12,36 @@
 			<cpu effected_by="Nanocircuitry">15</cpu>
 			<pg>2</pg>
 			<armor_repaired_on_revive>0.30</armor_repaired_on_revive>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="KIN-012 Nanite Injector">
 			<slot_type>equipment</slot_type>
 			<cpu effected_by="Nanocircuitry">32</cpu>
 			<pg>4</pg>
 			<armor_repaired_on_revive>0.50</armor_repaired_on_revive>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">2</prerequisite>
+			</prerequisites>
 		</module>
-		<module name="Necromancer KIN-012 Nanite Injector">
+		<module name="'Necromancer' KIN-012 Nanite Injector">
 			<slot_type>equipment</slot_type>
 			<cpu effected_by="Nanocircuitry">48</cpu>
 			<pg>8</pg>
 			<armor_repaired_on_revive>0.80</armor_repaired_on_revive>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">2</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Wiyrkomi Nanite Injector">
 			<slot_type>equipment</slot_type>
 			<cpu effected_by="Nanocircuitry">48</cpu>
 			<pg>8</pg>
 			<armor_repaired_on_revive>0.80</armor_repaired_on_revive>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">5</prerequisite>
+			</prerequisites>
 		</module>
 	</nanite_injector>
 	<repair_tool>
@@ -172,17 +184,6 @@
 			<ammo_resupply_rate>15</ammo_resupply_rate>
 			<health>200</health>
 		</module>
-		<module name="Compact Nanohive">
-			<slot_type>equipment</slot_type>
-			<cpu effected_by="Nanocircuitry">10</cpu>
-			<pg>2</pg>
-			<max_active>1</max_active>
-			<max_carried>1</max_carried>
-			<max_nanite_clusters>24</max_nanite_clusters>
-			<effective_range>2</effective_range>
-			<ammo_resupply_rate>25</ammo_resupply_rate>
-			<health>200</health>
-		</module>
 		<module name="Nanohive">
 			<slot_type>equipment</slot_type>
 			<cpu effected_by="Nanocircuitry">21</cpu>
@@ -193,6 +194,23 @@
 			<effective_range>4</effective_range>
 			<ammo_resupply_rate>15</ammo_resupply_rate>
 			<health>200</health>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">1</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="Compact Nanohive">
+			<slot_type>equipment</slot_type>
+			<cpu effected_by="Nanocircuitry">10</cpu>
+			<pg>2</pg>
+			<max_active>1</max_active>
+			<max_carried>1</max_carried>
+			<max_nanite_clusters>24</max_nanite_clusters>
+			<effective_range>2</effective_range>
+			<ammo_resupply_rate>25</ammo_resupply_rate>
+			<health>200</health>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">2</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Gauged Nanohive">
 			<slot_type>equipment</slot_type>
@@ -204,6 +222,9 @@
 			<effective_range>4</effective_range>
 			<ammo_resupply_rate>15</ammo_resupply_rate>
 			<health>200</health>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">2</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Quantum Nanohive">
 			<slot_type>equipment</slot_type>
@@ -215,6 +236,9 @@
 			<effective_range>4.2</effective_range>
 			<ammo_resupply_rate>17.2</ammo_resupply_rate>
 			<health>200</health>
+			<prerequisites>
+				<prerequisite skill="Nanocircuirty">2</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Stable Nanohive">
 			<slot_type>equipment</slot_type>
@@ -226,6 +250,9 @@
 			<effective_range>4</effective_range>
 			<ammo_resupply_rate>15</ammo_resupply_rate>
 			<health>200</health>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">2</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="K-2 Nanohive">
 			<slot_type>equipment</slot_type>
