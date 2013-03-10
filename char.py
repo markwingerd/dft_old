@@ -34,7 +34,6 @@ class Character:
         self.skillpoints_used = 0
         for skill in self.skill_dict.values():
             self.skillpoints_used += skill.get_sp_used()
-        print self.skillpoints_used
 
     def get_skill_level(self, skill_name):
         """ Returns the skill level. If none found in the self.skill_level dict
@@ -57,9 +56,12 @@ class Character:
 class CharacterLibrary:
     def __init__(self):
         self.character_data = DataRetrieval('characters.dat')
+        # If no characters.dat file exists then create default characters and
+        # save them.
+        if not self.character_data.data:
+            self._create_default_characters()
 
         self.character_list = self.character_data.data
-        #self._load_characters('characters.dat')
 
     def get_character(self, char_name):
         """ Returns a the specified character instance. """
@@ -75,6 +77,20 @@ class CharacterLibrary:
 
     def delete_character(self, character):
         self.character_data.delete_data(character)
+
+    def _create_default_characters(self):
+        """ Called when no character data has been found. This method will
+        create a 'No Skills' character and a 'Max Skills' character.  Both
+        default characters will be saved for future used. """
+        no_skills = Character('No Skills')
+        max_skills = Character('Max Skills')
+        # Set all known skills to Lv5 for max_skills
+        for skill_name in max_skills.skill_dict:
+            max_skills.set_skill(skill_name, 5)
+
+        # Save characters.
+        self.save_character(no_skills)
+        self.save_character(max_skills)
 
 
 class Skill:
