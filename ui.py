@@ -4,7 +4,7 @@ import tkFont
 
 from fitting import Fitting, DropsuitLibrary, Dropsuit, FittingLibrary
 from module import ModuleLibrary, Module, WeaponLibrary, Weapon
-from char import Character, CharacterLibrary, Skills
+from char import Character, CharacterLibrary, SkillLibrary
 
 __application_name__ = 'Dust Fitting Tool'
 
@@ -492,6 +492,7 @@ class CharacterEditWindow(Frame):
         self.window = Toplevel(self.parent)
         self.window.resizable(width=False, height=False)
         self.character_library = CharacterLibrary()
+        self.skill_library = SkillLibrary()
         self.character = self.character_library.get_character(character_name)
 
         # Call pertinent methods for this window.
@@ -529,11 +530,11 @@ class CharacterEditWindow(Frame):
         self.tre_skills.column('#0', width=250, minwidth=150)
         self.tre_skills.column('level', width=30, minwidth=30)
         self.tre_skills.heading('level', text='Lvl')
-        for parent in self.character.get_parent_skills():
+        for parent in self.skill_library.get_all_skill_categories():
             self.tre_skills.insert('', 'end', parent, text=parent, tag='ttk')
-            for child in self.character.get_children_skills(parent):
-                self.character.skill_level
-                self.tre_skills.insert(parent, 'end', child, text=child, tag='ttk')
+            for child in self.skill_library.get_skill_by_category(parent):skills.insert(parent, 'end', child, text=child, tag='ttk')
+                #else:
+                self.tre_skills.insert(parent, 'end', child, text=child, tag=('ttk', child))
                 self.tre_skills.set(child, 'level', self.character.get_skill_level(child))
 
         # Grid management.
@@ -541,6 +542,9 @@ class CharacterEditWindow(Frame):
         self.tre_skills.grid(column=0, row=0, sticky=NW, padx=3, pady=3)
         scb_skills.grid(column=1, row=0, sticky=NE+S, pady=4)
         self.tre_skills.configure(yscrollcommand=scb_skills.set)
+
+        # Deals with prerequisites and the text color
+        self.color_skills()
 
         # Bindings
         self.tre_skills.bind('<<TreeviewSelect>>', self.current_skill_changed)
@@ -587,8 +591,33 @@ class CharacterEditWindow(Frame):
         # Saves changes to the character.
         self.character_library.save_character(self.character)
 
-        # Update the listbox by calling its function
+        # Update the level column for the skill
         self.tre_skills.set(skill, 'level', level)
+
+        # Updates which skills have prerequisites met or unmet (black, red)
+        for skill in self.skill_library.skill_dict.values():
+            prereqs_met = True
+            for prereq_skill, prereq_level in skill.prerequisites:
+                if self.character.get_skill_level(prereq_skill) < prereq_level:
+                    prereqs_met = False
+            if prereqs_met:
+                self.tre_skills.tag_configure(skill.name, foreground='black')
+            else:
+                self.tre_skills.tag_configure(skill.name, foreground='red')
+
+    def color_skills(self):
+        """ Moves through all known skills and colors the skills based on
+            whether they have their prerequisites met or not. """
+        for skill in self.skill_library.skill_dict.values():
+            for prereq_name, prereq_level in skill.prerequisites:
+                if self.character.get_skill_level(prereq_name) < prereq_level:
+                    # Character does not have the prerequisites met to unlock
+                    # this skill.
+                    self.tre_skills.tag_configure(skill.name, foreground='red')
+                    break
+            else:
+                # All prerequisites have been met.
+                self.tre_skills.tag_configure(skill.name, foreground='black')
 
     def change_character(self, *args):
         """ Changes the character. """

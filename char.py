@@ -34,7 +34,6 @@ class Character:
         self.skillpoints_used = 0
         for skill in self.skill_dict.values():
             self.skillpoints_used += skill.get_sp_used()
-        print self.skillpoints_used
 
     def get_skill_level(self, skill_name):
         """ Returns the skill level. If none found in the self.skill_level dict
