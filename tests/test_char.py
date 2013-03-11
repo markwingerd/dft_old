@@ -17,7 +17,7 @@ try:
         Skills,
         InvalidSkillException,
         InvalidCharacterException
-        )
+    )
 except ImportError:
     print "Please place the 'dft' directory on the PYTHONPATH"
     sys.exit(1)
@@ -75,7 +75,8 @@ class TestCharacterSkills(unittest.TestCase):
         self.test_char.set_skill(skill_name, skill_level)
 
         # then we make our call to get_skill_level to test it
-        self.assertEqual(self.test_char.get_skill_level(skill_name), skill_level)
+        self.assertEqual(self.test_char.get_skill_level(skill_name),
+                         skill_level)
 
     def test_character_get_unknown_skill_level(self):
         """ Get the skill level for an unknown skill
@@ -86,7 +87,8 @@ class TestCharacterSkills(unittest.TestCase):
 
         # Any skill that doesn't exist on this character
         # should return 0
-        self.assertEqual(self.test_char.get_skill_level(skill_name), skill_level)
+        self.assertEqual(self.test_char.get_skill_level(skill_name),
+                         skill_level)
 
     @patch("char.Skills.get_names")
     def test_get_all_skills(self, get_names):
@@ -100,9 +102,9 @@ class TestCharacterSkills(unittest.TestCase):
                                   'test skill 2',
                                   'test skill 3']
         # Set up the expected skill values
-        self.test_char.skill_level['test skill 1']=1
-        self.test_char.skill_level['test skill 2']=2
-        self.test_char.skill_level['test skill 3']=3
+        self.test_char.skill_level['test skill 1'] = 1
+        self.test_char.skill_level['test skill 2'] = 2
+        self.test_char.skill_level['test skill 3'] = 3
 
         # The is the result we expect to get back
         expected_skills = {'test skill 1': 1,
@@ -155,7 +157,8 @@ class TestCharacterLibraryGet(unittest.TestCase):
         # we can test
         self.char_name = 'Bob'
         self.test_char = Character(self.char_name)
-        self.char_library.character_list = {self.test_char.name: self.test_char}
+        self.char_library.character_list = {self.test_char.name:
+                                            self.test_char}
 
     def test_get_character(self):
         """Get a character out of the library"""
@@ -237,7 +240,7 @@ class TestCharacterLibrarySave(unittest.TestCase):
 
         count_before = len(self.char_library.character_list)
         # Change the Character and Save it again
-        char.set_skill(skill_name,1)
+        char.set_skill(skill_name, 1)
         self.char_library.save_character(char)
         # Check we now have the same number of characters
         count_after = len(self.char_library.character_list)
@@ -245,7 +248,7 @@ class TestCharacterLibrarySave(unittest.TestCase):
         # Check that our character is in the library once
         char_list = self.char_library.get_character_list()
         self.assertIn(char.name, char_list)
-        self.assertEqual(char_list.count(char_name),1)
+        self.assertEqual(char_list.count(char_name), 1)
         # Check that our skill change was saved
         saved_char = self.char_library.get_character(char_name)
         self.assertEqual(saved_char.get_skill_level(skill_name), 1)
@@ -347,5 +350,5 @@ class TestSkillCategories(unittest.TestCase):
                          [])
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     unittest.main()

@@ -11,7 +11,7 @@ from module import (
     ModuleLibrary,
     Weapon,
     WeaponLibrary
-    )
+)
 from char import Skills
 from cStringIO import StringIO
 
@@ -229,9 +229,12 @@ class TestModuleLibrary(unittest.TestCase):
         # tested in XmlRetrieval
 
         test_library = ModuleLibrary(StringIO(MODULE_XML))
-        self.assertEqual([
-            ("Militia Nanite Injector", '20', '4'),
-            ], test_library.get_children('nanite_injector'))
+        self.assertEqual(
+            [
+                ("Militia Nanite Injector", '20', '4'),
+            ],
+            test_library.get_children('nanite_injector')
+        )
 
 
 class TestWeaponLibrary(unittest.TestCase):
@@ -261,11 +264,13 @@ class TestWeaponLibrary(unittest.TestCase):
         # tested in XmlRetrieval
 
         test_library = WeaponLibrary(StringIO(WEAPON_XML))
-        self.assertEqual([
-            ("Assault Rifle", '23', '3'),
-            ], test_library.get_children('assault_rifles'))
+        self.assertEqual(
+            [
+                ("Assault Rifle", '23', '3'),
+            ],
+            test_library.get_children('assault_rifles')
+        )
 
 
-
-if __name__=='__main__':
+if __name__ == '__main__':
     unittest.main()

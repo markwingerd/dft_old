@@ -88,12 +88,12 @@ class TestXmlRetrieval(unittest.TestCase):
         The get_target method should find the element with the given name
         attribute and it's immediate children are returned as properties
         """
-        xml_data = '<data><item name="banana"><colour>yellow</colour>'+\
+        xml_data = '<data><item name="banana"><colour>yellow</colour>' + \
             '</item></data>'
         xml = StringIO(xml_data)
         obj = XmlRetrieval(xml)
         properties, skills = obj.get_target('banana')
-        self.assertEqual({'colour':'yellow'}, properties)
+        self.assertEqual({'colour': 'yellow'}, properties)
         self.assertEqual({}, skills)
 
     def test_get_target_with_properties_and_skills(self):
@@ -103,12 +103,12 @@ class TestXmlRetrieval(unittest.TestCase):
         and the properties with the attribute 'effected_by' are returned as
         effecting skills
         """
-        xml_data = '<data><item name="banana"><colour effected_by="light">'+\
+        xml_data = '<data><item name="banana"><colour effected_by="light">' + \
             'yellow</colour></item></data>'
         xml = StringIO(xml_data)
         obj = XmlRetrieval(xml)
         properties, skills = obj.get_target('banana')
-        self.assertEqual({'colour':['light']}, skills)
+        self.assertEqual({'colour': ['light']}, skills)
 
     def test_get_target_with_properties_and_multiple_skills(self):
         """
@@ -117,12 +117,12 @@ class TestXmlRetrieval(unittest.TestCase):
         and the properties with the attribute 'effected_by' are returned as
         effecting skills
         """
-        xml_data = '<data><item name="banana"><colour effected_by="light" '+\
+        xml_data = '<data><item name="banana"><colour effected_by="light" ' + \
             'effected_by2="moisture">yellow</colour></item></data>'
         xml = StringIO(xml_data)
         obj = XmlRetrieval(xml)
         properties, skills = obj.get_target('banana')
-        self.assertEqual({'colour':['moisture', 'light']}, skills)
+        self.assertEqual({'colour': ['moisture', 'light']}, skills)
 
     def test_get_list(self):
         """
@@ -255,10 +255,13 @@ class TestXmlRetrieval(unittest.TestCase):
         obj = XmlRetrieval(xml)
         children_list = obj.get_children('nanite_injector')
         # pg and cpu are returned as strings
-        self.assertEqual([
-            ("Militia Nanite Injector", '20', '4'),
-            ("Nanite Injector", '10', '2'),
-            ], children_list)
+        self.assertEqual(
+            [
+                ("Militia Nanite Injector", '20', '4'),
+                ("Nanite Injector", '10', '2'),
+            ],
+            children_list
+        )
 
     def test_get_children_none(self):
         """
@@ -295,5 +298,5 @@ class TestXmlRetrieval(unittest.TestCase):
         self.assertEqual([], children_list)
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     unittest.main()
