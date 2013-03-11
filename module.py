@@ -136,7 +136,7 @@ class ModuleLibrary(object):
 
 
 class WeaponLibrary(ModuleLibrary):
-    def __init__(self, filename_or_stream='module.xml'):
+    def __init__(self, filename_or_stream='weapon.xml'):
         super(WeaponLibrary, self).__init__(filename_or_stream)
 
 
