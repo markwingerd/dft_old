@@ -11,12 +11,17 @@ class XmlRetrieval:
         # Create a dictionary of the targets properties and effecting skills.
         properties = {}
         effecting_skills = {}
+        prerequisites = []
 
         xml_tree = ET.parse(self.file_name)
         target = xml_tree.find('.//*[@name="%s"]' % target_name)
 
         # Extracts targets data.
+        for prereq in target.findall('./prerequisites/prerequisite'):
+            prerequisites.append( (prereq.attrib['skill'], int(prereq.text)) )
         for prop in target:
+            #if prop.tag == 'prerequisites':
+            #continue
             # Get any xml attributes and save them to a dict for later use.
             if 'effected_by' in prop.attrib.keys():
                 effecting_skills[prop.tag] = prop.attrib.values()
@@ -29,7 +34,7 @@ class XmlRetrieval:
         # Gets the parent name.
         parent = xml_tree.find('.//*[@name="%s"]/..' % target_name).tag
 
-        return (parent, properties, effecting_skills)
+        return (parent, properties, effecting_skills, prerequisites)
 
     def get_list(self):
         """ Returns a list of all items in an xml file. """
