@@ -234,5 +234,38 @@ class TestModuleLibrary(unittest.TestCase):
             ], test_library.get_children('nanite_injector'))
 
 
+class TestWeaponLibrary(unittest.TestCase):
+    """Tests for the WeaponsLibrary class"""
+
+    def test_get_names(self):
+        """Test we can get the names from the Library"""
+        # Not going to go overboard testing this as it's already
+        # tested in XmlRetrieval
+        test_library = WeaponLibrary(StringIO(WEAPON_XML))
+        self.assertEqual(("Locus Grenade",
+                          "Assault Rifle"),
+                         test_library.get_names())
+
+    def test_get_parents(self):
+        """Test we can get the parents from the Library"""
+        # Not going to go overboard testing this as it's already
+        # tested in XmlRetrieval
+        test_library = WeaponLibrary(StringIO(WEAPON_XML))
+        self.assertEqual(["grenades",
+                          "assault_rifles"],
+                         test_library.get_parents())
+
+    def test_get_children(self):
+        """Test we can get the children from the Library"""
+        # Not going to go overboard testing this as it's already
+        # tested in XmlRetrieval
+
+        test_library = WeaponLibrary(StringIO(WEAPON_XML))
+        self.assertEqual([
+            ("Assault Rifle", '23', '3'),
+            ], test_library.get_children('assault_rifles'))
+
+
+
 if __name__=='__main__':
     unittest.main()
