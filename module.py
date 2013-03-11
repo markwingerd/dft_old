@@ -15,7 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import sys, os
+import sys
+import os
 import xml.etree.ElementTree as ET
 import math
 
@@ -45,7 +46,7 @@ class Module:
         # value of the Property, in a dictionary in the format
         # {'property':['skill', 'skill']}
         properties, effecting_skills = module_data.get_target(mod_name)
-        self._add_stats(properties,effecting_skills)
+        self._add_stats(properties, effecting_skills)
 
     def show_stats(self):
         print self.name
@@ -77,7 +78,8 @@ class Module:
 
         for key in properties:
             if key in effecting_skills.keys():
-                # Skills effect this property. Get and apply the skill modifier.
+                # Skills effect this property.
+                # Get and apply the skill modifier.
                 skill_list = effecting_skills[key]
                 mod = _get_skill_modifier(skill_list)
                 self.stats[key] = math.floor(properties[key] * (1 + mod))
@@ -87,7 +89,8 @@ class Module:
 
 class Weapon(Module):
     """ Req dropsuit and fitting to test properly. """
-    def __init__(self, skills, weapon_name, filename_or_stream='weapon.xml', module_list=[]):
+    def __init__(self, skills, weapon_name, filename_or_stream='weapon.xml',
+                 module_list=[]):
         self.stats = {}
         self.name = weapon_name
         self.skills = skills
@@ -95,7 +98,7 @@ class Weapon(Module):
 
         weapon_data = XmlRetrieval(filename_or_stream)
         properties, effecting_skills = weapon_data.get_target(weapon_name)
-        self._add_stats(properties,effecting_skills)
+        self._add_stats(properties, effecting_skills)
         self._add_module_bonus()
 
     def _add_module_bonus(self):
@@ -107,9 +110,11 @@ class Weapon(Module):
         for m in self.module_list:
             try:
                 if slot_type == m.stats['enhances']:
-                    self.stats['damage'] = self.stats['damage'] * (1 + m.stats['damage'])
+                    self.stats['damage'] = self.stats['damage'] \
+                        * (1 + m.stats['damage'])
             except KeyError:
-                # Module does not have a key 'enhances' in its stats dictionary.
+                # Module does not have a key 'enhances'
+                # in its stats dictionary.
                 pass
 
 
