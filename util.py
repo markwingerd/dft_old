@@ -30,6 +30,12 @@ class XmlRetrieval:
         properties = {}
         effecting_skills = {}
 
+        # if we have a stream, wind it back to the beginning because
+        # if it's already been read from then there will be nothing
+        # left to read
+        if isinstance(self.data, cStringIO.InputType):
+            self.data.seek(0)
+
         xml_tree = ET.parse(self.data)
         target = xml_tree.find('.//*[@name="%s"]' % target_name)
 
@@ -53,6 +59,12 @@ class XmlRetrieval:
         """ Returns a list of all items in an xml file. """
         names_list = []
 
+        # if we have a stream, wind it back to the beginning because
+        # if it's already been read from then there will be nothing
+        # left to read
+        if isinstance(self.data, cStringIO.InputType):
+            self.data.seek(0)
+
         xml_tree = ET.parse(self.data)
 
         parents = xml_tree.findall('.//*[@name]/..')
@@ -67,6 +79,12 @@ class XmlRetrieval:
         """ Returns a list of all parents in the xml file. """
         parent_list = []
 
+        # if we have a stream, wind it back to the beginning because
+        # if it's already been read from then there will be nothing
+        # left to read
+        if isinstance(self.data, cStringIO.InputType):
+            self.data.seek(0)
+
         xml_tree = ET.parse(self.data)
         parents = xml_tree.findall('.//*[@name]/..')
         for parent in parents:
@@ -77,6 +95,12 @@ class XmlRetrieval:
     def get_children(self, target):
         """ Returns all the children of a given parent. """
         children_list = []
+
+        # if we have a stream, wind it back to the beginning because
+        # if it's already been read from then there will be nothing
+        # left to read
+        if isinstance(self.data, cStringIO.InputType):
+            self.data.seek(0)
 
         xml_tree = ET.parse(self.data)
         parent = xml_tree.findall('.//%s/' % target)
