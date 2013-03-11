@@ -24,18 +24,22 @@ from util import XmlRetrieval
 
 
 class Module:
-    def __init__(self, skills, mod_name):
+    def __init__(self, skills, mod_name, filename_or_stream='module.xml'):
         """
         skills - A dictionary of skill, value pairs
                  e.g. {'Nanocircuitry': 0.05}
         module - The name of the module
                  e.g. "Militia Nanite Injector"
+        filename_or_stream - If a string this represents an xml file containing
+                             The module data.
+                             If a StringIO object then the object will contain
+                             the XML data and read directly
         """
         self.stats = {}
         self.name = mod_name
         self.skills = skills
 
-        module_data = XmlRetrieval('module.xml')
+        module_data = XmlRetrieval(filename_or_stream)
         # Properties include: slot_type, cpu, pg
         # Effecting_skills are the names of skills (list) which will adjust the
         # value of the Property, in a dictionary in the format
@@ -83,13 +87,13 @@ class Module:
 
 class Weapon(Module):
     """ Req dropsuit and fitting to test properly. """
-    def __init__(self, skills, weapon_name, module_list=[]):
+    def __init__(self, skills, weapon_name, filename_or_stream='weapon.xml', module_list=[]):
         self.stats = {}
         self.name = weapon_name
         self.skills = skills
         self.module_list = module_list
 
-        weapon_data = XmlRetrieval('weapon.xml')
+        weapon_data = XmlRetrieval(filename_or_stream)
         properties, effecting_skills = weapon_data.get_target(weapon_name)
         self._add_stats(properties,effecting_skills)
         self._add_module_bonus()
