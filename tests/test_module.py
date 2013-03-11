@@ -6,7 +6,12 @@
 import sys
 import unittest
 from mock import patch
-from module import Module, Weapon
+from module import (
+    Module,
+    ModuleLibrary,
+    Weapon,
+    WeaponLibrary
+    )
 from char import Skills
 from cStringIO import StringIO
 
@@ -193,6 +198,40 @@ class TestWeapon(unittest.TestCase):
                              [test_module])
         self.assertEqual(21, test_weapon.get('cpu'))
         self.assertEqual(31.93, test_weapon.get('damage'))
+
+
+class TestModuleLibrary(unittest.TestCase):
+    """Tests for the ModuleLibrary class"""
+
+    def test_get_names(self):
+        """Test we can get the names from the Library"""
+        # Not going to go overboard testing this as it's already
+        # tested in XmlRetrieval
+        test_library = ModuleLibrary(StringIO(MODULE_XML))
+        self.assertEqual(("Militia Nanite Injector",
+                          "Militia Repair Tool",
+                          "Basic Light Damage Modifier"),
+                         test_library.get_names())
+
+    def test_get_parents(self):
+        """Test we can get the parents from the Library"""
+        # Not going to go overboard testing this as it's already
+        # tested in XmlRetrieval
+        test_library = ModuleLibrary(StringIO(MODULE_XML))
+        self.assertEqual(["nanite_injector",
+                          "repair_tool",
+                          "weapons_upgrades"],
+                         test_library.get_parents())
+
+    def test_get_children(self):
+        """Test we can get the children from the Library"""
+        # Not going to go overboard testing this as it's already
+        # tested in XmlRetrieval
+
+        test_library = ModuleLibrary(StringIO(MODULE_XML))
+        self.assertEqual([
+            ("Militia Nanite Injector", '20', '4'),
+            ], test_library.get_children('nanite_injector'))
 
 
 if __name__=='__main__':
