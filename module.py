@@ -136,8 +136,8 @@ class ModuleLibrary:
 
 
 class WeaponLibrary(ModuleLibrary):
-    def __init__(self):
-        self.weapon_data = XmlRetrieval('weapon.xml')
+    def __init__(self, filename_or_stream='module.xml'):
+        self.weapon_data = XmlRetrieval(filename_or_stream)
 
         self.names = self.weapon_data.get_list()
 
