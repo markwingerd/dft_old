@@ -118,7 +118,7 @@ class Weapon(Module):
                 pass
 
 
-class ModuleLibrary:
+class ModuleLibrary(object):
     def __init__(self, filename_or_stream='module.xml'):
         self.module_data = XmlRetrieval(filename_or_stream)
 
@@ -137,15 +137,7 @@ class ModuleLibrary:
 
 class WeaponLibrary(ModuleLibrary):
     def __init__(self, filename_or_stream='module.xml'):
-        self.weapon_data = XmlRetrieval(filename_or_stream)
-
-        self.names = self.weapon_data.get_list()
-
-    def get_parents(self):
-        return self.weapon_data.get_parents()
-
-    def get_children(self, parent):
-        return self.weapon_data.get_children(parent)
+        super(WeaponLibrary, self).__init__(filename_or_stream)
 
 
 if __name__ == '__main__':
