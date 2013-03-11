@@ -47,62 +47,42 @@ MODULE_XML = """
 class TestModule(unittest.TestCase):
     """Tests for the Module class in the Module module.. hoho"""
 
-    @patch("util.get_file_loc")
-    def test_instantiation(self, get_file_loc):
+    def test_instantiation(self):
         """
         The instantiation of the class will load the data
         """
-        # Patch the get_file_loc function to return a stream object
-        # containing the Module XML.  This will work because ElementTree
-        # will take either a filename or a file-like object
-        get_file_loc.return_value = StringIO(MODULE_XML)
-
+        test_data = StringIO(MODULE_XML)
         test_skills = {'Nanocircuitry': -0.05}
-        test_module = Module(test_skills, "Militia Nanite Injector")
+        test_module = Module(test_skills, "Militia Nanite Injector", test_data)
 
-    @patch("util.get_file_loc")
-    def test_skill_modifier(self, get_file_loc):
+    def test_skill_modifier(self):
         """
         The Nanocircuitry modifier of -0.05 should reduce the cpu
         from 20 to 19
         """
-        # Patch the get_file_loc function to return a stream object
-        # containing the Module XML.  This will work because ElementTree
-        # will take either a filename or a file-like object
-        get_file_loc.return_value = StringIO(MODULE_XML)
-
+        test_data = StringIO(MODULE_XML)
         test_skills = {'Nanocircuitry': -0.05}
-        test_module = Module(test_skills, "Militia Nanite Injector")
+        test_module = Module(test_skills, "Militia Nanite Injector", test_data)
         self.assertEqual(19, test_module.get('cpu'))
 
-    @patch("util.get_file_loc")
-    def test_skill_modifier_no_matching_skill(self, get_file_loc):
+    def test_skill_modifier_no_matching_skill(self):
         """
         The instantiate the Module but the skills passed in do not
         contain the skill referenced in the module.
         When this happens
         """
-        # Patch the get_file_loc function to return a stream object
-        # containing the Module XML.  This will work because ElementTree
-        # will take either a filename or a file-like object
-        get_file_loc.return_value = StringIO(MODULE_XML)
-
+        test_data = StringIO(MODULE_XML)
         test_skills = {}
-        test_module = Module(test_skills, "Militia Nanite Injector")
+        test_module = Module(test_skills, "Militia Nanite Injector", test_data)
         self.assertEqual(20, test_module.get('cpu'))
 
-    @patch("util.get_file_loc")
-    def test_show_stats(self, get_file_loc):
+    def test_show_stats(self):
         """
         Outputs the stats of a module
         """
-        # Patch the get_file_loc function to return a stream object
-        # containing the Module XML.  This will work because ElementTree
-        # will take either a filename or a file-like object
-        get_file_loc.return_value = StringIO(MODULE_XML)
-
+        test_data = StringIO(MODULE_XML)
         test_skills = {}
-        test_module = Module(test_skills, "Militia Nanite Injector")
+        test_module = Module(test_skills, "Militia Nanite Injector", test_data)
         # catch the stdout
         try:
             output = StringIO()
@@ -158,32 +138,23 @@ WEAPON_XML = """
 class TestWeapon(unittest.TestCase):
     """Tests for the Weapon class in the Module module"""
 
-    @patch("util.get_file_loc")
-    def test_instantiation(self, get_file_loc):
+    def test_instantiation(self):
         """
         The instantiation of the class will load the data
         """
-        # Patch the get_file_loc function to return a stream object
-        # containing the Weapons XML.  This will work because ElementTree
-        # will take either a filename or a file-like object
-        get_file_loc.return_value = StringIO(WEAPON_XML)
-
+        test_data = StringIO(WEAPON_XML)
         test_skills = {'Light Weapon Upgrades': -0.05}
-        test_weapon = Weapon(test_skills, "Assault Rifle")
+        test_weapon = Weapon(test_skills, "Assault Rifle", test_data)
 
-    @patch("util.get_file_loc")
-    def test_skill_modifier(self, get_file_loc):
+    def test_skill_modifier(self):
         """
         The Light Weapon Upgrades modifier of -0.05 should reduce the cpu
         from 23 to 21
         """
-        # Patch the get_file_loc function to return a stream object
-        # containing the Module XML.  This will work because ElementTree
-        # will take either a filename or a file-like object
-        get_file_loc.return_value = StringIO(WEAPON_XML)
+        test_data = StringIO(WEAPON_XML)
 
         test_skills = {'Light Weapon Upgrades': -0.05}
-        test_weapon = Weapon(test_skills, "Assault Rifle")
+        test_weapon = Weapon(test_skills, "Assault Rifle", test_data)
         self.assertEqual(21, test_weapon.get('cpu'))
 
     # TODO.. you haven't tested the effects of a module on weapons
