@@ -157,7 +157,42 @@ class TestWeapon(unittest.TestCase):
         test_weapon = Weapon(test_skills, "Assault Rifle", test_data)
         self.assertEqual(21, test_weapon.get('cpu'))
 
-    # TODO.. you haven't tested the effects of a module on weapons
+    def test_module_modifier(self):
+        """
+        The Basic Light Damage Modifier module of 0.03 should increase the
+        damage of the Assault Rifle from 31 to 31.93
+        """
+        test_data = StringIO(WEAPON_XML)
+
+        test_skills = {}
+        test_module = Module(test_skills,
+                             "Basic Light Damage Modifier",
+                             StringIO(MODULE_XML))
+
+        test_weapon = Weapon(test_skills,
+                             "Assault Rifle",
+                             test_data,
+                             [test_module])
+        self.assertEqual(31.93, test_weapon.get('damage'))
+
+    def test_skill_and_module_modifier(self):
+        """
+        Test that both Skills modifers and Module damage modifiers are
+        both applied together
+        """
+        test_data = StringIO(WEAPON_XML)
+
+        test_skills = {'Light Weapon Upgrades': -0.05}
+        test_module = Module(test_skills,
+                             "Basic Light Damage Modifier",
+                             StringIO(MODULE_XML))
+
+        test_weapon = Weapon(test_skills,
+                             "Assault Rifle",
+                             test_data,
+                             [test_module])
+        self.assertEqual(21, test_weapon.get('cpu'))
+        self.assertEqual(31.93, test_weapon.get('damage'))
 
 
 if __name__=='__main__':
