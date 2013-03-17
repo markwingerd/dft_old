@@ -9,6 +9,7 @@ from mock import patch
 from module import (
     Module,
     ModuleLibrary,
+    ModuleNotExistException,
     Weapon,
     WeaponLibrary
 )
@@ -59,6 +60,15 @@ class TestModule(unittest.TestCase):
         test_data = StringIO(MODULE_XML)
         test_skills = {'Nanocircuitry': -0.05}
         test_module = Module(test_skills, "Militia Nanite Injector", test_data)
+
+    def test_module_not_exist(self):
+        """
+        The instantiation of the class with a module that doesn't exist
+        """
+        test_data = StringIO(MODULE_XML)
+        test_skills = {'Nanocircuitry': -0.05}
+        with self.assertRaises(ModuleNotExistException):
+            test_module = Module(test_skills, "I dont exist", test_data)
 
     def test_skill_modifier(self):
         """

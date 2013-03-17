@@ -1,9 +1,9 @@
 About
 -----
-DFT is a fitting tool for the PS3 game Dust 514.  DFT (unofficial name 
-at this point) will allow a user to build dropsuit and vehicle fits using 
-any known item in the game at no cost and no restriction.  It will 
-eventually have the functionality to allow you to plan your fittings with 
+DFT is a fitting tool for the PS3 game Dust 514.  DFT (unofficial name
+at this point) will allow a user to build dropsuit and vehicle fits using
+any known item in the game at no cost and no restriction.  It will
+eventually have the functionality to allow you to plan your fittings with
 ease.
 
 Usage
@@ -13,6 +13,25 @@ TBD
 Examples
 --------
 TBD
+
+Tests
+--------
+To run the tests you must have the nose installed.
+https://nose.readthedocs.org/en/latest/
+
+You must also have the mock python extension installed.
+https://pypi.python.org/pypi/mock
+
+Change to the dft directory.
+
+Export the dft directory as the python path
+
+    export PYTHONPATH=.
+
+Run the tests
+
+    nosetests
+
 
 LICENSE
 -------
