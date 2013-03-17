@@ -6,7 +6,12 @@
 import sys
 import unittest
 from cStringIO import StringIO
-from fitting import Dropsuit, DropsuitNotFound
+from fitting import (
+    Dropsuit,
+    DropsuitNotFound,
+    DropsuitLibrary,
+    Fitting
+)
 from char import Character
 
 DROPSUIT_XML = """
@@ -123,3 +128,36 @@ stamina_recovery_rate 18.0
         test_data = StringIO(DROPSUIT_XML)
         test_dropsuit = Dropsuit(self.char, "Scout Type-I", test_data)
         self.assertEqual(120.75, test_dropsuit.stats.get('cpu'))
+
+
+class TestDropsuitLibrary(unittest.TestCase):
+    """Tests for the DropsuitLibrary class"""
+
+    def test_instantiation(self):
+        """
+        The instantiation of the class will load the data
+        """
+        test_data = StringIO(DROPSUIT_XML)
+        test_dropsuit = DropsuitLibrary(test_data)
+
+    def test_get_names(self):
+        """
+        Test fetching all the dropsuit names from the library
+        """
+        test_data = StringIO(DROPSUIT_XML)
+        test_dropsuit = DropsuitLibrary(test_data)
+        self.assertEquals(("Scout Type-I",), test_dropsuit.get_names())
+
+
+class TestFitting(unittest.TestCase):
+    """Tests for the Fitting class"""
+
+    def setUp(self):
+        """Setup data to test with"""
+        self.char = Character('Test')
+
+    def test_instantiation(self):
+        """
+        The instantiation of the class will load the data
+        """
+        test_dropsuit = Fitting("Test Fitting", self.char, 'Scout Type-I')
