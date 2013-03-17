@@ -20,7 +20,7 @@ import xml.etree.ElementTree as ET
 
 from char import Character, CharacterLibrary
 from module import Module, Weapon
-from util import XmlRetrieval, DataRetrieval
+from util import XmlRetrieval, DataRetrieval, ElementNotFoundException
 
 class Fitting:
     def __init__(self, name, character, ds_name):
@@ -442,6 +442,11 @@ class Fitting:
         return output
 
 
+class DropsuitNotFound(Exception):
+    """Exception raised when a named Dropsuit cannot be found"""
+    pass
+
+
 class Dropsuit:
     def __init__(self, char, ds_name, filename_or_stream='module.xml'):
         """
@@ -456,7 +461,11 @@ class Dropsuit:
         self.ds_name = ds_name
 
         dropsuit_data = XmlRetrieval(filename_or_stream)
-        properties, effecting_skills = dropsuit_data.get_target(ds_name)
+        try:
+            properties, effecting_skills = dropsuit_data.get_target(ds_name)
+        except ElementNotFoundException:
+            raise DropsuitNotFound
+
         self._add_stats(properties, effecting_skills)
 
     def show_stats(self):
