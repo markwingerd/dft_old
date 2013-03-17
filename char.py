@@ -28,12 +28,17 @@ class Character:
         self.skill_effect = {} # Used for modifying modules
 
     def show_skills(self):
+        # Not currently referenced anywhere
         print self.skill_level
 
-    def get_all_skills(self):
+    def get_all_skill_names(self):
         return self.skills.get_names()
 
     def set_skill(self, skill, level):
+        """Sets a given skill name to a given skill level"""
+        if not skill in self.skills.get_names():
+            raise InvalidSkillException
+
         self.skill_level[skill] = level
         self.skill_effect[skill] = level * self.skills.skill_effect[skill]
 
@@ -64,16 +69,25 @@ class Character:
         return self.skills.get_children(parent)
 
 
-class CharacterLibrary:
-    def __init__(self):
-        self.character_data = DataRetrieval('characters.dat')
+class InvalidCharacterException(Exception):
+    """Exception raised when a referenced character doesn't exist"""
+    pass
 
+
+class CharacterLibrary:
+    def __init__(self, filename='characters.dat'):
+        self.character_data = DataRetrieval(filename)
+
+        # Ironically self.character_list is a dictionary
         self.character_list = self.character_data.data
         #self._load_characters('characters.dat')
 
     def get_character(self, char_name):
         """ Returns a the specified character instance. """
-        return self.character_list[char_name]
+        try:
+            return self.character_list[char_name]
+        except KeyError:
+            raise InvalidCharacterException(char_name)
 
     def get_character_list(self):
         """ Returns a list of the names of all characters as a tuple. """
@@ -87,17 +101,24 @@ class CharacterLibrary:
         self.character_data.delete_data(character)
 
 
+class InvalidSkillException(Exception):
+    """Exception raised when the requested skill
+       does not exist"""
+    pass
+
+
 class Skills:
     def __init__(self):
         # Dict of skills and their effects on stats {Skill_Name: Effect}
         self.skill_effect = {}
         self.file_name = self._get_file_loc('skills.xml')
-        
+
         # THIS STILL USES THE OLDER VERSION TO RETRIEVE XML.... ITS TOO
         # DIFFERENT TO USE THE OTHER SHIT. FUCK. IL FIX IT LATER
         self._get_xml(self.file_name)
 
     def show_skills(self):
+        # Not used anywhere!
         print self.skill_effect
 
     def get_names(self):
@@ -132,7 +153,7 @@ class Skills:
         if getattr(sys, 'frozen', None):
             basedir = sys._MEIPASS + '/data/'
         else:
-            basedir = os.path.dirname('data/')
+            basedir = os.path.join(os.path.dirname(__file__),'data')
         return os.path.join(basedir, file_name)
 
     def _get_xml(self, src):
@@ -158,7 +179,7 @@ if __name__ == '__main__':
     #char3.set_skill('Weaponry',5)
     #char3.set_skill('Dropsuit Command',4)
 
-    char_lib = CharacterLibrary()   
+    char_lib = CharacterLibrary()
     #char_lib.save_character(char3)
     print char_lib.get_character_list()
     char = char_lib.get_character('Reimus')
