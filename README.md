@@ -25,9 +25,11 @@ https://pypi.python.org/pypi/mock
 Change to the dft directory.
 
 Export the dft directory as the python path
+
     export PYTHONPATH=.
 
 Run the tests
+
     nosetests
 
 
