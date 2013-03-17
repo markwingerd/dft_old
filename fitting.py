@@ -443,17 +443,26 @@ class Fitting:
 
 
 class Dropsuit:
-    def __init__(self, char, ds_name):
+    def __init__(self, char, ds_name, filename_or_stream='module.xml'):
+        """
+        Initalisation method for a Dropsuit
+        char = An Instance of a Character
+        ds_name = The name of the Dropsuit (i.e. Scout Type-I)
+        filename_or_stream = The filename of the xml data file containing
+                             the data.. or stream containing data
+        """
         self.stats = {}
         self.skill_effects = char.skill_effect
         self.ds_name = ds_name
 
-        dropsuit_data = XmlRetrieval('dropsuit.xml')
+        dropsuit_data = XmlRetrieval(filename_or_stream)
         properties, effecting_skills = dropsuit_data.get_target(ds_name)
         self._add_stats(properties, effecting_skills)
 
     def show_stats(self):
-        for key in self.stats:
+        keys = self.stats.keys()
+        keys.sort()
+        for key in keys:
             print key, self.stats[key]
 
     def _add_stats(self, properties, effecting_skills):
