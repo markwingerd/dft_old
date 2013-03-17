@@ -160,7 +160,6 @@ class Fitting:
             mod.show_stats()
             print '======================================================'
 
-
     def add_module(self, mod_name):
         """ Adds a module if there is enough CPU, PG, and slots available. """
         module = Module(self.char.skill_effect, mod_name)
@@ -229,7 +228,7 @@ class Fitting:
 
     def add_weapon(self, weapon_name):
         """ Adds a weapon. THIS MUST bE CALLED AFTER MODULES HAVE BEEN ADDED. """
-        weapon = Weapon(self.char.skill_effect, weapon_name, self.hi_slot)
+        weapon = Weapon(self.char.skill_effect, weapon_name)
         slot_type = weapon.stats['slot_type']
         used_slots = len(getattr(self, slot_type))
         max_slots = self.dropsuit.stats[slot_type]

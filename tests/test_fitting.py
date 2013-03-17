@@ -13,6 +13,8 @@ from fitting import (
     Fitting
 )
 from char import Character
+from module import ModuleNotExistException
+
 
 DROPSUIT_XML = """
 <data>
@@ -149,6 +151,14 @@ class TestDropsuitLibrary(unittest.TestCase):
         self.assertEquals(("Scout Type-I",), test_dropsuit.get_names())
 
 
+# Please Note:
+# The fitting tests are very basic because the module was not written
+# With testing in mind and it is quite difficult to test it properly.
+# More tests can be written over time but the fitting module really needs
+# to be refactored so it is a little more Object Orientated and easier
+# to test.
+
+
 class TestFitting(unittest.TestCase):
     """Tests for the Fitting class"""
 
@@ -160,4 +170,296 @@ class TestFitting(unittest.TestCase):
         """
         The instantiation of the class will load the data
         """
-        test_dropsuit = Fitting("Test Fitting", self.char, 'Scout Type-I')
+        test_fitting = Fitting("Test Fitting", self.char, 'Scout Type-I')
+
+
+class TestFittingAddModules(unittest.TestCase):
+    """Tests for adding Modules to Fittings"""
+
+    def setUp(self):
+        """Setup data to test with"""
+        self.char = Character('Test')
+        self.fitting = Fitting("Test Fitting", self.char, 'Scout Type-I')
+
+    def test_add(self):
+        """Add a module to the fitting"""
+        self.fitting.add_module('Militia Nanite Injector')
+        all_modules = self.fitting.get_all_modules()
+
+        # We should have the "Militia Nanite Injector" in the list of
+        # fitted modules.... somewhere.
+        # The return value of get_all_modules is not the best to manipulate
+        # This test could be better if it returned objects instead of strings
+        expected = "Militia Nanite Injector"
+        self.assertIn(expected, ','.join(all_modules))
+
+    def test_add_not_exist(self):
+        """Add a module that doesn't exist to the fitting"""
+        with self.assertRaises(ModuleNotExistException):
+            self.fitting.add_module('Rocket Pants')
+
+    def test_add_increases_cpu(self):
+        """Adding a module should increase the used cpu"""
+        current_cpu = self.fitting.current_cpu
+        self.fitting.add_module('Militia Nanite Injector')
+        new_cpu = self.fitting.current_cpu
+
+        # This is not a great test.  Since we are not overriding the module data
+        # and it's loading it from the xml file it could change without us knowing.
+        # Therefore I'm only going to test that the cpu increases and I'm not going
+        # to test the amount in which it increases... as this could break later
+        self.assertGreater(new_cpu, current_cpu)
+
+    def test_add_increases_pg(self):
+        """Adding a module should increase the used pg"""
+        current_pg = self.fitting.current_pg
+        self.fitting.add_module('Militia Nanite Injector')
+        new_pg = self.fitting.current_pg
+
+        # This is not a great test.  Since we are not overriding the module data
+        # and it's loading it from the xml file it could change without us knowing.
+        # Therefore I'm only going to test that the pg increases and I'm not going
+        # to test the amount in which it increases... as this could break later
+        self.assertGreater(new_pg, current_pg)
+
+
+class TestFittingRemoveModules(unittest.TestCase):
+    """Tests for removing Modules from Fittings"""
+
+    def setUp(self):
+        """Setup data to test with"""
+        self.char = Character('Test')
+        self.fitting = Fitting("Test Fitting", self.char, 'Scout Type-I')
+        self.fitting.add_module('Militia Nanite Injector')
+
+    def test_remove(self):
+        """Remove a module from the fitting"""
+        self.fitting.remove_module("Militia Nanite Injector")
+        all_modules = self.fitting.get_all_modules()
+
+        expected = "Militia Nanite Injector"
+        self.assertNotIn(expected, ','.join(all_modules))
+
+    def test_remove_not_exist(self):
+        """Remove a module that isn't even on the fitting"""
+        # This should not error
+        self.fitting.remove_module("Banana Gun")
+        all_modules = self.fitting.get_all_modules()
+
+        expected = "Banana Gun"
+        self.assertNotIn(expected, ','.join(all_modules))
+
+
+class TestFittingAddWeapon(unittest.TestCase):
+    """Tests for adding Weapons to Fittings"""
+
+    def setUp(self):
+        """Setup data to test with"""
+        self.char = Character('Test')
+        self.fitting = Fitting("Test Fitting", self.char, 'Scout Type-I')
+
+    def test_add(self):
+        """Add a weapon to the fitting"""
+        self.fitting.add_weapon('Assault Rifle')
+        all_modules = self.fitting.get_all_modules()
+
+        # We should have the "Assault Rifle" in the list of
+        # fitted modules.... somewhere.
+        # The return value of get_all_modules is not the best to manipulate
+        # This test could be better if it returned objects instead of strings
+        expected = "Assault Rifle"
+        self.assertIn(expected, ','.join(all_modules))
+
+    def test_add_not_exist(self):
+        """Add a weapons that doesn't exist to the fitting"""
+        with self.assertRaises(ModuleNotExistException):
+            self.fitting.add_module('Spud Gun')
+
+    def test_wrong_slot(self):
+        """Add a weapon to a dropsuit that doesn't have a slot of that type"""
+        # We'll add a heavy weapon to the Scout Suit which doesn't have a Heavy Slot
+        # This should error but won't add the Heavy Weapon either
+        self.fitting.add_weapon('Forge Gun')
+        all_modules = self.fitting.get_all_modules()
+
+        expected = "Forge Gun"
+        self.assertNotIn(expected, ','.join(all_modules))
+
+
+class TestFittingCPUOver(unittest.TestCase):
+    """Tests for the CPU Over method"""
+
+    def setUp(self):
+        """Setup data to test with"""
+        self.char = Character('Test')
+        self.fitting = Fitting("Test Fitting", self.char, 'Scout Type-I')
+
+    def test_zero(self):
+        """If the max and used CPU are the same it should return zero"""
+        self.fitting.max_cpu = 100.0
+        self.fitting.current_cpu = 100.0
+        self.assertEqual(None, self.fitting.get_cpu_over())
+
+    def test_postive(self):
+        """If the used CPU is higher than the max CPU"""
+        self.fitting.max_cpu = 100.0
+        self.fitting.current_cpu = 110.0
+        self.assertEqual("10.0% over", self.fitting.get_cpu_over())
+
+    def test_negative(self):
+        """If the used CPU is lower than the max CPU we should get zero"""
+        self.fitting.max_cpu = 100.0
+        self.fitting.current_cpu = 90.0
+        self.assertEqual(None, self.fitting.get_cpu_over())
+
+
+
+class TestFittingPGOver(unittest.TestCase):
+    """Tests for the PG Over method"""
+
+    def setUp(self):
+        """Setup data to test with"""
+        self.char = Character('Test')
+        self.fitting = Fitting("Test Fitting", self.char, 'Scout Type-I')
+
+    def test_zero(self):
+        """If the max and used PG are the same it should return zero"""
+        self.fitting.max_pg = 100.0
+        self.fitting.current_pg = 100.0
+        self.assertEqual(None, self.fitting.get_pg_over())
+
+    def test_postive(self):
+        """If the used PG is higher than the max PG"""
+        self.fitting.max_pg = 100.0
+        self.fitting.current_pg = 110.0
+        self.assertEqual("10.0% over", self.fitting.get_pg_over())
+
+    def test_negative(self):
+        """If the used PG is lower than the max PG we should get zero"""
+        self.fitting.max_pg = 100.0
+        self.fitting.current_pg = 90.0
+        self.assertEqual(None, self.fitting.get_pg_over())
+
+
+class TestFittingPrimaryWeapon(unittest.TestCase):
+    """Tests for getting the primary Weapon from a Fitting"""
+
+    def setUp(self):
+        """Setup data to test with"""
+        self.char = Character('Test')
+        self.fitting = Fitting("Test Fitting", self.char, 'God Type-I')
+
+    def test_light_primary_weapon(self):
+        """If just a light weapon fitted then that is the primary weapon"""
+        self.fitting.add_weapon('Assault Rifle')
+        self.assertEqual('Assault Rifle', self.fitting.get_primary_weapon_name())
+
+    def test_heavy_primary_weapon(self):
+        """If just a heavy weapon fitted then that is the primary weapon"""
+        self.fitting.add_weapon('Forge Gun')
+        self.assertEqual('Forge Gun', self.fitting.get_primary_weapon_name())
+
+    def test_heavy_and_light_primary_weapon(self):
+        """If both heavy and light weapon fitted then heavy is the primary weapon"""
+        self.fitting.add_weapon('Assault Rifle')
+        self.fitting.add_weapon('Forge Gun')
+        self.assertEqual('Forge Gun', self.fitting.get_primary_weapon_name())
+
+
+class TestFittingPrimaryWeaponStat(unittest.TestCase):
+    """Tests for getting stats from the primary Weapon from a Fitting"""
+
+    def setUp(self):
+        """Setup data to test with"""
+        self.char = Character('Test')
+        self.fitting = Fitting("Test Fitting", self.char, 'God Type-I')
+
+    def test_light_primary_weapon(self):
+        """If just a light weapon fitted then get the CPU"""
+        self.fitting.add_weapon('Assault Rifle')
+        # fix the cpu value so we can test it for a known value
+        self.fitting.light_weapon[0].stats['cpu'] = 20
+        self.assertEqual(20, self.fitting.get_primary_stats('cpu'))
+
+    def test_heavy_primary_weapon(self):
+        """If just a heavy weapon fitted then get the CPU"""
+        self.fitting.add_weapon('Forge Gun')
+        # fix the cpu value so we can test it for a known value
+        self.fitting.heavy_weapon[0].stats['cpu'] = 40
+        self.assertEqual(40, self.fitting.get_primary_stats('cpu'))
+
+    def test_heavy_and_light_primary_weapon(self):
+        """If both heavy and light weapon fitted then heavy is the primary weapon"""
+        self.fitting.add_weapon('Assault Rifle')
+        self.fitting.add_weapon('Forge Gun')
+        self.assertEqual('Forge Gun', self.fitting.get_primary_weapon_name())
+
+
+class TestFittingPrimaryDPS(unittest.TestCase):
+    """Tests for getting primary weapon DPS"""
+
+    def setUp(self):
+        """Setup data to test with"""
+        self.char = Character('Test')
+        self.fitting = Fitting("Test Fitting", self.char, 'God Type-I')
+
+    def test_light_primary_weapon(self):
+        """If just a light weapon fitted then get the DPS"""
+        self.fitting.add_weapon('Assault Rifle')
+        # fix the stats values so we can test it for a known value
+        self.fitting.light_weapon[0].stats['damage'] = 20.0
+        self.fitting.light_weapon[0].stats['rate_of_fire'] = 600.0
+        self.assertEqual(200.0, self.fitting.get_primary_dps())
+
+    def test_heavy_primary_weapon(self):
+        """If just a heavy weapon fitted then get the CPU"""
+        self.fitting.add_weapon('Forge Gun')
+        # fix the stats values so we can test it for a known value
+        self.fitting.heavy_weapon[0].stats['damage'] = 100.0
+        self.fitting.heavy_weapon[0].stats['rate_of_fire'] = 60.0
+        self.assertEqual(100.0, self.fitting.get_primary_dps())
+
+    def test_heavy_and_light_primary_weapon(self):
+        """If both heavy and light weapon fitted then heavy is the primary weapon"""
+        self.fitting.add_weapon('Assault Rifle')
+        self.fitting.light_weapon[0].stats['damage'] = 20.0
+        self.fitting.light_weapon[0].stats['rate_of_fire'] = 600.0
+        self.fitting.add_weapon('Forge Gun')
+        self.fitting.heavy_weapon[0].stats['damage'] = 100.0
+        self.fitting.heavy_weapon[0].stats['rate_of_fire'] = 60.0
+        self.assertEqual(100.0, self.fitting.get_primary_dps())
+
+
+class TestFittingPrimaryDPM(unittest.TestCase):
+    """Tests for getting primary weapon DPM"""
+
+    def setUp(self):
+        """Setup data to test with"""
+        self.char = Character('Test')
+        self.fitting = Fitting("Test Fitting", self.char, 'God Type-I')
+
+    def test_light_primary_weapon(self):
+        """If just a light weapon fitted then get the DPM"""
+        self.fitting.add_weapon('Assault Rifle')
+        # fix the stats values so we can test it for a known value
+        self.fitting.light_weapon[0].stats['damage'] = 20.0
+        self.fitting.light_weapon[0].stats['clip_size'] = 24.0
+        self.assertEqual(480.0, self.fitting.get_primary_dpm())
+
+    def test_heavy_primary_weapon(self):
+        """If just a heavy weapon fitted then get the CPU"""
+        self.fitting.add_weapon('Forge Gun')
+        # fix the stats values so we can test it for a known value
+        self.fitting.heavy_weapon[0].stats['damage'] = 100.0
+        self.fitting.heavy_weapon[0].stats['clip_size'] = 3.0
+        self.assertEqual(300.0, self.fitting.get_primary_dpm())
+
+    def test_heavy_and_light_primary_weapon(self):
+        """If both heavy and light weapon fitted then heavy is the primary weapon"""
+        self.fitting.add_weapon('Assault Rifle')
+        self.fitting.light_weapon[0].stats['damage'] = 20.0
+        self.fitting.light_weapon[0].stats['clip_size'] = 24.0
+        self.fitting.add_weapon('Forge Gun')
+        self.fitting.heavy_weapon[0].stats['damage'] = 100.0
+        self.fitting.heavy_weapon[0].stats['clip_size'] = 3.0
+        self.assertEqual(300.0, self.fitting.get_primary_dpm())
