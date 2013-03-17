@@ -463,3 +463,82 @@ class TestFittingPrimaryDPM(unittest.TestCase):
         self.fitting.heavy_weapon[0].stats['damage'] = 100.0
         self.fitting.heavy_weapon[0].stats['clip_size'] = 3.0
         self.assertEqual(300.0, self.fitting.get_primary_dpm())
+
+
+class TestFittingAdditiveStat(unittest.TestCase):
+    """Tests for getting an additive stat"""
+
+    def setUp(self):
+        """Setup data to test with"""
+        self.char = Character('Test')
+        self.fitting = Fitting("Test Fitting", self.char, 'God Type-I')
+
+    def test_get_shield_hp(self):
+        """Get the shield hp from the fitting"""
+        self.fitting.dropsuit.stats['shield_hp'] = 200
+        self.assertEqual(200, self.fitting.get_shield_hp())
+
+    def test_get_shield_hp_with_module(self):
+        """Add a module that adds to shield hp"""
+        self.fitting.dropsuit.stats['shield_hp'] = 200
+        self.fitting.add_module('Basic Shield Extender')
+        # Poor test.  Relies on the values in the XML file
+        # Should refactor this to enter a known value
+        # At the time of writing the module adds 22
+        self.assertEqual(222, self.fitting.get_shield_hp())
+
+
+class TestFittingStackingStat(unittest.TestCase):
+    """Tests for getting a stacking stat"""
+
+    def setUp(self):
+        """Setup data to test with"""
+        self.char = Character('Test')
+        self.fitting = Fitting("Test Fitting", self.char, 'God Type-I')
+
+    def test_get_shield_recharge(self):
+        """Get the shield hp from the fitting"""
+        self.fitting.dropsuit.stats['shield_recharge'] = 0.5
+        self.assertEqual(0.5, self.fitting.get_shield_recharge())
+
+    def test_get_shield_hp_with_module(self):
+        """Add a module that adds to shield hp"""
+        self.fitting.dropsuit.stats['shield_recharge'] = 0.5
+        self.fitting.add_module('Complex Shield Recharger')
+        # Poor test.  Relies on the values in the XML file
+        # Should refactor this to enter a known value
+        # At the time of writing the module adds 0.42
+        self.assertEqual(0.71, self.fitting.get_shield_recharge())
+
+    def test_get_shield_hp_with_two_modules(self):
+        """Add two modules that adds to shield hp. Stacking penalties come into play"""
+        self.fitting.dropsuit.stats['shield_recharge'] = 0.5
+        self.fitting.add_module('Complex Shield Recharger')
+        self.fitting.add_module('Complex Shield Recharger')
+        # Poor test.  Relies on the values in the XML file
+        # Should refactor this to enter a known value
+        # At the time of writing the module adds 0.42
+        self.assertEqual(0.97, self.fitting.get_shield_recharge())
+
+    def test_get_shield_hp_with_three_modules(self):
+        """Add three modules that adds to shield hp. Stacking penalties come into play"""
+        self.fitting.dropsuit.stats['shield_recharge'] = 0.5
+        self.fitting.add_module('Complex Shield Recharger')
+        self.fitting.add_module('Complex Shield Recharger')
+        self.fitting.add_module('Complex Shield Recharger')
+        # Poor test.  Relies on the values in the XML file
+        # Should refactor this to enter a known value
+        # At the time of writing the module adds 0.42
+        self.assertEqual(1.20, self.fitting.get_shield_recharge())
+
+    def test_get_shield_hp_with_four_modules(self):
+        """Add four modules that adds to shield hp. Stacking penalties come into play"""
+        self.fitting.dropsuit.stats['shield_recharge'] = 0.5
+        self.fitting.add_module('Complex Shield Recharger')
+        self.fitting.add_module('Complex Shield Recharger')
+        self.fitting.add_module('Complex Shield Recharger')
+        self.fitting.add_module('Complex Shield Recharger')
+        # Poor test.  Relies on the values in the XML file
+        # Should refactor this to enter a known value
+        # At the time of writing the module adds 0.42
+        self.assertEqual(1.34, self.fitting.get_shield_recharge())
