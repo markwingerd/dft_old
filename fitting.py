@@ -20,7 +20,7 @@ import xml.etree.ElementTree as ET
 
 from char import Character, CharacterLibrary
 from module import Module, Weapon
-from util import XmlRetrieval, DataRetrieval
+from util import XmlRetrieval, DataRetrieval, ElementNotFoundException
 
 class Fitting:
     def __init__(self, name, character, ds_name):
@@ -160,7 +160,6 @@ class Fitting:
             mod.show_stats()
             print '======================================================'
 
-
     def add_module(self, mod_name):
         """ Adds a module if there is enough CPU, PG, and slots available. """
         module = Module(self.char.skill_effect, mod_name)
@@ -229,7 +228,7 @@ class Fitting:
 
     def add_weapon(self, weapon_name):
         """ Adds a weapon. THIS MUST bE CALLED AFTER MODULES HAVE BEEN ADDED. """
-        weapon = Weapon(self.char.skill_effect, weapon_name, self.hi_slot)
+        weapon = Weapon(self.char.skill_effect, weapon_name)
         slot_type = weapon.stats['slot_type']
         used_slots = len(getattr(self, slot_type))
         max_slots = self.dropsuit.stats[slot_type]
@@ -388,7 +387,7 @@ class Fitting:
         """ This will update weapons with any modules that give a bonus to them.
         This is intended to be a hotfix. """
         for w in self.heavy_weapon + self.light_weapon + self.sidearm:
-            w.__init__(self.char.skill_effect, w.name, self.hi_slot)
+            w.__init__(self.char.skill_effect, w.name)
 
 
     def _get_additive_stat(self, stat):
@@ -442,18 +441,36 @@ class Fitting:
         return output
 
 
+class DropsuitNotFound(Exception):
+    """Exception raised when a named Dropsuit cannot be found"""
+    pass
+
+
 class Dropsuit:
-    def __init__(self, char, ds_name):
+    def __init__(self, char, ds_name, filename_or_stream='dropsuit.xml'):
+        """
+        Initalisation method for a Dropsuit
+        char = An Instance of a Character
+        ds_name = The name of the Dropsuit (i.e. Scout Type-I)
+        filename_or_stream = The filename of the xml data file containing
+                             the data.. or stream containing data
+        """
         self.stats = {}
         self.skill_effects = char.skill_effect
         self.ds_name = ds_name
 
-        dropsuit_data = XmlRetrieval('dropsuit.xml')
-        properties, effecting_skills = dropsuit_data.get_target(ds_name)
+        dropsuit_data = XmlRetrieval(filename_or_stream)
+        try:
+            properties, effecting_skills = dropsuit_data.get_target(ds_name)
+        except ElementNotFoundException:
+            raise DropsuitNotFound
+
         self._add_stats(properties, effecting_skills)
 
     def show_stats(self):
-        for key in self.stats:
+        keys = self.stats.keys()
+        keys.sort()
+        for key in keys:
             print key, self.stats[key]
 
     def _add_stats(self, properties, effecting_skills):
@@ -502,8 +519,8 @@ class FittingLibrary:
 
 
 class DropsuitLibrary:
-    def __init__(self):
-        dropsuit_data = XmlRetrieval('dropsuit.xml')
+    def __init__(self, filename_or_stream='dropsuit.xml'):
+        dropsuit_data = XmlRetrieval(filename_or_stream)
 
         self.names = dropsuit_data.get_list()
 

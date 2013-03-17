@@ -21,7 +21,12 @@ import xml.etree.ElementTree as ET
 import math
 
 from char import Character
-from util import XmlRetrieval
+from util import XmlRetrieval, ElementNotFoundException
+
+
+class ModuleNotExistException(Exception):
+    """An exception that is raised when a Module does not exist"""
+    pass
 
 
 class Module:
@@ -45,7 +50,11 @@ class Module:
         # Effecting_skills are the names of skills (list) which will adjust the
         # value of the Property, in a dictionary in the format
         # {'property':['skill', 'skill']}
-        properties, effecting_skills = module_data.get_target(mod_name)
+        try:
+            properties, effecting_skills = module_data.get_target(mod_name)
+        except ElementNotFoundException:
+            raise ModuleNotExistException
+
         self._add_stats(properties, effecting_skills)
 
     def show_stats(self):
