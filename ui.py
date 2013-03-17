@@ -104,13 +104,13 @@ class DftUi(Frame):
         for parent in self.weapon_library.get_parents():
             self.tre_modules.insert('', 'end', parent, text=parent, tag='ttk')
             for child in self.weapon_library.get_children(parent):
-                self.tre_modules.insert(parent, 'end', child[0], text=child[0], tag='ttk')
+                self.tre_modules.insert(parent, 'end', child[0], text=child[0], tag=('ttk', child))
                 self.tre_modules.set(child[0], 'cpu', child[1])
                 self.tre_modules.set(child[0], 'pg', child[2])
         for parent in self.module_library.get_parents():
             self.tre_modules.insert('', 'end', parent, text=parent, tag='ttk')
             for child in self.module_library.get_children(parent):
-                self.tre_modules.insert(parent, 'end', child[0], text=child[0], tag='ttk')
+                self.tre_modules.insert(parent, 'end', child[0], text=child[0], tag=('ttk', child))
                 self.tre_modules.set(child[0], 'cpu', child[1])
                 self.tre_modules.set(child[0], 'pg', child[2])
 
@@ -120,8 +120,25 @@ class DftUi(Frame):
         scb_modules.grid(column=1, row=0, sticky=NE+S, pady=4)
         self.tre_modules.configure(yscrollcommand=scb_modules.set)
 
+        # Color modules based on prerequisite skills
+        #self.color_modules()
+
         # Bindings
         self.tre_modules.bind('<Double-1>', self.add_module)
+
+    def color_modules(self):
+        """ Moves through all modules and colors the module based on
+            whether they have their prerequisites met or not. """
+        for module_name in self.weapon_library.get_names():
+            for prereq_name, prereq_level in skill.prerequisites:
+                if self.character.get_skill_level(prereq_name) < prereq_level:
+                    # Character does not have the prerequisites met to unlock
+                    # this skill.
+                    self.tre_skills.tag_configure(skill.name, foreground='red')
+                    break
+            else:
+                # All prerequisites have been met.
+                self.tre_skills.tag_configure(skill.name, foreground='black')
 
     def fitting_display(self):
         """ Displays all the current fitted modules. """
@@ -370,7 +387,7 @@ class DftUi(Frame):
         # Reload character data. THIS IS A HACK. Add better methods for changing and updating characters.
         self.character_library = CharacterLibrary()
         self.current_char = self.character_library.get_character(self.current_char.name)
-        self.current_fit.change_character(self.current_char)
+        self.current_fit.change_character(self.current_char.name)
 
         # Display the changes.
         self.fitting_display()
@@ -409,7 +426,7 @@ class DropsuitWindow(Frame):
         """ Handles the main menu items to select a dropsuit. """
         # Get known dropsuit names.
         self.fitting_name = StringVar()
-        dropsuit_names = StringVar(value=self.dropsuit_library.get_names())
+        dropsuit_names = StringVar(value=self.dropsuit_library.get_all_names())
 
         # Creates the widgets needed for this menu.
         lbl_enter_name = Label(self.window, text='Enter Dropsuit Fitting Name')

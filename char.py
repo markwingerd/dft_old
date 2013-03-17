@@ -43,6 +43,16 @@ class Character:
         else:
             return 0
 
+    def get_leveled_skill_effect(self, skill_name):
+        """ Returns the leveled_skill_effect of the given name. Use this
+        instead of checking leveled_skill_effect directly. The dict does not 
+        have all the keys. If the key isn't present, this will return 0 for no
+        effect."""
+        if skill_name in self.leveled_skill_effects:
+            return self.leveled_skill_effects[skill_name]
+        else:
+            return 0
+
     def get_all_skills(self):
         """ Returns a dictionary of all known skills and the characters skill
         levels. """
@@ -61,15 +71,16 @@ class CharacterLibrary:
         if not self.character_data.data:
             self._create_default_characters()
 
-        self.character_list = self.character_data.data
+        self.character_dict = self.character_data.data
 
     def get_character(self, char_name):
         """ Returns a the specified character instance. """
-        return self.character_list[char_name]
+        print self.character_dict
+        return self.character_dict[char_name]
 
     def get_character_list(self):
         """ Returns a list of the names of all characters as a tuple. """
-        return tuple(self.character_list.keys())
+        return tuple(self.character_dict.keys())
 
     def save_character(self, character):
         """ """
@@ -191,7 +202,7 @@ class SkillLibrary:
 if __name__ == '__main__':
     char_lib = CharacterLibrary()
     print 'CHARACTER LIST: ', char_lib.get_character_list()
-    char = char_lib.get_character('No Skills')
+    char = char_lib.get_character('Max Skills')
     print 'SHOW ALL SKILLS: ', char.get_all_skills()
     s = SkillLibrary()
     print 'SHOW PARENTS: ', s.get_all_skill_categories()

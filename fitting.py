@@ -19,16 +19,19 @@ import sys, os
 import xml.etree.ElementTree as ET
 
 from char import Character, CharacterLibrary
-from module import Module, Weapon
+from module import Module, Weapon, ModuleLibrary, WeaponLibrary
 from util import XmlRetrieval, DataRetrieval
 
 class Fitting:
     def __init__(self, name, character, ds_name):
+        self.dropsuit_library = DropsuitLibrary()
+        self.character_library = CharacterLibrary()
+        self.weapon_library = WeaponLibrary()
+        self.module_library = ModuleLibrary()
         self.name = name
-        self.char = character
+        self.character = character
         self.ds_name = ds_name
-        #self.dropsuit = Dropsuit(self.char.skill_effect, ds_type, ds_name)
-        self.dropsuit = Dropsuit(self.char, ds_name)
+        self.dropsuit = self.dropsuit_library.get(ds_name)
 
         self.heavy_weapon = []
         self.light_weapon = []
@@ -51,28 +54,12 @@ class Fitting:
         self.shield_depleted_recharge_delay = self.dropsuit.stats['shield_depleted_recharge_delay']
         self.scan_profile = self.dropsuit.stats['scan_profile']
 
-    def change_character(self, char):
-        """ This method will reroll the whole fitting instance with the new 
-        character. It will need to collect all of the fitted modules before the
-        reroll.  After the roll it will readd all the modules. This is currently
-        the easiest way to change characters. """
-        # Get a list of all modules and all weapons
-        mod_list = []
-        wea_list = []
-        for m in self.hi_slot + self.low_slot + self.equipment:
-            mod_list.append(m.name)
-        for w in self.heavy_weapon + self.light_weapon + self.sidearm + self.grenade:
-            wea_list.append(w.name)
-
-        # Change base fitting stats by recalling the init function.
-        self.char = char
-        self.__init__(self.name, char, self.ds_name)
-
-        # Readd the modules and weapons.
-        for m in mod_list:
-            self.add_module(m)
-        for w in wea_list:
-            self.add_weapon(w)
+    def change_character(self, character_obj):
+        """ This method will change the stored character to whichever character
+            object has the given name then changes the character for the 
+            Dropsuit ojbect. """
+        self.character = character_obj
+        self.dropsuit.change_character(self.character)
 
     def show_stats(self):
         """ Displays fitting status with all calculations, modules, and skills
@@ -84,18 +71,10 @@ class Fitting:
                 name_list.append(module.name)
             return name_list
 
-        def get_bonus(bonus):
-            """ Find all bonus' to cpu or pg and return them. """
-            output = 0
-            for m in self.low_slot:
-                if bonus in m.stats:
-                    output += m.stats[bonus]
-            return output
-
         # Display dropsuit stats.
-        print 'Character Name:                    %s' % self.char.name
-        print 'CPU:                            %s/%s' % (self.current_cpu, self.max_cpu)
-        print 'PG:                             %s/%s' % (self.current_pg, self.max_pg)
+        print 'Character Name:                    %s' % self.character.name
+        print 'CPU:                            %s/%s' % (self.current_cpu, self.get_max_cpu())
+        print 'PG:                             %s/%s' % (self.current_pg, self.get_max_pg())
         print 'Heavy Weapon:                      %s' % get_mod_names(self.heavy_weapon)
         print 'Light Weapon:                      %s' % get_mod_names(self.light_weapon)
         print 'Sidearm:                           %s' % get_mod_names(self.sidearm)
@@ -160,18 +139,18 @@ class Fitting:
             mod.show_stats()
             print '======================================================'
 
-
     def add_module(self, mod_name):
         """ Adds a module if there is enough CPU, PG, and slots available. """
-        module = Module(self.char.skill_effect, mod_name)
-        slot_type = module.stats['slot_type']
+        #module = Module(self.character.leveled_skill_effects, mod_name)
+        module = self.module_library.get(mod_name)
+        slot_type = module.properties['slot_type']
         used_slots = len(getattr(self, slot_type))
         max_slots = self.dropsuit.stats[slot_type]
         if used_slots < max_slots:
             if True: #cpu/pg reqs go here.
                 self._update_cpu(module)
                 self._update_pg(module)
-                getattr(self, module.stats['slot_type']).append(module)
+                getattr(self, module.properties['slot_type']).append(module)
                 self._update_module_bonus() # Must be called after the module has been added to the list
 
     def remove_module(self, mod_name):
@@ -229,15 +208,35 @@ class Fitting:
 
     def add_weapon(self, weapon_name):
         """ Adds a weapon. THIS MUST bE CALLED AFTER MODULES HAVE BEEN ADDED. """
-        weapon = Weapon(self.char.skill_effect, weapon_name, self.hi_slot)
-        slot_type = weapon.stats['slot_type']
+        weapon = self.weapon_library.get(weapon_name)
+        slot_type = weapon.get('slot_type')
         used_slots = len(getattr(self, slot_type))
         max_slots = self.dropsuit.stats[slot_type]
         if used_slots < max_slots:
             if True: #cpu/pg reqs go here.
                 self._update_cpu(weapon)
                 self._update_pg(weapon)
-                getattr(self, weapon.stats['slot_type']).append(weapon)
+                getattr(self, weapon.get('slot_type')).append(weapon)
+
+    def get_max_cpu(self):
+        """ Returns the maximum cpu. Takes dropsuit, skills, and cpu enhancing
+        modules into account. This method will update self.max_cpu as well as
+        return the value of self.max_cpu. """
+        self.max_cpu = self.dropsuit.stats['cpu']
+        for module in self.hi_slot + self.low_slot:
+            if 'cpu_bonus' in module.properties:
+                self.max_cpu = self.max_cpu * (1 + module.properties['cpu_bonus'])
+        return self.max_cpu
+
+    def get_max_pg(self):
+        """ Returns the maximum pg. Takes dropsuit, skills, and pg enhancing
+        modules into account. This method will update self.max_pg as well as
+        return the value of self.max_pg. """
+        self.max_pg = self.dropsuit.stats['pg']
+        for module in self.hi_slot + self.low_slot:
+            if 'pg_bonus' in module.properties:
+                self.max_pg += module.properties('pg_bonus')
+        return self.max_pg
 
     def get_cpu_over(self):
         """ If the dropsuit is using more CPU then it has available, return the
@@ -333,31 +332,31 @@ class Fitting:
         module_list = []
 
         for mod in self.heavy_weapon:
-            module_list.append(('H', mod.name, mod.stats['cpu'], mod.stats['pg']))
+            module_list.append(('H', mod.name, mod.properties['cpu'], mod.properties['pg']))
         for mod in range( len(self.heavy_weapon), int(self.dropsuit.stats['heavy_weapon']) ):
             module_list.append(('H', 'None', '0', '0'))
         for mod in self.light_weapon:
-            module_list.append(('L', mod.name, mod.stats['cpu'], mod.stats['pg']))
+            module_list.append(('L', mod.name, mod.properties['cpu'], mod.properties['pg']))
         for mod in range( len(self.light_weapon), int(self.dropsuit.stats['light_weapon']) ):
             module_list.append(('L', 'None', '0', '0'))
         for mod in self.sidearm:
-            module_list.append(('S', mod.name, mod.stats['cpu'], mod.stats['pg']))
+            module_list.append(('S', mod.name, mod.properties['cpu'], mod.properties['pg']))
         for mod in range( len(self.sidearm), int(self.dropsuit.stats['sidearm']) ):
             module_list.append(('S', 'None', '0', '0'))
         for mod in self.grenade:
-            module_list.append(('G', mod.name, mod.stats['cpu'], mod.stats['pg']))
+            module_list.append(('G', mod.name, mod.properties['cpu'], mod.properties['pg']))
         for mod in range( len(self.grenade), int(self.dropsuit.stats['grenade']) ):
             module_list.append(('G', 'None', '0', '0'))
         for mod in self.equipment:
-            module_list.append(('E', mod.name, mod.stats['cpu'], mod.stats['pg']))
+            module_list.append(('E', mod.name, mod.properties['cpu'], mod.properties['pg']))
         for mod in range( len(self.equipment), int(self.dropsuit.stats['equipment']) ):
             module_list.append(('E', 'None', '0', '0'))
         for mod in self.hi_slot:
-            module_list.append(('--', mod.name, mod.stats['cpu'], mod.stats['pg']))
+            module_list.append(('--', mod.name, mod.properties['cpu'], mod.properties['pg']))
         for mod in range( len(self.hi_slot), int(self.dropsuit.stats['hi_slot']) ):
             module_list.append(('--', 'None', '0', '0'))
         for mod in self.low_slot:
-            module_list.append(('-', mod.name, mod.stats['cpu'], mod.stats['pg']))
+            module_list.append(('-', mod.name, mod.properties['cpu'], mod.properties['pg']))
         for mod in range( len(self.low_slot), int(self.dropsuit.stats['low_slot']) ):
             module_list.append(('-', 'None', '0', '0'))
 
@@ -507,35 +506,35 @@ class Fitting:
         """ Called by add_module or add_weapon methods.  This will update the
         fittings current_cpu and max_cpu when a module has been added. 
         ONLY  FOR ADDING CPU. """
-        self.current_cpu += module.stats['cpu']
-        if 'cpu_bonus' in module.stats:
-            self.max_cpu += self.max_cpu * module.stats['cpu_bonus']
+        self.current_cpu += module.properties['cpu']
+        if 'cpu_bonus' in module.properties:
+            self.max_cpu += self.max_cpu * module.properties['cpu_bonus']
 
     def _update_pg(self, module):
         """ Called by add_module or add_weapon methods.  This will update the
         fittings current_pg and max_pg when a module has been added. 
         ONLY FOR ADDING PG"""
-        self.current_pg += module.stats['pg']
-        if 'pg_bonus' in module.stats:
-            self.max_pg += module.stats['pg_bonus']
+        self.current_pg += module.properties['pg']
+        if 'pg_bonus' in module.properties:
+            self.max_pg += module.properties['pg_bonus']
 
     def _free_cpu(self, module):
         """ Called by remove_module. This will free CPU resources from the
         fitting when a module has been removed. """
-        self.current_cpu -= module.stats['cpu']
+        self.current_cpu -= module.properties['cpu']
         self.current_cpu = round(self.current_cpu, 3)
-        if 'cpu_bonus' in module.stats:
+        if 'cpu_bonus' in module.properties:
             # For the love of god, please note that this equation is far 
             # different than the others. Especially the equal sign!!!!!
-            self.max_cpu = self.max_cpu / (1 + module.stats['cpu_bonus'])
+            self.max_cpu = self.max_cpu / (1 + module.properties['cpu_bonus'])
 
     def _free_pg(self, module):
         """ Called by remove_module. This will free CPU resources from the
         fitting when a module has been removed. """
-        self.current_pg -= module.stats['pg']
+        self.current_pg -= module.properties['pg']
         self.current_pg = round(self.current_pg, 3)
-        if 'pg_bonus' in module.stats:
-            self.max_pg -= module.stats['pg_bonus']
+        if 'pg_bonus' in module.properties:
+            self.max_pg -= module.properties['pg_bonus']
 
     def _update_module_bonus(self):
         """ This will update weapons with any modules that give a bonus to them.
@@ -543,35 +542,22 @@ class Fitting:
         for w in self.heavy_weapon + self.light_weapon + self.sidearm:
             w.__init__(self.char.skill_effect, w.name, self.hi_slot)
 
-
     def _get_additive_stat(self, stat):
         output = self.dropsuit.stats[stat]
-        for m in self.hi_slot:
+        for m in self.hi_slot + self.low_slot:
             try:
                 output = output + m.get(stat)
             except TypeError:
-                # If mod doesn't have the proper stat, None is returned.
-                pass
-        for m in self.low_slot:
-            try:
-                output = output + m.get(stat)
-            except:
                 # If mod doesn't have the proper stat, None is returned.
                 pass
         return output
 
     def _get_multiplicative_stat(self, stat):
         output = self.dropsuit.stats[stat]
-        for m in self.hi_slot:
+        for m in self.hi_slot + self.low_slot:
             try:
                 output = output + (output * m.get(stat))
             except TypeError:
-                # If mod doesn't have the proper stat, None is returned.
-                pass
-        for m in self.low_slot:
-            try:
-                output = output + (output * m.get(stat))
-            except:
                 # If mod doesn't have the proper stat, None is returned.
                 pass
         return output
@@ -595,7 +581,7 @@ class Fitting:
         return output
 
 
-class Dropsuit:
+class Dropsuit2:
     def __init__(self, char, ds_name):
         self.stats = {}
         self.skill_effects = char.leveled_skill_effects
@@ -630,6 +616,29 @@ class Dropsuit:
             else:
                 stat = properties[key]
             self.stats[key] = round(stat, 3)
+
+class Dropsuit:
+    def __init__(self, name, category, properties, effecting_skills, prerequisites, character):
+        self.name = name
+        self.category = category
+        self.stats = properties #TODO: Rename to something more descriptive
+        self.effecting_skills = effecting_skills
+        self.prerequisites = prerequisites
+
+        self.character = character
+
+    def change_character(self, character):
+        """ Changes the character object and calls _apply_skills to change the
+            values stored in stats. """
+        self.character = character
+        self._apply_skills()
+
+    def _apply_skills(self):
+        """ Modifies the values stored in stats with the characters skills. """
+        print self.character.get_leveled_skill_effect('Shield Control')
+        for property, skill_name_list in self.effecting_skills.iteritems():
+            for skill_name in skill_name_list:
+                self.stats[property] = self.stats[property] * (1+self.character.get_leveled_skill_effect(skill_name))
 
 
 class FittingLibrary:
@@ -667,43 +676,42 @@ class FittingLibrary:
 
 class DropsuitLibrary:
     def __init__(self):
-        dropsuit_data = XmlRetrieval('dropsuit.xml')
+        self.dropsuit_dict = {}
+        self.dropsuit_data = XmlRetrieval('dropsuit.xml')
 
-        self.names = dropsuit_data.get_list()       
+        self._get_all_dropsuits()
 
-    def get_names(self):
+    def get(self, name):
+        """ Returns a dropsuit object when given the name of the dropsuit. """
+        return self.dropsuit_dict[name]
+
+    def get_all_names(self):
         """ Returns dropsuit names as a tuple. """
-        return tuple(self.names)
+        return tuple(self.dropsuit_dict.keys())
+
+    def _get_all_dropsuits(self):
+        # Dropsuits require a character. Created a CharacterLibrary object and
+        # give each dropsuit a 'No Skills' character.
+        character_library = CharacterLibrary()
+        for name, category, properties, effecting_skills, prerequisites in self.dropsuit_data.get_all():
+            self.dropsuit_dict[name] = Dropsuit(name, category, properties, effecting_skills, prerequisites, character_library.get_character('No Skills'))
 
 
 if __name__ == '__main__':
-    fitlib = FittingLibrary()
-    charlib = CharacterLibrary()
+    fitting_library = FittingLibrary()
+    character_library = CharacterLibrary()
+    dropsuit_library = DropsuitLibrary()
 
-    char = Character('No Skills')
-
-    fit = Fitting('Test', char, 'Assault Type-I')
-    fitlib.save_fitting(fit)
-    charlib.save_character(char)
-
-    fit = fitlib.get_fitting(fitlib.get_fitting_list()[0])
-
-
-    for i, item in enumerate(fit.get_offensive_abilities()):
-        print '#%s - %s' % (i, item[0])
-        for name, value in item[1]:
-            print '\t\t%s: %s' % (name, value)
-
-    print '\n\n\n'
-
-    for i, item in enumerate(fit.get_defensive_abilities()):
-        print '#%s - %s' % (i, item[0])
-        for name, value in item[1]:
-            print '\t\t%s: %s' % (name, value)
-
-    print '\n\n\n'
-
-    for i, item in enumerate(fit.get_systems_abilities()):
-        print '#%s - %s' % (i, item[0])
-        for name, value in item[1]:
-            print '\t\t%s: %s' % (name, value)
+    print 'SHOW ALL DROPSUITS: ', dropsuit_library.get_all_names()
+    test_ds = dropsuit_library.get('Assault Type-II')
+    print 'Test dropsuit: ', test_ds.name
+    test_fit = Fitting('Test Fitting', test_ds, 'Assault Type-I')
+    print '\n\n\nSTATS WITH NO SKILLS\n', test_fit.show_stats()
+    test_fit.change_character('Max Skills')
+    print '\n\n\nSTATS WITH MAX SKILLS\n', test_fit.show_stats()
+    test_fit.add_module('Enhanced CPU Upgrade')
+    print '\n\n\nSTATS WITH MAX SKILLS AND CPU UPGRADE (.25)\n', test_fit.show_stats()
+    test_fit.remove_module('Enhanced CPU Upgrade')
+    print '\n\n\nREMOVED MODULE\n', test_fit.show_stats()
+    test_fit.add_weapon('Assault Rifle')
+    print '\n\n\nADD ASSAULT RIFLE\n', test_fit.show_stats()

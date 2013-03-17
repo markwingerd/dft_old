@@ -62,6 +62,9 @@
 			<repair_rate_on_vehicle>75</repair_rate_on_vehicle>
 			<max_repair_distance>15</max_repair_distance>
 			<max_targets>1</max_targets>
+			<prerequisites>
+				<prerequisite skill="Remote Repair Systems">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Flux Repair Tool">
 			<slot_type>equipment</slot_type>
@@ -71,6 +74,9 @@
 			<repair_rate_on_vehicle>75</repair_rate_on_vehicle>
 			<max_repair_distance>22.5</max_repair_distance>
 			<max_targets>1</max_targets>
+			<prerequisites>
+				<prerequisite skill="Remote Repair Systems">2</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Stable Repair Tool">
 			<slot_type>equipment</slot_type>
@@ -80,6 +86,9 @@
 			<repair_rate_on_vehicle>75</repair_rate_on_vehicle>
 			<max_repair_distance>15</max_repair_distance>
 			<max_targets>1</max_targets>
+			<prerequisites>
+				<prerequisite skill="Remote Repair Systems">2</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Inert Repair Tool">
 			<slot_type>equipment</slot_type>
@@ -89,6 +98,9 @@
 			<repair_rate_on_vehicle>56</repair_rate_on_vehicle>
 			<max_repair_distance>15</max_repair_distance>
 			<max_targets>1</max_targets>
+			<prerequisites>
+				<prerequisite skill="Remote Repair Systems">2</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Triage Repair Tool">
 			<slot_type>equipment</slot_type>
@@ -98,6 +110,9 @@
 			<repair_rate_on_vehicle>56</repair_rate_on_vehicle>
 			<max_repair_distance>15</max_repair_distance>
 			<max_targets>1</max_targets>
+			<prerequisites>
+				<prerequisite skill="Remote Repair Systems">2</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="A/7 Inert Repair Tool">
 			<slot_type>equipment</slot_type>
@@ -107,6 +122,9 @@
 			<repair_rate_on_vehicle>73</repair_rate_on_vehicle>
 			<max_repair_distance>18</max_repair_distance>
 			<max_targets>1</max_targets>
+			<prerequisites>
+				<prerequisite skill="Remote Repair Systems">4</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="BDR-2 Repair Tool">
 			<slot_type>equipment</slot_type>
@@ -116,6 +134,9 @@
 			<repair_rate_on_vehicle>98</repair_rate_on_vehicle>
 			<max_repair_distance>18</max_repair_distance>
 			<max_targets>1</max_targets>
+			<prerequisites>
+				<prerequisite skill="Remote Repair Systems">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="BDR-5 Axis Repair Tool">
 			<slot_type>equipment</slot_type>
@@ -125,6 +146,9 @@
 			<repair_rate_on_vehicle>112</repair_rate_on_vehicle>
 			<max_repair_distance>18</max_repair_distance>
 			<max_targets>1</max_targets>
+			<prerequisites>
+				<prerequisite skill="Remote Repair Systems">4</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Fractal A/7 Repair Tool">
 			<slot_type>equipment</slot_type>
@@ -134,6 +158,9 @@
 			<repair_rate_on_vehicle>107</repair_rate_on_vehicle>
 			<max_repair_distance>22.1</max_repair_distance>
 			<max_targets>2</max_targets>
+			<prerequisites>
+				<prerequisite skill="Remote Repair Systems">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Core Repair Tool">
 			<slot_type>equipment</slot_type>
@@ -143,6 +170,9 @@
 			<repair_rate_on_vehicle>105</repair_rate_on_vehicle>
 			<max_repair_distance>21</max_repair_distance>
 			<max_targets>2</max_targets>
+			<prerequisites>
+				<prerequisite skill="Remote Repair Systems">5</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Lai Dai Flux Repair Tool">
 			<slot_type>equipment</slot_type>
@@ -152,6 +182,9 @@
 			<repair_rate_on_vehicle>105</repair_rate_on_vehicle>
 			<max_repair_distance>31.5</max_repair_distance>
 			<max_targets>2</max_targets>
+			<prerequisites>
+				<prerequisite skill="Remote Repair Systems">5</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Schizm Viziam Repair Tool">
 			<slot_type>equipment</slot_type>
@@ -161,6 +194,9 @@
 			<repair_rate_on_vehicle>105</repair_rate_on_vehicle>
 			<max_repair_distance>21</max_repair_distance>
 			<max_targets>2</max_targets>
+			<prerequisites>
+				<prerequisite skill="Remote Repair Systems">5</prerequisite>
+			</prerequisites>
 			</module>
 		<module name="Six Kin Repair Tool">
 		<slot_type>equipment</slot_type>
@@ -170,6 +206,9 @@
 			<repair_rate_on_vehicle>79</repair_rate_on_vehicle>
 			<max_repair_distance>21</max_repair_distance>
 			<max_targets>2</max_targets>
+			<prerequisites>
+				<prerequisite skill="Remote Repair Systems">5</prerequisite>
+			</prerequisites>
 		</module>
 	</repair_tool>
 	<nanohive>
@@ -264,6 +303,9 @@
 			<effective_range>6</effective_range>
 			<ammo_resupply_rate>18.8</ammo_resupply_rate>
 			<health>300</health>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Cistern K-17D Nanohive (R)">
 			<slot_type>equipment</slot_type>
@@ -275,6 +317,9 @@
 			<effective_range>6</effective_range>
 			<ammo_resupply_rate>18.8</ammo_resupply_rate>
 			<health>315</health>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="R11-4 Flux Nanohive">
 			<slot_type>equipment</slot_type>
@@ -286,6 +331,9 @@
 			<effective_range>6.6</effective_range>
 			<ammo_resupply_rate>18.8</ammo_resupply_rate>
 			<health>300</health>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">4</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="X-3 Quantum Nanohive">
 			<slot_type>equipment</slot_type>
@@ -297,6 +345,9 @@
 			<effective_range>6</effective_range>
 			<ammo_resupply_rate>21.5</ammo_resupply_rate>
 			<health>300</health>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">4</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="K-CR Triage Nanohive">
 			<slot_type>equipment</slot_type>
@@ -308,6 +359,9 @@
 			<effective_range>7.5</effective_range>
 			<ammo_resupply_rate>0</ammo_resupply_rate>
 			<health>300</health>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">4</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="K17/D Nanohive (R) ">
 			<slot_type>equipment</slot_type>
@@ -319,6 +373,9 @@
 			<effective_range>4</effective_range>
 			<ammo_resupply_rate>15</ammo_resupply_rate>
 			<health>200</health>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">4</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Ishokone Flux Nanohive">
 			<slot_type>equipment</slot_type>
@@ -330,6 +387,9 @@
 			<effective_range>7.7</effective_range>
 			<ammo_resupply_rate>22.5</ammo_resupply_rate>
 			<health>400</health>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">5</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Ishokone Gauged Nanohive">
 			<slot_type>equipment</slot_type>
@@ -341,6 +401,9 @@
 			<effective_range>7</effective_range>
 			<ammo_resupply_rate>22.5</ammo_resupply_rate>
 			<health>400</health>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">5</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Wiyrkomi Triage Nanohive">
 			<slot_type>equipment</slot_type>
@@ -352,6 +415,9 @@
 			<effective_range>8.8</effective_range>
 			<ammo_resupply_rate>0</ammo_resupply_rate>
 			<health>400</health>
+			<prerequisites>
+				<prerequisite skill="Nanocircuitry">5</prerequisite>
+			</prerequisites>
 		</module>
 	</nanohive>
 	<drop_uplink>
@@ -374,6 +440,9 @@
 			<spawn_time_modifier>0</spawn_time_modifier>
 			<max_spawns_per_unit>10</max_spawns_per_unit>
 			<health>200</health>
+			<prerequisites>
+				<prerequisite skill="Drop Uplink Deployment">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Flux Drop Uplink">
 			<slot_type>equipment</slot_type>
@@ -384,6 +453,9 @@
 			<spawn_time_modifier>-0.50</spawn_time_modifier>
 			<max_spawns_per_unit>10</max_spawns_per_unit>
 			<health>200</health>
+			<prerequisites>
+				<prerequisite skill="Drop Uplink Deployment">2</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Gauged Drop Uplink">
 			<slot_type>equipment</slot_type>
@@ -394,6 +466,9 @@
 			<spawn_time_modifier>0</spawn_time_modifier>
 			<max_spawns_per_unit>10</max_spawns_per_unit>
 			<health>200</health>
+			<prerequisites>
+				<prerequisite skill="Drop Uplink Deployment">2</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Quantum Drop Uplink">
 			<slot_type>equipment</slot_type>
@@ -404,6 +479,9 @@
 			<spawn_time_modifier>0</spawn_time_modifier>
 			<max_spawns_per_unit>12</max_spawns_per_unit>
 			<health>200</health>
+			<prerequisites>
+				<prerequisite skill="Drop Uplink Deployment">2</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Stable Drop Uplink">
 			<slot_type>equipment</slot_type>
@@ -414,6 +492,9 @@
 			<spawn_time_modifier>0</spawn_time_modifier>
 			<max_spawns_per_unit>10</max_spawns_per_unit>
 			<health>200</health>
+			<prerequisites>
+				<prerequisite skill="Drop Uplink Deployment">2</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Dawnpyre R-9 Drop Uplink">
 			<slot_type>equipment</slot_type>
@@ -424,6 +505,9 @@
 			<spawn_time_modifier>-0.19</spawn_time_modifier>
 			<max_spawns_per_unit>20</max_spawns_per_unit>
 			<health>200</health>
+			<prerequisites>
+				<prerequisite skill="Drop Uplink Deployment">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="R-9 Drop Uplink">
 			<slot_type>equipment</slot_type>
@@ -434,6 +518,9 @@
 			<spawn_time_modifier>-0.10</spawn_time_modifier>
 			<max_spawns_per_unit>15</max_spawns_per_unit>
 			<health>300</health>
+			<prerequisites>
+				<prerequisite skill="Drop Uplink Deployment">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="N-11/A Flux Drop Uplink">
 			<slot_type>equipment</slot_type>
@@ -444,6 +531,9 @@
 			<spawn_time_modifier>-0.19</spawn_time_modifier>
 			<max_spawns_per_unit>15</max_spawns_per_unit>
 			<health>300</health>
+			<prerequisites>
+				<prerequisite skill="Drop Uplink Deployment">4</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="P-13 Quantum Drop Uplink">
 			<slot_type>equipment</slot_type>
@@ -454,6 +544,9 @@
 			<spawn_time_modifier>-0.10</spawn_time_modifier>
 			<max_spawns_per_unit>18</max_spawns_per_unit>
 			<health>300</health>
+			<prerequisites>
+				<prerequisite skill="Drop Uplink Deployment">4</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Allotek Stable Drop Uplink">
 			<slot_type>equipment</slot_type>
@@ -464,6 +557,9 @@
 			<spawn_time_modifier>-0.20</spawn_time_modifier>
 			<max_spawns_per_unit>20</max_spawns_per_unit>
 			<health>400</health>
+			<prerequisites>
+				<prerequisite skill="Drop Uplink Deployment">5</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Imperial Drop Uplink">
 			<slot_type>equipment</slot_type>
@@ -474,6 +570,9 @@
 			<spawn_time_modifier>-0.20</spawn_time_modifier>
 			<max_spawns_per_unit>20</max_spawns_per_unit>
 			<health>400</health>
+			<prerequisites>
+				<prerequisite skill="Drop Uplink Deployment">5</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Ishukone Gauged Drop Uplink">
 			<slot_type>equipment</slot_type>
@@ -484,6 +583,9 @@
 			<spawn_time_modifier>-0.20</spawn_time_modifier>
 			<max_spawns_per_unit>20</max_spawns_per_unit>
 			<health>400</health>
+			<prerequisites>
+				<prerequisite skill="Drop Uplink Deployment">5</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Abyss Carthum Drop Uplink">
 			<slot_type>equipment</slot_type>
@@ -494,6 +596,9 @@
 			<spawn_time_modifier>-0.60</spawn_time_modifier>
 			<max_spawns_per_unit>5</max_spawns_per_unit>
 			<health>400</health>
+			<prerequisites>
+				<prerequisite skill="Drop Uplink Deployment">5</prerequisite>
+			</prerequisites>
 		</module>
 	</drop_uplink>
 	<remote_explosives>
@@ -504,6 +609,9 @@
 			<max_active>5</max_active>
 			<blast_radius>5</blast_radius>
 			<max_carried>2</max_carried>
+			<prerequisites>
+				<prerequisite skill="Demolitions">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Proximity Explosive">
 			<slot_type>equipment</slot_type>
@@ -512,6 +620,9 @@
 			<max_active>6</max_active>
 			<blast_radius>5</blast_radius>
 			<max_carried>3</max_carried>
+			<prerequisites>
+				<prerequisite skill="Demolitions">2</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="F/45 Remote Explosives">
 			<slot_type>equipment</slot_type>
@@ -520,6 +631,9 @@
 			<max_active>5</max_active>
 			<blast_radius>5</blast_radius>
 			<max_carried>3</max_carried>
+			<prerequisites>
+				<prerequisite skill="Demolitions">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="F/49 Proximity Explosive">
 			<slot_type>equipment</slot_type>
@@ -528,6 +642,9 @@
 			<max_active>6</max_active>
 			<blast_radius>5</blast_radius>
 			<max_carried>3</max_carried>
+			<prerequisites>
+				<prerequisite skill="Demolitions">4</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Boundless Proximity Explosive">
 			<slot_type>equipment</slot_type>
@@ -536,6 +653,9 @@
 			<max_active>6</max_active>
 			<blast_radius>5</blast_radius>
 			<max_carried>3</max_carried>
+			<prerequisites>
+				<prerequisite skill="Demolitions">5</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Boundless Remote Explosives">
 			<slot_type>equipment</slot_type>
@@ -544,6 +664,9 @@
 			<max_active>5</max_active>
 			<blast_radius>7.5</blast_radius>
 			<max_carried>3</max_carried>
+			<prerequisites>
+				<prerequisite skill="Demolitions">5</prerequisite>
+			</prerequisites>
 		</module>
 	</remote_explosives>
 	<shields>
@@ -552,45 +675,150 @@
 			<cpu effected_by="Shield Enhancements">18</cpu>
 			<pg>3</pg>
 			<shield_hp>22</shield_hp>
+			<prerequisites>
+				<prerequisite skill="Shield Enhancements">1</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Kinesis' Basic Shield Extender">
+			<slot_type>hi_slot</slot_type>
+			<cpu effected_by="Shield Enhancements">36</cpu>
+			<pg>6</pg>
+			<shield_hp>33</shield_hp>
+			<prerequisites>
+				<prerequisite skill="Shield Enhancements">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Enhanced Shield Extender">
 			<slot_type>hi_slot</slot_type>
 			<cpu effected_by="Shield Enhancements">36</cpu>
 			<pg>6</pg>
 			<shield_hp>33</shield_hp>
+			<prerequisites>
+				<prerequisite skill="Shield Enhancements">3</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Impulse' Enhanced Shield Extender">
+			<slot_type>hi_slot</slot_type>
+			<cpu effected_by="Shield Enhancements">54</cpu>
+			<pg>11</pg>
+			<shield_hp>66</shield_hp>
+			<prerequisites>
+				<prerequisite skill="Shield Enhancements">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Complex Shield Extender">
 			<slot_type>hi_slot</slot_type>
 			<cpu effected_by="Shield Enhancements">54</cpu>
 			<pg>11</pg>
 			<shield_hp>66</shield_hp>
+			<prerequisites>
+				<prerequisite skill="Shield Enhancements">4</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="Basic Shield Recharger">
+			<slot_type>hi_slot</slot_type>
+			<cpu effected_by="Shield Enhancements">30</cpu>
+			<pg>0</pg>
+			<shield_recharge>0.15</shield_recharge>
+			<prerequisites>
+				<prerequisite skill="Shield Enhancements">1</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Synapse' Basic Shield Recharger">
+			<slot_type>hi_slot</slot_type>
+			<cpu effected_by="Shield Enhancements">60</cpu>
+			<pg>0</pg>
+			<shield_recharge>0.25</shield_recharge>
+			<prerequisites>
+				<prerequisite skill="Shield Enhancements">1</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="Enhanced Shield Recharger">
+			<slot_type>hi_slot</slot_type>
+			<cpu effected_by="Shield Enhancements">60</cpu>
+			<pg>0</pg>
+			<shield_recharge>0.25</shield_recharge>
+			<prerequisites>
+				<prerequisite skill="Shield Enhancements">3</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Spark' Enhanced Shield Recharger">
+			<slot_type>hi_slot</slot_type>
+			<cpu effected_by="Shield Enhancements">90</cpu>
+			<pg>0</pg>
+			<shield_recharge>0.42</shield_recharge>
+			<prerequisites>
+				<prerequisite skill="Shield Enhancements">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Complex Shield Recharger">
 			<slot_type>hi_slot</slot_type>
 			<cpu effected_by="Shield Enhancements">90</cpu>
 			<pg>0</pg>
 			<shield_recharge>0.42</shield_recharge>
+			<prerequisites>
+				<prerequisite skill="Shield Enhancements">4</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Basic Shield Regulator">
 			<slot_type>low_slot</slot_type>
-			<cpu effected_by="Shield Enhancements">11</cpu>
+			<cpu>11</cpu>
 			<pg>1</pg>
 			<shield_recharge_delay>-0.10</shield_recharge_delay>
 			<shield_depleted_recharge_delay>-0.10</shield_depleted_recharge_delay>
+			<prerequisites>
+				<prerequisite skill="Shield Control">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Enhanced Shield Regulator">
 			<slot_type>low_slot</slot_type>
-			<cpu effected_by="Shield Enhancements">24</cpu>
+			<cpu>24</cpu>
 			<pg>2</pg>
 			<shield_recharge_delay>-0.20</shield_recharge_delay>
 			<shield_depleted_recharge_delay>-0.20</shield_depleted_recharge_delay>
+			<prerequisites>
+				<prerequisite skill="Shield Control">3</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Shaft' Basic Shield Regulator">
+			<slot_type>low_slot</slot_type>
+			<cpu>24</cpu>
+			<pg>2</pg>
+			<shield_recharge_delay>-0.20</shield_recharge_delay>
+			<shield_depleted_recharge_delay>-0.20</shield_depleted_recharge_delay>
+			<prerequisites>
+				<prerequisite skill="Shield Control">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Complex Shield Regulator">
 			<slot_type>low_slot</slot_type>
-			<cpu effected_by="Shield Enhancements">35</cpu>
+			<cpu>35</cpu>
 			<pg>3</pg>
 			<shield_recharge_delay>-0.25</shield_recharge_delay>
 			<shield_depleted_recharge_delay>-0.25</shield_depleted_recharge_delay>
+			<prerequisites>
+				<prerequisite skill="Shield Control">4</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Origin' Enhanced Shield Regulator">
+			<slot_type>low_slot</slot_type>
+			<cpu>35</cpu>
+			<pg>3</pg>
+			<shield_recharge_delay>-0.25</shield_recharge_delay>
+			<shield_depleted_recharge_delay>-0.25</shield_depleted_recharge_delay>
+			<prerequisites>
+				<prerequisite skill="Shield Control">3</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Tether' Complex Shield Regulator">
+			<slot_type>low_slot</slot_type>
+			<cpu>24</cpu>
+			<pg>2</pg>
+			<shield_recharge_delay>-0.25</shield_recharge_delay>
+			<shield_depleted_recharge_delay>-0.25</shield_depleted_recharge_delay>
+			<prerequisites>
+				<prerequisite skill="Shield Control">5</prerequisite>
+			</prerequisites>
 		</module>
 	</shields>
 	<armor>
@@ -601,6 +829,9 @@
 			<armor_hp>65</armor_hp>
 			<movement_speed>-0.03</movement_speed>
 			<sprint_speed>-0.03</sprint_speed>
+			<prerequisites>
+				<prerequisite skill="Armor Upgrades">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Enhanced Armor Plates">
 			<slot_type>low_slot</slot_type>
@@ -609,6 +840,31 @@
 			<armor_hp>87</armor_hp>
 			<movement_speed>-0.05</movement_speed>
 			<sprint_speed>-0.05</sprint_speed>
+			<prerequisites>
+				<prerequisite skill="Armor Upgrades">3</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Goliath' Basic Armor Plates">
+			<slot_type>low_slot</slot_type>
+			<cpu>20</cpu>
+			<pg effected_by="Armor Upgrades">6</pg>
+			<armor_hp>87</armor_hp>
+			<movement_speed>-0.05</movement_speed>
+			<sprint_speed>-0.05</sprint_speed>
+			<prerequisites>
+				<prerequisite skill="Armor Upgrades">1</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Samson' Enhanced Armor Plates">
+			<slot_type>low_slot</slot_type>
+			<cpu>30</cpu>
+			<pg effected_by="Armor Upgrades">12</pg>
+			<armor_hp>115</armor_hp>
+			<movement_speed>-0.10</movement_speed>
+			<sprint_speed>-0.10</sprint_speed>
+			<prerequisites>
+				<prerequisite skill="Armor Upgrades">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Complex Armor Plates">
 			<slot_type>low_slot</slot_type>
@@ -617,24 +873,54 @@
 			<armor_hp>115</armor_hp>
 			<movement_speed>-0.10</movement_speed>
 			<sprint_speed>-0.10</sprint_speed>
+			<prerequisites>
+				<prerequisite skill="Armor Upgrades">5</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Basic Armor Repairer">
 			<slot_type>low_slot</slot_type>
 			<cpu>20</cpu>
 			<pg effected_by="Armor Upgrades">1</pg>
 			<armor_repair_rate effected_by="Armor Repair Systems">2</armor_repair_rate>
+			<prerequisites>
+				<prerequisite skill="Armor Repair Systems">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Enhanced Armor Repairer">
 			<slot_type>low_slot</slot_type>
 			<cpu>35</cpu>
 			<pg effected_by="Armor Upgrades">5</pg>
 			<armor_repair_rate effected_by="Armor Repair Systems">3</armor_repair_rate>
+			<prerequisites>
+				<prerequisite skill="Armor Repair Systems">3</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Monolith' Basic Armor Repairer">
+			<slot_type>low_slot</slot_type>
+			<cpu>35</cpu>
+			<pg effected_by="Armor Upgrades">5</pg>
+			<armor_repair_rate effected_by="Armor Repair Systems">3</armor_repair_rate>
+			<prerequisites>
+				<prerequisite skill="Armor Repair Systems">1</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Menhir' Enhanced Armor Repairer">
+			<slot_type>low_slot</slot_type>
+			<cpu>45</cpu>
+			<pg effected_by="Armor Upgrades">11</pg>
+			<armor_repair_rate effected_by="Armor Repair Systems">5</armor_repair_rate>
+			<prerequisites>
+				<prerequisite skill="Armor Repair Systems">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Complex Armor Repairer">
 			<slot_type>low_slot</slot_type>
 			<cpu>45</cpu>
 			<pg effected_by="Armor Upgrades">11</pg>
 			<armor_repair_rate effected_by="Armor Repair Systems">5</armor_repair_rate>
+			<prerequisites>
+				<prerequisite skill="Armor Repair Systems">5</prerequisite>
+			</prerequisites>
 		</module>
 	</armor>
 	<electronics>
@@ -649,54 +935,99 @@
 			<cpu>0</cpu>
 			<pg>0</pg>
 			<cpu_bonus>0.16</cpu_bonus>
+			<prerequisites>
+				<prerequisite skill="CPU Upgrades">1</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Scalar' Basic CPU Upgrade">
+			<slot_type>low_slot</slot_type>
+			<cpu>0</cpu>
+			<pg>0</pg>
+			<cpu_bonus>0.25</cpu_bonus>
+			<prerequisites>
+				<prerequisite skill="CPU Upgrades">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Enhanced CPU Upgrade">
 			<slot_type>low_slot</slot_type>
 			<cpu>0</cpu>
 			<pg>0</pg>
 			<cpu_bonus>0.25</cpu_bonus>
+			<prerequisites>
+				<prerequisite skill="CPU Upgrades">3</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Dimension' Enhanced CPU Upgrade">
+			<slot_type>low_slot</slot_type>
+			<cpu>0</cpu>
+			<pg>0</pg>
+			<cpu_bonus>0.35</cpu_bonus>
+			<prerequisites>
+				<prerequisite skill="CPU Upgrades">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Complex CPU Upgrade">
 			<slot_type>low_slot</slot_type>
 			<cpu>0</cpu>
 			<pg>0</pg>
 			<cpu_bonus>0.35</cpu_bonus>
+			<prerequisites>
+				<prerequisite skill="CPU Upgrades">5</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Basic Range Amplifier">
 			<slot_type>low_slot</slot_type>
-			<cpu>15</cpu>
+			<cpu effected_by="Sensor Upgrades">15</cpu>
 			<pg>0</pg>
 			<scan_radius>0.25</scan_radius>
+			<prerequisites>
+				<prerequisite skill="Long Range Scanning">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Enhanced Range Amplifier">
 			<slot_type>low_slot</slot_type>
-			<cpu>24</cpu>
+			<cpu effected_by="Sensor Upgrades">24</cpu>
 			<pg>0</pg>
 			<scan_radius>0.35</scan_radius>
+			<prerequisites>
+				<prerequisite skill="Long Range Scanning">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Complex Range Amplifier">
 			<slot_type>low_slot</slot_type>
-			<cpu>33</cpu>
+			<cpu effected_by="Sensor Upgrades">33</cpu>
 			<pg>0</pg>
 			<scan_radius>0.45</scan_radius>
+			<prerequisites>
+				<prerequisite skill="Long Range Scanning">5</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Basic Profile Dampener">
 			<slot_type>low_slot</slot_type>
-			<cpu>15</cpu>
+			<cpu effected_by="Sensor Upgrades">15</cpu>
 			<pg>0</pg>
 			<scan_profile>-0.15</scan_profile>
+			<prerequisites>
+				<prerequisite skill="Profile Dampening">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Enhanced Profile Dampener">
 			<slot_type>low_slot</slot_type>
-			<cpu>24</cpu>
+			<cpu effected_by="Sensor Upgrades">24</cpu>
 			<pg>0</pg>
 			<scan_profile>-0.20</scan_profile>
+			<prerequisites>
+				<prerequisite skill="Profile Dampening">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Complex Profile Dampener">
 			<slot_type>low_slot</slot_type>
-			<cpu>33</cpu>
+			<cpu effected_by="Sensor Upgrades">33</cpu>
 			<pg>0</pg>
 			<scan_profile>-0.25</scan_profile>
+			<prerequisites>
+				<prerequisite skill="Profile Dampening">5</prerequisite>
+			</prerequisites>
 		</module>
 	</electronics>
 	<engineering>
@@ -711,18 +1042,45 @@
 			<cpu>14</cpu>
 			<pg>0</pg>
 			<pg_bonus>8</pg_bonus>
+			<prerequisites>
+				<prerequisite skill="Powergrid Upgrades">1</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Azimuth' Basic PG Upgrade">
+			<slot_type>low_slot</slot_type>
+			<cpu>17</cpu>
+			<pg>0</pg>
+			<pg_bonus>11</pg_bonus>
+			<prerequisites>
+				<prerequisite skill="Powergrid Upgrades">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Enhanced PG Upgrade">
 			<slot_type>low_slot</slot_type>
 			<cpu>17</cpu>
 			<pg>0</pg>
 			<pg_bonus>11</pg_bonus>
+			<prerequisites>
+				<prerequisite skill="Powergrid Upgrades">3</prerequisite>
+			</prerequisites>
+		</module>
+		<module name="'Helix' Enhanced PG Upgrade">
+			<slot_type>low_slot</slot_type>
+			<cpu>24</cpu>
+			<pg>0</pg>
+			<pg_bonus>14</pg_bonus>
+			<prerequisites>
+				<prerequisite skill="Powergrid Upgrades">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Complex PG Upgrade">
 			<slot_type>low_slot</slot_type>
 			<cpu>24</cpu>
 			<pg>0</pg>
 			<pg_bonus>14</pg_bonus>
+			<prerequisites>
+				<prerequisite skill="Powergrid Upgrades">5</prerequisite>
+			</prerequisites>
 		</module>
 	</engineering>
 	<weapons_upgrades>
@@ -732,6 +1090,9 @@
 			<pg>3</pg>
 			<enhances>heavy_weapon</enhances>
 			<damage>0.03</damage>
+			<prerequisites>
+				<prerequisite skill="Weaponry">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Enhanced Heavy Damage Modifier">
 			<slot_type>hi_slot</slot_type>
@@ -739,6 +1100,9 @@
 			<pg>5</pg>
 			<enhances>heavy_weapon</enhances>
 			<damage>0.05</damage>
+			<prerequisites>
+				<prerequisite skill="Weaponry">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Complex Heavy Damage Modifier">
 			<slot_type>hi_slot</slot_type>
@@ -746,6 +1110,9 @@
 			<pg>11</pg>
 			<enhances>heavy_weapon</enhances>
 			<damage>0.10</damage>
+			<prerequisites>
+				<prerequisite skill="Weaponry">5</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Basic Light Damage Modifier">
 			<slot_type>hi_slot</slot_type>
@@ -753,6 +1120,9 @@
 			<pg>3</pg>
 			<enhances>light_weapon</enhances>
 			<damage>0.03</damage>
+			<prerequisites>
+				<prerequisite skill="Weaponry">1</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Enhanced Light Damage Modifier">
 			<slot_type>hi_slot</slot_type>
@@ -760,6 +1130,9 @@
 			<pg>5</pg>
 			<enhances>light_weapon</enhances>
 			<damage>0.05</damage>
+			<prerequisites>
+				<prerequisite skill="Weaponry">3</prerequisite>
+			</prerequisites>
 		</module>
 		<module name="Complex Light Damage Modifier">
 			<slot_type>hi_slot</slot_type>
@@ -767,6 +1140,9 @@
 			<pg>11</pg>
 			<enhances>light_weapon</enhances>
 			<damage>0.10</damage>
+			<prerequisites>
+				<prerequisite skill="Weaponry">5</prerequisite>
+			</prerequisites>
 		</module>
 	</weapons_upgrades>
 </data>

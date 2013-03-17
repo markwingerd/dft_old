@@ -36,8 +36,33 @@ class XmlRetrieval:
 
         return (parent, properties, effecting_skills, prerequisites)
 
-    def get_list(self):
-        """ Returns a list of all items in an xml file. """
+    def get_all(self):
+        """Will return the targets xml data. """
+        # Create a dictionary of the targets properties and effecting skills.
+        item_list = []
+
+        xml_tree = ET.parse(self.file_name)
+        for item in xml_tree.findall('.//*[@name]'):
+            name = item.attrib['name']
+            category = xml_tree.find('.//*[@name="%s"]/..' % name).tag
+            properties_dict = {}
+            effecting_skills_dict = {}
+            prerequisites_dict = {}
+            for property in item:
+                if 'prerequisites' in property.tag:
+                    for prereq in property:
+                        prerequisites_dict[prereq.attrib['skill']] = int(prereq.text)
+                if 'effected_by' in property.attrib.keys():
+                    effecting_skills_dict[property.tag] = property.attrib.values()
+                if self._is_number(property.text):
+                    properties_dict[property.tag] = round(float(property.text), 3)
+                else:
+                    properties_dict[property.tag] = property.text
+            item_list.append( (name, category, properties_dict, effecting_skills_dict, prerequisites_dict) )
+        return item_list
+
+    def get_all_names(self):
+        """ Returns a list of all the names of items in an xml file. """
         names_list = []
 
         xml_tree = ET.parse(self.file_name)
@@ -127,8 +152,4 @@ def get_file_loc(file_name):
 if __name__ == '__main__':
     mod = XmlRetrieval('module.xml')
 
-    #ds._get_target('Assault Type-II')
-
-    print mod.get_target('Nanite Injector')
-    print mod.get_parents()
-    print mod.get_children('nanite_injector')
+    mod.get_all()
