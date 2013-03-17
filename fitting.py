@@ -387,7 +387,7 @@ class Fitting:
         """ This will update weapons with any modules that give a bonus to them.
         This is intended to be a hotfix. """
         for w in self.heavy_weapon + self.light_weapon + self.sidearm:
-            w.__init__(self.char.skill_effect, w.name, self.hi_slot)
+            w.__init__(self.char.skill_effect, w.name)
 
 
     def _get_additive_stat(self, stat):
