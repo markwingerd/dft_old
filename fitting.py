@@ -448,7 +448,7 @@ class DropsuitNotFound(Exception):
 
 
 class Dropsuit:
-    def __init__(self, char, ds_name, filename_or_stream='module.xml'):
+    def __init__(self, char, ds_name, filename_or_stream='dropsuit.xml'):
         """
         Initalisation method for a Dropsuit
         char = An Instance of a Character
@@ -520,8 +520,8 @@ class FittingLibrary:
 
 
 class DropsuitLibrary:
-    def __init__(self):
-        dropsuit_data = XmlRetrieval('dropsuit.xml')
+    def __init__(self, filename_or_stream='dropsuit.xml'):
+        dropsuit_data = XmlRetrieval(filename_or_stream)
 
         self.names = dropsuit_data.get_list()
 
